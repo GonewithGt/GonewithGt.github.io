@@ -1,0 +1,1260 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="飘" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="Description对一组输入的数据进行排序。对输入的数据，我们有如下的约定：所有的输入数据都为正整数，且都不大于300000000。但是输入的数据可能会有重复，排序时，应将重复的数据合并，即同样的数只处理一次。 
+Input只有一组数据，以0结尾。
+Output输出排序后的数据（不含0），其中相同的数应只显示1个。
+Sample Input12500000 10000000 12500000">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WOJ Problem 1170 Sorting">
+<meta property="og:url" content="http://yoursite.com/2016/03/03/WOJ-Problem-1170-Sorting/index.html">
+<meta property="og:site_name" content="飘">
+<meta property="og:description" content="Description对一组输入的数据进行排序。对输入的数据，我们有如下的约定：所有的输入数据都为正整数，且都不大于300000000。但是输入的数据可能会有重复，排序时，应将重复的数据合并，即同样的数只处理一次。 
+Input只有一组数据，以0结尾。
+Output输出排序后的数据（不含0），其中相同的数应只显示1个。
+Sample Input12500000 10000000 12500000">
+<meta property="og:image" content="http://7xqh35.com1.z0.glb.clouddn.com/sort.jpg">
+<meta property="og:updated_time" content="2016-03-03T01:18:46.265Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WOJ Problem 1170 Sorting">
+<meta name="twitter:description" content="Description对一组输入的数据进行排序。对输入的数据，我们有如下的约定：所有的输入数据都为正整数，且都不大于300000000。但是输入的数据可能会有重复，排序时，应将重复的数据合并，即同样的数只处理一次。 
+Input只有一组数据，以0结尾。
+Output输出排序后的数据（不含0），其中相同的数应只显示1个。
+Sample Input12500000 10000000 12500000">
+<meta name="twitter:image" content="http://7xqh35.com1.z0.glb.clouddn.com/sort.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> WOJ Problem 1170 Sorting | 飘 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">飘</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">海の上で最も自由なのは海賊王だぁ～</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                WOJ Problem 1170 Sorting
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-03T02:37:02+08:00" content="2016-03-03">
+              2016-03-03
+            </time>
+          </span>
+
+
+  <span id="busuanzi_container_page_pv">&nbsp;&nbsp;|&nbsp;&nbsp;阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/WOJ/" itemprop="url" rel="index">
+                    <span itemprop="name">WOJ</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/03/WOJ-Problem-1170-Sorting/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/03/WOJ-Problem-1170-Sorting/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><p>对一组输入的数据进行排序。<br>对输入的数据，我们有如下的约定：所有的输入数据都为正整数，且都不大于300000000。但是输入的数据可能会有重复，排序时，应将重复的数据合并，即同样的数只处理一次。 </p>
+<h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><p>只有一组数据，以0结尾。</p>
+<h1 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h1><p>输出排序后的数据（不含0），其中相同的数应只显示1个。</p>
+<h1 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h1><p>12500000 10000000 12500000 0</p>
+<h1 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h1><p>10000000 12500000</p>
+<a id="more"></a>
+<h1 id="Hint"><a href="#Hint" class="headerlink" title="Hint"></a>Hint</h1><p>woj中的一个5分题，本以为会有一些技巧，尝试了桶排序（超空间）、位排序（超时间）、最后发现只需要普通的快排即可</p>
+<h1 id="QuickSort"><a href="#QuickSort" class="headerlink" title="QuickSort"></a>QuickSort</h1><pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt; 
+#define N 300000000
+
+int comp(const void*a,const void*b)//用来做比较的函数。
+{
+    return *(int*)a-*(int*)b;
+}
+
+int main()
+{
+     int *array=(int *)malloc(30000000*sizeof(int)); 
+     int gt=0,count=0;
+     while(scanf(&quot;%d&quot;,&amp;gt)&amp;&amp;gt!=0)
+    {
+        array[count]=gt;
+        count++;
+    }
+
+     qsort(array,count,sizeof(int),comp);//调用qsort排序
+     int prev=0;
+
+     for(int i=0;i&lt;count;i++)
+     {
+         if(array[i]==prev)
+         continue;
+         else
+         {
+             printf(&quot;%d &quot;,array[i]);
+             prev=array[i];
+         }
+
+     }
+     return 0;
+}
+</code></pre><p>快速排序一般写法：</p>
+<pre><code>void print(int a[], int n){
+    for(int j= 0; j&lt;n; j++){
+        cout&lt;&lt;a[j] &lt;&lt;&quot;  &quot;;
+    }
+    cout&lt;&lt;endl;
+}
+
+void swap(int *a, int *b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+int partition(int a[], int low, int high)
+{
+    int privotKey = a[low];                    //基准元素
+    while(low &lt; high){                //从表的两端交替地向中间扫描
+        while(low &lt; high  &amp;&amp; a[high] &gt;= privotKey) --high;  
+    //从high 所指位置向前搜索，至多到low+1 位置。将比基准元素小的交换到低端
+        swap(&amp;a[low], &amp;a[high]);
+        while(low &lt; high  &amp;&amp; a[low] &lt;= privotKey ) ++low;
+        swap(&amp;a[low], &amp;a[high]);
+    }
+    print(a,10);
+    return low;
+}
+
+
+void quickSort(int a[], int low, int high){
+        if(low &lt; high){
+        int privotLoc = partition(a,  low,  high);  //将表一分为二
+            quickSort(a,  low,  privotLoc -1);            //递归对低子表递归排序
+        quickSort(a,   privotLoc + 1, high);        //递归对高子表递归排序
+    }
+}
+
+int main(){
+    int a[10] = {3,1,5,7,2,4,9,6,10,8};
+    cout&lt;&lt;&quot;初始值：&quot;;
+    print(a,10);
+    quickSort(a,0,9);
+    cout&lt;&lt;&quot;结果：&quot;;
+    print(a,10);
+
+}
+</code></pre><h1 id="BucketSort"><a href="#BucketSort" class="headerlink" title="BucketSort"></a>BucketSort</h1><pre><code>#include&lt;stdio.h&gt;
+#include&lt;stdlib.h&gt;
+#include&lt;string.h&gt;
+#define N 300000000
+//超空间  桶排序 
+int main()
+{
+    int gt;
+    int *array=(int *)malloc(N*sizeof(int));
+    memset(array,0,N);
+    int i=0,max=0;
+    while(scanf(&quot;%d&quot;,&amp;gt)!=EOF&amp;&amp;gt!=0)
+    {
+        array[gt]=gt;
+        i++;
+    }
+    for(int j=1;j&lt;N;j++)
+    {
+        if(array[j]!=0)
+        printf(&quot;%d &quot;,array[j]);
+    }
+    return 0;
+}
+</code></pre><h1 id="BitSort"><a href="#BitSort" class="headerlink" title="BitSort"></a>BitSort</h1><pre><code>#include &lt;stdio.h&gt;
+#define N 300000000
+#define BITSPERWORD 32
+#define SHIFT 5
+#define MASK 0x1F
+
+//超时间，bitsort 
+
+int arr[1+ N/BITSPERWORD];
+
+void set(int i)
+{
+    arr[i&gt;&gt;SHIFT] |= (1&lt;&lt;(i&amp;MASK));
+}    
+
+int test(int i)
+{
+    return arr[i&gt;&gt;SHIFT] &amp; (1&lt;&lt;(i&amp;MASK));
+}
+
+int main()
+{
+
+
+    int gt=0,max=0;
+    //int i=0,max=0;
+    while(scanf(&quot;%d&quot;,&amp;gt)&amp;&amp;gt!=0)
+    {
+        if(gt&gt;max)
+        max=gt;
+        set(gt);    
+    }
+    for(int j=1;j&lt;max;j++)
+    {
+        if (test(j))
+        printf(&quot;%d &quot;,j);
+    }
+    printf(&quot;%d&quot;,max);
+    return 0;
+}
+</code></pre><h1 id="HeapSort"><a href="#HeapSort" class="headerlink" title="HeapSort"></a>HeapSort</h1><pre><code>/*与题目无关，作为参考
+*/
+
+void print(int a[], int n){
+    for(int j= 0; j&lt;n; j++){
+        cout&lt;&lt;a[j] &lt;&lt;&quot;  &quot;;
+    }
+    cout&lt;&lt;endl;
+}
+
+
+
+/**
+ * 已知H[s…m]除了H[s] 外均满足堆的定义
+ * 调整H[s],使其成为大顶堆.即将对第s个结点为根的子树筛选, 
+ *
+ * @param H是待调整的堆数组
+ * @param s是待调整的数组元素的位置
+ * @param length是数组的长度
+ *
+ */
+void HeapAdjust(int H[],int s, int length)
+{
+    int tmp  = H[s];
+    int child = 2*s+1; //左孩子结点的位置。(i+1 为当前调整结点的右孩子结点的位置)
+    while (child &lt; length) {
+        if(child+1 &lt;length &amp;&amp; H[child]&lt;H[child+1]) { // 如果右孩子大于左孩子(找到比当前待调整结点大的孩子结点)
+            ++child ;
+        }
+        if(H[s]&lt;H[child]) {  // 如果较大的子结点大于父结点
+            H[s] = H[child]; // 那么把较大的子结点往上移动，替换它的父结点
+            s = child;         // 重新设置s ,即待调整的下一个结点的位置
+            child = 2*s+1;
+        }  else {             // 如果当前待调整结点大于它的左右孩子，则不需要调整，直接退出
+             break;
+        }
+        H[s] = tmp;            // 当前待调整的结点放到比其大的孩子结点位置上
+    }
+    print(H,length);
+}
+
+
+/**
+ * 初始堆进行调整
+ * 将H[0..length-1]建成堆
+ * 调整完之后第一个元素是序列的最小的元素
+ */
+void BuildingHeap(int H[], int length)
+{ 
+    //最后一个有孩子的节点的位置 i=  (length -1) / 2
+    for (int i = (length -1) / 2 ; i &gt;= 0; --i)
+    HeapAdjust(H,i,length);
+}
+/**
+ * 堆排序算法
+ */
+void HeapSort(int H[],int length)
+{
+    //初始堆
+    BuildingHeap(H, length);
+    //从最后一个元素开始对序列进行调整
+    for (int i = length - 1; i &gt; 0; --i)
+    {
+        //交换堆顶元素H[0]和堆中最后一个元素
+        int temp = H[i]; H[i] = H[0]; H[0] = temp;
+        //每次交换堆顶元素和堆中最后一个元素之后，都要对堆进行调整
+        HeapAdjust(H,0,i);
+  }
+} 
+
+int main(){
+    int H[10] = {3,1,5,7,2,4,9,6,10,8};
+    cout&lt;&lt;&quot;初始值：&quot;;
+    print(H,10);
+    HeapSort(H,10);
+    //selectSort(a, 8);
+    cout&lt;&lt;&quot;结果：&quot;;
+    print(H,10);
+
+}
+</code></pre><h1 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h1><pre><code>void bubbleSort(int a[], int n){
+    for(int i =0 ; i&lt; n-1; ++i) {
+        for(int j = 0; j &lt; n-i-1; ++j) {
+            if(a[j] &gt; a[j+1])
+            {
+                int tmp = a[j] ; a[j] = a[j+1] ;  a[j+1] = tmp;
+            }
+        }
+    }
+}
+
+/*
+*/
+
+void Bubble_1 ( int r[], int n) {
+int i= n -1;  //初始时,最后位置保持不变
+while ( i&gt; 0) { 
+    int pos= 0; //每趟开始时,无记录交换
+    for (int j= 0; j&lt; i; j++)
+        if (r[j]&gt; r[j+1]) {
+            pos= j; //记录交换的位置 
+            int tmp = r[j]; r[j]=r[j+1];r[j+1]=tmp;
+        } 
+        i= pos; //为下一趟排序作准备
+     } 
+}  
+
+void Bubble_2 ( int r[], int n){
+    int low = 0; 
+    int high= n -1; //设置变量的初始值
+    int tmp,j;
+    while (low &lt; high) {
+        for (j= low; j&lt; high; ++j) //正向冒泡,找到最大者
+                if (r[j]&gt; r[j+1]) {
+                    tmp = r[j]; r[j]=r[j+1];r[j+1]=tmp;
+                } 
+        --high;                    //修改high值, 前移一位
+        for ( j=high; j&gt;low; --j) //反向冒泡,找到最小者
+            if (r[j]&lt;r[j-1]) {
+                tmp = r[j]; r[j]=r[j-1];r[j-1]=tmp;
+            }
+        ++low;                    //修改low值,后移一位
+    } 
+} 
+</code></pre><h1 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h1><pre><code>void Merge(ElemType *r,ElemType *rf, int i, int m, int n)
+{
+    int j,k;
+    for(j=m+1,k=i; i&lt;=m &amp;&amp; j &lt;=n ; ++k){
+        if(r[j] &lt; r[i]) rf[k] = r[j++];
+        else rf[k] = r[i++];
+    }
+    while(i &lt;= m)  rf[k++] = r[i++];
+    while(j &lt;= n)  rf[k++] = r[j++];
+}
+</code></pre><p>归并的迭代算法</p>
+<pre><code>void print(int a[], int n){
+    for(int j= 0; j&lt;n; j++){
+        cout&lt;&lt;a[j] &lt;&lt;&quot;  &quot;;
+    }
+    cout&lt;&lt;endl;
+}
+
+//将r[i…m]和r[m +1 …n]归并到辅助数组rf[i…n]
+void Merge(ElemType *r,ElemType *rf, int i, int m, int n)
+{
+    int j,k;
+    for(j=m+1,k=i; i&lt;=m &amp;&amp; j &lt;=n ; ++k){
+        if(r[j] &lt; r[i]) rf[k] = r[j++];
+        else rf[k] = r[i++];
+    }
+    while(i &lt;= m)  rf[k++] = r[i++];
+    while(j &lt;= n)  rf[k++] = r[j++];
+    print(rf,n+1);
+}
+
+void MergeSort(ElemType *r, ElemType *rf, int lenght)
+{ 
+    int len = 1;
+    ElemType *q = r ;
+    ElemType *tmp ;
+    while(len &lt; lenght) {
+        int s = len;
+        len = 2 * s ;
+        int i = 0;
+        while(i+ len &lt;lenght){
+            Merge(q, rf,  i, i+ s-1, i+ len-1 ); //对等长的两个子表合并
+            i = i+ len;
+        }
+        if(i + s &lt; lenght){
+            Merge(q, rf,  i, i+ s -1, lenght -1); //对不等长的两个子表合并
+        }
+        tmp = q; q = rf; rf = tmp; //交换q,rf，以保证下一趟归并时，仍从q 归并到rf
+    }
+}
+
+
+int main(){
+    int a[10] = {3,1,5,7,2,4,9,6,10,8};
+    int b[10];
+    MergeSort(a, b, 10);
+    print(b,10);
+    cout&lt;&lt;&quot;结果：&quot;;
+    print(a,10);
+
+}
+</code></pre><p>归并的递归算法</p>
+<pre><code>void MSort(ElemType *r, ElemType *rf,int s, int t)
+{ 
+    ElemType *rf2;
+    if(s==t) r[s] = rf[s];
+    else
+    { 
+        int m=(s+t)/2;            /*平分*p 表*/
+        MSort(r, rf2, s, m);        /*递归地将p[s…m]归并为有序的p2[s…m]*/
+        MSort(r, rf2, m+1, t);        /*递归地将p[m+1…t]归并为有序的p2[m+1…t]*/
+        Merge(rf2, rf, s, m+1,t);    /*将p2[s…m]和p2[m+1…t]归并到p1[s…t]*/
+    }
+}
+void MergeSort_recursive(ElemType *r, ElemType *rf, int n)
+{   /*对顺序表*p 作归并排序*/
+    MSort(r, rf,0, n-1);
+}
+</code></pre><p>#Radix Sort</p>
+<p>基数排序</p>
+<pre><code>Void RadixSort(Node L[],length,maxradix)
+{
+   int m,n,k,lsp;
+   k=1;m=1;
+   int temp[10][length-1];
+   Empty(temp); //清空临时空间
+   while(k&lt;maxradix) //遍历所有关键字
+   {
+     for(int i=0;i&lt;length;i++) //分配过程
+    {
+       if(L[i]&lt;m)
+          Temp[0][n]=L[i];
+       else
+          Lsp=(L[i]/m)%10; //确定关键字
+       Temp[lsp][n]=L[i];
+       n++;
+   }
+   CollectElement(L,Temp); //收集
+   n=0;
+   m=m*10;
+  k++;
+ }
+}
+</code></pre><h1 id="Select-Sort"><a href="#Select-Sort" class="headerlink" title="Select Sort"></a>Select Sort</h1><pre><code>void print(int a[], int n ,int i){
+    cout&lt;&lt;&quot;第&quot;&lt;&lt;i+1 &lt;&lt;&quot;趟 : &quot;;
+    for(int j= 0; j&lt;8; j++){
+        cout&lt;&lt;a[j] &lt;&lt;&quot;  &quot;;
+    }
+    cout&lt;&lt;endl;
+}
+/**
+ * 数组的最小值
+ *
+ * @return int 数组的键值
+ */
+int SelectMinKey(int a[], int n, int i)
+{
+    int k = i;
+    for(int j=i+1 ;j&lt; n; ++j) {
+        if(a[k] &gt; a[j]) k = j;
+    }
+    return k;
+}
+
+/**
+ * 选择排序
+ *
+*/
+void selectSort(int a[], int n){
+    int key, tmp;
+    for(int i = 0; i&lt; n; ++i) {
+        key = SelectMinKey(a, n,i);           //选择最小的元素
+        if(key != i){
+            tmp = a[i];  a[i] = a[key]; a[key] = tmp; //最小元素与第i位置元素互换
+        }
+        print(a,  n , i);
+    }
+}
+int main(){
+    int a[8] = {3,1,5,7,2,4,9,6};
+    cout&lt;&lt;&quot;初始值：&quot;;
+    for(int j= 0; j&lt;8; j++){
+        cout&lt;&lt;a[j] &lt;&lt;&quot;  &quot;;
+    }
+    cout&lt;&lt;endl&lt;&lt;endl;
+    selectSort(a, 8);
+    print(a,8,8);
+}
+</code></pre><p>单选择排序的改进——二元选择排序</p>
+<pre><code>void SelectSort(int r[],int n) {
+    int i ,j , min ,max, tmp;
+    for (i=1 ;i &lt;= n/2;i++) {  
+        // 做不超过n/2趟选择排序 
+        min = i; max = i ; //分别记录最大和最小关键字记录位置
+        for (j= i+1; j&lt;= n-i; j++) {
+            if (r[j] &gt; r[max]) { 
+                max = j ; continue ; 
+            }  
+            if (r[j]&lt; r[min]) { 
+                    min = j ; 
+            }   
+      }  
+      //该交换操作还可分情况讨论以提高效率
+      tmp = r[i-1]; r[i-1] = r[min]; r[min] = tmp;
+      tmp = r[n-i]; r[n-i] = r[max]; r[max] = tmp; 
+
+    } 
+}
+</code></pre><h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p><img src="http://7xqh35.com1.z0.glb.clouddn.com/sort.jpg" alt=""></p>
+<h1 id="Referrence"><a href="#Referrence" class="headerlink" title="Referrence"></a>Referrence</h1><p><a href="http://blog.csdn.net/hguisu/article/details/7776068" target="_blank" rel="external">八大排序算法</a></p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/03/WOJ-Problem-1099-Flirly/" rel="next" title="WOJ Problem 1099 Flirly">
+                <i class="fa fa-chevron-left"></i> WOJ Problem 1099 Flirly
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/20/一周的挑战第七期/" rel="prev" title="一周的挑战第七期">
+                一周的挑战第七期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/03/WOJ-Problem-1170-Sorting/"
+           data-title="WOJ Problem 1170 Sorting" data-url="http://yoursite.com/2016/03/03/WOJ-Problem-1170-Sorting/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="GonewithGt" />
+          <p class="site-author-name" itemprop="name">GonewithGt</p>
+          <p class="site-description motion-element" itemprop="description">Everything is good now~</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/GonewithGt" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:1724532024@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hint"><span class="nav-number">6.</span> <span class="nav-text">Hint</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#QuickSort"><span class="nav-number">7.</span> <span class="nav-text">QuickSort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BucketSort"><span class="nav-number">8.</span> <span class="nav-text">BucketSort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BitSort"><span class="nav-number">9.</span> <span class="nav-text">BitSort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HeapSort"><span class="nav-number">10.</span> <span class="nav-text">HeapSort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Bubble-Sort"><span class="nav-number">11.</span> <span class="nav-text">Bubble Sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Merge-Sort"><span class="nav-number">12.</span> <span class="nav-text">Merge Sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Select-Sort"><span class="nav-number">13.</span> <span class="nav-text">Select Sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">14.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Referrence"><span class="nav-number">15.</span> <span class="nav-text">Referrence</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GonewithGt
+
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<script type="text/javascript">
+var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257374415'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257374415' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+
+</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;本站总点击 <span id="busuanzi_value_site_pv"></span> 次
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post'||CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"GonewithGt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>
