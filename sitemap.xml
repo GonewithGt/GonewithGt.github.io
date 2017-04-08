@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/04/08/C++%E9%A2%84%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4--#pragma/</loc>
+    
+    <lastmod>2017-04-08T03:08:49.243Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/03/03/WOJ-Problem-1170-Sorting/</loc>
+    
+    <lastmod>2017-04-08T03:03:37.166Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
     
-    <lastmod>2017-03-20T09:34:58.127Z</lastmod>
+    <lastmod>2017-04-08T02:54:42.615Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>http://yoursite.com/2016/03/03/WOJ-Problem-1099-Flirly/</loc>
     
     <lastmod>2016-03-03T01:19:13.897Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/03/03/WOJ-Problem-1170-Sorting/</loc>
-    
-    <lastmod>2016-03-03T01:18:46.265Z</lastmod>
     
   </url>
   
