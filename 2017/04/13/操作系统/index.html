@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/13/操作系统/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="《操作系统真象还原》相关笔记">
-<meta property="og:updated_time" content="2017-04-14T10:04:14.352Z">
+<meta property="og:updated_time" content="2017-04-15T08:50:47.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统">
 <meta name="twitter:description" content="《操作系统真象还原》相关笔记">
@@ -377,7 +377,8 @@ vstart=xxxx 和 org xxxx功能一样
 </code></pre><h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><pre><code>段寄存器：CS DS（数据段）、ES（附加段）、FS（附加段）、GS（附加段）、SS（堆栈段，在内存中） 32位CPU中16位宽
 通用寄存器：AX BX CX DX SI DI BP SP
 IP flags寄存器 实模式16位宽
-</code></pre>
+</code></pre><p>#寄存器寻址方式<br>    直接寻址：默认段基址是DS；如果使用段跨越前缀fs，段基址就是gs寄存器<br>    基址寻址：bs或bp作为基址寄存器，bs+DS，bp+SS<br>    略：待补充</p>
+
       
     </div>
 
