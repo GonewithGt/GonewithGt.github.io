@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/20/Tensorflow常用函数/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlow">
-<meta property="og:updated_time" content="2017-04-16T13:51:38.393Z">
+<meta property="og:updated_time" content="2017-04-16T14:17:28.568Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow常用函数">
 <meta name="twitter:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlow">
@@ -343,24 +343,43 @@ keep_prob = tf.placeholder(tf.float32) #dropout (keep probability)
 def conv2d(img, w, b):
     return tf.nn.relu(tf.nn.bias_add(tf.nn.conv2d(img, w, strides=[1, 1, 1, 1], padding=&apos;SAME&apos;),b))
 
+    #tf.nn.conv2d(input, filter, strides, padding, use_cudnn_on_gpu=None, name=None)
+    #除去name参数用以指定该操作的name，与方法有关的一共五个参数：
+    #第一个参数input：指需要做卷积的输入图像，它要求是一个Tensor，具有[batch,in_height,in_width,in_channels]这样的shape，具体含义是[训练时一个batch的图片
+    #数量，图片高度, 图片宽度,     图像通道数]，注意这是一个4维的Tensor，要求类型为float32和float64其中之一
+    #第二个参数filter：相当于CNN中的卷积核，它要求是一个Tensor，具有[filter_height,filter_width,in_channels,out_channels]这样的shape，具体含义是[卷积核的高度#，卷积核的宽度，图像通道数，卷积核个数]，要求类型与参数input相同，有一个地方需要注意，第三维in_channels#，就是参数input的第四维
+    #第三个参数strides：卷积时在图像每一维的步长，这是一个一维的向量，长度4
+    #第四个参数padding：string类型的量，只能是&quot;SAME&quot;,&quot;VALID&quot;其中之一，这个值决定了不同的卷积方式（后面会介绍）
+    #第五个参数：use_cudnn_on_gpu:bool类型，是否使用cudnn加速，默认为true
+    #结果返回一个Tensor，这个输出，就是我们常说的feature map
+    #http://blog.csdn.net/mao_xiao_feng/article/details/53444333
+
 def max_pool(img, k):
     return tf.nn.max_pool(img, ksize=[1, k, k, 1], strides=[1, k, k, 1], padding=&apos;SAME&apos;)
 
+    #tf.nn.max_pool(value, ksize, strides, padding, name=None)
+    #参数是四个，和卷积很类似：
+    #第一个参数value：需要池化的输入，一般池化层接在卷积层后面，所以输入通常是feature map，依然是[batch, height, width, channels]这样的shape
+    #第二个参数ksize：池化窗口的大小，取一个四维向量，一般是[1, height, width, 1]，因为我们不想在batch和channels上做池化，所以这两个维度设为了1
+    #第三个参数strides：和卷积类似，窗口在每一个维度上滑动的步长，一般也是[1, stride,stride, 1]
+    #第四个参数padding：和卷积类似，可以取&apos;VALID&apos; 或者&apos;SAME&apos;
+    #返回一个Tensor，类型不变，shape仍然是[batch, height, width, channels]这种形式
+
 def conv_net(_X, _weights, _biases, _dropout):
     # Reshape input picture
-    _X = tf.reshape(_X, shape=[-1, 28, 28, 1])
+    _X = tf.reshape(_X, shape=[-1, 28, 28, 1]) # -1表示会自动计算出来该维的值，注意最后面的1
 
     # Convolution Layer
     conv1 = conv2d(_X, _weights[&apos;wc1&apos;], _biases[&apos;bc1&apos;])
     # Max Pooling (down-sampling)
     conv1 = max_pool(conv1, k=2)
     # Apply Dropout
-    conv1 = tf.nn.dropout(conv1, _dropout)
+    conv1 = tf.nn.dropout(conv1, _dropout) # 按照一定的比例dropout某些节点，防止过拟合 参考 http://www.cnblogs.com/tornadomeet/p/3258122.html
 
     # Convolution Layer
     conv2 = conv2d(conv1, _weights[&apos;wc2&apos;], _biases[&apos;bc2&apos;])
     # Max Pooling (down-sampling)
-    conv2 = max_pool(conv2, k=2)
+    conv2 = max_pool(conv2, k=2) 
     # Apply Dropout
     conv2 = tf.nn.dropout(conv2, _dropout)
 
