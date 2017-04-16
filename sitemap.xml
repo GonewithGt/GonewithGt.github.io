@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2017-04-16T03:36:48.511Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
     
     <lastmod>2017-04-15T08:50:47.500Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>http://yoursite.com/2016/03/03/WOJ-Problem-1170-Sorting/</loc>
     
     <lastmod>2017-04-08T03:03:37.166Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
-    
-    <lastmod>2017-04-08T02:54:42.615Z</lastmod>
     
   </url>
   

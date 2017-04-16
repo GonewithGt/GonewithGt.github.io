@@ -3,6 +3,28 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
+    <lastmod>2017-04-16T03:36:48.511Z</lastmod>
+    <data>
+        <display>
+        <title>Tensorflow常用函数</title>
+        <pubTime>2017-03-20T09:34:58.000Z</pubTime>
+        
+        <tag>TensorFlow </tag>
+         
+        <tag>DL </tag>
+         
+         
+           
+             
+              <breadCrumb title="DL" url="http://yoursite.com/categories/DL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
     <lastmod>2017-04-15T08:50:47.500Z</lastmod>
     <data>
@@ -58,28 +80,6 @@
            
              
               <breadCrumb title="WOJ" url="http://yoursite.com/categories/WOJ/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2017-04-08T02:54:42.615Z</lastmod>
-    <data>
-        <display>
-        <title>Tensorflow常用函数</title>
-        <pubTime>2017-03-20T09:34:58.000Z</pubTime>
-        
-        <tag>TensorFlow </tag>
-         
-        <tag>DL </tag>
-         
-         
-           
-             
-              <breadCrumb title="DL" url="http://yoursite.com/categories/DL/"/>
           
         </display>
     </data>
