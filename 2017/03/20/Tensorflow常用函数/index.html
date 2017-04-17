@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/20/Tensorflow常用函数/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlow">
-<meta property="og:updated_time" content="2017-04-16T14:17:28.568Z">
+<meta property="og:updated_time" content="2017-04-17T14:31:57.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow常用函数">
 <meta name="twitter:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlow">
@@ -297,11 +297,7 @@
         <h1 id="Referrence"><a href="#Referrence" class="headerlink" title="Referrence"></a>Referrence</h1><p><a href="http://www.cnblogs.com/wuzhitj/p/6298004.html" target="_blank" rel="external">Tensorflow常用函数说明</a><br><a href="http://blog.csdn.net/jdbc/article/details/52402302" target="_blank" rel="external">Tensorflow入门教程合集</a><br><a href="http://www.cnblogs.com/yao62995/p/5773578.html" target="_blank" rel="external">图解TensorFlow</a></p>
 <a id="more"></a> 
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://blog.csdn.net/jdbc/article/details/68957085" target="_blank" rel="external">TensorFlow入门教程之0: BigPicture&amp;极速入门</a><br><a href="https://my.oschina.net/yilian/blog/659618" target="_blank" rel="external">TensorFlow入门教程之1: 基本概念以及理解</a><br><a href="http://blog.csdn.net/kkk584520/article/details/51476816" target="_blank" rel="external">TensorFlow入门教程之2: 安装和使用</a><br><a href="http://my.oschina.net/yilian/blog/661218" target="_blank" rel="external">TensorFlow入门教程之3: CNN卷积神经网络的基本定义理解</a><br><a href="https://my.oschina.net/yilian/blog/661409" target="_blank" rel="external">TensorFlow入门教程之4: 实现一个自创的CNN卷积神经网络</a><br><a href="http://my.oschina.net/yilian/blog/661900" target="_blank" rel="external">TensorFlow入门教程之5: TensorBoard面板可视化管理</a><br><a href="http://my.oschina.net/yilian/blog/662029" target="_blank" rel="external">TensorFlow入门教程之6: AlphaGo 的策略网络（CNN）简单的实现</a><br><a href="http://my.oschina.net/yilian/blog/662539" target="_blank" rel="external">TensorFlow入门教程之7: 训练的模型Model 保存 文件 并使用</a><br><a href="http://my.oschina.net/yilian/blog/664077" target="_blank" rel="external">TensorFlow入门教程之8: DNN深度神经网络 的原理 以及 使用</a><br><a href="http://my.oschina.net/yilian/blog/664087" target="_blank" rel="external">TensorFlow入门教程之9: 接着补充一章MLP多层感知器网络原理以及 使用</a><br><a href="http://my.oschina.net/yilian/blog/665412" target="_blank" rel="external">TensorFlow入门教程之10: RNN循环网络原理以及使用</a><br><a href="http://blog.csdn.net/kkk584520/article/details/51477830" target="_blank" rel="external">TensorFlow入门教程之11: 使用TensorFlow实现RNN</a><br><a href="http://my.oschina.net/yilian/blog/667900" target="_blank" rel="external">TensorFlow入门教程之12: 最强网络RSNN深度残差网络 平均准确率96-99%</a><br><a href="http://my.oschina.net/yilian/blog/667904" target="_blank" rel="external">TensorFlow入门教程之13: 最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）</a><br><a href="http://my.oschina.net/yilian/blog/672135" target="_blank" rel="external">TensorFlow入门教程之14: Tensorflow Caffe相互转换</a><br><a href="http://my.oschina.net/yilian/blog/673051" target="_blank" rel="external">TensorFlow入门教程之15: Tensorflow RCNN区域卷积神经网络</a><br><a href="http://my.oschina.net/yilian/blog/687364" target="_blank" rel="external">Tensorflow入门教程之16: 模型AutoEncoder自编码机网络</a><br><a href="http://my.oschina.net/yilian/blog/693660" target="_blank" rel="external">Tensorflow入门教程之17: Tensorflow人工智能分布式实现</a></p>
-<h1 id="tensorflow自学之前的bigpicture"><a href="#tensorflow自学之前的bigpicture" class="headerlink" title="tensorflow自学之前的bigpicture"></a>tensorflow自学之前的bigpicture</h1><p>1、tf.contrib.learn，tf.contrib.slim，Keras 等，它们都提供了高层封装<br>2、计算图：有向无环图<br>3、相关概念<br>    Tensor：类型化的多维数组，图的边；<br>    Operation:执行计算的单元，图的节点；<br>    Graph：一张有边与点的图，其表示了需要进行计算的任务；<br>    Session:称之为会话的上下文，用于执行图。<br>Graph仅仅定义了所有 operation 与 tensor 流向，没有进行任何计算。而session根据 graph 的定义分配资源，计算 operation，得出结果。既然是图就会有点与边，在图计算中 operation 就是点而 tensor 就是边。Operation 可以是加减乘除等数学运算，也可以是各种各样的优化算法。每个 operation 都会有零个或多个输入，零个或多个输出。 tensor 就是其输入与输出，其可以表示一维二维多维向量或者常量。而且除了Variables指向的 tensor 外所有的 tensor 在流入下一个节点后都不再保存。<br>4、数据结构<br>    rank：Rank一般是指数据的维度，其与线性代数中的rank不是一个概念<br>    Shape：Shape指tensor每个维度数据的个数，可以用python的list/tuple表示。<br>    data type：Data type，是指单个数据的类型。常用DT_FLOAT，也就是32位的浮点数。<br>5、Variables</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>当训练模型时，需要使用Variables保存与更新参数。Variables会保存在内存当中，所有tensor一旦拥有Variables的指向就不会在session中丢失。其必须明确的初始化而且可以通过Saver保存到磁盘上。Variables可以通过Variables初始化。</p>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>实际在其初始化过程中做了很多的操作，比如初始化空间，赋初值（等价于tf.assign），并把Variable添加到graph中等操作。</p>
-<h2 id="Variables与constant的区别"><a href="#Variables与constant的区别" class="headerlink" title="Variables与constant的区别"></a>Variables与constant的区别</h2><p>Constant一般是常量，可以被赋值给Variables，constant保存在graph中，如果graph重复载入那么constant也会重复载入，其非常浪费资源，如非必要尽量不使用其保存大量数据。</p>
-<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><p>另外一个值得注意的地方是尽量每一个变量都明确的命名，这样易于管理命令空间，而且在导入模型的时候不会造成不同模型之间的命名冲突，这样就可以在一张graph中容纳很多个模型。<br>6、placeholders与feed_dict<br>当我们定义一张graph时，有时候并不知道需要计算的值，比如模型的输入数据，其只有在训练与预测时才会有值。这时就需要placeholder与feed_dict的帮助。</p>
+<h1 id="tensorflow自学之前的bigpicture"><a href="#tensorflow自学之前的bigpicture" class="headerlink" title="tensorflow自学之前的bigpicture"></a>tensorflow自学之前的bigpicture</h1><p>1、tf.contrib.learn，tf.contrib.slim，Keras 等，它们都提供了高层封装<br>2、计算图：有向无环图<br>3、相关概念<br>    Tensor：类型化的多维数组，图的边；<br>    Operation:执行计算的单元，图的节点；<br>    Graph：一张有边与点的图，其表示了需要进行计算的任务；<br>    Session:称之为会话的上下文，用于执行图。<br>Graph仅仅定义了所有 operation 与 tensor 流向，没有进行任何计算。而session根据 graph 的定义分配资源，计算 operation，得出结果。既然是图就会有点与边，在图计算中 operation 就是点而 tensor 就是边。Operation 可以是加减乘除等数学运算，也可以是各种各样的优化算法。每个 operation 都会有零个或多个输入，零个或多个输出。 tensor 就是其输入与输出，其可以表示一维二维多维向量或者常量。而且除了Variables指向的 tensor 外所有的 tensor 在流入下一个节点后都不再保存。<br>4、数据结构<br>    rank：Rank一般是指数据的维度，其与线性代数中的rank不是一个概念<br>    Shape：Shape指tensor每个维度数据的个数，可以用python的list/tuple表示。<br>    data type：Data type，是指单个数据的类型。常用DT_FLOAT，也就是32位的浮点数。<br>5、Variables<br>5.1、介绍<br>当训练模型时，需要使用Variables保存与更新参数。Variables会保存在内存当中，所有tensor一旦拥有Variables的指向就不会在session中丢失。其必须明确的初始化而且可以通过Saver保存到磁盘上。Variables可以通过Variables初始化。<br>5.2初始化<br>实际在其初始化过程中做了很多的操作，比如初始化空间，赋初值（等价于tf.assign），并把Variable添加到graph中等操作。<br>5.3Variables与constant的区别<br>Constant一般是常量，可以被赋值给Variables，constant保存在graph中，如果graph重复载入那么constant也会重复载入，其非常浪费资源，如非必要尽量不使用其保存大量数据。<br>5.4命名<br>另外一个值得注意的地方是尽量每一个变量都明确的命名，这样易于管理命令空间，而且在导入模型的时候不会造成不同模型之间的命名冲突，这样就可以在一张graph中容纳很多个模型。<br>6、placeholders与feed_dict<br>当我们定义一张graph时，有时候并不知道需要计算的值，比如模型的输入数据，其只有在训练与预测时才会有值。这时就需要placeholder与feed_dict的帮助。</p>
 <h1 id="基本概念以及理解"><a href="#基本概念以及理解" class="headerlink" title="基本概念以及理解"></a>基本概念以及理解</h1><p><a href="https://my.oschina.net/yilian/blog/659618" target="_blank" rel="external">https://my.oschina.net/yilian/blog/659618</a></p>
 <h1 id="安装和使用"><a href="#安装和使用" class="headerlink" title="安装和使用"></a>安装和使用</h1><p><a href="http://blog.csdn.net/kkk584520/article/details/51476816" target="_blank" rel="external">http://blog.csdn.net/kkk584520/article/details/51476816</a></p>
 <h1 id="CNN卷积神经网络的基本定义理解"><a href="#CNN卷积神经网络的基本定义理解" class="headerlink" title="CNN卷积神经网络的基本定义理解"></a>CNN卷积神经网络的基本定义理解</h1><pre><code>def conv2d(x, w, b):
@@ -350,6 +346,7 @@ def conv2d(img, w, b):
     #第二个参数filter：相当于CNN中的卷积核，它要求是一个Tensor，具有[filter_height,filter_width,in_channels,out_channels]这样的shape，具体含义是[卷积核的高度#，卷积核的宽度，图像通道数，卷积核个数]，要求类型与参数input相同，有一个地方需要注意，第三维in_channels#，就是参数input的第四维
     #第三个参数strides：卷积时在图像每一维的步长，这是一个一维的向量，长度4
     #第四个参数padding：string类型的量，只能是&quot;SAME&quot;,&quot;VALID&quot;其中之一，这个值决定了不同的卷积方式（后面会介绍）
+    #&quot;Same&quot;表示表示卷积核可以停留在图像边缘，valid只考虑有效的像素点
     #第五个参数：use_cudnn_on_gpu:bool类型，是否使用cudnn加速，默认为true
     #结果返回一个Tensor，这个输出，就是我们常说的feature map
     #http://blog.csdn.net/mao_xiao_feng/article/details/53444333
@@ -415,8 +412,13 @@ cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(pred, y))
 optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost)
 
 # Evaluate model
-correct_pred = tf.equal(tf.argmax(pred,1), tf.argmax(y,1))
+correct_pred = tf.equal(tf.argmax(pred,1), tf.argmax(y,1)) 
 accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
+
+#tf.argmax(input, axis=None, name=None, dimension=None)
+#Returns the index with the largest value across axis of a tensor.
+#tf.equal(a,b) 如果a,b是数组，返回长度一致的一维数组，每一项为1或者0，表示每一项是否相等 
+#http://stackoverflow.com/questions/41708572/tensorflow-questions-regarding-tf-argmax-and-tf-equal
 
 # Initializing the variables
 init = tf.initialize_all_variables()
@@ -440,7 +442,76 @@ with tf.Session() as sess:
     print &quot;Optimization Finished!&quot;
     # Calculate accuracy for 256 mnist test images
     print &quot;Testing Accuracy:&quot;, sess.run(accuracy, feed_dict={x: mnist.test.images[:256], y: mnist.test.labels[:256], keep_prob: 1.})
-</code></pre><h1 id="实现一个自创的CNN卷积神经网络"><a href="#实现一个自创的CNN卷积神经网络" class="headerlink" title="实现一个自创的CNN卷积神经网络"></a>实现一个自创的CNN卷积神经网络</h1><h1 id="TensorBoard面板可视化管理"><a href="#TensorBoard面板可视化管理" class="headerlink" title="TensorBoard面板可视化管理"></a>TensorBoard面板可视化管理</h1><h1 id="AlphaGo-的策略网络（CNN）简单的实现"><a href="#AlphaGo-的策略网络（CNN）简单的实现" class="headerlink" title="AlphaGo 的策略网络（CNN）简单的实现"></a>AlphaGo 的策略网络（CNN）简单的实现</h1><h1 id="训练的模型Model-保存-文件-并使用"><a href="#训练的模型Model-保存-文件-并使用" class="headerlink" title="训练的模型Model 保存 文件 并使用"></a>训练的模型Model 保存 文件 并使用</h1><h1 id="DNN深度神经网络-的原理-以及-使用"><a href="#DNN深度神经网络-的原理-以及-使用" class="headerlink" title="DNN深度神经网络 的原理 以及 使用"></a>DNN深度神经网络 的原理 以及 使用</h1><h1 id="接着补充一章MLP多层感知器网络原理以及-使用"><a href="#接着补充一章MLP多层感知器网络原理以及-使用" class="headerlink" title="接着补充一章MLP多层感知器网络原理以及 使用"></a>接着补充一章MLP多层感知器网络原理以及 使用</h1><h1 id="RNN循环网络原理以及使用"><a href="#RNN循环网络原理以及使用" class="headerlink" title="RNN循环网络原理以及使用"></a>RNN循环网络原理以及使用</h1><h1 id="使用TensorFlow实现RNN"><a href="#使用TensorFlow实现RNN" class="headerlink" title="使用TensorFlow实现RNN"></a>使用TensorFlow实现RNN</h1><h1 id="最强网络RSNN深度残差网络-平均准确率96-99"><a href="#最强网络RSNN深度残差网络-平均准确率96-99" class="headerlink" title="最强网络RSNN深度残差网络 平均准确率96-99%"></a>最强网络RSNN深度残差网络 平均准确率96-99%</h1><h1 id="最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）"><a href="#最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）" class="headerlink" title="最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）"></a>最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）</h1><h1 id="Tensorflow-Caffe相互转换"><a href="#Tensorflow-Caffe相互转换" class="headerlink" title="Tensorflow Caffe相互转换"></a>Tensorflow Caffe相互转换</h1><h1 id="Tensorflow-RCNN区域卷积神经网络"><a href="#Tensorflow-RCNN区域卷积神经网络" class="headerlink" title="Tensorflow RCNN区域卷积神经网络"></a>Tensorflow RCNN区域卷积神经网络</h1><h1 id="模型AutoEncoder自编码机网络"><a href="#模型AutoEncoder自编码机网络" class="headerlink" title="模型AutoEncoder自编码机网络"></a>模型AutoEncoder自编码机网络</h1><h1 id="Tensorflow人工智能分布式实现"><a href="#Tensorflow人工智能分布式实现" class="headerlink" title="Tensorflow人工智能分布式实现"></a>Tensorflow人工智能分布式实现</h1>
+</code></pre><p>常用函数：<br>    tf.concat(concat_dim, values, name=’concat’)<br>    tf.concat是连接两个矩阵的操作<br>    除去name参数用以指定该操作的name，与方法有关的一共两个参数：<br>    第一个参数concat_dim：必须是一个数，表明在哪一维上连接<br>    如果concat_dim是0，那么在某一个shape的第一个维度上连，对应到实际，就是叠放到列上<br>    <a href="http://blog.csdn.net/mao_xiao_feng/article/details/53366163" target="_blank" rel="external">http://blog.csdn.net/mao_xiao_feng/article/details/53366163</a></p>
+<pre><code>tf.expand_dims(tf.constant([1,2,3]),1)  
+扩维操作
+
+tf.sparse_to_dense(sparse_indices, output_shape, sparse_values, default_value, name=None)
+除去name参数用以指定该操作的name，与方法有关的一共四个参数：
+第一个参数sparse_indices：稀疏矩阵中那些个别元素对应的索引值。
+    有三种情况：
+    sparse_indices是个数，那么它只能指定一维矩阵的某一个元素
+    sparse_indices是个向量，那么它可以指定一维矩阵的多个元素
+    sparse_indices是个矩阵，那么它可以指定二维矩阵的多个元素
+第二个参数output_shape：输出的稀疏矩阵的shape
+第三个参数sparse_values：个别元素的值。
+    分为两种情况：
+    sparse_values是个数：所有索引指定的位置都用这个数
+    sparse_values是个向量：输出矩阵的某一行向量里某一行对应的数（所以这里向量的长度应该和输出矩阵的行数对应，不然报错）
+第四个参数default_value：未指定元素的默认值，一般如果是稀疏矩阵的话就是0了
+http://blog.csdn.net/mao_xiao_feng/article/details/53365889
+
+tf.nn.softmax_cross_entropy_with_logits(logits, labels, name=None)
+除去name参数用以指定该操作的name，与方法有关的一共两个参数：
+第一个参数logits：就是神经网络最后一层的输出，如果有batch的话，它的大小就是[batchsize，num_classes]，单样本的话，大小就是num_classes
+第二个参数labels：实际的标签，大小同上
+第一步：对网络最后一层的输出做一个softmax
+第二步：softmax的输出向量[Y1，Y2,Y3...]和样本的实际标签做一个交叉熵
+tf.reduce_sum操作,就是对向量里面所有元素求和
+tf.reduce_mean操作，对向量求均值
+http://blog.csdn.net/mao_xiao_feng/article/details/53382790
+
+tf.nn.local_response_normalization(input, depth_radius=None, bias=None, alpha=None, beta=None, name=None) = tf.nn.lrn
+http://blog.csdn.net/mao_xiao_feng/article/details/53488271
+除去name参数用以指定该操作的name，与方法有关的一共五个参数：
+第一个参数input：这个输入就是feature map了，既然是feature map，那么它就具有[batch, height, width, channels]这样的shape
+第二个参数depth_radius：这个值需要自己指定，就是上述公式中的n/2
+第三个参数bias：上述公式中的k
+第四个参数alpha：上述公式中的α
+第五个参数beta：上述公式中的β
+返回值是新的feature map，它应该具有和原feature map相同的shape
+</code></pre><h1 id="实现一个自创的CNN卷积神经网络"><a href="#实现一个自创的CNN卷积神经网络" class="headerlink" title="实现一个自创的CNN卷积神经网络"></a>实现一个自创的CNN卷积神经网络</h1><h1 id="TensorBoard面板可视化管理"><a href="#TensorBoard面板可视化管理" class="headerlink" title="TensorBoard面板可视化管理"></a>TensorBoard面板可视化管理</h1><p><a href="https://www.tensorflow.org/versions/r0.8/how_tos/summaries_and_tensorboard/index.html" target="_blank" rel="external">https://www.tensorflow.org/versions/r0.8/how_tos/summaries_and_tensorboard/index.html</a></p>
+<h2 id="tensorflow-网络可视化"><a href="#tensorflow-网络可视化" class="headerlink" title="tensorflow 网络可视化"></a>tensorflow 网络可视化</h2><pre><code>summary_writer = tf.train.SummaryWriter(&apos;/tmp/tensorflowlogs&apos;, graph_def=sess.graph_def)
+# 将来训练时候的op 过程记录到日志里面，便于后面显示graph
+</code></pre><h2 id="4D数据虚拟化"><a href="#4D数据虚拟化" class="headerlink" title="4D数据虚拟化"></a>4D数据虚拟化</h2><pre><code>images = np.random.randint(256, size=shape).astype(np.uint8)
+tf.image_summary(&quot;Visualize_image&quot;, images)#用图像方式虚拟化显示image_summary
+</code></pre><h2 id="图标变化方式展示tensorflow数据特征"><a href="#图标变化方式展示tensorflow数据特征" class="headerlink" title="图标变化方式展示tensorflow数据特征"></a>图标变化方式展示tensorflow数据特征</h2><pre><code>w_hist = tf.histogram_summary(&quot;weights&quot;, W)
+b_hist = tf.histogram_summary(&quot;biases&quot;, b)
+y_hist = tf.histogram_summary(&quot;y&quot;, y)
+</code></pre><h2 id="以变量批次事件变化的线路图显示表示tensorflow数据"><a href="#以变量批次事件变化的线路图显示表示tensorflow数据" class="headerlink" title="以变量批次事件变化的线路图显示表示tensorflow数据"></a>以变量批次事件变化的线路图显示表示tensorflow数据</h2><pre><code>accuracy_summary = tf.scalar_summary(&quot;accuracy&quot;, accuracy)
+</code></pre><h2 id="汇总"><a href="#汇总" class="headerlink" title="汇总"></a>汇总</h2><pre><code>merged = tf.merge_all_summaries() #汇总summary
+summary_all = sess.run(merged_summary_op, feed_dict={x: batch_xs, y: batch_ys})
+summary_writer.add_summary(summary_all,  i) 
+#session中执行汇总summary操作op 并使用上面sumarywriter 写入更新到graph 日志中
+</code></pre><h1 id="AlphaGo-的策略网络（CNN）简单的实现"><a href="#AlphaGo-的策略网络（CNN）简单的实现" class="headerlink" title="AlphaGo 的策略网络（CNN）简单的实现"></a>AlphaGo 的策略网络（CNN）简单的实现</h1><p><a href="http://renzhichu1987.blogchina.com/2917056.html" target="_blank" rel="external">AlphaGo机制说明</a></p>
+<h1 id="训练的模型Model保存文件并使用"><a href="#训练的模型Model保存文件并使用" class="headerlink" title="训练的模型Model保存文件并使用"></a>训练的模型Model保存文件并使用</h1><pre><code>save_path = saver.save(sess, &quot;/root/alexnet.tfmodel&quot;) #保存
+saver.restore(sess, &quot;/root/alexnet.tfmodel&quot;) #使用
+</code></pre><h1 id="DNN深度神经网络的原理以及使用"><a href="#DNN深度神经网络的原理以及使用" class="headerlink" title="DNN深度神经网络的原理以及使用"></a>DNN深度神经网络的原理以及使用</h1><p>DNN ,就是去掉卷积层之后  使用全连接层+dropout下降+relu激活  一层一层的WX+B的 网络模式 </p>
+<h1 id="接着补充一章MLP多层感知器网络原理以及使用"><a href="#接着补充一章MLP多层感知器网络原理以及使用" class="headerlink" title="接着补充一章MLP多层感知器网络原理以及使用"></a>接着补充一章MLP多层感知器网络原理以及使用</h1><pre><code>linear----线性感知器
+
+tanh----双曲正切函数
+
+sigmoid----双曲函数
+
+softmax----1/(e(net) * e(wi*xi- shift))
+
+log-softmax---- log(1/(e(net) * e(wi*xi)))
+
+exp----指数函数
+
+softplus----log(1+ e(wi*xi))
+</code></pre><h1 id="RNN循环网络原理以及使用"><a href="#RNN循环网络原理以及使用" class="headerlink" title="RNN循环网络原理以及使用"></a>RNN循环网络原理以及使用</h1><pre><code>_X = tf.transpose(_X, [1, 0, 2]) # 对于3维的X 默认是 0 1 2 系数 ，我们把它置换成1 0 2 也就是 第一维 第二维进行交换
+</code></pre><h1 id="使用TensorFlow实现RNN"><a href="#使用TensorFlow实现RNN" class="headerlink" title="使用TensorFlow实现RNN"></a>使用TensorFlow实现RNN</h1><h1 id="最强网络RSNN深度残差网络-平均准确率96-99"><a href="#最强网络RSNN深度残差网络-平均准确率96-99" class="headerlink" title="最强网络RSNN深度残差网络 平均准确率96-99%"></a>最强网络RSNN深度残差网络 平均准确率96-99%</h1><h1 id="最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）"><a href="#最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）" class="headerlink" title="最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）"></a>最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）</h1><h1 id="Tensorflow-Caffe相互转换"><a href="#Tensorflow-Caffe相互转换" class="headerlink" title="Tensorflow Caffe相互转换"></a>Tensorflow Caffe相互转换</h1><h1 id="Tensorflow-RCNN区域卷积神经网络"><a href="#Tensorflow-RCNN区域卷积神经网络" class="headerlink" title="Tensorflow RCNN区域卷积神经网络"></a>Tensorflow RCNN区域卷积神经网络</h1><h1 id="模型AutoEncoder自编码机网络"><a href="#模型AutoEncoder自编码机网络" class="headerlink" title="模型AutoEncoder自编码机网络"></a>模型AutoEncoder自编码机网络</h1><h1 id="Tensorflow人工智能分布式实现"><a href="#Tensorflow人工智能分布式实现" class="headerlink" title="Tensorflow人工智能分布式实现"></a>Tensorflow人工智能分布式实现</h1>
       
     </div>
 
@@ -541,7 +612,7 @@ with tf.Session() as sess:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">13</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -612,7 +683,7 @@ with tf.Session() as sess:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Referrence"><span class="nav-number">1.</span> <span class="nav-text">Referrence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tensorflow自学之前的bigpicture"><span class="nav-number">3.</span> <span class="nav-text">tensorflow自学之前的bigpicture</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">3.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">3.2.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Variables与constant的区别"><span class="nav-number">3.3.</span> <span class="nav-text">Variables与constant的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名"><span class="nav-number">3.4.</span> <span class="nav-text">命名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念以及理解"><span class="nav-number">4.</span> <span class="nav-text">基本概念以及理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装和使用"><span class="nav-number">5.</span> <span class="nav-text">安装和使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN卷积神经网络的基本定义理解"><span class="nav-number">6.</span> <span class="nav-text">CNN卷积神经网络的基本定义理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现一个自创的CNN卷积神经网络"><span class="nav-number">7.</span> <span class="nav-text">实现一个自创的CNN卷积神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorBoard面板可视化管理"><span class="nav-number">8.</span> <span class="nav-text">TensorBoard面板可视化管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AlphaGo-的策略网络（CNN）简单的实现"><span class="nav-number">9.</span> <span class="nav-text">AlphaGo 的策略网络（CNN）简单的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#训练的模型Model-保存-文件-并使用"><span class="nav-number">10.</span> <span class="nav-text">训练的模型Model 保存 文件 并使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNN深度神经网络-的原理-以及-使用"><span class="nav-number">11.</span> <span class="nav-text">DNN深度神经网络 的原理 以及 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接着补充一章MLP多层感知器网络原理以及-使用"><span class="nav-number">12.</span> <span class="nav-text">接着补充一章MLP多层感知器网络原理以及 使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN循环网络原理以及使用"><span class="nav-number">13.</span> <span class="nav-text">RNN循环网络原理以及使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用TensorFlow实现RNN"><span class="nav-number">14.</span> <span class="nav-text">使用TensorFlow实现RNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最强网络RSNN深度残差网络-平均准确率96-99"><span class="nav-number">15.</span> <span class="nav-text">最强网络RSNN深度残差网络 平均准确率96-99%</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）"><span class="nav-number">16.</span> <span class="nav-text">最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow-Caffe相互转换"><span class="nav-number">17.</span> <span class="nav-text">Tensorflow Caffe相互转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow-RCNN区域卷积神经网络"><span class="nav-number">18.</span> <span class="nav-text">Tensorflow RCNN区域卷积神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型AutoEncoder自编码机网络"><span class="nav-number">19.</span> <span class="nav-text">模型AutoEncoder自编码机网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow人工智能分布式实现"><span class="nav-number">20.</span> <span class="nav-text">Tensorflow人工智能分布式实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Referrence"><span class="nav-number">1.</span> <span class="nav-text">Referrence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tensorflow自学之前的bigpicture"><span class="nav-number">3.</span> <span class="nav-text">tensorflow自学之前的bigpicture</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念以及理解"><span class="nav-number">4.</span> <span class="nav-text">基本概念以及理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装和使用"><span class="nav-number">5.</span> <span class="nav-text">安装和使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNN卷积神经网络的基本定义理解"><span class="nav-number">6.</span> <span class="nav-text">CNN卷积神经网络的基本定义理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现一个自创的CNN卷积神经网络"><span class="nav-number">7.</span> <span class="nav-text">实现一个自创的CNN卷积神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TensorBoard面板可视化管理"><span class="nav-number">8.</span> <span class="nav-text">TensorBoard面板可视化管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tensorflow-网络可视化"><span class="nav-number">8.1.</span> <span class="nav-text">tensorflow 网络可视化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4D数据虚拟化"><span class="nav-number">8.2.</span> <span class="nav-text">4D数据虚拟化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图标变化方式展示tensorflow数据特征"><span class="nav-number">8.3.</span> <span class="nav-text">图标变化方式展示tensorflow数据特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以变量批次事件变化的线路图显示表示tensorflow数据"><span class="nav-number">8.4.</span> <span class="nav-text">以变量批次事件变化的线路图显示表示tensorflow数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#汇总"><span class="nav-number">8.5.</span> <span class="nav-text">汇总</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AlphaGo-的策略网络（CNN）简单的实现"><span class="nav-number">9.</span> <span class="nav-text">AlphaGo 的策略网络（CNN）简单的实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#训练的模型Model保存文件并使用"><span class="nav-number">10.</span> <span class="nav-text">训练的模型Model保存文件并使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNN深度神经网络的原理以及使用"><span class="nav-number">11.</span> <span class="nav-text">DNN深度神经网络的原理以及使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#接着补充一章MLP多层感知器网络原理以及使用"><span class="nav-number">12.</span> <span class="nav-text">接着补充一章MLP多层感知器网络原理以及使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RNN循环网络原理以及使用"><span class="nav-number">13.</span> <span class="nav-text">RNN循环网络原理以及使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用TensorFlow实现RNN"><span class="nav-number">14.</span> <span class="nav-text">使用TensorFlow实现RNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最强网络RSNN深度残差网络-平均准确率96-99"><span class="nav-number">15.</span> <span class="nav-text">最强网络RSNN深度残差网络 平均准确率96-99%</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）"><span class="nav-number">16.</span> <span class="nav-text">最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow-Caffe相互转换"><span class="nav-number">17.</span> <span class="nav-text">Tensorflow Caffe相互转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow-RCNN区域卷积神经网络"><span class="nav-number">18.</span> <span class="nav-text">Tensorflow RCNN区域卷积神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#模型AutoEncoder自编码机网络"><span class="nav-number">19.</span> <span class="nav-text">模型AutoEncoder自编码机网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tensorflow人工智能分布式实现"><span class="nav-number">20.</span> <span class="nav-text">Tensorflow人工智能分布式实现</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
