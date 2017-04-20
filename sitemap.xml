@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/04/20/Tensorflow%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
+    
+    <lastmod>2017-04-20T14:25:25.828Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2017-04-20T14:21:48.479Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/04/18/Algorithms/</loc>
     
     <lastmod>2017-04-20T01:29:08.472Z</lastmod>
@@ -19,13 +33,6 @@
     <loc>http://yoursite.com/2017/04/17/%E5%AD%A6%E4%B9%A0%E6%B8%85%E5%8D%95/</loc>
     
     <lastmod>2017-04-17T14:36:28.775Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
-    
-    <lastmod>2017-04-17T14:31:57.022Z</lastmod>
     
   </url>
   
