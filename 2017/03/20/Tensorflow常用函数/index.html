@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/20/Tensorflow常用函数/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlow">
-<meta property="og:updated_time" content="2017-04-20T14:21:48.479Z">
+<meta property="og:updated_time" content="2017-04-21T13:26:36.214Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow常用函数">
 <meta name="twitter:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlow">
@@ -510,8 +510,150 @@ log-softmax---- log(1/(e(net) * e(wi*xi)))
 exp----指数函数
 
 softplus----log(1+ e(wi*xi))
-</code></pre><h1 id="RNN循环网络原理以及使用"><a href="#RNN循环网络原理以及使用" class="headerlink" title="RNN循环网络原理以及使用"></a>RNN循环网络原理以及使用</h1><pre><code>_X = tf.transpose(_X, [1, 0, 2]) # 对于3维的X 默认是 0 1 2 系数 ，我们把它置换成1 0 2 也就是 第一维 第二维进行交换
-</code></pre><h1 id="使用TensorFlow实现RNN"><a href="#使用TensorFlow实现RNN" class="headerlink" title="使用TensorFlow实现RNN"></a>使用TensorFlow实现RNN</h1><h1 id="最强网络RSNN深度残差网络-平均准确率96-99"><a href="#最强网络RSNN深度残差网络-平均准确率96-99" class="headerlink" title="最强网络RSNN深度残差网络 平均准确率96-99%"></a>最强网络RSNN深度残差网络 平均准确率96-99%</h1><h1 id="最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）"><a href="#最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）" class="headerlink" title="最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）"></a>最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）</h1><h1 id="Tensorflow-Caffe相互转换"><a href="#Tensorflow-Caffe相互转换" class="headerlink" title="Tensorflow Caffe相互转换"></a>Tensorflow Caffe相互转换</h1><h1 id="Tensorflow-RCNN区域卷积神经网络"><a href="#Tensorflow-RCNN区域卷积神经网络" class="headerlink" title="Tensorflow RCNN区域卷积神经网络"></a>Tensorflow RCNN区域卷积神经网络</h1><h1 id="模型AutoEncoder自编码机网络"><a href="#模型AutoEncoder自编码机网络" class="headerlink" title="模型AutoEncoder自编码机网络"></a>模型AutoEncoder自编码机网络</h1><h1 id="Tensorflow人工智能分布式实现"><a href="#Tensorflow人工智能分布式实现" class="headerlink" title="Tensorflow人工智能分布式实现"></a>Tensorflow人工智能分布式实现</h1>
+</code></pre><h1 id="RNN循环网络原理以及使用"><a href="#RNN循环网络原理以及使用" class="headerlink" title="RNN循环网络原理以及使用"></a>RNN循环网络原理以及使用</h1><pre><code>def rnn(cell, inputs, initial_state, dtype=None, squence_length=None,scope=None)
+参数：
+cell：RNNCell
+inputs:A length T list of inputs,each a vector with shape [batch_size]
+initial_state:An initial state for RNN shape[batch_size*cell.state_size]
+dtype:required if initial_state is not provided
+sequence_length:An int64 vector size[batch_size]
+scope:VariableScope for the created subgraph;default to &quot;RNN&quot;
+returns :
+A pair (outputs,state)where:
+    output is a length T list of outputs(one for each input)
+    states is a length T list of states(one state following each input)
+_X = tf.transpose(_X, [1, 0, 2]) # 对于3维的X 默认是 0 1 2 系数 ，我们把它置换成1 0 2 也就是 第一维 第二维进行交换
+</code></pre><p>eg：<br>    import input_data<br>    mnist = input_data.read_data_sets(“/tmp/data/“, one_hot=True)</p>
+<pre><code>import tensorflow as tf
+from tensorflow.models.rnn import rnn, rnn_cell
+import numpy as np
+
+&apos;&apos;&apos;
+To classify images using a reccurent neural network, we consider every image row as a sequence of pixels.
+Because MNIST image shape is 28*28px, we will then handle 28 sequences of 28 steps for every sample.
+&apos;&apos;&apos;
+
+# Parameters
+learning_rate = 0.001
+training_iters = 100000
+batch_size = 128
+display_step = 10
+
+# Network Parameters
+n_input = 28 # MNIST data input (img shape: 28*28)
+n_steps = 28 # timesteps
+n_hidden = 128 # hidden layer num of features
+n_classes = 10 # MNIST total classes (0-9 digits)
+
+# tf Graph input
+x = tf.placeholder(&quot;float&quot;, [None, n_steps, n_input])
+# Tensorflow LSTM cell requires 2x n_hidden length (state &amp; cell)
+istate = tf.placeholder(&quot;float&quot;, [None, 2*n_hidden])
+y = tf.placeholder(&quot;float&quot;, [None, n_classes])
+
+# Define weights
+weights = {
+    &apos;hidden&apos;: tf.Variable(tf.random_normal([n_input, n_hidden])), # Hidden layer weights
+    &apos;out&apos;: tf.Variable(tf.random_normal([n_hidden, n_classes]))
+}
+biases = {
+    &apos;hidden&apos;: tf.Variable(tf.random_normal([n_hidden])),
+    &apos;out&apos;: tf.Variable(tf.random_normal([n_classes]))
+}
+
+def RNN(_X, _istate, _weights, _biases):
+
+
+    _X = tf.transpose(_X, [1, 0, 2])  # permute n_steps and batch_size
+
+    _X = tf.reshape(_X, [-1, n_input]) # (n_steps*batch_size, n_input)
+
+    _X = tf.matmul(_X, _weights[&apos;hidden&apos;]) + _biases[&apos;hidden&apos;]
+
+
+    lstm_cell = rnn_cell.BasicLSTMCell(n_hidden, forget_bias=1.0)
+
+    _X = tf.split(0, n_steps, _X) # n_steps * (batch_size, n_hidden)
+
+
+    outputs, states = rnn.rnn(lstm_cell, _X, initial_state=_istate)
+
+    # Get inner loop last output
+    return tf.matmul(outputs[-1], _weights[&apos;out&apos;]) + _biases[&apos;out&apos;]
+
+pred = RNN(x, istate, weights, biases)
+
+# Define loss and optimizer
+cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(pred, y)) # Softmax loss
+optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate).minimize(cost) # Adam Optimizer
+
+# Evaluate model
+correct_pred = tf.equal(tf.argmax(pred,1), tf.argmax(y,1))
+accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
+
+# Initializing the variables
+init = tf.initialize_all_variables()
+
+# Launch the graph
+with tf.Session() as sess:
+    sess.run(init)
+    step = 1
+    # Keep training until reach max iterations
+    while step * batch_size &lt; training_iters:
+        batch_xs, batch_ys = mnist.train.next_batch(batch_size)
+        # Reshape data to get 28 seq of 28 elements
+        batch_xs = batch_xs.reshape((batch_size, n_steps, n_input))
+        # Fit training using batch data
+        sess.run(optimizer, feed_dict={x: batch_xs, y: batch_ys,
+                                       istate: np.zeros((batch_size, 2*n_hidden))})
+        if step % display_step == 0:
+            # Calculate batch accuracy
+            acc = sess.run(accuracy, feed_dict={x: batch_xs, y: batch_ys,
+                                                istate: np.zeros((batch_size, 2*n_hidden))})
+            # Calculate batch loss
+            loss = sess.run(cost, feed_dict={x: batch_xs, y: batch_ys,
+                                             istate: np.zeros((batch_size, 2*n_hidden))})
+            print &quot;Iter &quot; + str(step*batch_size) + &quot;, Minibatch Loss= &quot; + &quot;{:.6f}&quot;.format(loss) + \
+                  &quot;, Training Accuracy= &quot; + &quot;{:.5f}&quot;.format(acc)
+        step += 1
+    print &quot;Optimization Finished!&quot;
+    # Calculate accuracy for 256 mnist test images
+    test_len = 256
+    test_data = mnist.test.images[:test_len].reshape((-1, n_steps, n_input))
+    test_label = mnist.test.labels[:test_len]
+    print &quot;Testing Accuracy:&quot;, sess.run(accuracy, feed_dict={x: test_data, y: test_label,
+                                                             istate: np.zeros((test_len, 2*n_hidden))})
+</code></pre><h1 id="使用TensorFlow实现RNN"><a href="#使用TensorFlow实现RNN" class="headerlink" title="使用TensorFlow实现RNN"></a>使用TensorFlow实现RNN</h1><p><a href="http://blog.csdn.net/kkk584520/article/details/51477830" target="_blank" rel="external">RNN实现</a><br><a href="http://blog.csdn.net/u012436149/article/details/53026848" target="_blank" rel="external">tensorflow.Python.ops.rnn_cell</a></p>
+<p>类型判断：<br>    isinstance<br>rnn_cell中的函数：<br>    def _linear(args, output_size, bias, bias_start=0.0, scope=None):<br>args: list of tensor [batch_size, size]. 注意,list中的每个tensor的size 并不需要一定相同,但batch_size要保证一样.<br>output_size : 一个整数<br>bias: bool型, True表示 加bias,False表示不加<br>return : [batch_size, output_size]<br>注意: 这个函数的atgs 不能是 _ref 类型(tf_getvariable(), tf.Variables()返回的都是 _ref),<br>但这个 _ref类型经过任何op之后,_ref就会消失</p>
+<pre><code>class BasicLSTMCell(RNNCell):
+    def __init__(self, num_units, forget_bias=1.0, input_size=None,
+           state_is_tuple=True, activation=tanh):
+&quot;&quot;&quot;
+为什么被称为 Basic
+It does not allow cell clipping, a projection layer, and does not
+use peep-hole connections: it is the basic baseline.
+&quot;&quot;&quot;
+</code></pre><p>num_units: lstm单元的output_size<br>input_size: 这个参数没必要输入, 官方说马上也要禁用了<br>state_is_tuple: True的话, (c_state,h_state)作为tuple返回<br>activation: 激活函数<br>注意: 在我们创建 cell=BasicLSTMCell(…) 的时候, 只是初始化了cell的一些基本参数值. 这时,是没有variable被创建的, variable在我们 cell(input, state)时才会被创建, 下面所有的类都是这样</p>
+<pre><code>class GRUCell(RNNCell):
+    def __init__(self, num_units, input_size=None, activation=tanh):
+</code></pre><p>创建一个GRUCell</p>
+<pre><code>class OutputProjectionWrapper(RNNCell):
+    def __init__(self, cell, output_size):
+</code></pre><p>output_size: 要映射的 size<br>return: 返回一个 带有 OutputProjection Layer的 cell(s)</p>
+<pre><code>class InputProjectionWrapper(RNNCell):
+  def __init__(self, cell, num_proj, input_size=None):
+</code></pre><p>和上面差不多,一个输出映射,一个输入映射</p>
+<pre><code>class DropoutWrapper(RNNCell):
+  def __init__(self, cell, input_keep_prob=1.0, output_keep_prob=1.0,
+               seed=None):
+</code></pre><p>dropout</p>
+<pre><code>class EmbeddingWrapper(RNNCell):
+  def __init__(self, cell, embedding_classes, embedding_size, initializer=None):
+</code></pre><p>返回一个带有 embedding 的cell</p>
+<pre><code>class MultiRNNCell(RNNCell):
+  def __init__(self, cells, state_is_tuple=True):
+</code></pre><p>用来增加 rnn 的层数<br>cells : list of cell<br>返回一个多层的cell</p>
+<h1 id="最强网络RSNN深度残差网络-平均准确率96-99"><a href="#最强网络RSNN深度残差网络-平均准确率96-99" class="headerlink" title="最强网络RSNN深度残差网络 平均准确率96-99%"></a>最强网络RSNN深度残差网络 平均准确率96-99%</h1><h1 id="最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）"><a href="#最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）" class="headerlink" title="最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）"></a>最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）</h1><h1 id="Tensorflow-Caffe相互转换"><a href="#Tensorflow-Caffe相互转换" class="headerlink" title="Tensorflow Caffe相互转换"></a>Tensorflow Caffe相互转换</h1><h1 id="Tensorflow-RCNN区域卷积神经网络"><a href="#Tensorflow-RCNN区域卷积神经网络" class="headerlink" title="Tensorflow RCNN区域卷积神经网络"></a>Tensorflow RCNN区域卷积神经网络</h1><h1 id="模型AutoEncoder自编码机网络"><a href="#模型AutoEncoder自编码机网络" class="headerlink" title="模型AutoEncoder自编码机网络"></a>模型AutoEncoder自编码机网络</h1><h1 id="Tensorflow人工智能分布式实现"><a href="#Tensorflow人工智能分布式实现" class="headerlink" title="Tensorflow人工智能分布式实现"></a>Tensorflow人工智能分布式实现</h1>
       
     </div>
 
@@ -612,7 +754,7 @@ softplus----log(1+ e(wi*xi))
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -626,7 +768,7 @@ softplus----log(1+ e(wi*xi))
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

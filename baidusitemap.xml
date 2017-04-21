@@ -3,12 +3,27 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/04/20/Tensorflow%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
-    <lastmod>2017-04-20T14:25:25.828Z</lastmod>
+    <loc>http://yoursite.com/2017/04/21/EnglishWords/</loc>
+    <lastmod>2017-04-21T13:32:19.785Z</lastmod>
     <data>
         <display>
-        <title>Tensorflow源码解析</title>
-        <pubTime>2017-04-20T09:00:36.000Z</pubTime>
+        <title>English Words</title>
+        <pubTime>2017-04-21T13:30:12.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
+    <lastmod>2017-04-21T13:26:36.214Z</lastmod>
+    <data>
+        <display>
+        <title>Tensorflow常用函数</title>
+        <pubTime>2017-03-20T09:34:58.000Z</pubTime>
         
         <tag>TensorFlow </tag>
          
@@ -25,12 +40,49 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2017-04-20T14:21:48.479Z</lastmod>
+    <loc>http://yoursite.com/2017/04/21/%E9%82%A3%E4%BA%9B%E5%B9%B4%E9%81%87%E5%88%B0%E7%9A%84%E7%9A%84%E5%9D%91/</loc>
+    <lastmod>2017-04-21T12:09:16.677Z</lastmod>
     <data>
         <display>
-        <title>Tensorflow常用函数</title>
-        <pubTime>2017-03-20T09:34:58.000Z</pubTime>
+        <title>那些年遇到的的坑</title>
+        <pubTime>2017-04-21T11:55:53.000Z</pubTime>
+        
+        <tag>bug </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/04/17/C++-%E6%95%B0%E5%80%BC%E8%8C%83%E5%9B%B4/</loc>
+    <lastmod>2017-04-21T03:53:34.014Z</lastmod>
+    <data>
+        <display>
+        <title>C++数值范围</title>
+        <pubTime>2017-04-17T09:46:58.000Z</pubTime>
+        
+        <tag>C++ </tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/04/20/Tensorflow%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2017-04-20T14:25:25.828Z</lastmod>
+    <data>
+        <display>
+        <title>Tensorflow源码解析</title>
+        <pubTime>2017-04-20T09:00:36.000Z</pubTime>
         
         <tag>TensorFlow </tag>
          
@@ -58,26 +110,6 @@
          
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/04/17/C++-%E6%95%B0%E5%80%BC%E8%8C%83%E5%9B%B4/</loc>
-    <lastmod>2017-04-17T14:36:32.251Z</lastmod>
-    <data>
-        <display>
-        <title>C++数值范围</title>
-        <pubTime>2017-04-17T09:46:58.000Z</pubTime>
-        
-        <tag>C++ </tag>
-         
-         
-           
-             
-              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
-          
         </display>
     </data>
     </url>
