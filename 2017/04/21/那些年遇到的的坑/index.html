@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/21/那些年遇到的的坑/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="记录实践中遇到的各种各样的问题">
-<meta property="og:updated_time" content="2017-04-21T12:09:16.677Z">
+<meta property="og:updated_time" content="2017-04-25T06:56:26.722Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些年遇到的的坑">
 <meta name="twitter:description" content="记录实践中遇到的各种各样的问题">
@@ -277,7 +277,17 @@
       
         <p>记录实践中遇到的各种各样的问题</p>
 <a id="more"></a>
-<p>1、OpenVPN GUI这个工具可能需要Administrator执行<br>2、MySQL可以插入NULL<br>    UPDATE <code>cc_t_user_coupon</code> SET <code>verification_time</code>=NULL WHERE (<code>id</code>=’2281492761’) AND (<code>obtain_time</code>=’2017-04-21 15:41:04’) //出自文化汇项目<br>3、<a href="http://itindex.net/detail/49930-%E7%AC%94%E8%AE%B0-mysql-null" target="_blank" rel="external">mysql中的null值和空值区别</a><br>4、MyBatis中updateByExampleSelective与updateByExample的区别<br>    this.userCouponMapper.updateByExampleSelective(userCouponUpdate, userCouponExample);//只更新userCouponUpdate中不为null的部分<br>    this.userCouponMapper.updateByExample(userCouponUpdate, userCouponExample);//将查询到的词条更新为userCouponUpdate<br>5、用到不熟悉的东西一定要先打一个问号。<br>6、查看端口使用信息<br>    netstat -ano </p>
+<ol>
+<li>OpenVPN GUI这个工具可能需要Administrator执行</li>
+<li>MySQL可以插入NULL<br> UPDATE <code>cc_t_user_coupon</code> SET <code>verification_time</code>=NULL WHERE (<code>id</code>=’2281492761’) AND (<code>obtain_time</code>=’2017-04-21 15:41:04’) //出自文化汇项目</li>
+<li><a href="http://itindex.net/detail/49930-%E7%AC%94%E8%AE%B0-mysql-null" target="_blank" rel="external">mysql中的null值和空值区别</a></li>
+<li>MyBatis中updateByExampleSelective与updateByExample的区别<br> this.userCouponMapper.updateByExampleSelective(userCouponUpdate, userCouponExample);//只更新userCouponUpdate中不为null的部分<br> this.userCouponMapper.updateByExample(userCouponUpdate, userCouponExample);//将查询到的词条更新为userCouponUpdate</li>
+<li>用到不熟悉的东西一定要先打一个问号。</li>
+<li>查看端口使用信息<br> netstat -ano </li>
+<li>string_vector.size() 不等同与int，不能和负数相加减 </li>
+<li>Dev-C++函数必须有先后顺序(可能和版本相关)</li>
+<li>inplace_merge(first,mid,last,compare);//将[first,mid) 和 [mid,last)这两个区间进行归并成一个有序序列。</li>
+</ol>
 
       
     </div>
