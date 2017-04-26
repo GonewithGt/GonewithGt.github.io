@@ -1,0 +1,806 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="DL,C++,LSTM," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="飘" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="转自：LSTM神经网络的详细推导与c++实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LSTM-C++实现">
+<meta property="og:url" content="http://yoursite.com/2017/04/26/LSTM-C++实现/index.html">
+<meta property="og:site_name" content="飘">
+<meta property="og:description" content="转自：LSTM神经网络的详细推导与c++实现">
+<meta property="og:updated_time" content="2017-04-26T08:52:43.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LSTM-C++实现">
+<meta name="twitter:description" content="转自：LSTM神经网络的详细推导与c++实现">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> LSTM-C++实现 | 飘 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">飘</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">海の上で最も自由なのは海賊王だぁ～</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LSTM-C++实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-26T16:45:13+08:00" content="2017-04-26">
+              2017-04-26
+            </time>
+          </span>
+
+
+  <span id="busuanzi_container_page_pv">&nbsp;&nbsp;|&nbsp;&nbsp;阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/26/LSTM-C++实现/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/26/LSTM-C++实现/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转自：<a href="http://blog.csdn.net/mydear_11000/article/details/53688990" target="_blank" rel="external">LSTM神经网络的详细推导与c++实现</a></p>
+<a id="more"></a>
+<p>原文错误部分已修正。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"iostream"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"math.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdlib.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"time.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"vector"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"assert.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"string.h"</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> innode  2       <span class="comment">//输入结点数，将输入2个加数</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> hidenode  26    <span class="comment">//隐藏结点数，存储“携带位”</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> outnode  1      <span class="comment">//输出结点数，将输出一个预测数字</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> alpha  0.1      <span class="comment">//学习速率</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> binary_dim 8    <span class="comment">//二进制数的最大长度</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> randval(high) ( (double)rand() / RAND_MAX * high )</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> uniform_plus_minus_one ( (double)( 2.0 * rand() ) / ((double)RAND_MAX + 1.0) - 1.0 )  <span class="comment">//均匀随机分布</span></span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">int</span> largest_number = ( <span class="built_in">pow</span>(<span class="number">2</span>, binary_dim) );  <span class="comment">//跟二进制最大长度对应的可以表示的最大十进制数</span></div><div class="line"></div><div class="line"><span class="comment">//激活函数</span></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">sigmoid</span><span class="params">(<span class="keyword">double</span> x)</span> </span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">1.0</span> / (<span class="number">1.0</span> + <span class="built_in">exp</span>(-x));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//激活函数的导数，y为激活函数值</span></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">dsigmoid</span><span class="params">(<span class="keyword">double</span> y)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> y * (<span class="number">1.0</span> - y);  </div><div class="line">&#125;           </div><div class="line"></div><div class="line"><span class="comment">//tanh的导数，y为tanh值</span></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">dtanh</span><span class="params">(<span class="keyword">double</span> y)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">1.0</span> - y * y;  </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//将一个10进制整数转换为2进制数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">int2binary</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> *arr)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">while</span>(n)</div><div class="line">	&#123;</div><div class="line">		arr[i++] = n % <span class="number">2</span>;</div><div class="line">		n /= <span class="number">2</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">while</span>(i &lt; binary_dim)</div><div class="line">		arr[i++] = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> RNN</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	RNN();</div><div class="line">	<span class="keyword">virtual</span> ~RNN();</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">train</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">double</span> W_I[innode][hidenode];     <span class="comment">//连接输入与隐含层单元中输入门的权值矩阵</span></div><div class="line">	<span class="keyword">double</span> U_I[hidenode][hidenode];   <span class="comment">//连接上一隐层输出与本隐含层单元中输入门的权值矩阵</span></div><div class="line">	<span class="keyword">double</span> W_F[innode][hidenode];     <span class="comment">//连接输入与隐含层单元中遗忘门的权值矩阵</span></div><div class="line">	<span class="keyword">double</span> U_F[hidenode][hidenode];   <span class="comment">//连接上一隐含层与本隐含层单元中遗忘门的权值矩阵</span></div><div class="line">	<span class="keyword">double</span> W_O[innode][hidenode];     <span class="comment">//连接输入与隐含层单元中遗忘门的权值矩阵</span></div><div class="line">	<span class="keyword">double</span> U_O[hidenode][hidenode];   <span class="comment">//连接上一隐含层与现在时刻的隐含层的权值矩阵</span></div><div class="line">	<span class="keyword">double</span> W_G[innode][hidenode];     <span class="comment">//用于产生新记忆的权值矩阵</span></div><div class="line">	<span class="keyword">double</span> U_G[hidenode][hidenode];   <span class="comment">//用于产生新记忆的权值矩阵</span></div><div class="line">	<span class="keyword">double</span> W_out[hidenode][outnode];  <span class="comment">//连接隐层与输出层的权值矩阵</span></div><div class="line"></div><div class="line">	<span class="keyword">double</span> *x;             <span class="comment">//layer 0 输出值，由输入向量直接设定</span></div><div class="line">	<span class="comment">//double *layer_1;     //layer 1 输出值</span></div><div class="line">	<span class="keyword">double</span> *y;             <span class="comment">//layer 2 输出值</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">winit</span><span class="params">(<span class="keyword">double</span> w[], <span class="keyword">int</span> n)</span> <span class="comment">//权值初始化</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)</div><div class="line">		w[i] = uniform_plus_minus_one;  <span class="comment">//均匀随机分布</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">RNN::RNN()</div><div class="line">&#123;</div><div class="line">	x = <span class="keyword">new</span> <span class="keyword">double</span>[innode];</div><div class="line">	y = <span class="keyword">new</span> <span class="keyword">double</span>[outnode];</div><div class="line">	winit((<span class="keyword">double</span>*)W_I, innode * hidenode);</div><div class="line">	winit((<span class="keyword">double</span>*)U_I, hidenode * hidenode);</div><div class="line">	winit((<span class="keyword">double</span>*)W_F, innode * hidenode);</div><div class="line">	winit((<span class="keyword">double</span>*)U_F, hidenode * hidenode);</div><div class="line">	winit((<span class="keyword">double</span>*)W_O, innode * hidenode);</div><div class="line">	winit((<span class="keyword">double</span>*)U_O, hidenode * hidenode);</div><div class="line">	winit((<span class="keyword">double</span>*)W_G, innode * hidenode);</div><div class="line">	winit((<span class="keyword">double</span>*)U_G, hidenode * hidenode);</div><div class="line">	winit((<span class="keyword">double</span>*)W_out, hidenode * outnode);</div><div class="line">&#125;</div><div class="line"></div><div class="line">RNN::~RNN()</div><div class="line">&#123;</div><div class="line">	<span class="keyword">delete</span> x;</div><div class="line">	<span class="keyword">delete</span> y;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> RNN::train()</div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> epoch, i, j, k, m, p;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>*&gt; I_vector;      <span class="comment">//输入门</span></div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>*&gt; F_vector;      <span class="comment">//遗忘门</span></div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>*&gt; O_vector;      <span class="comment">//输出门</span></div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>*&gt; G_vector;      <span class="comment">//新记忆</span></div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>*&gt; S_vector;      <span class="comment">//状态值</span></div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>*&gt; h_vector;      <span class="comment">//输出值</span></div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; y_delta;        <span class="comment">//保存误差关于输出层的偏导</span></div><div class="line"></div><div class="line">	<span class="keyword">for</span>(epoch=<span class="number">0</span>; epoch&lt;<span class="number">16000</span>; epoch++)  <span class="comment">//训练次数</span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">double</span> e = <span class="number">0.0</span>;  <span class="comment">//误差</span></div><div class="line"></div><div class="line">		<span class="keyword">int</span> predict[binary_dim];               <span class="comment">//保存每次生成的预测值</span></div><div class="line">		<span class="built_in">memset</span>(predict, <span class="number">0</span>, <span class="keyword">sizeof</span>(predict));</div><div class="line"></div><div class="line">		<span class="keyword">int</span> a_int = (<span class="keyword">int</span>)randval(largest_number/<span class="number">2.0</span>);  <span class="comment">//随机生成一个加数 a</span></div><div class="line">		<span class="keyword">int</span> a[binary_dim];</div><div class="line">		int2binary(a_int, a);                 <span class="comment">//转为二进制数</span></div><div class="line"></div><div class="line">		<span class="keyword">int</span> b_int = (<span class="keyword">int</span>)randval(largest_number/<span class="number">2.0</span>);  <span class="comment">//随机生成另一个加数 b</span></div><div class="line">		<span class="keyword">int</span> b[binary_dim];</div><div class="line">		int2binary(b_int, b);                 <span class="comment">//转为二进制数</span></div><div class="line"></div><div class="line">		<span class="keyword">int</span> c_int = a_int + b_int;            <span class="comment">//真实的和 c</span></div><div class="line">		<span class="keyword">int</span> c[binary_dim];</div><div class="line">		int2binary(c_int, c);                 <span class="comment">//转为二进制数</span></div><div class="line"></div><div class="line">		<span class="comment">//在0时刻是没有之前的隐含层的，所以初始化一个全为0的</span></div><div class="line">		<span class="keyword">double</span> *S = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];     <span class="comment">//状态值</span></div><div class="line">		<span class="keyword">double</span> *h = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];     <span class="comment">//输出值</span></div><div class="line"></div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;hidenode; i++)  </div><div class="line">		&#123;</div><div class="line">			S[i] = <span class="number">0</span>;</div><div class="line">			h[i] = <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		S_vector.push_back(S);</div><div class="line">		h_vector.push_back(h);  </div><div class="line"></div><div class="line">		<span class="comment">//正向传播</span></div><div class="line">		<span class="keyword">for</span>(p=<span class="number">0</span>; p&lt;binary_dim; p++)           <span class="comment">//循环遍历二进制数组，从最低位开始</span></div><div class="line">		&#123;</div><div class="line">			x[<span class="number">0</span>] = a[p];</div><div class="line">			x[<span class="number">1</span>] = b[p];</div><div class="line">			<span class="keyword">double</span> t = (<span class="keyword">double</span>)c[p];          <span class="comment">//实际值</span></div><div class="line">			<span class="keyword">double</span> *in_gate = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];     <span class="comment">//输入门</span></div><div class="line">			<span class="keyword">double</span> *out_gate = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];    <span class="comment">//输出门</span></div><div class="line">			<span class="keyword">double</span> *forget_gate = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode]; <span class="comment">//遗忘门</span></div><div class="line">			<span class="keyword">double</span> *g_gate = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];      <span class="comment">//新记忆</span></div><div class="line">			<span class="keyword">double</span> *state = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];       <span class="comment">//状态值</span></div><div class="line">			<span class="keyword">double</span> *h = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];           <span class="comment">//隐层输出值</span></div><div class="line"></div><div class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;hidenode; j++)</div><div class="line">			&#123;   </div><div class="line">				<span class="comment">//输入层转播到隐层</span></div><div class="line">				<span class="keyword">double</span> inGate = <span class="number">0.0</span>;</div><div class="line">				<span class="keyword">double</span> outGate = <span class="number">0.0</span>;</div><div class="line">				<span class="keyword">double</span> forgetGate = <span class="number">0.0</span>;</div><div class="line">				<span class="keyword">double</span> gGate = <span class="number">0.0</span>;</div><div class="line">				<span class="keyword">double</span> s = <span class="number">0.0</span>;</div><div class="line"></div><div class="line">				<span class="keyword">for</span>(m=<span class="number">0</span>; m&lt;innode; m++) </div><div class="line">				&#123;</div><div class="line">					inGate += x[m] * W_I[m][j]; </div><div class="line">					outGate += x[m] * W_O[m][j];</div><div class="line">					forgetGate += x[m] * W_F[m][j];</div><div class="line">					gGate += x[m] * W_G[m][j];</div><div class="line">				&#125;</div><div class="line"></div><div class="line">				<span class="keyword">double</span> *h_pre = h_vector.back();</div><div class="line">				<span class="keyword">double</span> *state_pre = S_vector.back();</div><div class="line">				<span class="keyword">for</span>(m=<span class="number">0</span>; m&lt;hidenode; m++)</div><div class="line">				&#123;</div><div class="line">					inGate += h_pre[m] * U_I[m][j];</div><div class="line">					outGate += h_pre[m] * U_O[m][j];</div><div class="line">					forgetGate += h_pre[m] * U_F[m][j];</div><div class="line">					gGate += h_pre[m] * U_G[m][j];</div><div class="line">				&#125;</div><div class="line"></div><div class="line">				in_gate[j] = sigmoid(inGate);   </div><div class="line">				out_gate[j] = sigmoid(outGate);</div><div class="line">				forget_gate[j] = sigmoid(forgetGate);</div><div class="line">				g_gate[j] = sigmoid(gGate);</div><div class="line"></div><div class="line">				<span class="keyword">double</span> s_pre = (j == <span class="number">0</span> ? <span class="number">0</span> : state[j<span class="number">-1</span>]);</div><div class="line">				state[j] = forget_gate[j] * s_pre + g_gate[j] * in_gate[j];</div><div class="line">			   <span class="comment">// h[j] = in_gate[j] * tanh(state[j]);</span></div><div class="line">			   h[j] = out_gate[j] * <span class="built_in">tanh</span>(state[j]);  <span class="comment">//原文这儿有问题。</span></div><div class="line">			&#125;</div><div class="line"></div><div class="line"></div><div class="line">			<span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;outnode; k++)</div><div class="line">			&#123;</div><div class="line">				<span class="comment">//隐藏层传播到输出层</span></div><div class="line">				<span class="keyword">double</span> out = <span class="number">0.0</span>;</div><div class="line">				<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;hidenode; j++)</div><div class="line">					out += h[j] * W_out[j][k];              </div><div class="line">				y[k] = sigmoid(out);               <span class="comment">//输出层各单元输出</span></div><div class="line">			&#125;</div><div class="line"></div><div class="line">			predict[p] = (<span class="keyword">int</span>)<span class="built_in">floor</span>(y[<span class="number">0</span>] + <span class="number">0.5</span>);   <span class="comment">//记录预测值</span></div><div class="line"></div><div class="line">			<span class="comment">//保存隐藏层，以便下次计算</span></div><div class="line">			I_vector.push_back(in_gate);</div><div class="line">			F_vector.push_back(forget_gate);</div><div class="line">			O_vector.push_back(out_gate);</div><div class="line">			S_vector.push_back(state);</div><div class="line">			G_vector.push_back(g_gate);</div><div class="line">			h_vector.push_back(h);</div><div class="line"></div><div class="line">			<span class="comment">//保存标准误差关于输出层的偏导</span></div><div class="line">			y_delta.push_back( (t - y[<span class="number">0</span>]) * dsigmoid(y[<span class="number">0</span>]) );</div><div class="line">			e += <span class="built_in">fabs</span>(t - y[<span class="number">0</span>]);          <span class="comment">//误差</span></div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">//误差反向传播</span></div><div class="line"></div><div class="line">		<span class="comment">//隐含层偏差，通过当前之后一个时间点的隐含层误差和当前输出层的误差计算</span></div><div class="line">		<span class="keyword">double</span> h_delta[hidenode];  </div><div class="line">		<span class="keyword">double</span> *O_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">double</span> *I_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">double</span> *F_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">double</span> *G_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">double</span> *state_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="comment">//当前时间之后的一个隐藏层误差</span></div><div class="line">		<span class="keyword">double</span> *O_future_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode]; </div><div class="line">		<span class="keyword">double</span> *I_future_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">double</span> *F_future_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">double</span> *G_future_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">double</span> *state_future_delta = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">double</span> *forget_gate_future = <span class="keyword">new</span> <span class="keyword">double</span>[hidenode];</div><div class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;hidenode; j++)</div><div class="line">		&#123;</div><div class="line">			O_future_delta[j] = <span class="number">0</span>;</div><div class="line">			I_future_delta[j] = <span class="number">0</span>;</div><div class="line">			F_future_delta[j] = <span class="number">0</span>;</div><div class="line">			G_future_delta[j] = <span class="number">0</span>;</div><div class="line">			state_future_delta[j] = <span class="number">0</span>;</div><div class="line">			forget_gate_future[j] = <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">for</span>(p=binary_dim<span class="number">-1</span>; p&gt;=<span class="number">0</span> ; p--)</div><div class="line">		&#123;</div><div class="line">			x[<span class="number">0</span>] = a[p];</div><div class="line">			x[<span class="number">1</span>] = b[p];</div><div class="line"></div><div class="line">			<span class="comment">//当前隐藏层</span></div><div class="line">			<span class="keyword">double</span> *in_gate = I_vector[p];     <span class="comment">//输入门</span></div><div class="line">			<span class="keyword">double</span> *out_gate = O_vector[p];    <span class="comment">//输出门</span></div><div class="line">			<span class="keyword">double</span> *forget_gate = F_vector[p]; <span class="comment">//遗忘门</span></div><div class="line">			<span class="keyword">double</span> *g_gate = G_vector[p];      <span class="comment">//新记忆</span></div><div class="line">			<span class="keyword">double</span> *state = S_vector[p+<span class="number">1</span>];     <span class="comment">//状态值</span></div><div class="line">			<span class="keyword">double</span> *h = h_vector[p+<span class="number">1</span>];         <span class="comment">//隐层输出值</span></div><div class="line"></div><div class="line">			<span class="comment">//前一个隐藏层</span></div><div class="line">			<span class="keyword">double</span> *h_pre = h_vector[p];   </div><div class="line">			<span class="keyword">double</span> *state_pre = S_vector[p];</div><div class="line"></div><div class="line">			<span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;outnode; k++)  <span class="comment">//对于网络中每个输出单元，更新权值</span></div><div class="line">			&#123;</div><div class="line">				<span class="comment">//更新隐含层和输出层之间的连接权</span></div><div class="line">				<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;hidenode; j++)</div><div class="line">					W_out[j][k] += alpha * y_delta[p] * h[j];  </div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">//对于网络中每个隐藏单元，计算误差项，并更新权值</span></div><div class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>; j&lt;hidenode; j++) </div><div class="line">			&#123;</div><div class="line">				h_delta[j] = <span class="number">0.0</span>;</div><div class="line">				<span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;outnode; k++)</div><div class="line">				&#123;</div><div class="line">					h_delta[j] += y_delta[p] * W_out[j][k];</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;hidenode; k++)</div><div class="line">				&#123;</div><div class="line">					h_delta[j] += I_future_delta[k] * U_I[j][k];</div><div class="line">					h_delta[j] += F_future_delta[k] * U_F[j][k];</div><div class="line">					h_delta[j] += O_future_delta[k] * U_O[j][k];</div><div class="line">					h_delta[j] += G_future_delta[k] * U_G[j][k];</div><div class="line">				&#125;</div><div class="line"></div><div class="line">				O_delta[j] = <span class="number">0.0</span>;</div><div class="line">				I_delta[j] = <span class="number">0.0</span>;</div><div class="line">				F_delta[j] = <span class="number">0.0</span>;</div><div class="line">				G_delta[j] = <span class="number">0.0</span>;</div><div class="line">				state_delta[j] = <span class="number">0.0</span>;</div><div class="line"></div><div class="line">				<span class="comment">//隐含层的校正误差</span></div><div class="line">				O_delta[j] = h_delta[j] * <span class="built_in">tanh</span>(state[j]) * dsigmoid(out_gate[j]);</div><div class="line">				state_delta[j] = h_delta[j] * out_gate[j] * dtanh(state[j]) +</div><div class="line">								 state_future_delta[j] * forget_gate_future[j];</div><div class="line">				F_delta[j] = state_delta[j] * state_pre[j] * dsigmoid(forget_gate[j]);</div><div class="line">				I_delta[j] = state_delta[j] * g_gate[j] * dsigmoid(in_gate[j]);</div><div class="line">				G_delta[j] = state_delta[j] * in_gate[j] * dsigmoid(g_gate[j]);</div><div class="line"></div><div class="line">				<span class="comment">//更新前一个隐含层和现在隐含层之间的权值</span></div><div class="line">				<span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;hidenode; k++)</div><div class="line">				&#123;</div><div class="line">					U_I[k][j] += alpha * I_delta[j] * h_pre[k];</div><div class="line">					U_F[k][j] += alpha * F_delta[j] * h_pre[k];</div><div class="line">					U_O[k][j] += alpha * O_delta[j] * h_pre[k];</div><div class="line">					U_G[k][j] += alpha * G_delta[j] * h_pre[k];</div><div class="line">				&#125;</div><div class="line"></div><div class="line">				<span class="comment">//更新输入层和隐含层之间的连接权</span></div><div class="line">				<span class="keyword">for</span>(k=<span class="number">0</span>; k&lt;innode; k++)</div><div class="line">				&#123;</div><div class="line">					W_I[k][j] += alpha * I_delta[j] * x[k];</div><div class="line">					W_F[k][j] += alpha * F_delta[j] * x[k];</div><div class="line">					W_O[k][j] += alpha * O_delta[j] * x[k];</div><div class="line">					W_G[k][j] += alpha * G_delta[j] * x[k];</div><div class="line">				&#125;</div><div class="line"></div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="keyword">if</span>(p == binary_dim<span class="number">-1</span>)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">delete</span>  O_future_delta;</div><div class="line">				<span class="keyword">delete</span>  F_future_delta;</div><div class="line">				<span class="keyword">delete</span>  I_future_delta;</div><div class="line">				<span class="keyword">delete</span>  G_future_delta;</div><div class="line">				<span class="keyword">delete</span>  state_future_delta;</div><div class="line">				<span class="keyword">delete</span>  forget_gate_future;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			O_future_delta = O_delta;</div><div class="line">			F_future_delta = F_delta;</div><div class="line">			I_future_delta = I_delta;</div><div class="line">			G_future_delta = G_delta;</div><div class="line">			state_future_delta = state_delta;</div><div class="line">			forget_gate_future = forget_gate;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">delete</span>  O_future_delta;</div><div class="line">		<span class="keyword">delete</span>  F_future_delta;</div><div class="line">		<span class="keyword">delete</span>  I_future_delta;</div><div class="line">		<span class="keyword">delete</span>  G_future_delta;</div><div class="line">		<span class="keyword">delete</span>  state_future_delta;</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(epoch % <span class="number">200</span> == <span class="number">0</span>)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"error："</span> &lt;&lt; e &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"pred："</span> ;</div><div class="line">			<span class="keyword">for</span>(k=binary_dim<span class="number">-1</span>; k&gt;=<span class="number">0</span>; k--)</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; predict[k];</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"true："</span> ;</div><div class="line">			<span class="keyword">for</span>(k=binary_dim<span class="number">-1</span>; k&gt;=<span class="number">0</span>; k--)</div><div class="line">				<span class="built_in">cout</span> &lt;&lt; c[k];</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"></div><div class="line">			<span class="keyword">int</span> out = <span class="number">0</span>;</div><div class="line">			<span class="keyword">for</span>(k=binary_dim<span class="number">-1</span>; k&gt;=<span class="number">0</span>; k--)</div><div class="line">				out += predict[k] * <span class="built_in">pow</span>(<span class="number">2</span>, k);</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; a_int &lt;&lt; <span class="string">" + "</span> &lt;&lt; b_int &lt;&lt; <span class="string">" = "</span> &lt;&lt; out &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;I_vector.size(); i++)</div><div class="line">			<span class="keyword">delete</span> I_vector[i];</div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;F_vector.size(); i++)</div><div class="line">			<span class="keyword">delete</span> F_vector[i];</div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;O_vector.size(); i++)</div><div class="line">			<span class="keyword">delete</span> O_vector[i];</div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;G_vector.size(); i++)</div><div class="line">			<span class="keyword">delete</span> G_vector[i];</div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;S_vector.size(); i++)</div><div class="line">			<span class="keyword">delete</span> S_vector[i];</div><div class="line">		<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;h_vector.size(); i++)</div><div class="line">			<span class="keyword">delete</span> h_vector[i];</div><div class="line"></div><div class="line">		I_vector.clear();</div><div class="line">		F_vector.clear();</div><div class="line">		O_vector.clear();</div><div class="line">		G_vector.clear();</div><div class="line">		S_vector.clear();</div><div class="line">		h_vector.clear();</div><div class="line">		y_delta.clear();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	srand(time(<span class="literal">NULL</span>));</div><div class="line">	RNN rnn;</div><div class="line">	rnn.train();</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DL/" rel="tag">#DL</a>
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/LSTM/" rel="tag">#LSTM</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/21/EnglishWords/" rel="next" title="English Words">
+                <i class="fa fa-chevron-left"></i> English Words
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/26/LSTM-C++实现/"
+           data-title="LSTM-C++实现" data-url="http://yoursite.com/2017/04/26/LSTM-C++实现/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="GonewithGt" />
+          <p class="site-author-name" itemprop="name">GonewithGt</p>
+          <p class="site-description motion-element" itemprop="description">Everything is good now~</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/GonewithGt" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:1724532024@qq.com" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> Email
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GonewithGt
+
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<script type="text/javascript">
+var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257374415'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1257374415' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/sitemap.xml">Google网站地图</a></span>
+  &nbsp;&nbsp;|&nbsp;&nbsp;<span><a href="/baidusitemap.xml">百度网站地图</a></span>
+
+
+</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+&nbsp;&nbsp;|&nbsp;&nbsp;本站总点击 <span id="busuanzi_value_site_pv"></span> 次
+&nbsp;&nbsp;|&nbsp;&nbsp;您是第 <span id="busuanzi_value_site_uv"></span> 位访客
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar.display === 'post'||CONFIG.sidebar.display === 'always') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"GonewithGt"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '/js/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/MathJax.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/mathjax/2.4.0/config/TeX-AMS-MML_HTMLorMML.js"></script>
+  
+
+
+  
+  
+
+
+</body>
+</html>
