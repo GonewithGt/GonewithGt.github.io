@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://yoursite.com/2017/04/26/LSTM-C++%E5%AE%9E%E7%8E%B0/</loc>
-    <lastmod>2017-04-26T08:52:43.714Z</lastmod>
+    <lastmod>2017-04-27T09:04:56.187Z</lastmod>
     <data>
         <display>
         <title>LSTM-C++实现</title>
@@ -21,6 +21,77 @@
              
               <breadCrumb title="DL" url="http://yoursite.com/categories/DL/"/>
           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/</loc>
+    <lastmod>2017-04-27T03:18:13.412Z</lastmod>
+    <data>
+        <display>
+        <title>Stance_Detection_with_Conditional_Encoding</title>
+        <pubTime>2017-04-27T02:20:15.000Z</pubTime>
+        
+        <tag>paper </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/04/21/EnglishWords/</loc>
+    <lastmod>2017-04-27T02:51:11.183Z</lastmod>
+    <data>
+        <display>
+        <title>English Words</title>
+        <pubTime>2017-04-21T13:30:12.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/04/20/Tensorflow%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
+    <lastmod>2017-04-27T02:48:27.199Z</lastmod>
+    <data>
+        <display>
+        <title>Tensorflow源码解析</title>
+        <pubTime>2017-04-20T09:00:36.000Z</pubTime>
+        
+        <tag>DL </tag>
+         
+        <tag>TensorFlow </tag>
+         
+         
+           
+             
+              <breadCrumb title="DL" url="http://yoursite.com/categories/DL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/04/27/LDA%E4%B8%BB%E9%A2%98%E6%A8%A1%E5%9E%8B/</loc>
+    <lastmod>2017-04-27T02:03:54.185Z</lastmod>
+    <data>
+        <display>
+        <title>LDA主题模型</title>
+        <pubTime>2017-04-27T01:58:10.000Z</pubTime>
+        
+        <tag>LDA </tag>
+         
+         
+           
         </display>
     </data>
     </url>
@@ -111,43 +182,6 @@
            
              
               <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/04/21/EnglishWords/</loc>
-    <lastmod>2017-04-21T13:32:19.785Z</lastmod>
-    <data>
-        <display>
-        <title>English Words</title>
-        <pubTime>2017-04-21T13:30:12.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/04/20/Tensorflow%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/</loc>
-    <lastmod>2017-04-20T14:25:25.828Z</lastmod>
-    <data>
-        <display>
-        <title>Tensorflow源码解析</title>
-        <pubTime>2017-04-20T09:00:36.000Z</pubTime>
-        
-        <tag>DL </tag>
-         
-        <tag>TensorFlow </tag>
-         
-         
-           
-             
-              <breadCrumb title="DL" url="http://yoursite.com/categories/DL/"/>
           
         </display>
     </data>
