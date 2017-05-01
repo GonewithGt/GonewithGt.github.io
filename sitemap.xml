@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/</loc>
+    
+    <lastmod>2017-05-01T14:00:14.579Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/04/21/EnglishWords/</loc>
     
-    <lastmod>2017-05-01T11:46:54.474Z</lastmod>
+    <lastmod>2017-05-01T11:54:39.427Z</lastmod>
     
   </url>
   
@@ -26,13 +33,6 @@
     <loc>http://yoursite.com/2017/04/26/LSTM-C++%E5%AE%9E%E7%8E%B0/</loc>
     
     <lastmod>2017-04-27T09:04:56.187Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/</loc>
-    
-    <lastmod>2017-04-27T03:18:13.412Z</lastmod>
     
   </url>
   

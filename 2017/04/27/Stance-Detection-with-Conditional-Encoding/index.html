@@ -59,16 +59,16 @@
 
 
 
-<meta name="description" content="github: https://github.com/sheffieldnlp/stance-conditional">
+<meta name="description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Stance_Detection_with_Conditional_Encoding">
 <meta property="og:url" content="http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/index.html">
 <meta property="og:site_name" content="飘">
-<meta property="og:description" content="github: https://github.com/sheffieldnlp/stance-conditional">
-<meta property="og:updated_time" content="2017-04-27T03:18:13.412Z">
+<meta property="og:description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
+<meta property="og:updated_time" content="2017-05-01T14:00:14.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stance_Detection_with_Conditional_Encoding">
-<meta name="twitter:description" content="github: https://github.com/sheffieldnlp/stance-conditional">
+<meta name="twitter:description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
 
 
 
@@ -275,9 +275,157 @@
       
 
       
-        <p>github: <a href="https://github.com/sheffieldnlp/stance-conditional" target="_blank" rel="external">https://github.com/sheffieldnlp/stance-conditional</a></p>
+        <p>github: <a href="https://github.com/sheffieldnlp/stance-conditional" target="_blank" rel="external">https://github.com/sheffieldnlp/stance-conditional</a><br><a href="http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html" target="_blank" rel="external">Python re模块</a><br><a href="http://m.blog.csdn.net/article/details?id=53248570" target="_blank" rel="external">ipython</a><br><a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">FastText</a>:Library for fast text representation and classification.<br><a href="http://blog.csdn.net/questionfish/article/details/46725475" target="_blank" rel="external">gensim中文教程</a><br><a href="http://radimrehurek.com/gensim/tutorial.html" target="_blank" rel="external">gensim英文教程</a></p>
 <a id="more"></a>
-<p><a href="http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html" target="_blank" rel="external">Python re模块</a></p>
+<h1 id="gensim"><a href="#gensim" class="headerlink" title="gensim"></a>gensim</h1><ol>
+<li><p>激活日志</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> logging</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>logging.basicConfig(format=<span class="string">'%(asctime)s : %(levelname)s : %(message)s'</span>, level=logging.INFO)</div></pre></td></tr></table></figure>
+</li>
+<li><p>语料库创建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> gensim <span class="keyword">import</span> corpora, models, similarities</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>corpus = [[(<span class="number">0</span>, <span class="number">1.0</span>), (<span class="number">1</span>, <span class="number">1.0</span>), (<span class="number">2</span>, <span class="number">1.0</span>)],</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>          [(<span class="number">2</span>, <span class="number">1.0</span>), (<span class="number">3</span>, <span class="number">1.0</span>), (<span class="number">4</span>, <span class="number">1.0</span>), (<span class="number">5</span>, <span class="number">1.0</span>), (<span class="number">6</span>, <span class="number">1.0</span>), (<span class="number">8</span>, <span class="number">1.0</span>)],</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>          [(<span class="number">8</span>, <span class="number">1.0</span>), (<span class="number">10</span>, <span class="number">1.0</span>), (<span class="number">11</span>, <span class="number">1.0</span>)]]</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化转换并索引</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>tfidf = models.TfidfModel(corpus)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>vec = [(<span class="number">0</span>, <span class="number">1</span>), (<span class="number">4</span>, <span class="number">1</span>)]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(tfidf[vec])</div><div class="line">[(<span class="number">0</span>, <span class="number">0.8075244</span>), (<span class="number">4</span>, <span class="number">0.5898342</span>)]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=<span class="number">12</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>sims = index[tfidf[vec]]</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>print(list(enumerate(sims)))</div><div class="line">[(<span class="number">0</span>, <span class="number">0.4662244</span>), (<span class="number">1</span>, <span class="number">0.19139354</span>), (<span class="number">2</span>, <span class="number">0.24600551</span>), (<span class="number">3</span>, <span class="number">0.82094586</span>), (<span class="number">4</span>, <span class="number">0.0</span>), (<span class="number">5</span>, <span class="number">0.0</span>), (<span class="number">6</span>, <span class="number">0.0</span>), (<span class="number">7</span>, <span class="number">0.0</span>), (<span class="number">8</span>, <span class="number">0.0</span>)]</div></pre></td></tr></table></figure>
+</li>
+<li><p>tokenize<br>···Python</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<h1 id="去除停用词并分词"><a href="#去除停用词并分词" class="headerlink" title="去除停用词并分词"></a>去除停用词并分词</h1><h1 id="译者注：这里只是例子，实际上还有其他停用词"><a href="#译者注：这里只是例子，实际上还有其他停用词" class="headerlink" title="译者注：这里只是例子，实际上还有其他停用词"></a>译者注：这里只是例子，实际上还有其他停用词</h1><h1 id="处理中文时，请借助-Py结巴分词-https-github-com-fxsjy-jieba"><a href="#处理中文时，请借助-Py结巴分词-https-github-com-fxsjy-jieba" class="headerlink" title="处理中文时，请借助 Py结巴分词 https://github.com/fxsjy/jieba"></a>处理中文时，请借助 Py结巴分词 <a href="https://github.com/fxsjy/jieba" target="_blank" rel="external">https://github.com/fxsjy/jieba</a></h1><p>stoplist = set(‘for a of the and to in’.split())<br>texts = [[word for word in document.lower().split() if word not in stoplist]</p>
+<pre><code>for document in documents]
+</code></pre><h1 id="去除仅出现一次的单词"><a href="#去除仅出现一次的单词" class="headerlink" title="去除仅出现一次的单词"></a>去除仅出现一次的单词</h1><p>from collections import defaultdict<br>frequency = defaultdict(int)<br>for text in texts:</p>
+<pre><code>for token in text:
+    frequency[token] += 1
+</code></pre><p>texts = [[token for token in text if frequency[token] &gt; 1]</p>
+<pre><code>for text in texts]
+</code></pre><p>from pprint import pprint   # pretty-printer<br>pprint(texts)<br>[[‘human’, ‘interface’, ‘computer’],<br> [‘survey’, ‘user’, ‘computer’, ‘system’, ‘response’, ‘time’],<br> [‘eps’, ‘user’, ‘interface’, ‘system’],<br> [‘system’, ‘human’, ‘system’, ‘eps’],<br> [‘user’, ‘response’, ‘time’],<br> [‘trees’],<br> [‘graph’, ‘trees’],<br> [‘graph’, ‘minors’, ‘trees’],<br> [‘graph’, ‘minors’, ‘survey’]]<br>···</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p>总结属性字典</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>dictionary = corpora.Dictionary(texts)<br>dictionary.save(‘/tmp/deerwester.dict’) # 把字典保存起来，方便以后使用<br>print(dictionary)<br> Dictionary(12 unique tokens)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li>产生稀疏文档向量<blockquote>
+<blockquote>
+<blockquote>
+<p>new_doc = “Human computer interaction”<br>new_vec = dictionary.doc2bow(new_doc.lower().split())<br>print(new_vec) # “interaction”没有在dictionary中出现，因此忽略<br> [(0, 1), (1, 1)]<br>corpus = [dictionary.doc2bow(text) for text in texts]<br>corpora.MmCorpus.serialize(‘/tmp/deerwester.mm’, corpus) # 存入硬盘，以备后需<br>print(corpus)<br> [(0, 1), (1, 1), (2, 1)]<br> [(0, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1)]<br> [(2, 1), (5, 1), (7, 1), (8, 1)]<br> [(1, 1), (5, 2), (8, 1)]<br> [(3, 1), (6, 1), (7, 1)]<br> [(9, 1)]<br> [(9, 1), (10, 1)]<br> [(9, 1), (10, 1), (11, 1)]<br> [(4, 1), (10, 1), (11, 1)]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p>语料库流——一次一个文档</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>class MyCorpus(object):</p>
+<pre><code>def __iter__(self):
+    for line in open(&apos;mycorpus.txt&apos;):
+        # assume there&apos;s one document per line, tokens separated by whitespace
+        yield dictionary.doc2bow(line.lower().split())
+</code></pre><p>corpus_memory_friendly = MyCorpus() # 没有将整个语料库载入内存<br>print(corpus_memory_friendly)</p>
+ <__main__.mycorpus object="" at="" 0x10d5690="">
+
+<p>for vector in corpus_memory_friendly: # 一次读入内存一个向量<br> …     print(vector)<br> [(0, 1), (1, 1), (2, 1)]<br> [(0, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1)]<br> [(2, 1), (5, 1), (7, 1), (8, 1)]<br> [(1, 1), (5, 2), (8, 1)]<br> [(3, 1), (6, 1), (7, 1)]<br> [(9, 1)]<br> [(9, 1), (10, 1)]<br> [(9, 1), (10, 1), (11, 1)]<br> [(4, 1), (10, 1), (11, 1)]</p>
+<h1 id="收集所有符号的统计信息"><a href="#收集所有符号的统计信息" class="headerlink" title="收集所有符号的统计信息"></a>收集所有符号的统计信息</h1><p>dictionary = corpora.Dictionary(line.lower().split() for line in open(‘mycorpus.txt’))</p>
+<h1 id="收集停用词和仅出现一次的词的id"><a href="#收集停用词和仅出现一次的词的id" class="headerlink" title="收集停用词和仅出现一次的词的id"></a>收集停用词和仅出现一次的词的id</h1><p>stop_ids = [dictionary.token2id[stopword] for stopword in stoplist</p>
+<pre><code>if stopword in dictionary.token2id]
+</code></pre><p>once_ids = [tokenid for tokenid, docfreq in dictionary.dfs.iteritems() if docfreq == 1]<br>dictionary.filter_tokens(stop_ids + once_ids) # 删除停用词和仅出现一次的词<br>dictionary.compactify() # 消除id序列在删除词后产生的不连续的缺口<br>print(dictionary)<br> Dictionary(12 unique tokens)</p>
+</__main__.mycorpus></blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p>存储语料库</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from gensim import corpora</p>
+<h1 id="创建一个玩具级的语料库"><a href="#创建一个玩具级的语料库" class="headerlink" title="创建一个玩具级的语料库"></a>创建一个玩具级的语料库</h1><p>corpus = [[(1, 0.5)], []]  # 让一个文档为空，作为它的heck</p>
+<p>corpora.MmCorpus.serialize(‘/tmp/corpus.mm’, corpus)</p>
+<p>corpora.SvmLightCorpus.serialize(‘/tmp/corpus.svmlight’, corpus)<br>corpora.BleiCorpus.serialize(‘/tmp/corpus.lda-c’, corpus)<br>corpora.LowCorpus.serialize(‘/tmp/corpus.low’, corpus)</p>
+<p>corpus = corpora.MmCorpus(‘/tmp/corpus.mm’)</p>
+<p>print(corpus)<br> MmCorpus(2 documents, 2 features, 1 non-zero entries)</p>
+<h1 id="将语料库全部导入内存的方法"><a href="#将语料库全部导入内存的方法" class="headerlink" title="将语料库全部导入内存的方法"></a>将语料库全部导入内存的方法</h1><p>print(list(corpus)) # 调用list()将会把所有的序列转换为普通Python List<br> [[(1, 0.5)], []]</p>
+<h1 id="另一种利用流接口，一次只打印一个文档"><a href="#另一种利用流接口，一次只打印一个文档" class="headerlink" title="另一种利用流接口，一次只打印一个文档"></a>另一种利用流接口，一次只打印一个文档</h1><p>for doc in corpus:<br> …     print(doc)<br> [(1, 0.5)]<br> []</p>
+<p>corpora.BleiCorpus.serialize(‘/tmp/corpus.lda-c’, corpus)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p>与NumPy和SciPy的兼容性</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>corpus = gensim.matutils.Dense2Corpus(numpy_matrix)<br>numpy_matrix = gensim.matutils.corpus2dense(corpus, num_terms=number_of_corpus_features)</p>
+<p>corpus = gensim.matutils.Sparse2Corpus(scipy_sparse_matrix)<br>scipy_csc_matrix = gensim.matutils.corpus2csc(corpus)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p>向量转换</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from gensim import corpora, models, similarities<br>dictionary = corpora.Dictionary.load(‘/tmp/deerwester.dict’)<br>corpus = corpora.MmCorpus(‘/tmp/deerwester.mm’)<br>print(corpus)<br>MmCorpus(9 documents, 12 features, 28 non-zero entries)</p>
+<p>tfidf = models.TfidfModel(corpus) # 第一步 – 初始化一个模型</p>
+<p>doc_bow = [(0, 1), (1, 1)]<br>print(tfidf[doc_bow]) # 第二步 – 使用模型转换向量<br>[(0, 0.70710678), (1, 0.70710678)]</p>
+<p>corpus_tfidf = tfidf[corpus]<br>for doc in corpus_tfidf:<br>…     print(doc)<br>[(0, 0.57735026918962573), (1, 0.57735026918962573), (2, 0.57735026918962573)]<br>[(0, 0.44424552527467476), (3, 0.44424552527467476), (4, 0.44424552527467476), (5, 0.32448702061385548), (6, 0.44424552527467476), (7, 0.32448702061385548)]<br>[(2, 0.5710059809418182), (5, 0.41707573620227772), (7, 0.41707573620227772), (8, 0.5710059809418182)]<br>[(1, 0.49182558987264147), (5, 0.71848116070837686), (8, 0.49182558987264147)]<br>[(3, 0.62825804686700459), (6, 0.62825804686700459), (7, 0.45889394536615247)]<br>[(9, 1.0)]<br>[(9, 0.70710678118654746), (10, 0.70710678118654746)]<br>[(9, 0.50804290089167492), (10, 0.50804290089167492), (11, 0.69554641952003704)]<br>[(4, 0.62825804686700459), (10, 0.45889394536615247), (11, 0.62825804686700459)]</p>
+<p>lsi = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=2) # 初始化一个LSI转换<br>corpus_lsi = lsi[corpus_tfidf] # 在原始语料库上加上双重包装: bow-&gt;tfidf-&gt;fold-in-lsi 转换可以序列化</p>
+<p>lsi.print_topics(2)<br>topic #0(1.594): -0.703<em>“trees” + -0.538</em>“graph” + -0.402<em>“minors” + -0.187</em>“survey” + -0.061<em>“system” + -0.060</em>“response” + -0.060<em>“time” + -0.058</em>“user” + -0.049<em>“computer” + -0.035</em>“interface”<br>topic #1(1.476): -0.460<em>“system” + -0.373</em>“user” + -0.332<em>“eps” + -0.328</em>“interface” + -0.320<em>“response” + -0.320</em>“time” + -0.293<em>“computer” + -0.280</em>“human” + -0.171<em>“survey” + 0.161</em>“trees”</p>
+<p>for doc in corpus_lsi: # both bow-&gt;tfidf and tfidf-&gt;lsi transformations are actually executed here, on the fly<br>…     print(doc)<br>[(0, -0.066), (1, 0.520)] # “Human machine interface for lab abc computer applications”<br>[(0, -0.197), (1, 0.761)] # “A survey of user opinion of computer system response time”<br>[(0, -0.090), (1, 0.724)] # “The EPS user interface management system”<br>[(0, -0.076), (1, 0.632)] # “System and human system engineering testing of EPS”<br>[(0, -0.102), (1, 0.574)] # “Relation of user perceived response time to error measurement”<br>[(0, -0.703), (1, -0.161)] # “The generation of random binary unordered trees”<br>[(0, -0.877), (1, -0.168)] # “The intersection graph of paths in trees”<br>[(0, -0.910), (1, -0.141)] # “Graph minors IV Widths of trees and well quasi ordering”<br>[(0, -0.617), (1, 0.054)] # “Graph minors A survey”</p>
+<p>lsi.save(‘/tmp/model.lsi’) # same for tfidf, lda, …<br>lsi = models.LsiModel.load(‘/tmp/model.lsi’)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p>可用的转换<br>#词频-逆文档频（Term Frequency * Inverse Document Frequency， Tf-Idf）</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>model = tfidfmodel.TfidfModel(bow_corpus, normalize=True)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>#潜在语义索引（Latent Semantic Indexing，LSI，or sometimes LSA）</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>model = lsimodel.LsiModel(tfidf_corpus, id2word=dictionary, num_topics=300)<br>model.add_documents(another_tfidf_corpus) # 现在LSI已经使用tfidf_corpus + another_tfidf_corpus进行过训练了<br>lsi_vec = model[tfidf_vec] # 将新文档转化到LSI空间不会影响该模型<br>…<br>model.add_documents(more_documents) # tfidf_corpus + another_tfidf_corpus + more_documents<br>lsi_vec = model[tfidf_vec]<br>…</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>#随机映射（Random Projections，RP）</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>model = rpmodel.RpModel(tfidf_corpus, num_topics=500)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>#隐含狄利克雷分配（Latent Dirichlet Allocation, LDA）</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>model = ldamodel.LdaModel(bow_corpus, id2word=dictionary, num_topics=100)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>#分层狄利克雷过程（Hierarchical Dirichlet Process，HDP）</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>model = hdpmodel.HdpModel(bow_corpus, id2word=dictionary)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ol>
 
       
     </div>
@@ -448,7 +596,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gensim"><span class="nav-number">1.</span> <span class="nav-text">gensim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除停用词并分词"><span class="nav-number">2.</span> <span class="nav-text">去除停用词并分词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译者注：这里只是例子，实际上还有其他停用词"><span class="nav-number">3.</span> <span class="nav-text">译者注：这里只是例子，实际上还有其他停用词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理中文时，请借助-Py结巴分词-https-github-com-fxsjy-jieba"><span class="nav-number">4.</span> <span class="nav-text">处理中文时，请借助 Py结巴分词 https://github.com/fxsjy/jieba</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除仅出现一次的单词"><span class="nav-number">5.</span> <span class="nav-text">去除仅出现一次的单词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集所有符号的统计信息"><span class="nav-number">6.</span> <span class="nav-text">收集所有符号的统计信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集停用词和仅出现一次的词的id"><span class="nav-number">7.</span> <span class="nav-text">收集停用词和仅出现一次的词的id</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个玩具级的语料库"><span class="nav-number">8.</span> <span class="nav-text">创建一个玩具级的语料库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将语料库全部导入内存的方法"><span class="nav-number">9.</span> <span class="nav-text">将语料库全部导入内存的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#另一种利用流接口，一次只打印一个文档"><span class="nav-number">10.</span> <span class="nav-text">另一种利用流接口，一次只打印一个文档</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

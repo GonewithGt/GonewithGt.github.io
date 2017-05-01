@@ -3,8 +3,25 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/</loc>
+    <lastmod>2017-05-01T14:00:14.579Z</lastmod>
+    <data>
+        <display>
+        <title>Stance_Detection_with_Conditional_Encoding</title>
+        <pubTime>2017-04-27T02:20:15.000Z</pubTime>
+        
+        <tag>paper </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/04/21/EnglishWords/</loc>
-    <lastmod>2017-05-01T11:46:54.474Z</lastmod>
+    <lastmod>2017-05-01T11:54:39.427Z</lastmod>
     <data>
         <display>
         <title>English Words</title>
@@ -72,23 +89,6 @@
              
               <breadCrumb title="DL" url="http://yoursite.com/categories/DL/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/</loc>
-    <lastmod>2017-04-27T03:18:13.412Z</lastmod>
-    <data>
-        <display>
-        <title>Stance_Detection_with_Conditional_Encoding</title>
-        <pubTime>2017-04-27T02:20:15.000Z</pubTime>
-        
-        <tag>paper </tag>
-         
-         
-           
         </display>
     </data>
     </url>
