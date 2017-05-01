@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C++," />
+  <meta name="keywords" content="java,engineering," />
 
 
 
@@ -59,16 +59,49 @@
 
 
 
-<meta name="description" content="Function设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。">
+<meta name="description" content="记录在项目中可能会经常用到的模块。
+StringUtilStringUtil
+
+boolean isNumeric(String str) #判断一个字符串是否为数字
+
+JarToolUtilJarToolUtil
+
+jar包路径的一些操作
+
+PropertyUtilPropertyUtil
+
+关于Property类的一些操作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++预处理指令--#pragma">
-<meta property="og:url" content="http://yoursite.com/2017/04/08/C++预处理指令--#pragma/index.html">
+<meta property="og:title" content="项目中可重用模块">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/项目中可重用模块/index.html">
 <meta property="og:site_name" content="飘">
-<meta property="og:description" content="Function设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。">
-<meta property="og:updated_time" content="2017-04-08T03:08:49.243Z">
+<meta property="og:description" content="记录在项目中可能会经常用到的模块。
+StringUtilStringUtil
+
+boolean isNumeric(String str) #判断一个字符串是否为数字
+
+JarToolUtilJarToolUtil
+
+jar包路径的一些操作
+
+PropertyUtilPropertyUtil
+
+关于Property类的一些操作">
+<meta property="og:updated_time" content="2017-05-01T08:07:04.890Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++预处理指令--#pragma">
-<meta name="twitter:description" content="Function设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。">
+<meta name="twitter:title" content="项目中可重用模块">
+<meta name="twitter:description" content="记录在项目中可能会经常用到的模块。
+StringUtilStringUtil
+
+boolean isNumeric(String str) #判断一个字符串是否为数字
+
+JarToolUtilJarToolUtil
+
+jar包路径的一些操作
+
+PropertyUtilPropertyUtil
+
+关于Property类的一些操作">
 
 
 
@@ -86,7 +119,7 @@
   };
 </script>
 
-  <title> C++预处理指令--#pragma | 飘 </title>
+  <title> 项目中可重用模块 | 飘 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -226,7 +259,7 @@
             
             
               
-                C++预处理指令--#pragma
+                项目中可重用模块
               
             
           </h1>
@@ -238,8 +271,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-08T10:30:43+08:00" content="2017-04-08">
-              2017-04-08
+            <time itemprop="dateCreated" datetime="2017-05-01T12:11:30+08:00" content="2017-05-01">
+              2017-05-01
             </time>
           </span>
 
@@ -248,32 +281,13 @@
 
 
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/04/08/C++预处理指令--#pragma/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/08/C++预处理指令--#pragma/" itemprop="commentsCount"></span>
+                <a href="/2017/05/01/项目中可重用模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/01/项目中可重用模块/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -294,9 +308,20 @@
       
 
       
-        <h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p>设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。</p>
-<a id="more"></a> 
-<h1 id="pragma-message-“消息文本”"><a href="#pragma-message-“消息文本”" class="headerlink" title="#pragma message(“消息文本”)"></a>#pragma message(“消息文本”)</h1><h1 id="pragma-code-seg-“section-name”-”section-class”"><a href="#pragma-code-seg-“section-name”-”section-class”" class="headerlink" title="#pragma code_seg([“section-name”[,”section-class”]])"></a>#pragma code_seg([“section-name”[,”section-class”]])</h1><h1 id="pragma-once"><a href="#pragma-once" class="headerlink" title="#pragma once"></a>#pragma once</h1><h1 id="pragma-hdrstop"><a href="#pragma-hdrstop" class="headerlink" title="#pragma hdrstop"></a>#pragma hdrstop</h1><h1 id="pragma-resource"><a href="#pragma-resource" class="headerlink" title="#pragma resource"></a>#pragma resource</h1><h1 id="pragma-warning"><a href="#pragma-warning" class="headerlink" title="#pragma warning"></a>#pragma warning</h1><h1 id="pragma-comment"><a href="#pragma-comment" class="headerlink" title="#pragma comment"></a>#pragma comment</h1><h1 id="pragma-disable"><a href="#pragma-disable" class="headerlink" title="#pragma disable"></a>#pragma disable</h1><h1 id="pragma-data-seg"><a href="#pragma-data-seg" class="headerlink" title="#pragma data_seg"></a>#pragma data_seg</h1><h1 id="pragma-region"><a href="#pragma-region" class="headerlink" title="#pragma region"></a>#pragma region</h1>
+        <p>记录在项目中可能会经常用到的模块。</p>
+<h1 id="StringUtil"><a href="#StringUtil" class="headerlink" title="StringUtil"></a>StringUtil</h1><p><a href="https://github.com/GonewithGt/javaModules/blob/master/StringUtil" target="_blank" rel="external">StringUtil</a></p>
+<ol>
+<li>boolean isNumeric(String str) #判断一个字符串是否为数字</li>
+</ol>
+<h1 id="JarToolUtil"><a href="#JarToolUtil" class="headerlink" title="JarToolUtil"></a>JarToolUtil</h1><p><a href="https://github.com/GonewithGt/javaModules/blob/master/JarToolUtil" target="_blank" rel="external">JarToolUtil</a></p>
+<ol>
+<li>jar包路径的一些操作</li>
+</ol>
+<h1 id="PropertyUtil"><a href="#PropertyUtil" class="headerlink" title="PropertyUtil"></a>PropertyUtil</h1><p><a href="https://github.com/GonewithGt/javaModules/blob/master/PropertyUtil" target="_blank" rel="external">PropertyUtil</a></p>
+<ol>
+<li>关于Property类的一些操作</li>
+</ol>
+
       
     </div>
 
@@ -304,7 +329,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag">#C++</a>
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/engineering/" rel="tag">#engineering</a>
           
         </div>
       
@@ -313,17 +340,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/20/Tensorflow常用函数/" rel="next" title="Tensorflow常用函数">
-                <i class="fa fa-chevron-left"></i> Tensorflow常用函数
+              <a href="/2017/04/27/Stance-Detection-with-Conditional-Encoding/" rel="next" title="Stance_Detection_with_Conditional_Encoding">
+                <i class="fa fa-chevron-left"></i> Stance_Detection_with_Conditional_Encoding
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/13/操作系统/" rel="prev" title="操作系统">
-                操作系统 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -349,8 +372,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/08/C++预处理指令--#pragma/"
-           data-title="C++预处理指令--#pragma" data-url="http://yoursite.com/2017/04/08/C++预处理指令--#pragma/">
+      <div class="ds-thread" data-thread-key="2017/05/01/项目中可重用模块/"
+           data-title="项目中可重用模块" data-url="http://yoursite.com/2017/05/01/项目中可重用模块/">
       </div>
     
   </div>
@@ -466,7 +489,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">1.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-message-“消息文本”"><span class="nav-number">2.</span> <span class="nav-text">#pragma message(“消息文本”)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-code-seg-“section-name”-”section-class”"><span class="nav-number">3.</span> <span class="nav-text">#pragma code_seg([“section-name”[,”section-class”]])</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-once"><span class="nav-number">4.</span> <span class="nav-text">#pragma once</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-hdrstop"><span class="nav-number">5.</span> <span class="nav-text">#pragma hdrstop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-resource"><span class="nav-number">6.</span> <span class="nav-text">#pragma resource</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-warning"><span class="nav-number">7.</span> <span class="nav-text">#pragma warning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-comment"><span class="nav-number">8.</span> <span class="nav-text">#pragma comment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-disable"><span class="nav-number">9.</span> <span class="nav-text">#pragma disable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-data-seg"><span class="nav-number">10.</span> <span class="nav-text">#pragma data_seg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-region"><span class="nav-number">11.</span> <span class="nav-text">#pragma region</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#StringUtil"><span class="nav-number">1.</span> <span class="nav-text">StringUtil</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JarToolUtil"><span class="nav-number">2.</span> <span class="nav-text">JarToolUtil</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PropertyUtil"><span class="nav-number">3.</span> <span class="nav-text">PropertyUtil</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
