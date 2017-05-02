@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
+    
+    <lastmod>2017-05-02T12:03:20.523Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/</loc>
     
-    <lastmod>2017-05-01T14:00:14.579Z</lastmod>
+    <lastmod>2017-05-02T10:58:37.009Z</lastmod>
     
   </url>
   
@@ -54,13 +61,6 @@
     <loc>http://yoursite.com/2017/04/18/Algorithms/</loc>
     
     <lastmod>2017-04-25T12:23:58.727Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/03/20/Tensorflow%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0/</loc>
-    
-    <lastmod>2017-04-25T12:02:33.757Z</lastmod>
     
   </url>
   

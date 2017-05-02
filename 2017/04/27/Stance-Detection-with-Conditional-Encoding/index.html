@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
-<meta property="og:updated_time" content="2017-05-01T14:00:14.579Z">
+<meta property="og:updated_time" content="2017-05-02T10:58:37.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stance_Detection_with_Conditional_Encoding">
 <meta name="twitter:description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
@@ -425,6 +425,38 @@
 </blockquote>
 </blockquote>
 </li>
+<li></li>
+</ol>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ol>
+<li><p><a href="http://www.cnblogs.com/kerrycode/p/4391859.html" target="_blank" rel="external">Linux查找大文件</a><br> find . -type f -size +800M<br> find . -type f -size +800M  -print0 | xargs -0 ls -l<br> find . -type f -size +800M  -print0 | xargs -0 du -h<br> find . -type f -size +800M  -print0 | xargs -0 du -h | sort -nr<br> du -h –max-depth=1<br> du -h –max-depth=2 | sort -n<br> du -hm –max-depth=2 | sort -n<br> du -hm –max-depth=2 | sort -nr | head -12</p>
+</li>
+<li><p><a href="http://www.cnblogs.com/luying--lulu/p/5314963.html" target="_blank" rel="external">Linux查看大文本</a><br> head [-n number] filename </p>
+</li>
+<li><p><a href="http://blog.csdn.net/itplus/article/details/37969519" target="_blank" rel="external">word2vec</a><br> 基于 Hierarchical Softmax 的模型</p>
+<pre><code>CBOW
+Skip-gram
+</code></pre><p> 基于 Negative Sampling 的模型</p>
+</li>
+<li><p>按行读取目录中的文件</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>class MySentences(object):<br> …     def <strong>init</strong>(self, dirname):<br> …         self.dirname = dirname<br> …<br> …     def <strong>iter</strong>(self):<br> …         for fname in os.listdir(self.dirname):<br> …             for line in open(os.path.join(self.dirname, fname)):<br> …                 yield line.split()</p>
+<p>sentences = MySentences(‘/some/directory’) # a memory-friendly iterator<br>model = gensim.models.Word2Vec(sentences)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+<li><p>Python yield 的作用<br> <a href="https://www.ibm.com/developerworks/cn/opensource/os-cn-python-yield/" target="_blank" rel="external">Python yield浅析</a></p>
+<pre><code>简单地讲，yield 的作用就是把一个函数变成一个 generator，带有 yield 的函数
+</code></pre><p> 不再是一个普通函数，Python 解释器会将其视为一个 generator，调用 fab(5) 不<br> 会执行 fab 函数，而是返回一个 iterable 对象！在 for 循环执行时，每次循环都<br> 会执行 fab 函数内部的代码，执行到 yield b 时，fab 函数就返回一个迭代值，<br> 下次迭代时，代码从 yield b 的下一条语句继续执行，而函数的本地变量看起来<br> 和上次中断执行前是完全一样的，于是函数继续执行，直到再次遇到 yield。</p>
+</li>
+<li><p>gensim.models.Word2Vec<br> <a href="http://radimrehurek.com/gensim/models/word2vec.html" target="_blank" rel="external">官方文档</a><br> <a href="http://blog.csdn.net/szlcw1/article/details/52751314" target="_blank" rel="external">参数说明</a>：<br> class gensim.models.word2vec.Word2Vec(sentences=None,size=100,alpha=0.025,window=5, min_count=5, max_vocab_size=None, sample=0.001,seed=1, workers=3,min_alpha=0.0001, sg=0, hs=0, negative=5, cbow_mean=1, hashfxn=<built-in function="" hash="">,iter=5,null_word=0, trim_rule=None, sorted_vocab=1, batch_words=10000)</built-in></p>
+<p> 参数：</p>
+<p> ·  sentences：可以是一个·ist，对于大语料集，建议使用BrownCorpus,Text8Corpus或·ineSentence构建。<br> ·  sg： 用于设置训练算法，默认为0，对应CBOW算法；sg=1则采用skip-gram算法。<br> ·  size：是指特征向量的维度，默认为100。大的size需要更多的训练数据,但是效果会更好. 推荐值为几十到几百。<br> ·  window：表示当前词与预测词在一个句子中的最大距离是多少<br> ·  alpha: 是学习速率<br> ·  seed：用于随机数发生器。与初始化词向量有关。<br> ·  min_count: 可以对字典做截断. 词频少于min_count次数的单词会被丢弃掉, 默认值为5<br> ·  max_vocab_size: 设置词向量构建期间的RAM限制。如果所有独立单词个数超过这个，则就消除掉其中最不频繁的一个。每一千万个单词需要大约1GB的RAM。设置成None则没有限制。<br> ·  sample: 高频词汇的随机降采样的配置阈值，默认为1e-3，范围是(0,1e-5)<br> ·  workers参数控制训练的并行数。<br> ·  hs: 如果为1则会采用hierarchica·softmax技巧。如果设置为0（defau·t），则negative sampling会被使用。<br> ·  negative: 如果&gt;0,则会采用negativesamp·ing，用于设置多少个noise words<br> ·  cbow_mean: 如果为0，则采用上下文词向量的和，如果为1（defau·t）则采用均值。只有使用CBOW的时候才起作用。<br> ·  hashfxn： hash函数来初始化权重。默认使用python的hash函数<br> ·  iter： 迭代次数，默认为5<br> ·  trim_rule： 用于设置词汇表的整理规则，指定那些单词要留下，哪些要被删除。可以设置为None（min_count会被使用）或者一个接受()并返回RU·E_DISCARD,uti·s.RU·E_KEEP或者uti·s.RU·E_DEFAU·T的函数。<br> ·  sorted_vocab： 如果为1（defau·t），则在分配word index 的时候会先对单词基于频率降序排序。<br> ·  batch_words：每一批的传递给线程的单词的数量，默认为10000</p>
+</li>
+<li><p>model.most_similar(word, topn=top):</p>
+</li>
 </ol>
 
       
@@ -596,7 +628,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gensim"><span class="nav-number">1.</span> <span class="nav-text">gensim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除停用词并分词"><span class="nav-number">2.</span> <span class="nav-text">去除停用词并分词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译者注：这里只是例子，实际上还有其他停用词"><span class="nav-number">3.</span> <span class="nav-text">译者注：这里只是例子，实际上还有其他停用词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理中文时，请借助-Py结巴分词-https-github-com-fxsjy-jieba"><span class="nav-number">4.</span> <span class="nav-text">处理中文时，请借助 Py结巴分词 https://github.com/fxsjy/jieba</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除仅出现一次的单词"><span class="nav-number">5.</span> <span class="nav-text">去除仅出现一次的单词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集所有符号的统计信息"><span class="nav-number">6.</span> <span class="nav-text">收集所有符号的统计信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集停用词和仅出现一次的词的id"><span class="nav-number">7.</span> <span class="nav-text">收集停用词和仅出现一次的词的id</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个玩具级的语料库"><span class="nav-number">8.</span> <span class="nav-text">创建一个玩具级的语料库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将语料库全部导入内存的方法"><span class="nav-number">9.</span> <span class="nav-text">将语料库全部导入内存的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#另一种利用流接口，一次只打印一个文档"><span class="nav-number">10.</span> <span class="nav-text">另一种利用流接口，一次只打印一个文档</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gensim"><span class="nav-number">1.</span> <span class="nav-text">gensim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除停用词并分词"><span class="nav-number">2.</span> <span class="nav-text">去除停用词并分词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译者注：这里只是例子，实际上还有其他停用词"><span class="nav-number">3.</span> <span class="nav-text">译者注：这里只是例子，实际上还有其他停用词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理中文时，请借助-Py结巴分词-https-github-com-fxsjy-jieba"><span class="nav-number">4.</span> <span class="nav-text">处理中文时，请借助 Py结巴分词 https://github.com/fxsjy/jieba</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除仅出现一次的单词"><span class="nav-number">5.</span> <span class="nav-text">去除仅出现一次的单词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集所有符号的统计信息"><span class="nav-number">6.</span> <span class="nav-text">收集所有符号的统计信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集停用词和仅出现一次的词的id"><span class="nav-number">7.</span> <span class="nav-text">收集停用词和仅出现一次的词的id</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个玩具级的语料库"><span class="nav-number">8.</span> <span class="nav-text">创建一个玩具级的语料库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将语料库全部导入内存的方法"><span class="nav-number">9.</span> <span class="nav-text">将语料库全部导入内存的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#另一种利用流接口，一次只打印一个文档"><span class="nav-number">10.</span> <span class="nav-text">另一种利用流接口，一次只打印一个文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">11.</span> <span class="nav-text">Code</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
