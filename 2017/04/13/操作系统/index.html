@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/13/操作系统/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="《操作系统真象还原》相关笔记">
-<meta property="og:updated_time" content="2017-04-15T08:50:47.500Z">
+<meta property="og:updated_time" content="2017-05-03T13:45:38.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统">
 <meta name="twitter:description" content="《操作系统真象还原》相关笔记">
@@ -377,7 +377,33 @@ vstart=xxxx 和 org xxxx功能一样
 </code></pre><h1 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h1><pre><code>段寄存器：CS DS（数据段）、ES（附加段）、FS（附加段）、GS（附加段）、SS（堆栈段，在内存中） 32位CPU中16位宽
 通用寄存器：AX BX CX DX SI DI BP SP
 IP flags寄存器 实模式16位宽
-</code></pre><p>#寄存器寻址方式<br>    直接寻址：默认段基址是DS；如果使用段跨越前缀fs，段基址就是gs寄存器<br>    基址寻址：bs或bp作为基址寄存器，bs+DS，bp+SS<br>    略：待补充</p>
+</code></pre><h1 id="寄存器寻址方式"><a href="#寄存器寻址方式" class="headerlink" title="寄存器寻址方式"></a>寄存器寻址方式</h1><pre><code>直接寻址：默认段基址是DS；如果使用段跨越前缀fs，段基址就是gs寄存器
+基址寻址：bs或bp作为基址寄存器，bs+DS，bp+SS
+略：待补充
+</code></pre><h1 id="外部中断"><a href="#外部中断" class="headerlink" title="外部中断"></a>外部中断</h1><pre><code>中断信号线：
+    INTR：可屏蔽中断
+    NMI：紧急中断，不可屏蔽
+可屏蔽中断：
+    可以通过eflags寄存器中的IF位将所有的外部设备中断屏蔽
+不可屏蔽中断：中断号2
+</code></pre><h1 id="内部中断"><a href="#内部中断" class="headerlink" title="内部中断"></a>内部中断</h1><pre><code>int 8位立即数
+int3 调试断点指令
+调试过程： fork一个子进程；设置断点就是父进程修改子进程的指令，将其用int3指令替换（先备份），从而子进程调用int3指令触发中断。
+into 中断溢出。触发的是中断向量号4，受标志寄存器eflags的影响
+bound 检查数组索引是否越界，5号中断
+ud2软件测试，无实际意义
+有些内部中断会无视IF位
+异常和不可屏蔽中断由CPU提供，外部设备的可屏蔽中断由中断代理提供（8259A），软中断由软件提供。
+</code></pre><h1 id="中断描述符表"><a href="#中断描述符表" class="headerlink" title="中断描述符表"></a>中断描述符表</h1><pre><code>实模式下也有中断，由中断向量表提供入口，4字节
+中断描述符表：中断描述符|任务门描述符|陷阱门描述符 8字节
+IDTR：中断描述符表寄存器，48位 12位表界限+32位表基址
+描述符中的P位表示中断处理程序是否存在
+</code></pre><h1 id="中断处理过程"><a href="#中断处理过程" class="headerlink" title="中断处理过程"></a>中断处理过程</h1><ol>
+<li>中断向量号-&gt;中断门描述符 向量号*8+IDTR</li>
+<li>处理器进行特权级检查 CPL在门描述符DPL和门中目标代码DPL之间</li>
+<li>执行中断处理程序</li>
+<li></li>
+</ol>
 
       
     </div>
@@ -397,8 +423,8 @@ IP flags寄存器 实模式16位宽
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/08/C++预处理指令--#pragma/" rel="next" title="C++预处理指令--#pragma">
-                <i class="fa fa-chevron-left"></i> C++预处理指令--#pragma
+              <a href="/2017/04/08/C++预处理指令--#pragma/" rel="next" title="C++知识点">
+                <i class="fa fa-chevron-left"></i> C++知识点
               </a>
             
           </div>
@@ -479,7 +505,7 @@ IP flags寄存器 实模式16位宽
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -493,7 +519,7 @@ IP flags寄存器 实模式16位宽
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -550,7 +576,7 @@ IP flags寄存器 实模式16位宽
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分段原因"><span class="nav-number">1.</span> <span class="nav-text">分段原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码段、数据段划分"><span class="nav-number">2.</span> <span class="nav-text">代码段、数据段划分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实模式vs保护模式"><span class="nav-number">3.</span> <span class="nav-text">实模式vs保护模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#段重叠"><span class="nav-number">4.</span> <span class="nav-text">段重叠</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#段寄存器（存储段基值）"><span class="nav-number">5.</span> <span class="nav-text">段寄存器（存储段基值）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux系统下程序不能在Windows下运行"><span class="nav-number">6.</span> <span class="nav-text">Linux系统下程序不能在Windows下运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#局部变量放在栈中"><span class="nav-number">7.</span> <span class="nav-text">局部变量放在栈中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大端字节序vs小端字节序"><span class="nav-number">8.</span> <span class="nav-text">大端字节序vs小端字节序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中断向量表（IVT）"><span class="nav-number">9.</span> <span class="nav-text">中断向量表（IVT）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问外设"><span class="nav-number">10.</span> <span class="nav-text">访问外设</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-amp-segment"><span class="nav-number">11.</span> <span class="nav-text">section & segment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#magic-number"><span class="nav-number">12.</span> <span class="nav-text">magic number</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU指令执行"><span class="nav-number">13.</span> <span class="nav-text">CPU指令执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指令集"><span class="nav-number">14.</span> <span class="nav-text">指令集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序编译、汇编、链接"><span class="nav-number">15.</span> <span class="nav-text">程序编译、汇编、链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MBR、EBR、DBR、OBR"><span class="nav-number">16.</span> <span class="nav-text">MBR、EBR、DBR、OBR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NASM"><span class="nav-number">17.</span> <span class="nav-text">NASM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#secion"><span class="nav-number">18.</span> <span class="nav-text">secion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vstart"><span class="nav-number">19.</span> <span class="nav-text">vstart</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU大致工作原理"><span class="nav-number">20.</span> <span class="nav-text">CPU大致工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两类寄存器"><span class="nav-number">21.</span> <span class="nav-text">两类寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器"><span class="nav-number">22.</span> <span class="nav-text">寄存器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分段原因"><span class="nav-number">1.</span> <span class="nav-text">分段原因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码段、数据段划分"><span class="nav-number">2.</span> <span class="nav-text">代码段、数据段划分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实模式vs保护模式"><span class="nav-number">3.</span> <span class="nav-text">实模式vs保护模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#段重叠"><span class="nav-number">4.</span> <span class="nav-text">段重叠</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#段寄存器（存储段基值）"><span class="nav-number">5.</span> <span class="nav-text">段寄存器（存储段基值）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux系统下程序不能在Windows下运行"><span class="nav-number">6.</span> <span class="nav-text">Linux系统下程序不能在Windows下运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#局部变量放在栈中"><span class="nav-number">7.</span> <span class="nav-text">局部变量放在栈中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#大端字节序vs小端字节序"><span class="nav-number">8.</span> <span class="nav-text">大端字节序vs小端字节序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中断向量表（IVT）"><span class="nav-number">9.</span> <span class="nav-text">中断向量表（IVT）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问外设"><span class="nav-number">10.</span> <span class="nav-text">访问外设</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-amp-segment"><span class="nav-number">11.</span> <span class="nav-text">section & segment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#magic-number"><span class="nav-number">12.</span> <span class="nav-text">magic number</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU指令执行"><span class="nav-number">13.</span> <span class="nav-text">CPU指令执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#指令集"><span class="nav-number">14.</span> <span class="nav-text">指令集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序编译、汇编、链接"><span class="nav-number">15.</span> <span class="nav-text">程序编译、汇编、链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MBR、EBR、DBR、OBR"><span class="nav-number">16.</span> <span class="nav-text">MBR、EBR、DBR、OBR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NASM"><span class="nav-number">17.</span> <span class="nav-text">NASM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#secion"><span class="nav-number">18.</span> <span class="nav-text">secion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vstart"><span class="nav-number">19.</span> <span class="nav-text">vstart</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU大致工作原理"><span class="nav-number">20.</span> <span class="nav-text">CPU大致工作原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两类寄存器"><span class="nav-number">21.</span> <span class="nav-text">两类寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器"><span class="nav-number">22.</span> <span class="nav-text">寄存器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寄存器寻址方式"><span class="nav-number">23.</span> <span class="nav-text">寄存器寻址方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#外部中断"><span class="nav-number">24.</span> <span class="nav-text">外部中断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内部中断"><span class="nav-number">25.</span> <span class="nav-text">内部中断</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中断描述符表"><span class="nav-number">26.</span> <span class="nav-text">中断描述符表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#中断处理过程"><span class="nav-number">27.</span> <span class="nav-text">中断处理过程</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

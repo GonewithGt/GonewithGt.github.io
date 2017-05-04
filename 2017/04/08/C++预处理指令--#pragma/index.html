@@ -61,13 +61,13 @@
 
 <meta name="description" content="Function设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++预处理指令--#pragma">
+<meta property="og:title" content="C++知识点">
 <meta property="og:url" content="http://yoursite.com/2017/04/08/C++预处理指令--#pragma/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="Function设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。">
-<meta property="og:updated_time" content="2017-04-08T03:08:49.243Z">
+<meta property="og:updated_time" content="2017-05-04T00:57:41.331Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="C++预处理指令--#pragma">
+<meta name="twitter:title" content="C++知识点">
 <meta name="twitter:description" content="Function设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。">
 
 
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> C++预处理指令--#pragma | 飘 </title>
+  <title> C++知识点 | 飘 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -226,7 +226,7 @@
             
             
               
-                C++预处理指令--#pragma
+                C++知识点
               
             
           </h1>
@@ -296,7 +296,27 @@
       
         <h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p>设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。</p>
 <a id="more"></a> 
-<h1 id="pragma-message-“消息文本”"><a href="#pragma-message-“消息文本”" class="headerlink" title="#pragma message(“消息文本”)"></a>#pragma message(“消息文本”)</h1><h1 id="pragma-code-seg-“section-name”-”section-class”"><a href="#pragma-code-seg-“section-name”-”section-class”" class="headerlink" title="#pragma code_seg([“section-name”[,”section-class”]])"></a>#pragma code_seg([“section-name”[,”section-class”]])</h1><h1 id="pragma-once"><a href="#pragma-once" class="headerlink" title="#pragma once"></a>#pragma once</h1><h1 id="pragma-hdrstop"><a href="#pragma-hdrstop" class="headerlink" title="#pragma hdrstop"></a>#pragma hdrstop</h1><h1 id="pragma-resource"><a href="#pragma-resource" class="headerlink" title="#pragma resource"></a>#pragma resource</h1><h1 id="pragma-warning"><a href="#pragma-warning" class="headerlink" title="#pragma warning"></a>#pragma warning</h1><h1 id="pragma-comment"><a href="#pragma-comment" class="headerlink" title="#pragma comment"></a>#pragma comment</h1><h1 id="pragma-disable"><a href="#pragma-disable" class="headerlink" title="#pragma disable"></a>#pragma disable</h1><h1 id="pragma-data-seg"><a href="#pragma-data-seg" class="headerlink" title="#pragma data_seg"></a>#pragma data_seg</h1><h1 id="pragma-region"><a href="#pragma-region" class="headerlink" title="#pragma region"></a>#pragma region</h1>
+<h1 id="pragma-message-“消息文本”"><a href="#pragma-message-“消息文本”" class="headerlink" title="#pragma message(“消息文本”)"></a>#pragma message(“消息文本”)</h1><h1 id="pragma-code-seg-“section-name”-”section-class”"><a href="#pragma-code-seg-“section-name”-”section-class”" class="headerlink" title="#pragma code_seg([“section-name”[,”section-class”]])"></a>#pragma code_seg([“section-name”[,”section-class”]])</h1><h1 id="pragma-once"><a href="#pragma-once" class="headerlink" title="#pragma once"></a>#pragma once</h1><h1 id="pragma-hdrstop"><a href="#pragma-hdrstop" class="headerlink" title="#pragma hdrstop"></a>#pragma hdrstop</h1><h1 id="pragma-resource"><a href="#pragma-resource" class="headerlink" title="#pragma resource"></a>#pragma resource</h1><h1 id="pragma-warning"><a href="#pragma-warning" class="headerlink" title="#pragma warning"></a>#pragma warning</h1><h1 id="pragma-comment"><a href="#pragma-comment" class="headerlink" title="#pragma comment"></a>#pragma comment</h1><h1 id="pragma-disable"><a href="#pragma-disable" class="headerlink" title="#pragma disable"></a>#pragma disable</h1><h1 id="pragma-data-seg"><a href="#pragma-data-seg" class="headerlink" title="#pragma data_seg"></a>#pragma data_seg</h1><h1 id="pragma-region"><a href="#pragma-region" class="headerlink" title="#pragma region"></a>#pragma region</h1><h1 id="ios"><a href="#ios" class="headerlink" title="ios"></a>ios</h1><ol>
+<li><p>设定会引发异常的标志位<br> cin.exception();返回引发异常的标志<br> try{</p>
+<pre><code>cin.exception(ios::eofbit|ios::failbit|ios::badbit)
+</code></pre><p> }catch(exception&amp; e){</p>
+<pre><code>cout&lt;&lt;e.what()&lt;&lt;endl;    
+</code></pre><p> }</p>
+</li>
+<li><p>输入输出<br> get(s,num);<br> get(s,num,t);<br> getline(s,num);<br> getline(s,num,t);//读取num-1个字符<br> read(s,num);//读取num个字符<br> readsome(s,num);<br> gcount();<br> ignore();<br> peek();<br> unget();<br> putback();<br> tellg();<br> seekg();</p>
+<p> put();<br> write();<br> flush();<br> tellg();<br> seekg();</p>
+<p> fstream fio;<br> fio.open(“.\gt.txt”,ios::in|ios::out);</p>
+</li>
+<li><p>格式化</p>
+</li>
+</ol>
+<ul>
+<li>格式标识：std::ios::boolalpha|hex|internal|left|oct|right|scientific|showbase|showpoint|showpos|skipws|stdio|uinbuf|uppercase|dec|fixed</li>
+<li>格式操作符：setf(),unsetf(),flags(),flags(flags),copyfmt(stream)…</li>
+<li>数值进制</li>
+<li></li>
+</ul>
+
       
     </div>
 
@@ -350,7 +370,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2017/04/08/C++预处理指令--#pragma/"
-           data-title="C++预处理指令--#pragma" data-url="http://yoursite.com/2017/04/08/C++预处理指令--#pragma/">
+           data-title="C++知识点" data-url="http://yoursite.com/2017/04/08/C++预处理指令--#pragma/">
       </div>
     
   </div>
@@ -395,7 +415,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -409,7 +429,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -466,7 +486,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">1.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-message-“消息文本”"><span class="nav-number">2.</span> <span class="nav-text">#pragma message(“消息文本”)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-code-seg-“section-name”-”section-class”"><span class="nav-number">3.</span> <span class="nav-text">#pragma code_seg([“section-name”[,”section-class”]])</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-once"><span class="nav-number">4.</span> <span class="nav-text">#pragma once</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-hdrstop"><span class="nav-number">5.</span> <span class="nav-text">#pragma hdrstop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-resource"><span class="nav-number">6.</span> <span class="nav-text">#pragma resource</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-warning"><span class="nav-number">7.</span> <span class="nav-text">#pragma warning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-comment"><span class="nav-number">8.</span> <span class="nav-text">#pragma comment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-disable"><span class="nav-number">9.</span> <span class="nav-text">#pragma disable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-data-seg"><span class="nav-number">10.</span> <span class="nav-text">#pragma data_seg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-region"><span class="nav-number">11.</span> <span class="nav-text">#pragma region</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Function"><span class="nav-number">1.</span> <span class="nav-text">Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-message-“消息文本”"><span class="nav-number">2.</span> <span class="nav-text">#pragma message(“消息文本”)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-code-seg-“section-name”-”section-class”"><span class="nav-number">3.</span> <span class="nav-text">#pragma code_seg([“section-name”[,”section-class”]])</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-once"><span class="nav-number">4.</span> <span class="nav-text">#pragma once</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-hdrstop"><span class="nav-number">5.</span> <span class="nav-text">#pragma hdrstop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-resource"><span class="nav-number">6.</span> <span class="nav-text">#pragma resource</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-warning"><span class="nav-number">7.</span> <span class="nav-text">#pragma warning</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-comment"><span class="nav-number">8.</span> <span class="nav-text">#pragma comment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-disable"><span class="nav-number">9.</span> <span class="nav-text">#pragma disable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-data-seg"><span class="nav-number">10.</span> <span class="nav-text">#pragma data_seg</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-region"><span class="nav-number">11.</span> <span class="nav-text">#pragma region</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ios"><span class="nav-number">12.</span> <span class="nav-text">ios</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

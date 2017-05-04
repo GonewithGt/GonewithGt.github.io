@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
-<meta property="og:updated_time" content="2017-05-02T10:58:37.009Z">
+<meta property="og:updated_time" content="2017-05-04T04:33:58.818Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stance_Detection_with_Conditional_Encoding">
 <meta name="twitter:description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
@@ -425,7 +425,8 @@
 </blockquote>
 </blockquote>
 </li>
-<li></li>
+<li><p>m2vmodel.syn0??</p>
+</li>
 </ol>
 <h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><ol>
 <li><p><a href="http://www.cnblogs.com/kerrycode/p/4391859.html" target="_blank" rel="external">Linux查找大文件</a><br> find . -type f -size +800M<br> find . -type f -size +800M  -print0 | xargs -0 ls -l<br> find . -type f -size +800M  -print0 | xargs -0 du -h<br> find . -type f -size +800M  -print0 | xargs -0 du -h | sort -nr<br> du -h –max-depth=1<br> du -h –max-depth=2 | sort -n<br> du -hm –max-depth=2 | sort -n<br> du -hm –max-depth=2 | sort -nr | head -12</p>
@@ -457,6 +458,120 @@ Skip-gram
 </li>
 <li><p>model.most_similar(word, topn=top):</p>
 </li>
+<li><p>Python中的一些关键字</p>
+<p> <a href="http://www.cnblogs.com/superxuezhazha/p/5793536.html" target="_blank" rel="external"><strong>call</strong></a>: 将类类实例可以变成一个可调用对象</p>
+<pre><code>class Person(object):
+    def __init__(self, name, gender):
+        self.name = name
+        self.gender = gender
+
+    def __call__(self, friend):
+        print &apos;My name is %s...&apos; % self.name
+        print &apos;My friend is %s...&apos; % friend
+</code></pre></li>
+</ol>
+<pre><code>    &gt;&gt;&gt; p = Person(&apos;Bob&apos;, &apos;male&apos;)
+    &gt;&gt;&gt; p(&apos;Tim&apos;)
+    My name is Bob...
+    My friend is Tim...
+
+[__slots__](http://www.cnblogs.com/superxuezhazha/p/5793458.html):__slots__是指一个类允许的属性列表
+
+    class Student(object):
+        __slots__ = (&apos;name&apos;, &apos;gender&apos;, &apos;score&apos;)
+        def __init__(self, name, gender, score):
+            self.name = name
+            self.gender = gender
+            self.score = score
+
+[@property](http://www.cnblogs.com/superxuezhazha/p/5793450.html):Python装饰器
+</code></pre><ol>
+<li><p>函数列表</p>
+<p>   readInputAndEval(tests, outfile, hid, max_epochs, “tanh”, drop, “most”, str(i), modelt, w2v, acc_thresh=1)</p>
+<pre><code>&quot;&quot;&quot;
+hidden_size = [100] #[50, 55, 60]
+#acc_tresh = 1.0
+max_epochs = 8
+w2v = &quot;big&quot; #small
+modeltype = [&quot;bicond&quot;]
+stopwords = [&quot;most&quot;]
+dropout = [&quot;true&quot;]
+testsetting = [&quot;weaklySup&quot;]
+pretrain = [&quot;pre_cont&quot;]
+outfile = &quot;../out/results_batch70_2_morehash3_ep7_9-1e-3-&quot; + tests + &quot;_&quot; + modelt + &quot;_w2v&quot; + w2v + &quot;_hidd&quot; + str(hid) + &quot;_drop&quot; + drop + &quot;_&quot; + pre + &quot;_&quot; + str(i) + &quot;.txt&quot;
+ readInputAndEval(&quot;weaklySup&quot;, outfile, 100, 8, &quot;tanh&quot;, drop = true , &quot;most&quot;, str(i), modelt = &quot;bicond&quot; , w2v = big, acc_thresh=1)
+&quot;&quot;&quot;        
+</code></pre><p> def readInputAndEval(testSetting, outfile, hidden_size, max_epochs, tanhOrSoftmax, dropout, stopwords=”most”, testid=”test1”, modeltype=”bicond”, word2vecmodel=”small”, postprocess=True, shortenTargets=False, useAutoTrump=False, useClinton=True, acc_thresh=1.0, pretrain=”pre_cont”, usePhrases=False):</p>
+<pre><code>&quot;&quot;&quot;
+Reading input files, calling the trainer for training the model, evaluate with official script
+:param outfile: name for output file
+:param stopwords: how to filter stopwords, see preprocess.filterStopwords()
+:param postprocess: force against/favor for tweets which contain the target
+:param shortenTargets: shorten the target text, see preprocess.transform_targets()
+:param useAutoTrump: use automatically annotated Trump tweets, experimental, not helping at the moment
+:param useClinton: add the Hillary Clinton dev data to train data
+:param testSetting: evaluate on Trump
+&quot;&quot;&quot;
+</code></pre><p> test_trainer(“weaklySup”, w2vmodel, transformed_tweets, transformed_targets, transformed_labels, ids, transformed_tweets_test,</p>
+<pre><code>transformed_targets_test, transformed_labels_test, ids_test, hidden_size, max_epochs,
+tanhOrSoftmax, dropout, modeltype, targetInTweet,
+testid, acc_thresh=acc_thresh, pretrain=pretrain)
+</code></pre><p> def test_trainer(testsetting, w2vmodel, tweets, targets, labels, ids, tweets_test, targets_test, labels_test, ids_test, hidden_size, max_epochs, tanhOrSoftmax, dropout, modeltype=”conditional”, targetInTweet={}, testid = “test-1”, pretrain = “pre_cont”, acc_thresh=0.9, sep = False):</p>
+<pre><code>&quot;&quot;&quot;
+Method for creating the different models and training them
+:param testsetting: &quot;True&quot; for SemEval test setting (Donald Trump), &quot;False&quot; for dev setting (Hillary Clinton)
+:param w2vmodel: location of word2vec model
+:param tweets: training tweets, read and converted in readInputAndEval()
+:param targets: training targets, read and converted in readInputAndEval()
+:param labels: training labels, read and converted in readInputAndEval()
+:param ids: ids of training instances
+:param tweets_test: testing tweets, read and converted in readInputAndEval()
+:param targets_test: testing targets, read and converted in readInputAndEval()
+:param labels_test: testing labels, read and converted in readInputAndEval()
+:param ids_test: ids of testing instances
+:param hidden_size: size of hidden layer
+:param max_epochs: maximum number of training epochs
+:param tanhOrSoftmax: tanh or softmax in projector
+:param dropout: use dropout or not
+:param modeltype: &quot;concat&quot;, &quot;tweetonly&quot;, &quot;conditional&quot;, &quot;conditional-reverse&quot;, &quot;bicond&quot;, &quot;conditional-target-feed&quot;, &quot;bicond-sepembed&quot;
+:param targetInTweet: dictionary produced with id to targetInTweet mappings in readInputAndEval(), used for postprocessing
+:param testid: id of test run
+:param pretrain: &quot;pre&quot; (use pretrained word embeddings), &quot;pre_cont&quot; (use pretrained word embeddings and continue training them), &quot;random&quot; (random word embeddings initialisations)
+:param acc_thresh: experimental, stop training at certain accuracy threshold (between 0 and 1)
+:param sep: True for using separate embeddings matrices, false for one (default)
+:return:
+</code></pre><p> “””<br> get_model_conditional(batch_size, max_seq_length, input_size, hidden_size, target_size,</p>
+<pre><code>                      vocab_size, pretrain, tanhOrSoftmax, dropout):
+&quot;&quot;&quot;
+Unidirectional conditional encoding model
+:param pretrain:  &quot;pre&quot;: use pretrained word embeddings, &quot;pre-cont&quot;: use pre-trained embeddings and continue training them, otherwise: random initialisation
+&quot;&quot;&quot;
+</code></pre><p> def test_trainer(testsetting, w2vmodel, tweets, targets, labels, ids, tweets_test, targets_test, labels_test, ids_test, hidden_size, max_epochs, tanhOrSoftmax, dropout, modeltype=”conditional”, targetInTweet={}, testid = “test-1”, pretrain = “pre_cont”, acc_thresh=0.9, sep = False):</p>
+<pre><code>&quot;&quot;&quot;
+Method for creating the different models and training them
+:param testsetting: &quot;True&quot; for SemEval test setting (Donald Trump), &quot;False&quot; for dev setting (Hillary Clinton)
+:param w2vmodel: location of word2vec model
+:param tweets: training tweets, read and converted in readInputAndEval()
+:param targets: training targets, read and converted in readInputAndEval()
+:param labels: training labels, read and converted in readInputAndEval()
+:param ids: ids of training instances
+:param tweets_test: testing tweets, read and converted in readInputAndEval()
+:param targets_test: testing targets, read and converted in readInputAndEval()
+:param labels_test: testing labels, read and converted in readInputAndEval()
+:param ids_test: ids of testing instances
+:param hidden_size: size of hidden layer
+:param max_epochs: maximum number of training epochs
+:param tanhOrSoftmax: tanh or softmax in projector
+:param dropout: use dropout or not
+:param modeltype: &quot;concat&quot;, &quot;tweetonly&quot;, &quot;conditional&quot;, &quot;conditional-reverse&quot;, &quot;bicond&quot;, &quot;conditional-target-feed&quot;, &quot;bicond-sepembed&quot;
+:param targetInTweet: dictionary produced with id to targetInTweet mappings in readInputAndEval(), used for postprocessing
+:param testid: id of test run
+:param pretrain: &quot;pre&quot; (use pretrained word embeddings), &quot;pre_cont&quot; (use pretrained word embeddings and continue training them), &quot;random&quot; (random word embeddings initialisations)
+:param acc_thresh: experimental, stop training at certain accuracy threshold (between 0 and 1)
+:param sep: True for using separate embeddings matrices, false for one (default)
+:return:
+&quot;&quot;&quot;
+</code></pre></li>
 </ol>
 
       
@@ -557,7 +672,7 @@ Skip-gram
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -571,7 +686,7 @@ Skip-gram
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
