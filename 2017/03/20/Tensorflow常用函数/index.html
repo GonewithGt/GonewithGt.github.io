@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="DL,TensorFlow," />
+  <meta name="keywords" content="TensorFlow,DL," />
 
 
 
@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/20/Tensorflow常用函数/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlowTensorFlow博客资源">
-<meta property="og:updated_time" content="2017-05-02T14:16:28.185Z">
+<meta property="og:updated_time" content="2017-05-07T02:55:11.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow常用函数">
 <meta name="twitter:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlowTensorFlow博客资源">
@@ -655,6 +655,10 @@ use peep-hole connections: it is the basic baseline.
 <pre><code>class MultiRNNCell(RNNCell):
   def __init__(self, cells, state_is_tuple=True):
 </code></pre><p>用来增加 rnn 的层数<br>cells : list of cell<br>返回一个多层的cell</p>
+<p><a href="http://blog.csdn.net/u010089444/article/details/60963053" target="_blank" rel="external">tensorflow1.0中的RNN</a></p>
+<p><a href="http://blog.csdn.net/guotong1988/article/details/52767418" target="_blank" rel="external">tensorflow reverse_sequence实例</a></p>
+<p>class tf.contrib.rnn.BasicLSTMCell</p>
+<p><a href="http://blog.csdn.net/u013378306/article/details/62427462" target="_blank" rel="external">tensorflow常用函数</a><br><a href="http://blog.csdn.net/u010417185/article/details/51900441" target="_blank" rel="external">转置函数 transpose</a></p>
 <h1 id="最强网络RSNN深度残差网络-平均准确率96-99"><a href="#最强网络RSNN深度残差网络-平均准确率96-99" class="headerlink" title="最强网络RSNN深度残差网络 平均准确率96-99%"></a>最强网络RSNN深度残差网络 平均准确率96-99%</h1><p>论文：图像识别的深度残差学习 Deep Residual Learning for Image Recognition<br>待完善</p>
 <h1 id="最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）"><a href="#最强网络DLSTM-双向长短期记忆网络（阿里小AI实现）" class="headerlink" title="最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）"></a>最强网络DLSTM 双向长短期记忆网络（阿里小AI实现）</h1><p>并没有给出阿里小AI的完整实现<br>outputs = rnn.bidirectional_rnn(lstm_fw_cell, lstm_bw_cell, _X,<br>                                            initial_state_fw=_istate_fw,<br>                                            initial_state_bw=_istate_bw,<br>                                            sequence_length=_seq_len)</p>
 <pre><code># Linear activation
@@ -678,9 +682,9 @@ AutoEncoder用于 无监督算法 里面可以用来进行 数据的转换 数�
       
         <div class="post-tags">
           
-            <a href="/tags/DL/" rel="tag">#DL</a>
-          
             <a href="/tags/TensorFlow/" rel="tag">#TensorFlow</a>
+          
+            <a href="/tags/DL/" rel="tag">#DL</a>
           
         </div>
       
@@ -771,7 +775,7 @@ AutoEncoder用于 无监督算法 里面可以用来进行 数据的转换 数�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
-<meta property="og:updated_time" content="2017-05-04T04:33:58.818Z">
+<meta property="og:updated_time" content="2017-05-06T13:51:55.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stance_Detection_with_Conditional_Encoding">
 <meta name="twitter:description" content="github: https://github.com/sheffieldnlp/stance-conditionalPython re模块ipythonFastText:Library for fast text representation and classification.gensim中文教程gensim英文教程">
@@ -512,68 +512,71 @@ Reading input files, calling the trainer for training the model, evaluate with o
 :param useClinton: add the Hillary Clinton dev data to train data
 :param testSetting: evaluate on Trump
 &quot;&quot;&quot;
-</code></pre><p> test_trainer(“weaklySup”, w2vmodel, transformed_tweets, transformed_targets, transformed_labels, ids, transformed_tweets_test,</p>
+</code></pre><p> test_trainer(“weaklySup”, w2vmodel, transformed_tweets , transformed_targets, transformed_labels, ids, transformed_tweets_test,</p>
 <pre><code>transformed_targets_test, transformed_labels_test, ids_test, hidden_size, max_epochs,
 tanhOrSoftmax, dropout, modeltype, targetInTweet,
 testid, acc_thresh=acc_thresh, pretrain=pretrain)
-</code></pre><p> def test_trainer(testsetting, w2vmodel, tweets, targets, labels, ids, tweets_test, targets_test, labels_test, ids_test, hidden_size, max_epochs, tanhOrSoftmax, dropout, modeltype=”conditional”, targetInTweet={}, testid = “test-1”, pretrain = “pre_cont”, acc_thresh=0.9, sep = False):</p>
-<pre><code>&quot;&quot;&quot;
-Method for creating the different models and training them
-:param testsetting: &quot;True&quot; for SemEval test setting (Donald Trump), &quot;False&quot; for dev setting (Hillary Clinton)
-:param w2vmodel: location of word2vec model
-:param tweets: training tweets, read and converted in readInputAndEval()
-:param targets: training targets, read and converted in readInputAndEval()
-:param labels: training labels, read and converted in readInputAndEval()
-:param ids: ids of training instances
-:param tweets_test: testing tweets, read and converted in readInputAndEval()
-:param targets_test: testing targets, read and converted in readInputAndEval()
-:param labels_test: testing labels, read and converted in readInputAndEval()
-:param ids_test: ids of testing instances
-:param hidden_size: size of hidden layer
-:param max_epochs: maximum number of training epochs
-:param tanhOrSoftmax: tanh or softmax in projector
-:param dropout: use dropout or not
-:param modeltype: &quot;concat&quot;, &quot;tweetonly&quot;, &quot;conditional&quot;, &quot;conditional-reverse&quot;, &quot;bicond&quot;, &quot;conditional-target-feed&quot;, &quot;bicond-sepembed&quot;
-:param targetInTweet: dictionary produced with id to targetInTweet mappings in readInputAndEval(), used for postprocessing
-:param testid: id of test run
-:param pretrain: &quot;pre&quot; (use pretrained word embeddings), &quot;pre_cont&quot; (use pretrained word embeddings and continue training them), &quot;random&quot; (random word embeddings initialisations)
-:param acc_thresh: experimental, stop training at certain accuracy threshold (between 0 and 1)
-:param sep: True for using separate embeddings matrices, false for one (default)
-:return:
-</code></pre><p> “””<br> get_model_conditional(batch_size, max_seq_length, input_size, hidden_size, target_size,</p>
-<pre><code>                      vocab_size, pretrain, tanhOrSoftmax, dropout):
+</code></pre><h1 id="transformed-tweets-–19维"><a href="#transformed-tweets-–19维" class="headerlink" title="transformed_tweets –19维"></a>transformed_tweets –19维</h1><h1 id="transformed-targets-–19维-Donald-trump"><a href="#transformed-targets-–19维-Donald-trump" class="headerlink" title="transformed_targets –19维 Donald trump"></a>transformed_targets –19维 Donald trump</h1><h1 id="transformed-labels-–3维-one-hot"><a href="#transformed-labels-–3维-one-hot" class="headerlink" title="transformed_labels –3维  one-hot"></a>transformed_labels –3维  one-hot</h1><h1 id="ids-：-0-18759"><a href="#ids-：-0-18759" class="headerlink" title="ids ： 0-18759"></a>ids ： 0-18759</h1><h1 id="transformed-tweets-test-–19维-707条"><a href="#transformed-tweets-test-–19维-707条" class="headerlink" title="transformed_tweets_test –19维 707条"></a>transformed_tweets_test –19维 707条</h1><h1 id="transformed-targets-test-–19维-Donald-trump-707条"><a href="#transformed-targets-test-–19维-Donald-trump-707条" class="headerlink" title="transformed_targets_test –19维 Donald trump 707条"></a>transformed_targets_test –19维 Donald trump 707条</h1><h1 id="transformed-labels-test–3维-one-hot"><a href="#transformed-labels-test–3维-one-hot" class="headerlink" title="transformed_labels_test–3维  one-hot"></a>transformed_labels_test–3维  one-hot</h1><h1 id="ids-test-20000-20707"><a href="#ids-test-20000-20707" class="headerlink" title="ids_test 20000- 20707"></a>ids_test 20000- 20707</h1><h1 id="hidden-size-–100"><a href="#hidden-size-–100" class="headerlink" title="hidden_size –100"></a>hidden_size –100</h1><h1 id="max-epochs-8"><a href="#max-epochs-8" class="headerlink" title="max_epochs = 8"></a>max_epochs = 8</h1><h1 id="tanhOrSoftmax-–tanh"><a href="#tanhOrSoftmax-–tanh" class="headerlink" title="tanhOrSoftmax –tanh"></a>tanhOrSoftmax –tanh</h1><h1 id="dropout-true"><a href="#dropout-true" class="headerlink" title="dropout =true"></a>dropout =true</h1><h1 id="modeltype-bicond"><a href="#modeltype-bicond" class="headerlink" title="modeltype = bicond"></a>modeltype = bicond</h1><h1 id="targetInTweet-id-gt-true-or-false"><a href="#targetInTweet-id-gt-true-or-false" class="headerlink" title="targetInTweet id-&gt;true or false"></a>targetInTweet id-&gt;true or false</h1><h1 id="testid-“test1”"><a href="#testid-“test1”" class="headerlink" title="testid = “test1”"></a>testid = “test1”</h1><h1 id="acc-thresh-0-9"><a href="#acc-thresh-0-9" class="headerlink" title="acc_thresh = 0.9"></a>acc_thresh = 0.9</h1><h1 id="pretrain-pre-cont"><a href="#pretrain-pre-cont" class="headerlink" title="pretrain = pre_cont"></a>pretrain = pre_cont</h1></li>
+</ol>
+<pre><code>def test_trainer(testsetting, w2vmodel, tweets, targets, labels, ids, tweets_test, targets_test, labels_test, ids_test, hidden_size, max_epochs, tanhOrSoftmax, dropout, modeltype=&quot;conditional&quot;, targetInTweet={}, testid = &quot;test-1&quot;, pretrain = &quot;pre_cont&quot;, acc_thresh=0.9, sep = False):
+    &quot;&quot;&quot;
+    Method for creating the different models and training them
+    :param testsetting: &quot;True&quot; for SemEval test setting (Donald Trump), &quot;False&quot; for dev setting (Hillary Clinton)
+    :param w2vmodel: location of word2vec model
+    :param tweets: training tweets, read and converted in readInputAndEval()
+    :param targets: training targets, read and converted in readInputAndEval()
+    :param labels: training labels, read and converted in readInputAndEval()
+    :param ids: ids of training instances
+    :param tweets_test: testing tweets, read and converted in readInputAndEval()
+    :param targets_test: testing targets, read and converted in readInputAndEval()
+    :param labels_test: testing labels, read and converted in readInputAndEval()
+    :param ids_test: ids of testing instances
+    :param hidden_size: size of hidden layer
+    :param max_epochs: maximum number of training epochs
+    :param tanhOrSoftmax: tanh or softmax in projector
+    :param dropout: use dropout or not
+    :param modeltype: &quot;concat&quot;, &quot;tweetonly&quot;, &quot;conditional&quot;, &quot;conditional-reverse&quot;, &quot;bicond&quot;, &quot;conditional-target-feed&quot;, &quot;bicond-sepembed&quot;
+    :param targetInTweet: dictionary produced with id to targetInTweet mappings in readInputAndEval(), used for postprocessing
+    :param testid: id of test run
+    :param pretrain: &quot;pre&quot; (use pretrained word embeddings), &quot;pre_cont&quot; (use pretrained word embeddings and continue training them), &quot;random&quot; (random word embeddings initialisations)
+    :param acc_thresh: experimental, stop training at certain accuracy threshold (between 0 and 1)
+    :param sep: True for using separate embeddings matrices, false for one (default)
+    :return:
 &quot;&quot;&quot;
-Unidirectional conditional encoding model
+
+
+ model, placeholders = get_model_bidirectional_conditioning(batch_size, max_seq_length, input_size, hidden_size, target_size,
+                                                               vocab_size, pretrain, tanhOrSoftmax, dropout)
+batch_size,=70
+max_seq_length = 19
+input_size = 100
+hidden_size = 100
+target_size = 3
+vocab_size = 47859
+pretrain = &quot;pre_cont&quot;
+tanhOrSoftmax = &quot;hanh&quot;
+dropout    = true
+
+def get_model_bidirectional_conditioning(batch_size, max_seq_length, input_size, hidden_size, target_size,
+                                     vocab_size, pretrain, tanhOrSoftmax, dropout):
+&quot;&quot;&quot;
+Bidirectional conditioning model
 :param pretrain:  &quot;pre&quot;: use pretrained word embeddings, &quot;pre-cont&quot;: use pre-trained embeddings and continue training them, otherwise: random initialisation
 &quot;&quot;&quot;
-</code></pre><p> def test_trainer(testsetting, w2vmodel, tweets, targets, labels, ids, tweets_test, targets_test, labels_test, ids_test, hidden_size, max_epochs, tanhOrSoftmax, dropout, modeltype=”conditional”, targetInTweet={}, testid = “test-1”, pretrain = “pre_cont”, acc_thresh=0.9, sep = False):</p>
-<pre><code>&quot;&quot;&quot;
-Method for creating the different models and training them
-:param testsetting: &quot;True&quot; for SemEval test setting (Donald Trump), &quot;False&quot; for dev setting (Hillary Clinton)
-:param w2vmodel: location of word2vec model
-:param tweets: training tweets, read and converted in readInputAndEval()
-:param targets: training targets, read and converted in readInputAndEval()
-:param labels: training labels, read and converted in readInputAndEval()
-:param ids: ids of training instances
-:param tweets_test: testing tweets, read and converted in readInputAndEval()
-:param targets_test: testing targets, read and converted in readInputAndEval()
-:param labels_test: testing labels, read and converted in readInputAndEval()
-:param ids_test: ids of testing instances
-:param hidden_size: size of hidden layer
-:param max_epochs: maximum number of training epochs
-:param tanhOrSoftmax: tanh or softmax in projector
-:param dropout: use dropout or not
-:param modeltype: &quot;concat&quot;, &quot;tweetonly&quot;, &quot;conditional&quot;, &quot;conditional-reverse&quot;, &quot;bicond&quot;, &quot;conditional-target-feed&quot;, &quot;bicond-sepembed&quot;
-:param targetInTweet: dictionary produced with id to targetInTweet mappings in readInputAndEval(), used for postprocessing
-:param testid: id of test run
-:param pretrain: &quot;pre&quot; (use pretrained word embeddings), &quot;pre_cont&quot; (use pretrained word embeddings and continue training them), &quot;random&quot; (random word embeddings initialisations)
-:param acc_thresh: experimental, stop training at certain accuracy threshold (between 0 and 1)
-:param sep: True for using separate embeddings matrices, false for one (default)
-:return:
-&quot;&quot;&quot;
-</code></pre></li>
-</ol>
 
+ Encoder(rnn_cell.BasicLSTMCell, input_size, hidden_size, drop_prob, drop_prob)
+
+
+
+
+
+get_model_conditional(batch_size, max_seq_length, input_size, hidden_size, target_size,
+                          vocab_size, pretrain, tanhOrSoftmax, dropout):
+    &quot;&quot;&quot;
+    Unidirectional conditional encoding model
+    :param pretrain:  &quot;pre&quot;: use pretrained word embeddings, &quot;pre-cont&quot;: use pre-trained embeddings and continue training them, otherwise: random initialisation
+    &quot;&quot;&quot;
+</code></pre>
       
     </div>
 
@@ -672,7 +675,7 @@ Method for creating the different models and training them
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -743,7 +746,7 @@ Method for creating the different models and training them
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gensim"><span class="nav-number">1.</span> <span class="nav-text">gensim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除停用词并分词"><span class="nav-number">2.</span> <span class="nav-text">去除停用词并分词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译者注：这里只是例子，实际上还有其他停用词"><span class="nav-number">3.</span> <span class="nav-text">译者注：这里只是例子，实际上还有其他停用词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理中文时，请借助-Py结巴分词-https-github-com-fxsjy-jieba"><span class="nav-number">4.</span> <span class="nav-text">处理中文时，请借助 Py结巴分词 https://github.com/fxsjy/jieba</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除仅出现一次的单词"><span class="nav-number">5.</span> <span class="nav-text">去除仅出现一次的单词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集所有符号的统计信息"><span class="nav-number">6.</span> <span class="nav-text">收集所有符号的统计信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集停用词和仅出现一次的词的id"><span class="nav-number">7.</span> <span class="nav-text">收集停用词和仅出现一次的词的id</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个玩具级的语料库"><span class="nav-number">8.</span> <span class="nav-text">创建一个玩具级的语料库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将语料库全部导入内存的方法"><span class="nav-number">9.</span> <span class="nav-text">将语料库全部导入内存的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#另一种利用流接口，一次只打印一个文档"><span class="nav-number">10.</span> <span class="nav-text">另一种利用流接口，一次只打印一个文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">11.</span> <span class="nav-text">Code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#gensim"><span class="nav-number">1.</span> <span class="nav-text">gensim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除停用词并分词"><span class="nav-number">2.</span> <span class="nav-text">去除停用词并分词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#译者注：这里只是例子，实际上还有其他停用词"><span class="nav-number">3.</span> <span class="nav-text">译者注：这里只是例子，实际上还有其他停用词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#处理中文时，请借助-Py结巴分词-https-github-com-fxsjy-jieba"><span class="nav-number">4.</span> <span class="nav-text">处理中文时，请借助 Py结巴分词 https://github.com/fxsjy/jieba</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#去除仅出现一次的单词"><span class="nav-number">5.</span> <span class="nav-text">去除仅出现一次的单词</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集所有符号的统计信息"><span class="nav-number">6.</span> <span class="nav-text">收集所有符号的统计信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#收集停用词和仅出现一次的词的id"><span class="nav-number">7.</span> <span class="nav-text">收集停用词和仅出现一次的词的id</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建一个玩具级的语料库"><span class="nav-number">8.</span> <span class="nav-text">创建一个玩具级的语料库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#将语料库全部导入内存的方法"><span class="nav-number">9.</span> <span class="nav-text">将语料库全部导入内存的方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#另一种利用流接口，一次只打印一个文档"><span class="nav-number">10.</span> <span class="nav-text">另一种利用流接口，一次只打印一个文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code"><span class="nav-number">11.</span> <span class="nav-text">Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#transformed-tweets-–19维"><span class="nav-number">12.</span> <span class="nav-text">transformed_tweets –19维</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#transformed-targets-–19维-Donald-trump"><span class="nav-number">13.</span> <span class="nav-text">transformed_targets –19维 Donald trump</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#transformed-labels-–3维-one-hot"><span class="nav-number">14.</span> <span class="nav-text">transformed_labels –3维  one-hot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ids-：-0-18759"><span class="nav-number">15.</span> <span class="nav-text">ids ： 0-18759</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#transformed-tweets-test-–19维-707条"><span class="nav-number">16.</span> <span class="nav-text">transformed_tweets_test –19维 707条</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#transformed-targets-test-–19维-Donald-trump-707条"><span class="nav-number">17.</span> <span class="nav-text">transformed_targets_test –19维 Donald trump 707条</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#transformed-labels-test–3维-one-hot"><span class="nav-number">18.</span> <span class="nav-text">transformed_labels_test–3维  one-hot</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ids-test-20000-20707"><span class="nav-number">19.</span> <span class="nav-text">ids_test 20000- 20707</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hidden-size-–100"><span class="nav-number">20.</span> <span class="nav-text">hidden_size –100</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#max-epochs-8"><span class="nav-number">21.</span> <span class="nav-text">max_epochs = 8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tanhOrSoftmax-–tanh"><span class="nav-number">22.</span> <span class="nav-text">tanhOrSoftmax –tanh</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dropout-true"><span class="nav-number">23.</span> <span class="nav-text">dropout =true</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#modeltype-bicond"><span class="nav-number">24.</span> <span class="nav-text">modeltype = bicond</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#targetInTweet-id-gt-true-or-false"><span class="nav-number">25.</span> <span class="nav-text">targetInTweet id->true or false</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#testid-“test1”"><span class="nav-number">26.</span> <span class="nav-text">testid = “test1”</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#acc-thresh-0-9"><span class="nav-number">27.</span> <span class="nav-text">acc_thresh = 0.9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pretrain-pre-cont"><span class="nav-number">28.</span> <span class="nav-text">pretrain = pre_cont</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
