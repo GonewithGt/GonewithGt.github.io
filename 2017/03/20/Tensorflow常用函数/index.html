@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/20/Tensorflow常用函数/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlowTensorFlow博客资源">
-<meta property="og:updated_time" content="2017-05-10T14:11:45.982Z">
+<meta property="og:updated_time" content="2017-05-11T03:31:02.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow常用函数">
 <meta name="twitter:description" content="ReferrenceTensorflow常用函数说明Tensorflow入门教程合集图解TensorFlowTensorFlow博客资源">
@@ -696,6 +696,14 @@ AutoEncoder用于 无监督算法 里面可以用来进行 数据的转换 数�
 <li>accuracy.eval(feedict)</li>
 <li>xavier initialization 初始化参数</li>
 <li>tf.truncated_normal([in_units,h1_units]) #截断的正态分布</li>
+<li>tf.nn.lrn对局部神经元的活动创建竞争环境，使得其中响应比较大的值变得相对更大</li>
+<li>tf.train.start_queue_runners()#启动线程进行加速</li>
+<li>tf.random_uniform((fan_in,fan_out),minval=low,maxval=high,dtype=tf.float32)#均匀分布</li>
+<li>tf.truncated_normal([in_units,h1_units],stddev=0.1)#截断的正态分布，标准差为0.1</li>
+<li>tf.nn.in_top_k(logits,label_holder,1)#输出结果中topk的准确率</li>
+<li>withtf.namescope(‘conv1’) as scope可以将scope内生成的Variable自动命名为conv1/name</li>
+<li>tf.nn.nce_loss()Noise-contrastive Estimation</li>
+<li><em>,a 中</em>只是一个占位的作用</li>
 <li></li>
 </ol>
 
