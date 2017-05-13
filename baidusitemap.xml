@@ -4,7 +4,7 @@
     
   <url>
     <loc>http://yoursite.com/2017/04/08/C++%E9%A2%84%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4--#pragma/</loc>
-    <lastmod>2017-05-12T01:36:31.462Z</lastmod>
+    <lastmod>2017-05-13T01:13:00.497Z</lastmod>
     <data>
         <display>
         <title>C++知识点</title>
@@ -30,9 +30,9 @@
         <title>Tensorflow常用函数</title>
         <pubTime>2017-03-20T09:34:58.000Z</pubTime>
         
-        <tag>TensorFlow </tag>
-         
         <tag>DL </tag>
+         
+        <tag>TensorFlow </tag>
          
          
            
@@ -198,9 +198,9 @@
         <title>Tensorflow源码解析</title>
         <pubTime>2017-04-20T09:00:36.000Z</pubTime>
         
-        <tag>TensorFlow </tag>
-         
         <tag>DL </tag>
+         
+        <tag>TensorFlow </tag>
          
          
            

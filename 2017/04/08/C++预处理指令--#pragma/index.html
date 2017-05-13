@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/08/C++预处理指令--#pragma/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="Function设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。">
-<meta property="og:updated_time" content="2017-05-12T01:36:31.462Z">
+<meta property="og:updated_time" content="2017-05-13T01:13:00.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++知识点">
 <meta name="twitter:description" content="Function设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。">
@@ -317,6 +317,16 @@
 <li></li>
 </ul>
 <p>4.<a href="https://github.com/zhedahht/CodingInterviewChinese2/blob/master/01_AssignmentOperator/AssignmentOperator.cpp" target="_blank" rel="external">赋值运算符函数</a><br>    返回声明为类型引用，只有返回引用才能连续赋值；传入参数为常量引用；释放内存；判断传入参数和当前实例是否相同；<br>    CMyString&amp; CMyString::operator=(const CMyString&amp; str){<br>        if(this!=&amp;str){<br>            CMyString tmpStr(str);<br>            chart<em> pTmp = strTmp.m_pData;<br>            strTmp.m_pData=m_pData;<br>            m_pData = pTmp;<br>        }//自动调用析构函数析构strTmp<br>        return </em>this;<br>    }</p>
+<p>5.<a href="https://github.com/zhedahht/CodingInterviewChinese2/blob/master/02_Singleton/Program.cs" target="_blank" rel="external">单例模式</a><br>    <a href="http://www.cnblogs.com/qiaoconglovelife/p/5851163.html" target="_blank" rel="external">BLOG</a><br>    将默认的构造函数设为私有；加锁实现多线程单例；锁前判断防止重复加锁耗费时间；<br>    Singleton * getInstance(){<br>        lock();<br>        if(instance==NULL){<br>            instance=new Singleton;<br>        }<br>        unlock();<br>        return instance;<br>    }</p>
+<ol>
+<li><p>二维数组中的查找<br> 注意以右上角的点作为分割点；</p>
+</li>
+<li><p>常量字符串在内存中只有一个拷贝</p>
+</li>
+<li><p>替换空格<br> 判空和判断长度是否大于0；计算替换后的总长度、从后向前替换。<br> 两个排序数组A,B，把A拷贝到B，同样从后至前比较方便。</p>
+</li>
+<li></li>
+</ol>
 
       
     </div>
