@@ -3,8 +3,23 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/04/21/EnglishWords/</loc>
+    <lastmod>2017-05-15T11:04:41.168Z</lastmod>
+    <data>
+        <display>
+        <title>English Words</title>
+        <pubTime>2017-04-21T13:30:12.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/04/08/C++%E9%A2%84%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4--#pragma/</loc>
-    <lastmod>2017-05-13T01:13:00.497Z</lastmod>
+    <lastmod>2017-05-14T00:44:25.765Z</lastmod>
     <data>
         <display>
         <title>C++知识点</title>
@@ -124,21 +139,6 @@
         <display>
         <title>KID模型</title>
         <pubTime>2017-05-05T03:26:09.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/04/21/EnglishWords/</loc>
-    <lastmod>2017-05-04T06:06:01.839Z</lastmod>
-    <data>
-        <display>
-        <title>English Words</title>
-        <pubTime>2017-04-21T13:30:12.000Z</pubTime>
         
          
            
