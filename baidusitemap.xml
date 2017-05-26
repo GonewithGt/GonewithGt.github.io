@@ -3,6 +3,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/04/08/C++%E9%A2%84%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4--#pragma/</loc>
+    <lastmod>2017-05-26T01:00:46.028Z</lastmod>
+    <data>
+        <display>
+        <title>C++知识点</title>
+        <pubTime>2017-04-08T02:30:43.000Z</pubTime>
+        
+        <tag>C++ </tag>
+         
+         
+           
+             
+              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/04/18/Algorithms/</loc>
     <lastmod>2017-05-24T01:08:08.505Z</lastmod>
     <data>
@@ -33,26 +53,6 @@
          
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/04/08/C++%E9%A2%84%E5%A4%84%E7%90%86%E6%8C%87%E4%BB%A4--#pragma/</loc>
-    <lastmod>2017-05-17T01:03:58.345Z</lastmod>
-    <data>
-        <display>
-        <title>C++知识点</title>
-        <pubTime>2017-04-08T02:30:43.000Z</pubTime>
-        
-        <tag>C++ </tag>
-         
-         
-           
-             
-              <breadCrumb title="C++" url="http://yoursite.com/categories/C/"/>
-          
         </display>
     </data>
     </url>
