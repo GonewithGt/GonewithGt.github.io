@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/21/那些年遇到的的坑/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="记录实践中遇到的各种各样的问题">
-<meta property="og:updated_time" content="2017-05-16T14:30:06.611Z">
+<meta property="og:updated_time" content="2017-05-31T11:32:33.778Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些年遇到的的坑">
 <meta name="twitter:description" content="记录实践中遇到的各种各样的问题">
@@ -296,7 +296,21 @@
 <li>tf.unpack 在TensorFlow1.0中修改为了tf.unstack(…)</li>
 <li>tf.reverse在TensorFlow1.0中参数由tf.reverse(inputs,[false,True,True])——&gt;tf.reverse(inputs,[1])</li>
 <li>tf.expand_dims(b,0)<br>b :  tensor [7,8]–&gt; tensor [[7,8]]<br>tf.expand_dims(b,1)<br>tensor[[7],[8]]# 系数不能超过b的维数</li>
-<li>tmp = tf.constant([1,11,21,31,41,51,61,71,81])<br>tf.gather(1,5,7) # [11,51,91]</li>
+<li><p>tmp = tf.constant([1,11,21,31,41,51,61,71,81])<br>tf.gather(1,5,7) # [11,51,91]</p>
+</li>
+<li><p>前端与后台交互的URL中含有特殊字符：+，&amp; %<br>前端：<br>$(“#submit”).click(function(event) {</p>
+<pre><code>var inputText =$(&quot;#query&quot;).val().replace(/\%/g,&quot;%25&quot;);
+var inputText = inputText.replace(/\&amp;/g, &quot;%26&quot;);
+var inputText = inputText.replace(/\+/g,&quot;%2B&quot;);
+
+$.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
+    $(&quot;#result&quot;).text(JSON.stringify(msg));
+});
+</code></pre><p>});</p>
+<p>后台：</p>
+<pre><code>expr = URLDecoder.decode(expr, &quot;utf-8&quot;);
+</code></pre></li>
+<li></li>
 </ol>
 
       
@@ -397,7 +411,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
