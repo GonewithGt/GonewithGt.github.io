@@ -211,11 +211,6 @@
 
     
     
-      
-      
-
-      
-    
 
     
       
@@ -403,15 +398,12 @@
 
       
         
-          
-            <p><a href="http://www.renfei.org/blog/bipartite-matching.html" target="_blank" rel="external">二分图的最大匹配、完美匹配和匈牙利算法</a></p>
-<p>整数运算 x&amp;(-x)，当x为0时结果为0；x为奇数时，结果为1；x为偶数时，结果为x中2的最大次方的因子。</p>
-<p><a href="http://blog.csdn.net/ljd4305/article/details/10101535" target="_blank" rel="external">树状数组</a></p>
-<p><a href="http://louiszhai.github.io/2017/04/07/http-cache/" target="_blank" rel="external">浏览器缓存机制浅析</a></p>
-<p>[RMQ问题]</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">RMQ_init</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;A)</span></span>&#123;</div><div class="line">	<span class="keyword">int</span> n = A.size();</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n ; i++) d[i][<span class="number">0</span>] = A[i];</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ; (<span class="number">1</span>&lt;&lt;j)&lt;n; j++)</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i+(<span class="number">1</span>&lt;&lt;j)<span class="number">-1</span> &lt; n ; i++)</div><div class="line">			d[i][j] = min((d[i][j<span class="number">-1</span>]),d[i+(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>])</div><div class="line">&#125;</div><div class="line"><span class="comment">//范围最小值问题，参考自白书</span></div><div class="line"><span class="keyword">void</span> RMQ(<span class="keyword">int</span> L , <span class="keyword">int</span>  R)&#123;</div><div class="line">	<span class="keyword">int</span> k = <span class="number">0</span> ;</div><div class="line">	<span class="keyword">while</span>(<span class="number">1</span>&lt;&lt;(k+<span class="number">1</span>) &lt;= R-L+<span class="number">1</span>) k++;</div><div class="line">	<span class="keyword">return</span> min(d[L][k],d[R-(<span class="number">1</span>&lt;&lt;k)+<span class="number">1</span>][k]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-          
+          <p>这里面的代码需要能够熟练写出。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/04/18/Algorithms/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -775,6 +767,120 @@
             
               
                 
+                <a class="post-title-link" href="/2017/04/08/C++预处理指令--#pragma/" itemprop="url">
+                  C++知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-08T10:30:43+08:00" content="2017-04-08">
+              2017-04-08
+            </time>
+          </span>
+
+
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/08/C++预处理指令--#pragma/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/08/C++预处理指令--#pragma/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p>设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/04/08/C++预处理指令--#pragma/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/03/20/Tensorflow常用函数/" itemprop="url">
                   Tensorflow常用函数
                 </a>
@@ -844,7 +950,7 @@
 
       
         
-          <h1 id="Referrence"><a href="#Referrence" class="headerlink" title="Referrence"></a>Referrence</h1><p><a href="http://www.cnblogs.com/wuzhitj/p/6298004.html">Tensorflow常用函数说明</a><br><a href="http://blog.csdn.net/jdbc/article/details/52402302">Tensorflow入门教程合集</a><br><a href="http://www.cnblogs.com/yao62995/p/5773578.html">图解TensorFlow</a><br><a href="http://blog.csdn.net/mydear_11000/article/details/52879710">TensorFlow博客资源</a></p>
+          <h1 id="Referrence"><a href="#Referrence" class="headerlink" title="Referrence"></a>Referrence</h1><p><a href="http://www.cnblogs.com/wuzhitj/p/6298004.html">Tensorflow常用函数说明</a><br><a href="http://blog.csdn.net/jdbc/article/details/52402302">Tensorflow入门教程合集</a><br><a href="http://www.cnblogs.com/yao62995/p/5773578.html">图解TensorFlow</a><br><a href="http://blog.csdn.net/mydear_11000/article/details/52879710">TensorFlow博客资源</a><br><a href="http://www.snakehacker.me/403">Tensorflow学习资料</a></p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/03/20/Tensorflow常用函数/#more" rel="contents">
               阅读全文 &raquo;
