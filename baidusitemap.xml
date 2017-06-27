@@ -4,13 +4,30 @@
     
   <url>
     <loc>http://yoursite.com/2017/04/18/Algorithms/</loc>
-    <lastmod>2017-06-23T02:28:05.783Z</lastmod>
+    <lastmod>2017-06-27T02:16:01.123Z</lastmod>
     <data>
         <display>
         <title>Algorithms</title>
         <pubTime>2017-04-18T14:20:37.000Z</pubTime>
         
         <tag>Algorithms </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/25/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/</loc>
+    <lastmod>2017-06-25T13:21:57.013Z</lastmod>
+    <data>
+        <display>
+        <title>数学建模</title>
+        <pubTime>2017-06-25T02:16:53.000Z</pubTime>
+        
+        <tag>数模 </tag>
          
          
            
