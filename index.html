@@ -285,7 +285,40 @@
       
         
           
-            
+            <p>学习GPU编程，希望能够用到开发的深度学习框架中</p>
+<h1 id="通讯模式"><a href="#通讯模式" class="headerlink" title="通讯模式"></a>通讯模式</h1><pre><code>映射(MAP):输入输出一对一，例如求数组元素平方。
+聚合(GATHER) ：多对一，每相邻三个元素平方。
+分散(scatter) ：一对多
+模板(stencil) ：以固定的模式读取相邻的内存数值，serveral-to-one
+转置(transpose) ：一对一，位置模式的转换
+压缩(reduce) ：多对一(all-to-one)
+重排(scan/sort) ：多对多
+</code></pre><h1 id="硬件模式"><a href="#硬件模式" class="headerlink" title="硬件模式"></a>硬件模式</h1><pre><code>SM(流处理器)：包含很多简单处理器和memory，每个simple process就是来处理线程的。每个GPU至少一个SM，每个SM并行而独立运行。
+Kernel(核)：可以理解为C/C++的一个function。function由内存块来运行
+thread blocks(线程块)：一些线程block组成线程块，一个线程块包含多个线程。
+线程    
+</code></pre><h1 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h1><pre><code>最大特点：对线程块将在何处，合适运行不作保证。
+优点：充分利用硬件，灵活；不需要线程互相等待；可扩展性强
+缺点：对于线程块在哪个流处理器运行无法进行任何假设；无法获取块之间的明确通信（并行死锁，线程退出）。
+</code></pre><h2 id="CUDA编程模型的原则"><a href="#CUDA编程模型的原则" class="headerlink" title="CUDA编程模型的原则"></a>CUDA编程模型的原则</h2><pre><code>1. 所有在同一个线程块上的线程必然会在同一时间运行在同一个SM上
+2. 同一个内核的所有线程块必然会全部完成了后，才会运行下一个内核
+</code></pre><h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><pre><code>每个线程有自己的local memory,局部变量
+每个线程块有shared memory，线程块之间共享变量
+thread blocks有global memory 同步主机内存 host memory
+速度local &gt; shared &gt;&gt; global &gt; host
+将数据切割的越小越好
+</code></pre><h2 id="同步性synchronisation和屏障barrier"><a href="#同步性synchronisation和屏障barrier" class="headerlink" title="同步性synchronisation和屏障barrier"></a>同步性synchronisation和屏障barrier</h2><pre><code>不同的线程在共享和全局内存中读写数据需要有先后的控制，所以引入了同步性的概念。
+屏障的作用：用来控制多个线程的停止与等待，当所有线程都到达了屏障点，程序才继续进行。
+</code></pre><h2 id="CUDA编程模CUDA"><a href="#CUDA编程模CUDA" class="headerlink" title="CUDA编程模CUDA"></a>CUDA编程模CUDA</h2><p>程序中CPU是主导地位，负责完成以下的事情：</p>
+<pre><code>1. 从CPU同步数据到GPU
+2. 从GPU同步数据到CPU
+（1、2使用cudaMemcpy）
+3. 给GPU分配内存（cudaMalloc）
+4. 加载Kernel到GPU上，launch kernel on GPU
+型    
+</code></pre><h1 id="CUDA代码"><a href="#CUDA代码" class="headerlink" title="CUDA代码"></a>CUDA代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="number">__</span><span class="function">global__ <span class="keyword">void</span> <span class="title">square</span><span class="params">(<span class="keyword">float</span>* d_out,<span class="keyword">float</span>* d_in)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> idx = threadIdx.x;</div><div class="line">  <span class="keyword">float</span> f = d_in[idx];</div><div class="line">  d_out[idx] = f * f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>** argv)</span></span>&#123;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> ARRAY_SIZE = <span class="number">8</span>;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> ARRAY_BYTES = ARRAY_SIZE * <span class="keyword">sizeof</span>(<span class="keyword">float</span>);</div><div class="line"></div><div class="line">  <span class="comment">// generate the input array on the host</span></div><div class="line">  <span class="keyword">float</span> h_in[ARRAY_SIZE];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ARRAY_SIZE;i++)&#123;</div><div class="line">	h_in[i] = <span class="keyword">float</span>(i);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">float</span> h_out[ARRAY_SIZE];</div><div class="line"></div><div class="line">  <span class="comment">// declare GPU memory pointers</span></div><div class="line">  <span class="keyword">float</span>* d_in;</div><div class="line">  <span class="keyword">float</span>* d_out;</div><div class="line"></div><div class="line">  <span class="comment">// allocate GPU memory</span></div><div class="line">  cudaMalloc((<span class="keyword">void</span>**) &amp;d_in,ARRAY_BYTES);</div><div class="line">  cudaMalloc((<span class="keyword">void</span>**) &amp;d_out,ARRAY_BYTES);</div><div class="line"></div><div class="line">  <span class="comment">// transfer the array to GPU</span></div><div class="line">  cudaMemcpy(d_in,h_in,ARRAY_BYTES,cudaMemcpyHostToDevice);</div><div class="line"></div><div class="line">  <span class="comment">// launch the kernel</span></div><div class="line">  square&lt;&lt;&lt;<span class="number">1</span>,ARRAY_SIZE&gt;&gt;&gt;(d_out,d_in);</div><div class="line"></div><div class="line">  <span class="comment">// copy back the result array to the GPU</span></div><div class="line">  cudaMemcpy(h_out,d_out,ARRAY_BYTES,cudaMemcpyDeviceToHost);</div><div class="line"></div><div class="line">  <span class="comment">// print out the resulting array</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ARRAY_SIZE;i++)&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%f"</span>,h_out[i]);</div><div class="line">	<span class="built_in">printf</span>(((i%<span class="number">4</span>) != <span class="number">3</span>) ? <span class="string">"\t"</span> : <span class="string">"\n"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// free GPU memory allocation</span></div><div class="line">  cudaFree(d_in);</div><div class="line">  cudaFree(d_out);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编译命令： nvcc -o square square.cu</p>
+
           
         
       
@@ -1298,7 +1331,7 @@ But that&apos;s not the shape of my heart
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
