@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/23/GPU编程/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="学习GPU编程，希望能够用到开发的深度学习框架中">
-<meta property="og:updated_time" content="2018-01-24T08:51:31.040Z">
+<meta property="og:updated_time" content="2018-01-25T08:33:19.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GPU编程">
 <meta name="twitter:description" content="学习GPU编程，希望能够用到开发的深度学习框架中">
@@ -308,8 +308,8 @@ thread blocks有global memory 同步主机内存 host memory
 4. 加载Kernel到GPU上，launch kernel on GPU
 型    
 </code></pre><h1 id="CUDA代码"><a href="#CUDA代码" class="headerlink" title="CUDA代码"></a>CUDA代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="comment">//kernel 表示要在GPU上运行</span></div><div class="line"><span class="number">__</span><span class="function">global__ <span class="keyword">void</span> <span class="title">square</span><span class="params">(<span class="keyword">float</span>* d_out,<span class="keyword">float</span>* d_in)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> idx = threadIdx.x;</div><div class="line">  <span class="keyword">float</span> f = d_in[idx];</div><div class="line">  d_out[idx] = f * f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>** argv)</span></span>&#123;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> ARRAY_SIZE = <span class="number">8</span>;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> ARRAY_BYTES = ARRAY_SIZE * <span class="keyword">sizeof</span>(<span class="keyword">float</span>);</div><div class="line"></div><div class="line">  <span class="comment">// generate the input array on the host</span></div><div class="line">  <span class="comment">// h_* represents variable in CPU</span></div><div class="line">  <span class="keyword">float</span> h_in[ARRAY_SIZE];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ARRAY_SIZE;i++)&#123;</div><div class="line">	h_in[i] = <span class="keyword">float</span>(i);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">float</span> h_out[ARRAY_SIZE];</div><div class="line"></div><div class="line">  <span class="comment">// declare GPU memory pointers</span></div><div class="line">  <span class="keyword">float</span>* d_in;</div><div class="line">  <span class="keyword">float</span>* d_out;</div><div class="line"></div><div class="line">  <span class="comment">// allocate GPU memory</span></div><div class="line">  cudaMalloc((<span class="keyword">void</span>**) &amp;d_in,ARRAY_BYTES);</div><div class="line">  cudaMalloc((<span class="keyword">void</span>**) &amp;d_out,ARRAY_BYTES);</div><div class="line"></div><div class="line">  <span class="comment">// transfer the array to GPU</span></div><div class="line">  cudaMemcpy(d_in,h_in,ARRAY_BYTES,cudaMemcpyHostToDevice);</div><div class="line"></div><div class="line">  <span class="comment">// launch the kernel</span></div><div class="line">  <span class="comment">//1 表示加载个1 个线程块上面</span></div><div class="line">  <span class="comment">//第二个参数表示每个线程块里面有多少个线程</span></div><div class="line">  square&lt;&lt;&lt;<span class="number">1</span>,ARRAY_SIZE&gt;&gt;&gt;(d_out,d_in);</div><div class="line"></div><div class="line">  <span class="comment">// copy back the result array to the GPU</span></div><div class="line">  cudaMemcpy(h_out,d_out,ARRAY_BYTES,cudaMemcpyDeviceToHost);</div><div class="line"></div><div class="line">  <span class="comment">// print out the resulting array</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ARRAY_SIZE;i++)&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%f"</span>,h_out[i]);</div><div class="line">	<span class="built_in">printf</span>(((i%<span class="number">4</span>) != <span class="number">3</span>) ? <span class="string">"\t"</span> : <span class="string">"\n"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// free GPU memory allocation</span></div><div class="line">  cudaFree(d_in);</div><div class="line">  cudaFree(d_out);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>编译命令： nvcc -o square square.cu</p>
-<h1 id="CUDA代码的高效策略"><a href="#CUDA代码的高效策略" class="headerlink" title="CUDA代码的高效策略"></a>CUDA代码的高效策略</h1><pre><code>高效公式
+<pre><code>编译命令： nvcc -o square square.cu
+</code></pre><h1 id="CUDA代码的高效策略"><a href="#CUDA代码的高效策略" class="headerlink" title="CUDA代码的高效策略"></a>CUDA代码的高效策略</h1><pre><code>高效公式
 最大化计算强度 = Math（数学计算量）/Memory(每个线程的内存)
 
 1. 最大化每个线程的计算量
@@ -320,7 +320,35 @@ thread blocks有global memory 同步主机内存 host memory
     线程发散：同一个线程块中的线程执行不同内容的代码
     例子： kernel中if语句 或者 长度不一致的循环语句
 </code></pre><h1 id="Kernel加载方式"><a href="#Kernel加载方式" class="headerlink" title="Kernel加载方式"></a>Kernel加载方式</h1><pre><code>注意：Kernel的加载中，自定义的线程数，线程块的数量等都不要超过系统本身的设定，否则，会影响机器的效率。
-</code></pre><h1 id="CUDA中的各种内存的代码使用"><a href="#CUDA中的各种内存的代码使用" class="headerlink" title="CUDA中的各种内存的代码使用"></a>CUDA中的各种内存的代码使用</h1><h1 id="CUDA同步操作"><a href="#CUDA同步操作" class="headerlink" title="CUDA同步操作"></a>CUDA同步操作</h1><h1 id="并行化高效策略（一）"><a href="#并行化高效策略（一）" class="headerlink" title="并行化高效策略（一）"></a>并行化高效策略（一）</h1>
+</code></pre><h1 id="CUDA中的各种内存的代码使用"><a href="#CUDA中的各种内存的代码使用" class="headerlink" title="CUDA中的各种内存的代码使用"></a>CUDA中的各种内存的代码使用</h1><pre><code>局部变量：kernel里面定义的变量
+全局变量：与GPU进行交互时需要拷入，拷出
+共享变量：需要进行barrier的操作。加载kernel时第三个参数可以表述共享变量大小。
+</code></pre><h1 id="CUDA同步操作"><a href="#CUDA同步操作" class="headerlink" title="CUDA同步操作"></a>CUDA同步操作</h1><h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><pre><code>原子操作：对于有很多线程需要同时读取或写入相同的内存时，保证同一时间只有一个线程能进行操作。
+1. 只支持某些运算(加、减、最小值、异或运算等，不支持求余和求幂等)和数据类型（整型）
+2. 运行顺序不定
+3. 安排不当，会使速度很慢（因为内部是个串行的运行）
+</code></pre><h2 id="同步函数"><a href="#同步函数" class="headerlink" title="同步函数"></a>同步函数</h2><pre><code>_syncthreads（）
+    线程块内线程同步
+    保证线程块内所有线程都执行到统一位置
+
+_threadfence()
+    一个线程调用__threadfence后，该线程在该语句前对全局存储器或共享存储器的访问已经全部完成，执行结果对grid中的所有线程可见。
+
+_threadfence_block()
+    一个线程调用__threadfence_block后，该线程在该语句前对全局存储器或者共享存储器的访问已经全部完成，执行结果对block中的所有线程可见。
+
+以上两个函数的重要作用是，及时通知其他线程，全局内存或者共享内存内的结果已经读入或写入完成了。
+</code></pre><h2 id="CPU-GPU同步"><a href="#CPU-GPU同步" class="headerlink" title="CPU/GPU同步"></a>CPU/GPU同步</h2><pre><code>cudaStreamSynchronize()/cudaEventSynchronize()
+主机端代码中使用cudaThreadSynchronize():实现CPU和GPU线程同步
+kernel启动后控制权将异步返回，利用该函数可以确定所有设备端线程均已运行结束；
+</code></pre><h1 id="并行化高效策略"><a href="#并行化高效策略" class="headerlink" title="并行化高效策略"></a>并行化高效策略</h1><pre><code>规约(Reduce)
+扫描(Scan)
+压缩（Compact）和 分配（Allocate）
+分段扫描：例子，稀疏矩阵与向量相乘的并行化方式
+排序：奇偶排序，归并排序，排序网
+</code></pre><h1 id="图像处理的例子"><a href="#图像处理的例子" class="headerlink" title="图像处理的例子"></a>图像处理的例子</h1><pre><code>RGB转灰度图
+图像模糊
+</code></pre><h1 id="CUDA流Streams"><a href="#CUDA流Streams" class="headerlink" title="CUDA流Streams"></a>CUDA流Streams</h1><h1 id="多GPU编程"><a href="#多GPU编程" class="headerlink" title="多GPU编程"></a>多GPU编程</h1><h1 id="纹理内存与纹理操作"><a href="#纹理内存与纹理操作" class="headerlink" title="纹理内存与纹理操作"></a>纹理内存与纹理操作</h1><h1 id="CPU-GPU协调"><a href="#CPU-GPU协调" class="headerlink" title="CPU/GPU协调"></a>CPU/GPU协调</h1>
       
     </div>
 
@@ -346,6 +374,10 @@ thread blocks有global memory 同步主机内存 host memory
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/26/Test/" rel="prev" title="Test">
+                Test <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -417,7 +449,7 @@ thread blocks有global memory 同步主机内存 host memory
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -488,7 +520,7 @@ thread blocks有global memory 同步主机内存 host memory
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通讯模式"><span class="nav-number">1.</span> <span class="nav-text">通讯模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件模式"><span class="nav-number">2.</span> <span class="nav-text">硬件模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编程模型"><span class="nav-number">3.</span> <span class="nav-text">编程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模型的原则"><span class="nav-number">3.1.</span> <span class="nav-text">CUDA编程模型的原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型"><span class="nav-number">3.2.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步性synchronisation和屏障barrier"><span class="nav-number">3.3.</span> <span class="nav-text">同步性synchronisation和屏障barrier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模CUDA"><span class="nav-number">3.4.</span> <span class="nav-text">CUDA编程模CUDA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码"><span class="nav-number">4.</span> <span class="nav-text">CUDA代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码的高效策略"><span class="nav-number">5.</span> <span class="nav-text">CUDA代码的高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kernel加载方式"><span class="nav-number">6.</span> <span class="nav-text">Kernel加载方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA中的各种内存的代码使用"><span class="nav-number">7.</span> <span class="nav-text">CUDA中的各种内存的代码使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA同步操作"><span class="nav-number">8.</span> <span class="nav-text">CUDA同步操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并行化高效策略（一）"><span class="nav-number">9.</span> <span class="nav-text">并行化高效策略（一）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通讯模式"><span class="nav-number">1.</span> <span class="nav-text">通讯模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件模式"><span class="nav-number">2.</span> <span class="nav-text">硬件模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编程模型"><span class="nav-number">3.</span> <span class="nav-text">编程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模型的原则"><span class="nav-number">3.1.</span> <span class="nav-text">CUDA编程模型的原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型"><span class="nav-number">3.2.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步性synchronisation和屏障barrier"><span class="nav-number">3.3.</span> <span class="nav-text">同步性synchronisation和屏障barrier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模CUDA"><span class="nav-number">3.4.</span> <span class="nav-text">CUDA编程模CUDA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码"><span class="nav-number">4.</span> <span class="nav-text">CUDA代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码的高效策略"><span class="nav-number">5.</span> <span class="nav-text">CUDA代码的高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kernel加载方式"><span class="nav-number">6.</span> <span class="nav-text">Kernel加载方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA中的各种内存的代码使用"><span class="nav-number">7.</span> <span class="nav-text">CUDA中的各种内存的代码使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA同步操作"><span class="nav-number">8.</span> <span class="nav-text">CUDA同步操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原子操作"><span class="nav-number">8.1.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步函数"><span class="nav-number">8.2.</span> <span class="nav-text">同步函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU-GPU同步"><span class="nav-number">8.3.</span> <span class="nav-text">CPU/GPU同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并行化高效策略"><span class="nav-number">9.</span> <span class="nav-text">并行化高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像处理的例子"><span class="nav-number">10.</span> <span class="nav-text">图像处理的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA流Streams"><span class="nav-number">11.</span> <span class="nav-text">CUDA流Streams</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多GPU编程"><span class="nav-number">12.</span> <span class="nav-text">多GPU编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#纹理内存与纹理操作"><span class="nav-number">13.</span> <span class="nav-text">纹理内存与纹理操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-GPU协调"><span class="nav-number">14.</span> <span class="nav-text">CPU/GPU协调</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
