@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/23/GPU编程/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="学习GPU编程，希望能够用到开发的深度学习框架中">
-<meta property="og:updated_time" content="2018-01-25T08:33:19.558Z">
+<meta property="og:updated_time" content="2018-01-31T01:52:52.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GPU编程">
 <meta name="twitter:description" content="学习GPU编程，希望能够用到开发的深度学习框架中">
@@ -348,7 +348,37 @@ kernel启动后控制权将异步返回，利用该函数可以确定所有设�
 排序：奇偶排序，归并排序，排序网
 </code></pre><h1 id="图像处理的例子"><a href="#图像处理的例子" class="headerlink" title="图像处理的例子"></a>图像处理的例子</h1><pre><code>RGB转灰度图
 图像模糊
-</code></pre><h1 id="CUDA流Streams"><a href="#CUDA流Streams" class="headerlink" title="CUDA流Streams"></a>CUDA流Streams</h1><h1 id="多GPU编程"><a href="#多GPU编程" class="headerlink" title="多GPU编程"></a>多GPU编程</h1><h1 id="纹理内存与纹理操作"><a href="#纹理内存与纹理操作" class="headerlink" title="纹理内存与纹理操作"></a>纹理内存与纹理操作</h1><h1 id="CPU-GPU协调"><a href="#CPU-GPU协调" class="headerlink" title="CPU/GPU协调"></a>CPU/GPU协调</h1>
+</code></pre><h1 id="CUDA流Streams"><a href="#CUDA流Streams" class="headerlink" title="CUDA流Streams"></a>CUDA流Streams</h1><pre><code>流：一系列将在GPU上按顺序执行的操作
+    定义流：cudaStream_t s1;
+    创建流：cudaStreamCreate(&amp;s1);
+    销毁流：cudaStreamDestory(s1);
+
+多GPU编程
+    两个问题：确定此时使用的是哪一个GPU，多个device如何与host同行
+</code></pre><h1 id="多GPU编程"><a href="#多GPU编程" class="headerlink" title="多GPU编程"></a>多GPU编程</h1><pre><code>两个方面
+    Peer-to-peer(P2P) memcopies
+使用另一个GPU的地址
+    cudaDeviceEnablePeerAccess( peer_device, 0 )
+        允许current GPU访问peer_device GPU
+    cudaDeviceCanAccessPeer( &amp;accessible, dev_X, dev_Y)
+        检查是否dev_X可以访问dev_Y的内存返回0/1(第一个参数)
+
+Peer-to-peer memcopy
+    cudaMemcpyPeerAsync(void* dst_addr, intdst_dev, void* src_addr, intsrc_dev, size_tnum_bytes, cudaStream_tstream)
+    两个设备之间拷贝字节
+    1）如果peer-access允许字节在最短的PCIe路径上传输
+    2）如果peer-access不允许CUDA驱动通过CPU memory传输
+</code></pre><h1 id="纹理内存"><a href="#纹理内存" class="headerlink" title="纹理内存"></a>纹理内存</h1><pre><code>纹理内存的优势：
+    1.它们是被缓存的,如果它们在texture fetch 中将提供更高的带宽
+    2.它们不会像全局或常驻内存读取时受内存访问模式的约束
+    3.寻址计算时的延迟更低,从而提高随机访问数据时的性能 
+    4. 在一个操作中,包装的数据可以通过广播到不同的变量中
+    5.8-bit和16-bit的整型输入数据可以被转换成在范围[0.0,1.0]或[-1.0,1.0]的浮点数
+</code></pre><h1 id="CPU与GPU协同"><a href="#CPU与GPU协同" class="headerlink" title="CPU与GPU协同"></a>CPU与GPU协同</h1><pre><code>CPU先将数据复制到CPU内的一个区域（staging）,然后再复制到GPU（通过PCLe）
+用于优化
+    cudaHostMalloc()
+    cudaHostRegister()
+</code></pre>
       
     </div>
 
@@ -516,7 +546,7 @@ kernel启动后控制权将异步返回，利用该函数可以确定所有设�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通讯模式"><span class="nav-number">1.</span> <span class="nav-text">通讯模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件模式"><span class="nav-number">2.</span> <span class="nav-text">硬件模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编程模型"><span class="nav-number">3.</span> <span class="nav-text">编程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模型的原则"><span class="nav-number">3.1.</span> <span class="nav-text">CUDA编程模型的原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型"><span class="nav-number">3.2.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步性synchronisation和屏障barrier"><span class="nav-number">3.3.</span> <span class="nav-text">同步性synchronisation和屏障barrier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模CUDA"><span class="nav-number">3.4.</span> <span class="nav-text">CUDA编程模CUDA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码"><span class="nav-number">4.</span> <span class="nav-text">CUDA代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码的高效策略"><span class="nav-number">5.</span> <span class="nav-text">CUDA代码的高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kernel加载方式"><span class="nav-number">6.</span> <span class="nav-text">Kernel加载方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA中的各种内存的代码使用"><span class="nav-number">7.</span> <span class="nav-text">CUDA中的各种内存的代码使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA同步操作"><span class="nav-number">8.</span> <span class="nav-text">CUDA同步操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原子操作"><span class="nav-number">8.1.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步函数"><span class="nav-number">8.2.</span> <span class="nav-text">同步函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU-GPU同步"><span class="nav-number">8.3.</span> <span class="nav-text">CPU/GPU同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并行化高效策略"><span class="nav-number">9.</span> <span class="nav-text">并行化高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像处理的例子"><span class="nav-number">10.</span> <span class="nav-text">图像处理的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA流Streams"><span class="nav-number">11.</span> <span class="nav-text">CUDA流Streams</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多GPU编程"><span class="nav-number">12.</span> <span class="nav-text">多GPU编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#纹理内存与纹理操作"><span class="nav-number">13.</span> <span class="nav-text">纹理内存与纹理操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU-GPU协调"><span class="nav-number">14.</span> <span class="nav-text">CPU/GPU协调</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通讯模式"><span class="nav-number">1.</span> <span class="nav-text">通讯模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件模式"><span class="nav-number">2.</span> <span class="nav-text">硬件模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编程模型"><span class="nav-number">3.</span> <span class="nav-text">编程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模型的原则"><span class="nav-number">3.1.</span> <span class="nav-text">CUDA编程模型的原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型"><span class="nav-number">3.2.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步性synchronisation和屏障barrier"><span class="nav-number">3.3.</span> <span class="nav-text">同步性synchronisation和屏障barrier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模CUDA"><span class="nav-number">3.4.</span> <span class="nav-text">CUDA编程模CUDA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码"><span class="nav-number">4.</span> <span class="nav-text">CUDA代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码的高效策略"><span class="nav-number">5.</span> <span class="nav-text">CUDA代码的高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kernel加载方式"><span class="nav-number">6.</span> <span class="nav-text">Kernel加载方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA中的各种内存的代码使用"><span class="nav-number">7.</span> <span class="nav-text">CUDA中的各种内存的代码使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA同步操作"><span class="nav-number">8.</span> <span class="nav-text">CUDA同步操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原子操作"><span class="nav-number">8.1.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步函数"><span class="nav-number">8.2.</span> <span class="nav-text">同步函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU-GPU同步"><span class="nav-number">8.3.</span> <span class="nav-text">CPU/GPU同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并行化高效策略"><span class="nav-number">9.</span> <span class="nav-text">并行化高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像处理的例子"><span class="nav-number">10.</span> <span class="nav-text">图像处理的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA流Streams"><span class="nav-number">11.</span> <span class="nav-text">CUDA流Streams</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多GPU编程"><span class="nav-number">12.</span> <span class="nav-text">多GPU编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#纹理内存"><span class="nav-number">13.</span> <span class="nav-text">纹理内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU与GPU协同"><span class="nav-number">14.</span> <span class="nav-text">CPU与GPU协同</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
