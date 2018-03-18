@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/13/操作系统/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="《操作系统真象还原》相关笔记">
-<meta property="og:updated_time" content="2017-05-10T14:12:54.203Z">
+<meta property="og:updated_time" content="2018-03-17T13:55:43.752Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统">
 <meta name="twitter:description" content="《操作系统真象还原》相关笔记">
@@ -399,12 +399,8 @@ ud2软件测试，无实际意义
 中断描述符表：中断描述符|任务门描述符|陷阱门描述符 8字节
 IDTR：中断描述符表寄存器，48位 12位表界限+32位表基址
 描述符中的P位表示中断处理程序是否存在
-</code></pre><h1 id="中断处理过程"><a href="#中断处理过程" class="headerlink" title="中断处理过程"></a>中断处理过程</h1><ol>
-<li>中断向量号-&gt;中断门描述符 向量号*8+IDTR</li>
-<li>处理器进行特权级检查 CPL在门描述符DPL和门中目标代码DPL之间</li>
-<li>执行中断处理程序</li>
-<li></li>
-</ol>
+</code></pre><h1 id="中断处理过程"><a href="#中断处理过程" class="headerlink" title="中断处理过程"></a>中断处理过程</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. 中断向量号-&gt;中断门描述符 向量号*8+IDTR</div><div class="line">2. 处理器进行特权级检查 CPL在门描述符DPL和门中目标代码DPL之间</div><div class="line">3. 执行中断处理程序</div></pre></td></tr></table></figure>
+<p>​    </p>
 
       
     </div>
@@ -506,7 +502,7 @@ IDTR：中断描述符表寄存器，48位 12位表界限+32位表基址
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

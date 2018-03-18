@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="bug," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -59,16 +59,19 @@
 
 
 
-<meta name="description" content="记录实践中遇到的各种各样的问题">
+<meta name="description" content="Counter类Counter类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。Counter类可以很方便的对文本进行单词计数并得出最大的n个词。
+123456789sum(c.values())  # 所有计数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="那些年遇到的的坑">
-<meta property="og:url" content="http://yoursite.com/2017/04/21/那些年遇到的的坑/index.html">
+<meta property="og:title" content="Python模块总结">
+<meta property="og:url" content="http://yoursite.com/2018/03/11/Python模块总结/index.html">
 <meta property="og:site_name" content="飘">
-<meta property="og:description" content="记录实践中遇到的各种各样的问题">
-<meta property="og:updated_time" content="2017-08-06T09:20:44.962Z">
+<meta property="og:description" content="Counter类Counter类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。Counter类可以很方便的对文本进行单词计数并得出最大的n个词。
+123456789sum(c.values())  # 所有计数">
+<meta property="og:updated_time" content="2018-03-13T13:50:08.816Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="那些年遇到的的坑">
-<meta name="twitter:description" content="记录实践中遇到的各种各样的问题">
+<meta name="twitter:title" content="Python模块总结">
+<meta name="twitter:description" content="Counter类Counter类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。Counter类可以很方便的对文本进行单词计数并得出最大的n个词。
+123456789sum(c.values())  # 所有计数">
 
 
 
@@ -86,7 +89,7 @@
   };
 </script>
 
-  <title> 那些年遇到的的坑 | 飘 </title>
+  <title> Python模块总结 | 飘 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -226,7 +229,7 @@
             
             
               
-                那些年遇到的的坑
+                Python模块总结
               
             
           </h1>
@@ -238,8 +241,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-21T19:55:53+08:00" content="2017-04-21">
-              2017-04-21
+            <time itemprop="dateCreated" datetime="2018-03-11T10:16:48+08:00" content="2018-03-11">
+              2018-03-11
             </time>
           </span>
 
@@ -253,8 +256,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/04/21/那些年遇到的的坑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/21/那些年遇到的的坑/" itemprop="commentsCount"></span>
+                <a href="/2018/03/11/Python模块总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/11/Python模块总结/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -275,55 +278,9 @@
       
 
       
-        <p>记录实践中遇到的各种各样的问题</p>
-<a id="more"></a>
-<ol>
-<li>OpenVPN GUI这个工具可能需要Administrator执行</li>
-<li>MySQL可以插入NULL</li>
-</ol>
-<p>···C++<br>    UPDATE <code>cc_t_user_coupon</code> SET <code>verification_time</code>=NULL WHERE (<code>id</code>=’2281492761’) AND (<code>obtain_time</code>=’2017-04-21 15:41:04’) //出自文化汇项目<br>···    </p>
-<ol>
-<li><a href="http://itindex.net/detail/49930-%E7%AC%94%E8%AE%B0-mysql-null" target="_blank" rel="external">mysql中的null值和空值区别</a></li>
-<li>MyBatis中updateByExampleSelective与updateByExample的区别</li>
-</ol>
-<p>···Java<br>    this.userCouponMapper.updateByExampleSelective(userCouponUpdate, userCouponExample);//只更新userCouponUpdate中不为null的部分<br>    this.userCouponMapper.updateByExample(userCouponUpdate, userCouponExample);//将查询到的词条更新为userCouponUpdate<br>···    </p>
-<ol>
-<li>用到不熟悉的东西一定要先打一个问号。</li>
-<li>查看端口使用信息</li>
-</ol>
-<p>···cmd<br>    netstat -ano<br>···</p>
-<ol>
-<li>string_vector.size() 不等同与int，不能和负数相加减 </li>
-<li>Dev-C++函数必须有先后顺序(可能和版本相关)</li>
-<li>inplace_merge(first,mid,last,compare);//将[first,mid) 和 [mid,last)这两个区间进行归并成一个有序序列。</li>
-<li>log4j.properties 需要<a href="http://stackoverflow.com/questions/12532339/no-appenders-could-be-found-for-loggerlog4j" target="_blank" rel="external">配置classPath</a>(网上有些教程没提到这一点)</li>
-<li>cout&lt;&lt;(void <em>)cstring&lt;&lt;endl;//(void </em>)将输出cstring的地址 可以应用于<strong> 交换地址 </strong>或<strong> 共享内存 </strong></li>
-<li>最新版TensorFlow(1.1.0版本)rnn的导入<br>···Python<br>from tensorflow.contrib imort rnn<br>lstm_cell = rnn.BasicLSTMCell(rnn_size);<br>outputs, states = rnn.static_rnn(lstm_cell,x,dtype= tf.float32)<br>```</li>
-<li>java的float只能用来进行科学计算或工程计算，在大多数的商业计算中，一般采用<a href="http://www.cnblogs.com/chenssy/archive/2012/09/09/2677279.html" target="_blank" rel="external">java.math.BigDecimal</a>类来进行精确计算。</li>
-<li>遇到问题尽量先找同事，没法解决再找老板。</li>
-<li>tf.concact([list1,list2],dim)// tensorflow1.1中参数的顺序有变化,注意需要加[],且数据类型要保持一致</li>
-<li>tf.unpack 在TensorFlow1.0中修改为了tf.unstack(…)</li>
-<li>tf.reverse在TensorFlow1.0中参数由tf.reverse(inputs,[false,True,True])——&gt;tf.reverse(inputs,[1])</li>
-<li>tf.expand_dims(b,0)<br>b :  tensor [7,8]–&gt; tensor [[7,8]]<br>tf.expand_dims(b,1)<br>tensor[[7],[8]]# 系数不能超过b的维数</li>
-<li><p>tmp = tf.constant([1,11,21,31,41,51,61,71,81])<br>tf.gather(1,5,7) # [11,51,91]</p>
-</li>
-<li><p>前端与后台交互的URL中含有特殊字符：+，&amp; %<br>前端：<br>$(“#submit”).click(function(event) {</p>
-<pre><code>var inputText =$(&quot;#query&quot;).val().replace(/\%/g,&quot;%25&quot;);
-var inputText = inputText.replace(/\&amp;/g, &quot;%26&quot;);
-var inputText = inputText.replace(/\+/g,&quot;%2B&quot;);
-
-$.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
-    $(&quot;#result&quot;).text(JSON.stringify(msg));
-});
-</code></pre><p>});</p>
-<p>后台：</p>
-<pre><code>expr = URLDecoder.decode(expr, &quot;utf-8&quot;);
-</code></pre></li>
-<li><p>git “Permission denied(publickey)”<br>可能是ssh key过期了<br>ssh-keygen<br>cd ~/.ssh/id_rsa<br>拷贝 id_rsa.pub</p>
-</li>
-<li><p>在jupyter中修改代码重新运行时，<a href="http://blog.csdn.net/Jerr__y/article/details/70809528" target="_blank" rel="external">tf.get_variable()</a>可能会报错，需要重启kernel</p>
-</li>
-</ol>
+        <h1 id="Counter类"><a href="#Counter类" class="headerlink" title="Counter类"></a>Counter类</h1><p><a href="http://www.pythoner.com/205.html" target="_blank" rel="external">Counter</a>类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。Counter类可以很方便的对文本进行单词计数并得出最大的n个词。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sum(c.values())  <span class="comment"># 所有计数的总数</span></div><div class="line">c.clear()  <span class="comment"># 重置Counter对象，注意不是删除</span></div><div class="line">list(c)  <span class="comment"># 将c中的键转为列表</span></div><div class="line">set(c)  <span class="comment"># 将c中的键转为set</span></div><div class="line">dict(c)  <span class="comment"># 将c中的键值对转为字典</span></div><div class="line">c.items()  <span class="comment"># 转为(elem, cnt)格式的列表</span></div><div class="line">Counter(dict(list_of_pairs))  <span class="comment"># 从(elem, cnt)格式的列表转换为Counter类对象</span></div><div class="line">c.most_common()[:-n:<span class="number">-1</span>]  <span class="comment"># 取出计数最少的n-1个元素</span></div><div class="line">c += Counter()  <span class="comment"># 移除0和负值</span></div></pre></td></tr></table></figure>
+<h1 id="enumerate-说明"><a href="#enumerate-说明" class="headerlink" title="enumerate()说明"></a>enumerate()说明</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">"这"</span>, <span class="string">"是"</span>, <span class="string">"一个"</span>, <span class="string">"测试"</span>]</div><div class="line"><span class="keyword">for</span> index, item <span class="keyword">in</span> enumerate(list1):</div><div class="line">    <span class="keyword">print</span> index, item</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="number">0</span> 这</div><div class="line"><span class="number">1</span> 是</div><div class="line"><span class="number">2</span> 一个</div><div class="line"><span class="number">3</span> 测试</div><div class="line"><span class="comment"># 遍历大文件</span></div><div class="line">count = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> index, line <span class="keyword">in</span> enumerate(open(filepath,<span class="string">'r'</span>))： </div><div class="line">    count += <span class="number">1</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -332,7 +289,7 @@ $.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
       
         <div class="post-tags">
           
-            <a href="/tags/bug/" rel="tag">#bug</a>
+            <a href="/tags/Python/" rel="tag">#Python</a>
           
         </div>
       
@@ -341,17 +298,13 @@ $.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/20/Tensorflow源码解析/" rel="next" title="Tensorflow源码解析">
-                <i class="fa fa-chevron-left"></i> Tensorflow源码解析
+              <a href="/2018/03/09/JVM/" rel="next" title="JVM">
+                <i class="fa fa-chevron-left"></i> JVM
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/21/EnglishWords/" rel="prev" title="English Words">
-                English Words <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -377,8 +330,8 @@ $.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/04/21/那些年遇到的的坑/"
-           data-title="那些年遇到的的坑" data-url="http://yoursite.com/2017/04/21/那些年遇到的的坑/">
+      <div class="ds-thread" data-thread-key="2018/03/11/Python模块总结/"
+           data-title="Python模块总结" data-url="http://yoursite.com/2018/03/11/Python模块总结/">
       </div>
     
   </div>
@@ -494,7 +447,7 @@ $.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Counter类"><span class="nav-number">1.</span> <span class="nav-text">Counter类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enumerate-说明"><span class="nav-number">2.</span> <span class="nav-text">enumerate()说明</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

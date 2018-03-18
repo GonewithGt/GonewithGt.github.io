@@ -3,14 +3,106 @@
 
     
   <url>
+    <loc>http://yoursite.com/2018/03/03/%E4%BC%98%E7%A7%80%E5%8D%9A%E5%AE%A2%E6%B1%87%E6%80%BB/</loc>
+    <lastmod>2018-03-18T16:00:54.993Z</lastmod>
+    <data>
+        <display>
+        <title>优秀博客汇总</title>
+        <pubTime>2018-03-03T03:09:15.000Z</pubTime>
+        
+        <tag>Ref </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-03-17T13:55:43.752Z</lastmod>
+    <data>
+        <display>
+        <title>操作系统</title>
+        <pubTime>2017-04-13T06:51:00.000Z</pubTime>
+        
+        <tag>操作系统 </tag>
+         
+        <tag>Linux </tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://yoursite.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/01/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
+    <lastmod>2018-03-17T09:22:07.411Z</lastmod>
+    <data>
+        <display>
+        <title>机器学习相关知识点</title>
+        <pubTime>2018-01-22T03:31:50.000Z</pubTime>
+        
+        <tag>ML </tag>
+         
+        <tag>DL </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/04/18/Algorithms/</loc>
-    <lastmod>2018-03-09T15:58:53.607Z</lastmod>
+    <lastmod>2018-03-17T04:41:46.626Z</lastmod>
     <data>
         <display>
         <title>Algorithms</title>
         <pubTime>2017-04-18T14:20:37.000Z</pubTime>
         
         <tag>Algorithms </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/02/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BA%94%E7%94%A8/</loc>
+    <lastmod>2018-03-16T13:40:24.967Z</lastmod>
+    <data>
+        <display>
+        <title>深度学习的应用</title>
+        <pubTime>2018-02-28T02:49:52.000Z</pubTime>
+        
+        <tag>DL </tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2018/03/11/Python%E6%A8%A1%E5%9D%97%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-03-13T13:50:08.816Z</lastmod>
+    <data>
+        <display>
+        <title>Python模块总结</title>
+        <pubTime>2018-03-11T02:16:48.000Z</pubTime>
+        
+        <tag>Python </tag>
          
          
            
@@ -30,59 +122,6 @@
         <tag>Java </tag>
          
         <tag>JVM </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/02/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%BA%94%E7%94%A8/</loc>
-    <lastmod>2018-03-08T10:18:03.310Z</lastmod>
-    <data>
-        <display>
-        <title>深度学习的应用</title>
-        <pubTime>2018-02-28T02:49:52.000Z</pubTime>
-        
-        <tag>DL </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/03/03/%E4%BC%98%E7%A7%80%E5%8D%9A%E5%AE%A2%E6%B1%87%E6%80%BB/</loc>
-    <lastmod>2018-03-08T10:13:20.589Z</lastmod>
-    <data>
-        <display>
-        <title>优秀博客汇总</title>
-        <pubTime>2018-03-03T03:09:15.000Z</pubTime>
-        
-        <tag>Ref </tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2018/01/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
-    <lastmod>2018-03-08T10:04:12.369Z</lastmod>
-    <data>
-        <display>
-        <title>机器学习相关知识点</title>
-        <pubTime>2018-01-22T03:31:50.000Z</pubTime>
-        
-        <tag>ML </tag>
-         
-        <tag>DL </tag>
          
          
            
@@ -331,9 +370,9 @@
         <title>Simple DNN Framework</title>
         <pubTime>2017-05-15T11:30:21.000Z</pubTime>
         
-        <tag>DNN </tag>
-         
         <tag>Python </tag>
+         
+        <tag>DNN </tag>
          
          
            
@@ -354,28 +393,6 @@
          
          
            
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2017-05-10T14:12:54.203Z</lastmod>
-    <data>
-        <display>
-        <title>操作系统</title>
-        <pubTime>2017-04-13T06:51:00.000Z</pubTime>
-        
-        <tag>操作系统 </tag>
-         
-        <tag>Linux </tag>
-         
-         
-           
-             
-              <breadCrumb title="操作系统" url="http://yoursite.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-          
         </display>
     </data>
     </url>
@@ -404,9 +421,9 @@
         <title>LSTM-C++实现</title>
         <pubTime>2017-04-26T08:45:13.000Z</pubTime>
         
-        <tag>DL </tag>
-         
         <tag>C++ </tag>
+         
+        <tag>DL </tag>
          
         <tag>LSTM </tag>
          
