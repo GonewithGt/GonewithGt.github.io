@@ -59,16 +59,19 @@
 
 
 
-<meta name="description" content="学习GPU编程，希望能够用到开发的深度学习框架中">
+<meta name="description" content="学习GPU编程，希望能够用到开发的深度学习框架中
+官方教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GPU编程">
 <meta property="og:url" content="http://yoursite.com/2018/01/23/GPU编程/index.html">
 <meta property="og:site_name" content="飘">
-<meta property="og:description" content="学习GPU编程，希望能够用到开发的深度学习框架中">
-<meta property="og:updated_time" content="2018-03-08T09:20:08.970Z">
+<meta property="og:description" content="学习GPU编程，希望能够用到开发的深度学习框架中
+官方教程">
+<meta property="og:updated_time" content="2018-03-27T07:24:32.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GPU编程">
-<meta name="twitter:description" content="学习GPU编程，希望能够用到开发的深度学习框架中">
+<meta name="twitter:description" content="学习GPU编程，希望能够用到开发的深度学习框架中
+官方教程">
 
 
 
@@ -276,7 +279,14 @@
 
       
         <p>学习GPU编程，希望能够用到开发的深度学习框架中</p>
+<p><a href="http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html" target="_blank" rel="external">官方教程</a></p>
 <a id="more"></a>
+<h1 id="GPU和CPU的区别"><a href="#GPU和CPU的区别" class="headerlink" title="GPU和CPU的区别"></a>GPU和CPU的区别</h1><p>GPU基于高吞吐设计的：多ALU，小cashe，多Thread并行，控制单元能够将多个访问和并未较少的访问。</p>
+<p>CPU基于低延时设计的：强大ALU，复杂逻辑控制单元，大cache，少register</p>
+<h1 id="两种调用GPU方式"><a href="#两种调用GPU方式" class="headerlink" title="两种调用GPU方式"></a>两种调用GPU方式</h1><ul>
+<li>驱动API：直接调用底层驱动</li>
+<li>运行API：调用封装好的API</li>
+</ul>
 <h1 id="通讯模式"><a href="#通讯模式" class="headerlink" title="通讯模式"></a>通讯模式</h1><pre><code>映射(MAP):输入输出一对一，例如求数组元素平方。
 聚合(GATHER) ：多对一，每相邻三个元素平方。
 分散(scatter) ：一对多
@@ -284,7 +294,13 @@
 转置(transpose) ：一对一，位置模式的转换
 压缩(reduce) ：多对一(all-to-one)
 重排(scan/sort) ：多对多
-</code></pre><h1 id="硬件模式"><a href="#硬件模式" class="headerlink" title="硬件模式"></a>硬件模式</h1><pre><code>SM(流处理器)：包含很多简单处理器和memory，每个simple process就是来处理线程的。每个GPU至少一个SM，每个SM并行而独立运行。
+</code></pre><h1 id="CUDA线程通信"><a href="#CUDA线程通信" class="headerlink" title="CUDA线程通信"></a>CUDA线程通信</h1><p>线程通信在CUDA中有三种实现方式：</p>
+<ol>
+<li>共享存储器；</li>
+<li>线程 同步；</li>
+<li>原子操作；</li>
+</ol>
+<h1 id="硬件模式"><a href="#硬件模式" class="headerlink" title="硬件模式"></a>硬件模式</h1><pre><code>SM(流处理器)：包含很多简单处理器和memory，每个simple process就是来处理线程的。每个GPU至少一个SM，每个SM并行而独立运行。
 Kernel(核)：可以理解为C/C++的一个function。function由内存块来运行
 thread blocks(线程块)：一些线程block组成线程块，一个线程块包含多个线程。
 线程    
@@ -298,7 +314,10 @@ thread blocks(线程块)：一些线程block组成线程块，一个线程块包
 thread blocks有global memory 同步主机内存 host memory
 速度local &gt; shared &gt;&gt; global &gt; host
 将数据切割的越小越好
-</code></pre><h2 id="同步性synchronisation和屏障barrier"><a href="#同步性synchronisation和屏障barrier" class="headerlink" title="同步性synchronisation和屏障barrier"></a>同步性synchronisation和屏障barrier</h2><pre><code>不同的线程在共享和全局内存中读写数据需要有先后的控制，所以引入了同步性的概念。
+</code></pre><h1 id="线程束"><a href="#线程束" class="headerlink" title="线程束"></a>线程束</h1><p>GPU采用单指令多线程(SIMT)架构来管理和执行线程，每32个线程为一组，称为线程束。</p>
+<h1 id="线程束分化"><a href="#线程束分化" class="headerlink" title="线程束分化"></a>线程束分化</h1><p>同一个线程块必须按照相同的指令执行，当一个线程束中出现分支时，会执行符合条件的线程，禁用不符合条件的线程，相当于分支两侧顺序执行了。</p>
+<p>对于短指令，cuda会将断定变量设为1或者0，用断定指令替代分支指令。</p>
+<h2 id="同步性synchronisation和屏障barrier"><a href="#同步性synchronisation和屏障barrier" class="headerlink" title="同步性synchronisation和屏障barrier"></a>同步性synchronisation和屏障barrier</h2><pre><code>不同的线程在共享和全局内存中读写数据需要有先后的控制，所以引入了同步性的概念。
 屏障的作用：用来控制多个线程的停止与等待，当所有线程都到达了屏障点，程序才继续进行。
 </code></pre><h2 id="CUDA编程模CUDA"><a href="#CUDA编程模CUDA" class="headerlink" title="CUDA编程模CUDA"></a>CUDA编程模CUDA</h2><p>程序中CPU是主导地位，负责完成以下的事情：</p>
 <pre><code>1. 从CPU同步数据到GPU
@@ -378,7 +397,8 @@ Peer-to-peer memcopy
 用于优化
     cudaHostMalloc()
     cudaHostRegister()
-</code></pre><h1 id="MPI"><a href="#MPI" class="headerlink" title="MPI"></a>MPI</h1><p><a href="https://zhuanlan.zhihu.com/p/21478495" target="_blank" rel="external">MPI安装</a><br>[MPI教程]（<a href="https://www.cnblogs.com/hantan2008/p/5390375.html）" target="_blank" rel="external">https://www.cnblogs.com/hantan2008/p/5390375.html）</a></p>
+</code></pre><h1 id="MPI"><a href="#MPI" class="headerlink" title="MPI"></a>MPI</h1><p><a href="https://zhuanlan.zhihu.com/p/21478495" target="_blank" rel="external">MPI安装</a><br><a href="https://www.cnblogs.com/hantan2008/p/5390375.html" target="_blank" rel="external">MPI教程</a></p>
+<p>​<br>​    </p>
 
       
     </div>
@@ -494,7 +514,7 @@ Peer-to-peer memcopy
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -551,7 +571,7 @@ Peer-to-peer memcopy
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#通讯模式"><span class="nav-number">1.</span> <span class="nav-text">通讯模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件模式"><span class="nav-number">2.</span> <span class="nav-text">硬件模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编程模型"><span class="nav-number">3.</span> <span class="nav-text">编程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模型的原则"><span class="nav-number">3.1.</span> <span class="nav-text">CUDA编程模型的原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型"><span class="nav-number">3.2.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步性synchronisation和屏障barrier"><span class="nav-number">3.3.</span> <span class="nav-text">同步性synchronisation和屏障barrier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模CUDA"><span class="nav-number">3.4.</span> <span class="nav-text">CUDA编程模CUDA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码"><span class="nav-number">4.</span> <span class="nav-text">CUDA代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码的高效策略"><span class="nav-number">5.</span> <span class="nav-text">CUDA代码的高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kernel加载方式"><span class="nav-number">6.</span> <span class="nav-text">Kernel加载方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA中的各种内存的代码使用"><span class="nav-number">7.</span> <span class="nav-text">CUDA中的各种内存的代码使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA同步操作"><span class="nav-number">8.</span> <span class="nav-text">CUDA同步操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原子操作"><span class="nav-number">8.1.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步函数"><span class="nav-number">8.2.</span> <span class="nav-text">同步函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU-GPU同步"><span class="nav-number">8.3.</span> <span class="nav-text">CPU/GPU同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并行化高效策略"><span class="nav-number">9.</span> <span class="nav-text">并行化高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像处理的例子"><span class="nav-number">10.</span> <span class="nav-text">图像处理的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA流Streams"><span class="nav-number">11.</span> <span class="nav-text">CUDA流Streams</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多GPU编程"><span class="nav-number">12.</span> <span class="nav-text">多GPU编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#纹理内存"><span class="nav-number">13.</span> <span class="nav-text">纹理内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU与GPU协同"><span class="nav-number">14.</span> <span class="nav-text">CPU与GPU协同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MPI"><span class="nav-number">15.</span> <span class="nav-text">MPI</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GPU和CPU的区别"><span class="nav-number">1.</span> <span class="nav-text">GPU和CPU的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#两种调用GPU方式"><span class="nav-number">2.</span> <span class="nav-text">两种调用GPU方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通讯模式"><span class="nav-number">3.</span> <span class="nav-text">通讯模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA线程通信"><span class="nav-number">4.</span> <span class="nav-text">CUDA线程通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件模式"><span class="nav-number">5.</span> <span class="nav-text">硬件模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编程模型"><span class="nav-number">6.</span> <span class="nav-text">编程模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模型的原则"><span class="nav-number">6.1.</span> <span class="nav-text">CUDA编程模型的原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内存模型"><span class="nav-number">6.2.</span> <span class="nav-text">内存模型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程束"><span class="nav-number">7.</span> <span class="nav-text">线程束</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程束分化"><span class="nav-number">8.</span> <span class="nav-text">线程束分化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#同步性synchronisation和屏障barrier"><span class="nav-number">8.1.</span> <span class="nav-text">同步性synchronisation和屏障barrier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CUDA编程模CUDA"><span class="nav-number">8.2.</span> <span class="nav-text">CUDA编程模CUDA</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码"><span class="nav-number">9.</span> <span class="nav-text">CUDA代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA代码的高效策略"><span class="nav-number">10.</span> <span class="nav-text">CUDA代码的高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Kernel加载方式"><span class="nav-number">11.</span> <span class="nav-text">Kernel加载方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA中的各种内存的代码使用"><span class="nav-number">12.</span> <span class="nav-text">CUDA中的各种内存的代码使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA同步操作"><span class="nav-number">13.</span> <span class="nav-text">CUDA同步操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原子操作"><span class="nav-number">13.1.</span> <span class="nav-text">原子操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步函数"><span class="nav-number">13.2.</span> <span class="nav-text">同步函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU-GPU同步"><span class="nav-number">13.3.</span> <span class="nav-text">CPU/GPU同步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#并行化高效策略"><span class="nav-number">14.</span> <span class="nav-text">并行化高效策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图像处理的例子"><span class="nav-number">15.</span> <span class="nav-text">图像处理的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CUDA流Streams"><span class="nav-number">16.</span> <span class="nav-text">CUDA流Streams</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多GPU编程"><span class="nav-number">17.</span> <span class="nav-text">多GPU编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#纹理内存"><span class="nav-number">18.</span> <span class="nav-text">纹理内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU与GPU协同"><span class="nav-number">19.</span> <span class="nav-text">CPU与GPU协同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MPI"><span class="nav-number">20.</span> <span class="nav-text">MPI</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

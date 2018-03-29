@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="GonewithGt,ML,Algorithms,飘" />
+  <meta name="keywords" content="并发," />
 
 
 
@@ -59,16 +59,31 @@
 
 
 
-<meta name="description" content="Everything is good now~">
+<meta name="description" content="记录并发相关知识点
+内存模型Java线程-工作内存-内存操作-主内存
+每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。
+内存间交互操作主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。
+volatile关键字
+可见性：一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并发">
 <meta property="og:url" content="http://yoursite.com/2018/03/23/并发/index.html">
 <meta property="og:site_name" content="飘">
-<meta property="og:description" content="Everything is good now~">
-<meta property="og:updated_time" content="2018-03-23T06:28:32.446Z">
+<meta property="og:description" content="记录并发相关知识点
+内存模型Java线程-工作内存-内存操作-主内存
+每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。
+内存间交互操作主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。
+volatile关键字
+可见性：一个">
+<meta property="og:updated_time" content="2018-03-24T10:33:36.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发">
-<meta name="twitter:description" content="Everything is good now~">
+<meta name="twitter:description" content="记录并发相关知识点
+内存模型Java线程-工作内存-内存操作-主内存
+每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。
+内存间交互操作主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。
+volatile关键字
+可见性：一个">
 
 
 
@@ -275,11 +290,186 @@
       
 
       
-        
+        <p>记录并发相关知识点</p>
+<h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><p>Java线程-工作内存-内存操作-主内存</p>
+<p>每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。</p>
+<h1 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h1><p>主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。</p>
+<h1 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h1><ul>
+<li>可见性：一个线程对volatile修饰的变量修改之后，立刻对其它线程可见。但是，有些运算可能并非原子的，不能保证并发安全。使用情况需要满足：<ul>
+<li>运算结果并不依赖变量的当前值，或者能够确保只有单一线程能够修改变量的值。</li>
+<li>变量不需要与其它的状态共同参与不变性约束。</li>
+</ul>
+</li>
+<li>禁止语义重排<ul>
+<li>相当于添加了内存屏障</li>
+</ul>
+</li>
+</ul>
+<h1 id="内存模型特性"><a href="#内存模型特性" class="headerlink" title="内存模型特性"></a>内存模型特性</h1><ul>
+<li>对于long和double类型需要注意JVM对64数据是否为原子的</li>
+<li>原子性：synchronized关键字</li>
+<li>可见性：volatile synchronized final关键字实现</li>
+<li>有序性：volatile</li>
+</ul>
+<h1 id="happen-before原则"><a href="#happen-before原则" class="headerlink" title="happen-before原则"></a>happen-before原则</h1><p>Java内存模型下有一些天然的先行发生关系：</p>
+<ul>
+<li>程序次序规则</li>
+<li>管程锁定规则</li>
+<li>volatile规则</li>
+<li>线程启动规则</li>
+<li>线程终止规则</li>
+<li>线程中断规则</li>
+<li>对象终结规则</li>
+<li>传递性</li>
+</ul>
+<h1 id="Java线程实现"><a href="#Java线程实现" class="headerlink" title="Java线程实现"></a>Java线程实现</h1><ul>
+<li>线程实现<ul>
+<li>内核级线程<ul>
+<li>一般通过轻量级进程包装内核线程，然后再使用</li>
+<li>轻量级进程和线程之间1:1</li>
+<li>由于需要在用户态和内核态之间切换，系统调用代价较高</li>
+</ul>
+</li>
+<li>用户线程<ul>
+<li>线程建立，同步，销毁，调度完全在用户态中完成。</li>
+<li>进程和线程之比为1：N</li>
+</ul>
+</li>
+<li>用户线程加轻量级线程<ul>
+<li>混合使用，进程和线程之间N：M</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Java线程实现<ul>
+<li>1.2之前是用户线程</li>
+<li>1.2之后是基于操作系统原生线程来实现的</li>
+</ul>
+</li>
+<li>Java线程调度<ul>
+<li>协同式线程调度：线程执行完通知其它线程执行<ul>
+<li>好处是实现简单</li>
+<li>坏处是线程执行时间不可控制，如果一个线程编写有问题，容易造成阻塞。</li>
+</ul>
+</li>
+<li>抢占式线程调度<ul>
+<li>每个线程由系统来分配执行时间。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线程状态转换<ul>
+<li>新建</li>
+<li>运行：包括系统线程中的Running和Ready，有可能在等待CPU调度</li>
+<li>无限期等待：需要等待被其它线程唤醒。<ul>
+<li>没有设置TimeOut的Object.wait()</li>
+<li>没有设置TimeOut的Thread.join()</li>
+<li>LockSupport.park()</li>
+</ul>
+</li>
+<li>有限期等待:一定时间之后被系统自动唤醒<ul>
+<li>Thread.sleep()</li>
+<li>设置TimeOut的Object.wait()</li>
+<li>设置TimeOut的Thread.join()</li>
+<li>LockSupport.parkNanos()</li>
+<li>LockSupport.parkUntil()</li>
+</ul>
+</li>
+<li>阻塞：等待获得排它锁，在等待另一个线程释放锁时发生。</li>
+<li>结束</li>
+</ul>
+</li>
+</ul>
+<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><ul>
+<li>定义<ul>
+<li>当多个线程访问一个类时，如果不用考虑这些线程在运行时环境下的调度和交替执行，并且不需要额外的同步，或者在调用代码代码不必作其他的协调，这个类的行为仍然是正确的，那么称这个类是线程安全的。</li>
+</ul>
+</li>
+<li>特征<ul>
+<li>代码本身封装了所有必要的正确性保障手段</li>
+</ul>
+</li>
+<li>Java操作共享数据分类（线程安全程度由强到弱）<ul>
+<li>不可变<ul>
+<li>String，Long，Double，BigInteger等为不可变对象</li>
+<li>AtomicInteger和AtomiLong则为可变类</li>
+</ul>
+</li>
+<li>绝对线程安全<ul>
+<li>java.util.Vector，方法被synchronized修</li>
+</ul>
+</li>
+<li>相对线程安全:特定的执行顺序需要同步<ul>
+<li>Vector，HashTable，Collections</li>
+</ul>
+</li>
+<li>线程兼容：对象本身是线程非线程安全的，但是可以使用同步手段让对象在并发情况下安全使用。</li>
+<li>线程对立：无法同步的代码。</li>
+</ul>
+</li>
+<li>线程安全的实现<ul>
+<li>互斥同步<ul>
+<li>可以使用临界区，互斥量，和信号量、</li>
+<li>synchronized关键字，Java里面会在同步块前后加上monitorenter和monitorexist关键字，重量级操作</li>
+<li>ReentrantLock和synchronized很相似，写法上不太同<ul>
+<li>等待可中断</li>
+<li>可实现公平锁</li>
+<li>锁绑定多个条件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非阻塞同步<ul>
+<li>基于冲突检测和乐观并发策略，先操作，有冲突，再补偿，需要硬件指令支持。</li>
+<li>Test-and-set，Fetch-and-Increment，Swap，Compare-and-Swap(CAS)，Load-Linked/Store-Conditional</li>
+</ul>
+</li>
+<li>无同步方案<ul>
+<li>可重入代码</li>
+<li>线程本地存储</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>锁优化(1.5到1.6)<ul>
+<li>适应性自旋<ul>
+<li>自旋锁，多处理器上，一个线程请求资源被上锁，可以占用CPU自旋（忙循环），避免线程切换。</li>
+<li>适应性自旋意味着自旋时间不是固定的，由前一次在同一个锁上的自旋时间及锁拥有者的状态来决定。</li>
+</ul>
+</li>
+<li>锁消除<ul>
+<li>对不可能存在数据竞争的代码进行锁消除</li>
+</ul>
+</li>
+<li>锁粗化<ul>
+<li>如果虚拟机探测到一连串的对象都涉及到一个锁，可以将锁扩展到这个操作序列的外部。</li>
+</ul>
+</li>
+<li>轻量级锁<ul>
+<li>传统锁使用互斥量来实现</li>
+<li>轻量级锁通过CAS，对象头信息中的锁标志位实现。如果存在竞争关系，轻量级锁会膨胀为重量级锁。</li>
+</ul>
+</li>
+<li>偏向锁<ul>
+<li>消除数据在无竞争情况下的同步原语。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Semphore"><a href="#Semphore" class="headerlink" title="Semphore"></a>Semphore</h1><p>限制线程并发的数量</p>
+<h1 id="Exchanger"><a href="#Exchanger" class="headerlink" title="Exchanger"></a>Exchanger</h1><p>在两个线程之间传输数据</p>
+
       
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发/" rel="tag">#并发</a>
+          
+        </div>
       
 
       
@@ -378,7 +568,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -435,7 +625,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内存模型"><span class="nav-number">1.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存间交互操作"><span class="nav-number">2.</span> <span class="nav-text">内存间交互操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile关键字"><span class="nav-number">3.</span> <span class="nav-text">volatile关键字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存模型特性"><span class="nav-number">4.</span> <span class="nav-text">内存模型特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#happen-before原则"><span class="nav-number">5.</span> <span class="nav-text">happen-before原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java线程实现"><span class="nav-number">6.</span> <span class="nav-text">Java线程实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程安全"><span class="nav-number">7.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Semphore"><span class="nav-number">8.</span> <span class="nav-text">Semphore</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exchanger"><span class="nav-number">9.</span> <span class="nav-text">Exchanger</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
