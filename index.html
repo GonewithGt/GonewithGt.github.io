@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion">
+<html class="theme-next muse use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -29,46 +29,20 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+  <link href="/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT, Neveryu, Never_yu, Blog, Node.js, Git, PHP, JAVA, JAVASCRIPT, HTML, CSS, jQuery, Angular, Vue, React" />
+  <meta name="keywords" content="GonewithGt,ML,Algorithms,飘" />
 
 
 
@@ -79,7 +53,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -101,12 +75,12 @@
 <script type="text/javascript" id="hexo.configuration">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"hide"},
+    scheme: 'Muse',
+    sidebar: {"position":"right","display":"always"},
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: undefined,
+      userId: 0,
       author: '博主'
     }
   };
@@ -114,8 +88,6 @@
 
 
 
-
-  <link rel="canonical" href="http://yoursite.com/"/>
 
 
 <!-- 网页加载条 -->
@@ -141,7 +113,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container one-collumn sidebar-position-right 
    page-home 
  ">
     <div class="headband"></div>
@@ -185,16 +157,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
@@ -205,32 +167,32 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-guestbook">
-          <a href="/guestbook" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br />
-            
-            留言
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -643,7 +605,7 @@
           <p>学习GPU编程，希望能够用到开发的深度学习框架中</p>
 <p><a href="http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html">官方教程</a></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2018/01/23/GPU编程/" rel="contents">
+            <a class="btn" href="/2018/01/23/GPU编程/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -749,7 +711,7 @@
         
           <p>主要记录优秀的网络资源</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/09/03/优秀博客汇总/" rel="contents">
+            <a class="btn" href="/2017/09/03/优秀博客汇总/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -855,7 +817,7 @@
         
           <p>记录数学建模知识点。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/25/数学建模/" rel="contents">
+            <a class="btn" href="/2017/06/25/数学建模/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -961,7 +923,7 @@
         
           <p>编译原理相关知识。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/31/编译原理/" rel="contents">
+            <a class="btn" href="/2017/05/31/编译原理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1067,7 +1029,7 @@
         
           <p>参考自：<a href="https://www.qcloud.com/community/article/598765?fromSource=gwzcw.116654.116654.116654?utm_source=qq&amp;utm_medium=social">Tensorflow 简明原理</a></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/15/Simple-DNN-Framework/" rel="contents">
+            <a class="btn" href="/2017/05/15/Simple-DNN-Framework/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1349,7 +1311,7 @@ But that&apos;s not the shape of my heart
         
           <p>记录在项目中可能会经常用到的模块。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/01/项目中可重用模块/" rel="contents">
+            <a class="btn" href="/2017/05/01/项目中可重用模块/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1455,7 +1417,7 @@ But that&apos;s not the shape of my heart
         
           <p>github: <a href="https://github.com/sheffieldnlp/stance-conditional">https://github.com/sheffieldnlp/stance-conditional</a><br><a href="http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html">Python re模块</a><br><a href="http://m.blog.csdn.net/article/details?id=53248570">ipython</a><br><a href="https://github.com/facebookresearch/fastText">FastText</a>:Library for fast text representation and classification.<br><a href="http://blog.csdn.net/questionfish/article/details/46725475">gensim中文教程</a><br><a href="http://radimrehurek.com/gensim/tutorial.html">gensim英文教程</a></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/04/27/Stance-Detection-with-Conditional-Encoding/" rel="contents">
+            <a class="btn" href="/2017/04/27/Stance-Detection-with-Conditional-Encoding/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1671,20 +1633,20 @@ But that&apos;s not the shape of my heart
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/Neveryu" target="_blank" title="Github">
+                <a href="https://github.com/GonewithGt" target="_blank" title="Github">
                   
-                    <i class="fa fa-fw fa-github"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
                   Github
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/Neveryu" target="_blank" title="Weibo">
+                <a href="mailto:1724532024@qq.com" target="_blank" title="Email">
                   
-                    <i class="fa fa-fw fa-weibo"></i>
+                    <i class="fa fa-fw fa-globe"></i>
                   
-                  Weibo
+                  Email
                 </a>
               </span>
             
@@ -1693,32 +1655,8 @@ But that&apos;s not the shape of my heart
 
         
         
-          <div class="cc-license motion-element" itemprop="license">
-            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
-              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
-            </a>
-          </div>
-        
 
         
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="/weblog" title="建站日志" target="_blank">建站日志</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://blog.csdn.net/csdn_yudong" title="CSDN" target="_blank">CSDN</a>
-                </li>
-              
-            </ul>
-          </div>
         
       </section>
 
@@ -1739,25 +1677,9 @@ But that&apos;s not the shape of my heart
       <div class="footer-inner">
         
 
-<div class="busuanzi-count">
-
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv">您是第<span class="busuanzi-value" id="busuanzi_value_site_uv"></span>个小伙伴</span>
-  
-
-  
-    <span class="site-pv">本站总浏览<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
-  
-  
-</div>
-
-
-
         <div class="copyright" >
   
-  &copy;  2016 - 
+  &copy;  2015 - 
   <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -1772,7 +1694,7 @@ But that&apos;s not the shape of my heart
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
-    NexT.Pisces
+    NexT.Muse
   </a>
 </div>
 
@@ -1810,49 +1732,42 @@ But that&apos;s not the shape of my heart
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
+  <script type="text/javascript" src="//fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
+  
 
   
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
 
 
 
@@ -1877,7 +1792,7 @@ But that&apos;s not the shape of my heart
 
   
     
-    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="//ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
     <script src="/js/src/hook-duoshuo.js"></script>
   
 
@@ -1894,9 +1809,6 @@ But that&apos;s not the shape of my heart
   
 
   
-<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
-</script>
-
 
   <!-- 按需加载背景 -->
   <!-- 按需加载背景 -->
@@ -1913,7 +1825,7 @@ if(par!='gfan'){
   if((contains(ua,"android") && contains(ua,"mobile"))||(contains(ua,"android") && contains(ua,"mozilla"))||(contains(ua,"android") && contains(ua,"opera"))||contains(ua,"ucweb7")||contains(ua,"iphone")){
     return false;
   } else {
-    $.getScript("/js/src/particle.js?v=5.0.1");
+    $.getScript("/js/src/particle.js?v=0.5.0");
   }
 }  
 })();  
@@ -1933,10 +1845,10 @@ return theRequest;
 <!-- 识别手机或电脑的js结束 -->  
   <!-- 页面点击小红心 -->
   <!-- 页面点击小红心 -->
-<script type="text/javascript" src="/js/src/love.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/love.js?v=0.5.0"></script>
   <!-- 页面移动stars -->
   <!-- 鼠标移动特效 -->
-<script type="text/javascript" src="/js/src/jquery-stars.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/jquery-stars.js?v=0.5.0"></script>
 <script type="text/javascript">
 jQuery('body').jstars({
 	image_path: '/images',
