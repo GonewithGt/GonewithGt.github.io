@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/weblog/index.html</loc>
+    
+    <lastmod>2018-03-30T17:27:10.255Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/01/22/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
     
     <lastmod>2018-03-30T14:12:25.940Z</lastmod>
@@ -117,6 +124,13 @@
     <loc>http://yoursite.com/2017/04/27/Stance-Detection-with-Conditional-Encoding/</loc>
     
     <lastmod>2018-03-08T09:15:36.677Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/guestbook/index.html</loc>
+    
+    <lastmod>2018-02-05T14:42:01.000Z</lastmod>
     
   </url>
   
