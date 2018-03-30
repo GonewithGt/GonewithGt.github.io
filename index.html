@@ -211,267 +211,15 @@
 
     
     
+      
+      
+        
+        
+        
+      
 
+      
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/03/23/并发/" itemprop="url">
-                  并发
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-03-23T14:28:32+08:00" content="2018-03-23">
-              2018-03-23
-            </time>
-          </span>
-
-
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/03/23/并发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/23/并发/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录并发相关知识点</p>
-<h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><p>Java线程-工作内存-内存操作-主内存</p>
-<p>每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。</p>
-<h1 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h1><p>主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。</p>
-<h1 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h1><ul>
-<li>可见性：一个线程对volatile修饰的变量修改之后，立刻对其它线程可见。但是，有些运算可能并非原子的，不能保证并发安全。使用情况需要满足：<ul>
-<li>运算结果并不依赖变量的当前值，或者能够确保只有单一线程能够修改变量的值。</li>
-<li>变量不需要与其它的状态共同参与不变性约束。</li>
-</ul>
-</li>
-<li>禁止语义重排<ul>
-<li>相当于添加了内存屏障</li>
-</ul>
-</li>
-</ul>
-<h1 id="内存模型特性"><a href="#内存模型特性" class="headerlink" title="内存模型特性"></a>内存模型特性</h1><ul>
-<li>对于long和double类型需要注意JVM对64数据是否为原子的</li>
-<li>原子性：synchronized关键字</li>
-<li>可见性：volatile synchronized final关键字实现</li>
-<li>有序性：volatile</li>
-</ul>
-<h1 id="happen-before原则"><a href="#happen-before原则" class="headerlink" title="happen-before原则"></a>happen-before原则</h1><p>Java内存模型下有一些天然的先行发生关系：</p>
-<ul>
-<li>程序次序规则</li>
-<li>管程锁定规则</li>
-<li>volatile规则</li>
-<li>线程启动规则</li>
-<li>线程终止规则</li>
-<li>线程中断规则</li>
-<li>对象终结规则</li>
-<li>传递性</li>
-</ul>
-<h1 id="Java线程实现"><a href="#Java线程实现" class="headerlink" title="Java线程实现"></a>Java线程实现</h1><ul>
-<li>线程实现<ul>
-<li>内核级线程<ul>
-<li>一般通过轻量级进程包装内核线程，然后再使用</li>
-<li>轻量级进程和线程之间1:1</li>
-<li>由于需要在用户态和内核态之间切换，系统调用代价较高</li>
-</ul>
-</li>
-<li>用户线程<ul>
-<li>线程建立，同步，销毁，调度完全在用户态中完成。</li>
-<li>进程和线程之比为1：N</li>
-</ul>
-</li>
-<li>用户线程加轻量级线程<ul>
-<li>混合使用，进程和线程之间N：M</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Java线程实现<ul>
-<li>1.2之前是用户线程</li>
-<li>1.2之后是基于操作系统原生线程来实现的</li>
-</ul>
-</li>
-<li>Java线程调度<ul>
-<li>协同式线程调度：线程执行完通知其它线程执行<ul>
-<li>好处是实现简单</li>
-<li>坏处是线程执行时间不可控制，如果一个线程编写有问题，容易造成阻塞。</li>
-</ul>
-</li>
-<li>抢占式线程调度<ul>
-<li>每个线程由系统来分配执行时间。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>线程状态转换<ul>
-<li>新建</li>
-<li>运行：包括系统线程中的Running和Ready，有可能在等待CPU调度</li>
-<li>无限期等待：需要等待被其它线程唤醒。<ul>
-<li>没有设置TimeOut的Object.wait()</li>
-<li>没有设置TimeOut的Thread.join()</li>
-<li>LockSupport.park()</li>
-</ul>
-</li>
-<li>有限期等待:一定时间之后被系统自动唤醒<ul>
-<li>Thread.sleep()</li>
-<li>设置TimeOut的Object.wait()</li>
-<li>设置TimeOut的Thread.join()</li>
-<li>LockSupport.parkNanos()</li>
-<li>LockSupport.parkUntil()</li>
-</ul>
-</li>
-<li>阻塞：等待获得排它锁，在等待另一个线程释放锁时发生。</li>
-<li>结束</li>
-</ul>
-</li>
-</ul>
-<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><ul>
-<li>定义<ul>
-<li>当多个线程访问一个类时，如果不用考虑这些线程在运行时环境下的调度和交替执行，并且不需要额外的同步，或者在调用代码代码不必作其他的协调，这个类的行为仍然是正确的，那么称这个类是线程安全的。</li>
-</ul>
-</li>
-<li>特征<ul>
-<li>代码本身封装了所有必要的正确性保障手段</li>
-</ul>
-</li>
-<li>Java操作共享数据分类（线程安全程度由强到弱）<ul>
-<li>不可变<ul>
-<li>String，Long，Double，BigInteger等为不可变对象</li>
-<li>AtomicInteger和AtomiLong则为可变类</li>
-</ul>
-</li>
-<li>绝对线程安全<ul>
-<li>java.util.Vector，方法被synchronized修</li>
-</ul>
-</li>
-<li>相对线程安全:特定的执行顺序需要同步<ul>
-<li>Vector，HashTable，Collections</li>
-</ul>
-</li>
-<li>线程兼容：对象本身是线程非线程安全的，但是可以使用同步手段让对象在并发情况下安全使用。</li>
-<li>线程对立：无法同步的代码。</li>
-</ul>
-</li>
-<li>线程安全的实现<ul>
-<li>互斥同步<ul>
-<li>可以使用临界区，互斥量，和信号量、</li>
-<li>synchronized关键字，Java里面会在同步块前后加上monitorenter和monitorexist关键字，重量级操作</li>
-<li>ReentrantLock和synchronized很相似，写法上不太同<ul>
-<li>等待可中断</li>
-<li>可实现公平锁</li>
-<li>锁绑定多个条件</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>非阻塞同步<ul>
-<li>基于冲突检测和乐观并发策略，先操作，有冲突，再补偿，需要硬件指令支持。</li>
-<li>Test-and-set，Fetch-and-Increment，Swap，Compare-and-Swap(CAS)，Load-Linked/Store-Conditional</li>
-</ul>
-</li>
-<li>无同步方案<ul>
-<li>可重入代码</li>
-<li>线程本地存储</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>锁优化(1.5到1.6)<ul>
-<li>适应性自旋<ul>
-<li>自旋锁，多处理器上，一个线程请求资源被上锁，可以占用CPU自旋（忙循环），避免线程切换。</li>
-<li>适应性自旋意味着自旋时间不是固定的，由前一次在同一个锁上的自旋时间及锁拥有者的状态来决定。</li>
-</ul>
-</li>
-<li>锁消除<ul>
-<li>对不可能存在数据竞争的代码进行锁消除</li>
-</ul>
-</li>
-<li>锁粗化<ul>
-<li>如果虚拟机探测到一连串的对象都涉及到一个锁，可以将锁扩展到这个操作序列的外部。</li>
-</ul>
-</li>
-<li>轻量级锁<ul>
-<li>传统锁使用互斥量来实现</li>
-<li>轻量级锁通过CAS，对象头信息中的锁标志位实现。如果存在竞争关系，轻量级锁会膨胀为重量级锁。</li>
-</ul>
-</li>
-<li>偏向锁<ul>
-<li>消除数据在无竞争情况下的同步原语。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="Semphore"><a href="#Semphore" class="headerlink" title="Semphore"></a>Semphore</h1><p>限制线程并发的数量</p>
-<h1 id="Exchanger"><a href="#Exchanger" class="headerlink" title="Exchanger"></a>Exchanger</h1><p>在两个线程之间传输数据</p>
-
-          
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
 
     
       
@@ -550,416 +298,6 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sum(c.values())  <span class="comment"># 所有计数的总数</span></div><div class="line">c.clear()  <span class="comment"># 重置Counter对象，注意不是删除</span></div><div class="line">list(c)  <span class="comment"># 将c中的键转为列表</span></div><div class="line">set(c)  <span class="comment"># 将c中的键转为set</span></div><div class="line">dict(c)  <span class="comment"># 将c中的键值对转为字典</span></div><div class="line">c.items()  <span class="comment"># 转为(elem, cnt)格式的列表</span></div><div class="line">Counter(dict(list_of_pairs))  <span class="comment"># 从(elem, cnt)格式的列表转换为Counter类对象</span></div><div class="line">c.most_common()[:-n:<span class="number">-1</span>]  <span class="comment"># 取出计数最少的n-1个元素</span></div><div class="line">c += Counter()  <span class="comment"># 移除0和负值</span></div></pre></td></tr></table></figure>
 <h1 id="enumerate-说明"><a href="#enumerate-说明" class="headerlink" title="enumerate()说明"></a>enumerate()说明</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">"这"</span>, <span class="string">"是"</span>, <span class="string">"一个"</span>, <span class="string">"测试"</span>]</div><div class="line"><span class="keyword">for</span> index, item <span class="keyword">in</span> enumerate(list1):</div><div class="line">    <span class="keyword">print</span> index, item</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="number">0</span> 这</div><div class="line"><span class="number">1</span> 是</div><div class="line"><span class="number">2</span> 一个</div><div class="line"><span class="number">3</span> 测试</div><div class="line"><span class="comment"># 遍历大文件</span></div><div class="line">count = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> index, line <span class="keyword">in</span> enumerate(open(filepath,<span class="string">'r'</span>))： </div><div class="line">    count += <span class="number">1</span></div></pre></td></tr></table></figure>
 
-          
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/03/09/JVM/" itemprop="url">
-                  JVM
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-03-09T12:15:21+08:00" content="2018-03-09">
-              2018-03-09
-            </time>
-          </span>
-
-
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/03/09/JVM/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/09/JVM/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>​    记录JVM相关知识点</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/03/09/JVM/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/03/03/优秀博客汇总/" itemprop="url">
-                  优秀博客汇总
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-03-03T11:09:15+08:00" content="2018-03-03">
-              2018-03-03
-            </time>
-          </span>
-
-
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/03/03/优秀博客汇总/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/03/优秀博客汇总/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>主要记录优秀的网络资源</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/03/03/优秀博客汇总/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/02/28/深度学习的应用/" itemprop="url">
-                  深度学习的应用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-02-28T10:49:52+08:00" content="2018-02-28">
-              2018-02-28
-            </time>
-          </span>
-
-
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/02/28/深度学习的应用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/28/深度学习的应用/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h1><p><a href="https://www.jianshu.com/p/583ae40e93cd" target="_blank" rel="external">QA问句解析的七种方法及优化思路</a></p>
-<h1 id="NER"><a href="#NER" class="headerlink" title="NER"></a>NER</h1><p><a href="https://github.com/crownpku/Information-Extraction-Chinese/tree/master/NER_IDCNN_CRF" target="_blank" rel="external">Named Entity Recognition</a></p>
-<p><a href="https://github.com/zjy-ucas/ChineseNER" target="_blank" rel="external">Recurrent neural networks for Chinese named entity recognition in TensorFlow</a></p>
-<h1 id="Relation-Extraction"><a href="#Relation-Extraction" class="headerlink" title="Relation Extraction"></a>Relation Extraction</h1><p><a href="https://github.com/crownpku/Information-Extraction-Chinese/tree/master/RE_BGRU_2ATT" target="_blank" rel="external">Chinese Relation Extraction by biGRU</a></p>
-<h1 id="Deep-Learning-In-Alibaba"><a href="#Deep-Learning-In-Alibaba" class="headerlink" title="Deep Learning In Alibaba"></a>Deep Learning In Alibaba</h1><p><a href="https://zhuanlan.zhihu.com/p/33956907" target="_blank" rel="external">阿里-搜索团队智能内容生成实践</a></p>
-<p><a href="https://www.zhihu.com/people/huaqingsong/posts" target="_blank" rel="external">深度学习的应用系列</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/28979653" target="_blank" rel="external">word2vec代码</a></p>
-<h1 id="Query-Title"><a href="#Query-Title" class="headerlink" title="Query-Title"></a>Query-Title</h1><p><a href="http://blog.csdn.net/puqutogether/article/details/42120275" target="_blank" rel="external">Pair-wise算法</a></p>
-<p><a href="http://blog.csdn.net/shine19930820/article/details/79042567" target="_blank" rel="external">DSSM &amp; Multi-view DSSM TensorFlow实现</a></p>
-<p><a href="http://www.mamicode.com/info-detail-1909443.html" target="_blank" rel="external">深度语义匹配模型-DSSM 及其变种</a></p>
-<h1 id="文本分析"><a href="#文本分析" class="headerlink" title="文本分析"></a>文本分析</h1><ul>
-<li>文本分类<ul>
-<li>基于语义向量距离：将文本按照语义映射成高维的向量特征，通过向量距离来分类</li>
-<li>基于文本关键词、主题：首先提取文本关键词、主题等信息，然后通过这些词语的对照关系来进行分类</li>
-</ul>
-</li>
-<li>文本打标签</li>
-<li>文本情感分析</li>
-<li>文本关键词抽取<ul>
-<li>TF-IDF</li>
-<li>LDA</li>
-<li>基于Graph：将每个词与相关连的词构成图的结构</li>
-</ul>
-</li>
-<li>文本摘要<ul>
-<li>关键句抽取</li>
-<li>解析原文主谓宾，基于语义自动生成</li>
-</ul>
-</li>
-<li>文本相似度分析<ul>
-<li>文本语义向量化，<a href="http://www.cnblogs.com/huilixieqi/p/6493089.html" target="_blank" rel="external">详细</a></li>
-<li>通过向量距离判断文本的语义距离</li>
-</ul>
-</li>
-</ul>
-<h1 id="PaddlePaddle提供的模型"><a href="#PaddlePaddle提供的模型" class="headerlink" title="PaddlePaddle提供的模型"></a>PaddlePaddle提供的模型</h1><p><a href="http://www.paddlepaddle.org/docs/develop/models/README.cn.html" target="_blank" rel="external">models 简介</a></p>
-
-          
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/02/16/情感分析/" itemprop="url">
-                  情感分析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-02-16T20:15:09+08:00" content="2018-02-16">
-              2018-02-16
-            </time>
-          </span>
-
-
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/02/16/情感分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/02/16/情感分析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
           
         
       
@@ -1096,8 +434,8 @@
             
               
                 
-                <a class="post-title-link" href="/2018/01/22/机器学习相关知识点/" itemprop="url">
-                  机器学习相关知识点
+                <a class="post-title-link" href="/2017/06/25/数学建模/" itemprop="url">
+                  数学建模
                 </a>
               
             
@@ -1110,8 +448,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-01-22T11:31:50+08:00" content="2018-01-22">
-              2018-01-22
+            <time itemprop="dateCreated" datetime="2017-06-25T10:16:53+08:00" content="2017-06-25">
+              2017-06-25
             </time>
           </span>
 
@@ -1123,8 +461,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2018/01/22/机器学习相关知识点/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/22/机器学习相关知识点/" itemprop="commentsCount"></span>
+                <a href="/2017/06/25/数学建模/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/25/数学建模/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1146,9 +484,9 @@
 
       
         
-          <p>记录机器学习相关知识点</p>
+          <p>记录数学建模知识点。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2018/01/22/机器学习相关知识点/#more" rel="contents">
+            <a class="btn" href="/2017/06/25/数学建模/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1191,8 +529,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/07/03/spaCy/" itemprop="url">
-                  spaCy
+                <a class="post-title-link" href="/2017/05/31/编译原理/" itemprop="url">
+                  编译原理
                 </a>
               
             
@@ -1205,8 +543,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-07-03T21:45:58+08:00" content="2017-07-03">
-              2017-07-03
+            <time itemprop="dateCreated" datetime="2017-05-31T10:52:17+08:00" content="2017-05-31">
+              2017-05-31
             </time>
           </span>
 
@@ -1218,8 +556,198 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/07/03/spaCy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/03/spaCy/" itemprop="commentsCount"></span>
+                <a href="/2017/05/31/编译原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/31/编译原理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>编译原理相关知识。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/31/编译原理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/15/Simple-DNN-Framework/" itemprop="url">
+                  Simple DNN Framework
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-15T19:30:21+08:00" content="2017-05-15">
+              2017-05-15
+            </time>
+          </span>
+
+
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/15/Simple-DNN-Framework/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/15/Simple-DNN-Framework/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>参考自：<a href="https://www.qcloud.com/community/article/598765?fromSource=gwzcw.116654.116654.116654?utm_source=qq&amp;utm_medium=social">Tensorflow 简明原理</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/15/Simple-DNN-Framework/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/04/Shape-of-My-Heart/" itemprop="url">
+                  Shape of My Heart
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-04T08:09:57+08:00" content="2017-05-04">
+              2017-05-04
+            </time>
+          </span>
+
+
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/04/Shape-of-My-Heart/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/04/Shape-of-My-Heart/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1242,7 +770,80 @@
       
         
           
-            
+            <pre><code> Shape of My Heart吾心之状 
+         Sting 
+
+He deals the cards as a meditation 
+他玩纸牌 如深深冥想 
+And those he plays never suspect 
+并不在游戏间徘徊流连 
+He doesn&apos;t play for the money he wins 
+他总是赢家 却漠视金钱 
+He doesn&apos;t play for respect 
+亦无视他人的尊谗 
+He deals the crads to find the answer 
+他玩纸牌 为寻觅答案 
+The sacred geometry of chance 
+那神秘几何中的偶然 
+The hidden law of a probable outcome 
+还有那飘忽结局的背后的隐匿之弦 
+The numbers lead a dance 
+数字昂首领舞 翩然 
+
+I know that the spades are swords of a soldier 
+黑桃如士兵手握的利剑 
+I know that the clubs are weapons of war 
+梅花似战场轰鸣的炮枪 
+I know that diamonds mean money for this art 
+这艺术般游戏里 方块便若到手的银钱 
+But that&apos;s not the shape of my heart 
+皆非吾心之状 
+
+He may play the jack of diamonds 
+或许 他会出牌方块J 
+He may lay the queen of spades 
+或许 他会下注黑桃Q 
+He may conceal a king in his hand 
+亦或匿藏手中的王 
+While the memory of it fades 
+但这些记忆呵 终将褪色 
+
+I know that the spades are swords of a soldier 
+黑桃如士兵手握的利剑 
+I know that the clubs are weapons of war 
+梅花似战场轰鸣的炮枪 
+I know that diamonds mean money for this art 
+这艺术般游戏里 方块便若到手的银钱 
+But that&apos;s not the shape of my heart 
+皆非吾心之状 
+
+
+And if I told you that I loved you 
+若是我说 爱你 
+You&apos;d maybe think there&apos;s something wrong 
+你会些许困惑 
+I&apos;m not a man of too many faces 
+我非善变多面的男人 
+The mask I wear is one 
+我的面具 始终如一 
+Those who speak know nothing 
+那些多言而无知的人们啊 
+And find out to their cost 
+终将背负代价 
+Like those who curse their luck in too many places 
+如同 四处充斥的诅咒自己命运者 
+And those who fear are lost 
+还有那些 深深恐惧 却难逃失落的人 
+
+I know that the spades are swords of a soldier 
+黑桃如士兵手握的利剑 
+I know that the clubs are weapons of war 
+梅花似战场轰鸣的炮枪 
+I know that diamonds mean money for this art 
+这艺术般游戏里 方块便若到手的银钱 
+But that&apos;s not the shape of my heart 
+皆非吾心之状 
+</code></pre>
           
         
       
@@ -1283,8 +884,8 @@
             
               
                 
-                <a class="post-title-link" href="/2017/07/03/Python网络服务器/" itemprop="url">
-                  Python网络服务器
+                <a class="post-title-link" href="/2017/05/01/项目中可重用模块/" itemprop="url">
+                  项目中可重用模块
                 </a>
               
             
@@ -1297,8 +898,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-07-03T10:09:05+08:00" content="2017-07-03">
-              2017-07-03
+            <time itemprop="dateCreated" datetime="2017-05-01T12:11:30+08:00" content="2017-05-01">
+              2017-05-01
             </time>
           </span>
 
@@ -1310,8 +911,198 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/07/03/Python网络服务器/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/03/Python网络服务器/" itemprop="commentsCount"></span>
+                <a href="/2017/05/01/项目中可重用模块/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/01/项目中可重用模块/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>记录在项目中可能会经常用到的模块。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/05/01/项目中可重用模块/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/27/Stance-Detection-with-Conditional-Encoding/" itemprop="url">
+                  Stance_Detection_with_Conditional_Encoding
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-27T10:20:15+08:00" content="2017-04-27">
+              2017-04-27
+            </time>
+          </span>
+
+
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/27/Stance-Detection-with-Conditional-Encoding/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/27/Stance-Detection-with-Conditional-Encoding/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>github: <a href="https://github.com/sheffieldnlp/stance-conditional">https://github.com/sheffieldnlp/stance-conditional</a><br><a href="http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html">Python re模块</a><br><a href="http://m.blog.csdn.net/article/details?id=53248570">ipython</a><br><a href="https://github.com/facebookresearch/fastText">FastText</a>:Library for fast text representation and classification.<br><a href="http://blog.csdn.net/questionfish/article/details/46725475">gensim中文教程</a><br><a href="http://radimrehurek.com/gensim/tutorial.html">gensim英文教程</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/04/27/Stance-Detection-with-Conditional-Encoding/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/27/LDA主题模型/" itemprop="url">
+                  LDA主题模型
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-27T09:58:10+08:00" content="2017-04-27">
+              2017-04-27
+            </time>
+          </span>
+
+
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/27/LDA主题模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/27/LDA主题模型/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -1334,7 +1125,8 @@
       
         
           
-            
+            <p>参考：<a href="http://blog.csdn.net/v_july_v/article/details/41209515?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">LDA主题模型</a></p>
+
           
         
       
@@ -1400,7 +1192,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1414,7 +1206,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

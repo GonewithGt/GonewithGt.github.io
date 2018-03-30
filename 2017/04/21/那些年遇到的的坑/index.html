@@ -65,7 +65,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/21/那些年遇到的的坑/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="记录实践中遇到的各种各样的问题">
-<meta property="og:updated_time" content="2017-08-06T09:20:44.962Z">
+<meta property="og:updated_time" content="2018-03-30T14:11:11.346Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些年遇到的的坑">
 <meta name="twitter:description" content="记录实践中遇到的各种各样的问题">
@@ -281,25 +281,28 @@
 <li>OpenVPN GUI这个工具可能需要Administrator执行</li>
 <li>MySQL可以插入NULL</li>
 </ol>
-<p>···C++<br>    UPDATE <code>cc_t_user_coupon</code> SET <code>verification_time</code>=NULL WHERE (<code>id</code>=’2281492761’) AND (<code>obtain_time</code>=’2017-04-21 15:41:04’) //出自文化汇项目<br>···    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UPDATE `cc_t_user_coupon` SET `verification_time`=NULL WHERE (`id`=&apos;2281492761&apos;) AND (`obtain_time`=&apos;2017-04-21 15:41:04&apos;) //出自文化汇项目</div></pre></td></tr></table></figure>
 <ol>
 <li><a href="http://itindex.net/detail/49930-%E7%AC%94%E8%AE%B0-mysql-null" target="_blank" rel="external">mysql中的null值和空值区别</a></li>
 <li>MyBatis中updateByExampleSelective与updateByExample的区别</li>
 </ol>
-<p>···Java<br>    this.userCouponMapper.updateByExampleSelective(userCouponUpdate, userCouponExample);//只更新userCouponUpdate中不为null的部分<br>    this.userCouponMapper.updateByExample(userCouponUpdate, userCouponExample);//将查询到的词条更新为userCouponUpdate<br>···    </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.userCouponMapper.updateByExampleSelective(userCouponUpdate, userCouponExample);<span class="comment">//只更新userCouponUpdate中不为null的部分</span></div><div class="line"><span class="keyword">this</span>.userCouponMapper.updateByExample(userCouponUpdate, userCouponExample);<span class="comment">//将查询到的词条更新为userCouponUpdate</span></div></pre></td></tr></table></figure>
 <ol>
 <li>用到不熟悉的东西一定要先打一个问号。</li>
 <li>查看端口使用信息</li>
 </ol>
-<p>···cmd<br>    netstat -ano<br>···</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -ano</div></pre></td></tr></table></figure>
 <ol>
 <li>string_vector.size() 不等同与int，不能和负数相加减 </li>
 <li>Dev-C++函数必须有先后顺序(可能和版本相关)</li>
 <li>inplace_merge(first,mid,last,compare);//将[first,mid) 和 [mid,last)这两个区间进行归并成一个有序序列。</li>
 <li>log4j.properties 需要<a href="http://stackoverflow.com/questions/12532339/no-appenders-could-be-found-for-loggerlog4j" target="_blank" rel="external">配置classPath</a>(网上有些教程没提到这一点)</li>
 <li>cout&lt;&lt;(void <em>)cstring&lt;&lt;endl;//(void </em>)将输出cstring的地址 可以应用于<strong> 交换地址 </strong>或<strong> 共享内存 </strong></li>
-<li>最新版TensorFlow(1.1.0版本)rnn的导入<br>···Python<br>from tensorflow.contrib imort rnn<br>lstm_cell = rnn.BasicLSTMCell(rnn_size);<br>outputs, states = rnn.static_rnn(lstm_cell,x,dtype= tf.float32)<br>```</li>
-<li>java的float只能用来进行科学计算或工程计算，在大多数的商业计算中，一般采用<a href="http://www.cnblogs.com/chenssy/archive/2012/09/09/2677279.html" target="_blank" rel="external">java.math.BigDecimal</a>类来进行精确计算。</li>
+<li><p>最新版TensorFlow(1.1.0版本)rnn的导入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> tensorflow.contrib imort rnn</div><div class="line">lstm_cell = rnn.BasicLSTMCell(rnn_size);</div><div class="line">outputs, states = rnn.static_rnn(lstm_cell,x,dtype= tf.float32)</div></pre></td></tr></table></figure>
+</li>
+<li><p>java的float只能用来进行科学计算或工程计算，在大多数的商业计算中，一般采用<a href="http://www.cnblogs.com/chenssy/archive/2012/09/09/2677279.html" target="_blank" rel="external">java.math.BigDecimal</a>类来进行精确计算。</p>
+</li>
 <li>遇到问题尽量先找同事，没法解决再找老板。</li>
 <li>tf.concact([list1,list2],dim)// tensorflow1.1中参数的顺序有变化,注意需要加[],且数据类型要保持一致</li>
 <li>tf.unpack 在TensorFlow1.0中修改为了tf.unstack(…)</li>
@@ -423,7 +426,7 @@ $.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -437,7 +440,7 @@ $.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

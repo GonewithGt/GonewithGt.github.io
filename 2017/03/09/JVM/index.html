@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="并发," />
+  <meta name="keywords" content="Java,JVM," />
 
 
 
@@ -59,31 +59,16 @@
 
 
 
-<meta name="description" content="记录并发相关知识点
-内存模型Java线程-工作内存-内存操作-主内存
-每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。
-内存间交互操作主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。
-volatile关键字
-可见性：一个">
+<meta name="description" content="​    记录JVM相关知识点">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并发">
-<meta property="og:url" content="http://yoursite.com/2018/03/23/并发/index.html">
+<meta property="og:title" content="JVM">
+<meta property="og:url" content="http://yoursite.com/2017/03/09/JVM/index.html">
 <meta property="og:site_name" content="飘">
-<meta property="og:description" content="记录并发相关知识点
-内存模型Java线程-工作内存-内存操作-主内存
-每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。
-内存间交互操作主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。
-volatile关键字
-可见性：一个">
-<meta property="og:updated_time" content="2018-03-24T10:33:36.323Z">
+<meta property="og:description" content="​    记录JVM相关知识点">
+<meta property="og:updated_time" content="2018-03-30T14:07:25.016Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发">
-<meta name="twitter:description" content="记录并发相关知识点
-内存模型Java线程-工作内存-内存操作-主内存
-每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。
-内存间交互操作主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。
-volatile关键字
-可见性：一个">
+<meta name="twitter:title" content="JVM">
+<meta name="twitter:description" content="​    记录JVM相关知识点">
 
 
 
@@ -101,7 +86,7 @@ volatile关键字
   };
 </script>
 
-  <title> 并发 | 飘 </title>
+  <title> JVM | 飘 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -241,7 +226,7 @@ volatile关键字
             
             
               
-                并发
+                JVM
               
             
           </h1>
@@ -253,8 +238,8 @@ volatile关键字
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-03-23T14:28:32+08:00" content="2018-03-23">
-              2018-03-23
+            <time itemprop="dateCreated" datetime="2017-03-09T12:15:21+08:00" content="2017-03-09">
+              2017-03-09
             </time>
           </span>
 
@@ -268,8 +253,8 @@ volatile关键字
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2018/03/23/并发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/23/并发/" itemprop="commentsCount"></span>
+                <a href="/2017/03/09/JVM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/09/JVM/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -290,175 +275,241 @@ volatile关键字
       
 
       
-        <p>记录并发相关知识点</p>
-<h1 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h1><p>Java线程-工作内存-内存操作-主内存</p>
-<p>每个Java线程都有自己对应的工作内存，工作内存线程私有，必须通过主内存进行数据交换。</p>
-<h1 id="内存间交互操作"><a href="#内存间交互操作" class="headerlink" title="内存间交互操作"></a>内存间交互操作</h1><p>主内存和工作内存之间有具体的交互协议，实现从主内存到交互内存的拷贝和同步。有lock，unlock，read，load，use，assign，store，write。规定了一系列的访问规则。</p>
-<h1 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h1><ul>
-<li>可见性：一个线程对volatile修饰的变量修改之后，立刻对其它线程可见。但是，有些运算可能并非原子的，不能保证并发安全。使用情况需要满足：<ul>
-<li>运算结果并不依赖变量的当前值，或者能够确保只有单一线程能够修改变量的值。</li>
-<li>变量不需要与其它的状态共同参与不变性约束。</li>
+        <p>​    记录JVM相关知识点</p>
+<a id="more"></a>
+<h1 id="Javac的编译过程"><a href="#Javac的编译过程" class="headerlink" title="Javac的编译过程"></a>Javac的编译过程</h1><ul>
+<li><p>词法分析</p>
+<p>将关键字标识符转为符合Java语法的Token序列</p>
+</li>
+<li><p>语法分析</p>
+<p>将Token序列整合为抽象语法树</p>
+</li>
+<li><p>语义分析</p>
+<p>将语法树补充完善</p>
+</li>
+<li><p>生成字节码</p>
+<p>根据语法树生成字节码</p>
+</li>
+</ul>
+<h1 id="字节码文件"><a href="#字节码文件" class="headerlink" title="字节码文件"></a>字节码文件</h1><ul>
+<li>两种结构：无符号数和表</li>
+<li>常量池，字段表，方法表，属性表等</li>
+</ul>
+<h1 id="HotSpot启动"><a href="#HotSpot启动" class="headerlink" title="HotSpot启动"></a>HotSpot启动</h1><ul>
+<li>可以通过gamma或者Java启动，两者实现相似</li>
+<li>Launcher启动过程<ul>
+<li>main()-&gt;JavaMain()-&gt;InitializeJVM()-&gt;JNI_CreateJavaVM()</li>
+<li>LoadClass()和GetStaticMethodID()获取Java程序的启动类和启动方法</li>
+<li>jni_CallStatic VoidMethod()执行Java程序的main方法</li>
+<li>jni_DetachCurrentThread()断开与主线程的连接</li>
+<li>全部非守护进程结束后调用jni_DestroyJavaVM()对JVM执行销毁</li>
 </ul>
 </li>
-<li>禁止语义重排<ul>
-<li>相当于添加了内存屏障</li>
 </ul>
-</li>
-</ul>
-<h1 id="内存模型特性"><a href="#内存模型特性" class="headerlink" title="内存模型特性"></a>内存模型特性</h1><ul>
-<li>对于long和double类型需要注意JVM对64数据是否为原子的</li>
-<li>原子性：synchronized关键字</li>
-<li>可见性：volatile synchronized final关键字实现</li>
-<li>有序性：volatile</li>
-</ul>
-<h1 id="happen-before原则"><a href="#happen-before原则" class="headerlink" title="happen-before原则"></a>happen-before原则</h1><p>Java内存模型下有一些天然的先行发生关系：</p>
+<h1 id="线程共享内存区"><a href="#线程共享内存区" class="headerlink" title="线程共享内存区"></a>线程共享内存区</h1><p>JVM根据受访问权限不同，分为线程共享和线程私有两大类。</p>
+<p>线程共享内存区包括：</p>
 <ul>
-<li>程序次序规则</li>
-<li>管程锁定规则</li>
-<li>volatile规则</li>
-<li>线程启动规则</li>
-<li>线程终止规则</li>
-<li>线程中断规则</li>
-<li>对象终结规则</li>
-<li>传递性</li>
-</ul>
-<h1 id="Java线程实现"><a href="#Java线程实现" class="headerlink" title="Java线程实现"></a>Java线程实现</h1><ul>
-<li>线程实现<ul>
-<li>内核级线程<ul>
-<li>一般通过轻量级进程包装内核线程，然后再使用</li>
-<li>轻量级进程和线程之间1:1</li>
-<li>由于需要在用户态和内核态之间切换，系统调用代价较高</li>
+<li>堆区<ul>
+<li>JVM启动时创建，在实际内存中可以不连续</li>
+<li>用于存储对象实例，垃圾回收重点区域。TaobaoVM创新之处在于GCIH，将生命周期比较长的实例放在Heap区以外</li>
+<li>可以细分为新生代，老年代，新生代可以划分为Eden空间、From Survivor和To Survivor空间</li>
 </ul>
 </li>
-<li>用户线程<ul>
-<li>线程建立，同步，销毁，调度完全在用户态中完成。</li>
-<li>进程和线程之比为1：N</li>
+<li>方法区<ul>
+<li>存储每个Java类的结构信息，运行时常量池，字段和方法数据，构造函数和普通方法的字节码以及类，实例，接口初始化时需要用到的特殊方法等数据。</li>
+<li>逻辑上独立，在物理上还是属于堆区</li>
+<li>称为永久代，不会被频繁GC，可以显式指定是否需要回收方法区中的内容。GC的回收目标是常量池和类型卸载</li>
 </ul>
 </li>
-<li>用户线程加轻量级线程<ul>
-<li>混合使用，进程和线程之间N：M</li>
+<li>运行时常量池<ul>
+<li>属于方法区的一部分</li>
+<li>包含各种不同的常量</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>Java线程实现<ul>
-<li>1.2之前是用户线程</li>
-<li>1.2之后是基于操作系统原生线程来实现的</li>
+<h1 id="线程私有内存区"><a href="#线程私有内存区" class="headerlink" title="线程私有内存区"></a>线程私有内存区</h1><ul>
+<li>PC寄存器<ul>
+<li>不是物理寄存器，可以理解为PC计数器</li>
+<li>线程私有，与线程生命周期一致</li>
+<li>存储正在执行的字节码地址，如果是native方法，PC寄存器为空</li>
+<li>没有明确规定需要跑出OutofMemoryError异常的运行时内存区</li>
 </ul>
 </li>
-<li>Java线程调度<ul>
-<li>协同式线程调度：线程执行完通知其它线程执行<ul>
-<li>好处是实现简单</li>
-<li>坏处是线程执行时间不可控制，如果一个线程编写有问题，容易造成阻塞。</li>
+<li>Java栈<ul>
+<li>存储栈帧，栈帧存储的是局部变量表，操作数栈以及方法出口等信息</li>
+<li>栈可以被实现成固定大小或者可动态扩展的内存大小</li>
 </ul>
 </li>
-<li>抢占式线程调度<ul>
-<li>每个线程由系统来分配执行时间。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>线程状态转换<ul>
-<li>新建</li>
-<li>运行：包括系统线程中的Running和Ready，有可能在等待CPU调度</li>
-<li>无限期等待：需要等待被其它线程唤醒。<ul>
-<li>没有设置TimeOut的Object.wait()</li>
-<li>没有设置TimeOut的Thread.join()</li>
-<li>LockSupport.park()</li>
-</ul>
-</li>
-<li>有限期等待:一定时间之后被系统自动唤醒<ul>
-<li>Thread.sleep()</li>
-<li>设置TimeOut的Object.wait()</li>
-<li>设置TimeOut的Thread.join()</li>
-<li>LockSupport.parkNanos()</li>
-<li>LockSupport.parkUntil()</li>
-</ul>
-</li>
-<li>阻塞：等待获得排它锁，在等待另一个线程释放锁时发生。</li>
-<li>结束</li>
+<li>本地方法栈<ul>
+<li>用于支持native方法</li>
 </ul>
 </li>
 </ul>
-<h1 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h1><ul>
-<li>定义<ul>
-<li>当多个线程访问一个类时，如果不用考虑这些线程在运行时环境下的调度和交替执行，并且不需要额外的同步，或者在调用代码代码不必作其他的协调，这个类的行为仍然是正确的，那么称这个类是线程安全的。</li>
+<h1 id="性能监控区"><a href="#性能监控区" class="headerlink" title="性能监控区"></a>性能监控区</h1><p>JVM提供是一块内存共享区，专供外部程序访问这块区域中的Perf Data</p>
+<h1 id="自动内存管理"><a href="#自动内存管理" class="headerlink" title="自动内存管理"></a>自动内存管理</h1><ul>
+<li>内存分配原理<ul>
+<li>JVM三种引用类型：类类型(class type)，数组类型(array type)，接口类型(interface type)。</li>
+<li>new 一个对象的过程：判断new的参数能否在常量池中找到换一个符号引用，检查与这个符号引用相对应的类是否已经成功经历过加载，解析和初始化的步骤；完成装载之后，就可以确定需要分配的内存大小；jvm对其进行内存分配，以存储所生成的对象实例。</li>
+<li>为新对象分配内存方法：指针碰撞或者空闲列表</li>
+<li>直接从堆区划分内存是非线程安全的</li>
+<li>如果一个类在内存装载之前已经成功完成类装载步骤，JVM就会优先选择在TLAB(Thread Local Allocation，本地分配缓存区)中为对象实例分配内存空间，TLAB是Java堆区中的一块线程私有区域，它包含在Eden区间中。这种称为快速分配策略。</li>
+<li>-XX:UseTLAB设置是否开启TLAB空间，很小，占据Eden区间的1%，可以通过设置参数扩容</li>
+<li>如果TLAB分配失败，则使用加锁在Eden空间中分配。Eden空间不足，执行MinorGC</li>
+<li>内存分配完成之后对空间进行零值初始化。之后再执行初始化对象头和实例数据</li>
+<li>最后将引用内存入栈</li>
 </ul>
 </li>
-<li>特征<ul>
-<li>代码本身封装了所有必要的正确性保障手段</li>
+<li>逃逸分析和栈上分配<ul>
+<li>逃逸分析：JVM在执行性能优化之前的一种分析技术，可以分析对象的作用域。</li>
+<li>栈上分配：如果一个实例作用域在一个方法类，可以直接把对象压栈，随着方法结束自动销毁栈帧。</li>
 </ul>
 </li>
-<li>Java操作共享数据分类（线程安全程度由强到弱）<ul>
-<li>不可变<ul>
-<li>String，Long，Double，BigInteger等为不可变对象</li>
-<li>AtomicInteger和AtomiLong则为可变类</li>
+<li>对象内存布局和OOP-Klass模型<ul>
+<li>对象实例化包括初始化对象头和实例数据</li>
+<li>对象头包括阿Mark word和元数据指针等数据。</li>
+<li>Mark Word用于存储对象运行时信息，包括HashCode，GC分代年龄，锁状态信息，线程持有锁，偏向线程ID，偏向时间戳</li>
+<li>元数据指向方法区中目标类的类型信息。</li>
+<li>实例数据，存储定义在当前对象中各种类型的字段信息，包括父类的字段信息。</li>
+<li>OOP-Klass：表示Java类在虚拟机中的对等实体。(这部分可以看书)</li>
 </ul>
 </li>
-<li>绝对线程安全<ul>
-<li>java.util.Vector，方法被synchronized修</li>
-</ul>
-</li>
-<li>相对线程安全:特定的执行顺序需要同步<ul>
-<li>Vector，HashTable，Collections</li>
-</ul>
-</li>
-<li>线程兼容：对象本身是线程非线程安全的，但是可以使用同步手段让对象在并发情况下安全使用。</li>
-<li>线程对立：无法同步的代码。</li>
-</ul>
-</li>
-<li>线程安全的实现<ul>
-<li>互斥同步<ul>
-<li>可以使用临界区，互斥量，和信号量、</li>
-<li>synchronized关键字，Java里面会在同步块前后加上monitorenter和monitorexist关键字，重量级操作</li>
-<li>ReentrantLock和synchronized很相似，写法上不太同<ul>
-<li>等待可中断</li>
-<li>可实现公平锁</li>
-<li>锁绑定多个条件</li>
+<li>GC<ul>
+<li>负责内存的动态分配和垃圾回收</li>
+<li>垃圾碎片通过压缩算法来消除</li>
+<li>垃圾标记：引用计数和根搜寻法<ul>
+<li>引用计数的问题：某些无用对象之间相互引用，造成无法回收。</li>
+<li>只有被根对象集合中的对象直接或者间接引用才算是存活对象。包含五类对象：Java栈中引用对象，本地方法栈中的对象引用，静态常量池中的对象引用，类静态属性的对象引用，与一个类对应的唯一数据类型的Class对象。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>非阻塞同步<ul>
-<li>基于冲突检测和乐观并发策略，先操作，有冲突，再补偿，需要硬件指令支持。</li>
-<li>Test-and-set，Fetch-and-Increment，Swap，Compare-and-Swap(CAS)，Load-Linked/Store-Conditional</li>
+<li>垃圾收集算法<ul>
+<li>标记-清除<ul>
+<li>效率低，容易造成内存碎片</li>
 </ul>
 </li>
-<li>无同步方案<ul>
-<li>可重入代码</li>
-<li>线程本地存储</li>
+<li>复制算法<ul>
+<li>Minor GC表示年轻代GC</li>
+<li>将To Survivor区域作为一个临时的空间交换角色</li>
+<li>将一次Minor GC后Eden和From Survivor区剩下的对象复制到To Survivor区域，然后将From Survivor区和To Survival区互换。</li>
+<li>例外情况：如果From Survivor中的实例达到了指定分代年龄或者To Survivor中内存不够，则直接将实例复制如老年区。</li>
+</ul>
+</li>
+<li>标记-压缩<ul>
+<li>将标记的对象实例移动到一个规整切连续的区域，然后再实行Full GC，利用指针碰撞技术实现。</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>锁优化(1.5到1.6)<ul>
-<li>适应性自旋<ul>
-<li>自旋锁，多处理器上，一个线程请求资源被上锁，可以占用CPU自旋（忙循环），避免线程切换。</li>
-<li>适应性自旋意味着自旋时间不是固定的，由前一次在同一个锁上的自旋时间及锁拥有者的状态来决定。</li>
+<li>垃圾收集器<ul>
+<li>分为串行回收还是并行回收，是并发还是”Stop-the-world”机制</li>
+<li>Serial/Serial Old<ul>
+<li>复制算法、串行回收、Stop-the-world机制</li>
+<li>Serial Old用于老年代，采用的是标记-压缩算法、串行回收、Stop-the-world机制</li>
 </ul>
 </li>
-<li>锁消除<ul>
-<li>对不可能存在数据竞争的代码进行锁消除</li>
+<li>ParNew收集器<ul>
+<li>Serial的多线程版本，单CPU下不一定会比Serial更好</li>
 </ul>
 </li>
-<li>锁粗化<ul>
-<li>如果虚拟机探测到一连串的对象都涉及到一个锁，可以将锁扩展到这个操作序列的外部。</li>
+<li>Parallel收集器<ul>
+<li>Parallel在新生代中同样采用了标记-复制算法，并行回收，stop-the-world</li>
+<li>与ParNew不同的是可以控制吞吐量大小，可以通过参数设置GC的执行频率。</li>
+<li>Parallel Old采用的是标记-压缩算法</li>
 </ul>
 </li>
-<li>轻量级锁<ul>
-<li>传统锁使用互斥量来实现</li>
-<li>轻量级锁通过CAS，对象头信息中的锁标志位实现。如果存在竞争关系，轻量级锁会膨胀为重量级锁。</li>
+<li>CMS收集器<ul>
+<li>采用标记-清除算法，采用空闲列表分配内存。可以通过参数来调整压缩。</li>
+<li>初始标记阶段：Stop-the-World标记不可达对象</li>
+<li>并发标记阶段：将不可达对象标记为垃圾对象，可能由于并发改变了对象的引用关系。</li>
+<li>再次标记阶段：Stop-the-World，再次短暂暂停。标记出改变引用关系的部分。</li>
+<li>并发清除阶段： 清除垃圾对象</li>
+<li>Full GC在其它收集器中回收所有的堆空间，而CMS的收集器可以指定当老年代达到一定比例之后再进行内存回收</li>
 </ul>
 </li>
-<li>偏向锁<ul>
-<li>消除数据在无竞争情况下的同步原语。</li>
+<li>区域化分代式：G1收集器<ul>
+<li>将Java堆区划分为2048个大小相同的独立Region块，每个Region块之间不连续，大小在1M和32M之间。优先回收占用内存块大的Region</li>
+<li>6个阶段：初始标记，根区域扫描，并发标记，再次标记，清除，拷贝</li>
+</ul>
+</li>
+<li>GCHisto<ul>
+<li>可以使用这个程序进行日志分析</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="Semphore"><a href="#Semphore" class="headerlink" title="Semphore"></a>Semphore</h1><p>限制线程并发的数量</p>
-<h1 id="Exchanger"><a href="#Exchanger" class="headerlink" title="Exchanger"></a>Exchanger</h1><p>在两个线程之间传输数据</p>
+<h1 id="如何定位堆溢出的代码段"><a href="#如何定位堆溢出的代码段" class="headerlink" title="如何定位堆溢出的代码段"></a>如何定位堆溢出的代码段</h1><ul>
+<li>通过设置vm argument转储堆内存快照<ul>
+<li>-Xx：+HeapDumpOnOutOfMemoryError</li>
+<li>需要使用MemoryAnalyzer 来分析</li>
+</ul>
+</li>
+</ul>
+<h1 id="JVM监控工具"><a href="#JVM监控工具" class="headerlink" title="JVM监控工具"></a>JVM监控工具</h1><p>jdk的bin里面有JConsole</p>
+<h1 id="类的加载机制"><a href="#类的加载机制" class="headerlink" title="类的加载机制"></a>类的加载机制</h1><ul>
+<li>类加载器<ul>
+<li>主要任务是根据一个类的全限定名来读取此类的二进制字节流到JVM内部，然后转换为一个与目标类对应的java.lang.Class对象实例。</li>
+<li>分为两类：引导类加载器，自定义类加载器<ul>
+<li>Bootstrap ClassLoard:C++编写，嵌在JVM内部，主要负责加载JAVA_HOME/lib目录中的所有类型，或者由-Xbootclasspath指定路径中的所有类型。</li>
+<li>ExtClassLoader：派生与ClassLoader，Java语言编写，负责加载JAVA_HOME/lib/ext中的所有类型。</li>
+<li>AppClassLoader：负责加载ClassPath中的所有类型。</li>
+</ul>
+</li>
+<li>ClassLoader<ul>
+<li>可以自定义ClassLoader</li>
+</ul>
+</li>
+<li>双亲委派模型<ul>
+<li>除了启动类加载器之外，每个类加载器都有一个超类加载器。</li>
+<li>类加载器接到一个类加载的任务之后，并不会立即展开加载，而是将加载任务委派给它的超类加载器去执行，每一层都采用相同的方式，直到委派给最顶层的启动加载类为止。</li>
+<li>Tomcat不是使用的双亲委派加载，而是优先自己加载。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>类加载过程<ul>
+<li>加载</li>
+<li>连接<ul>
+<li>验证：格式验证，语义分析，操作验证等。</li>
+<li>准备：为类中所有静态变量分配内存空间，并为其设置初始值</li>
+<li>解析：将常量池中的所有符号引用转变为直接引用。JVM会在这个阶段执行static代码块中定义的所有操作。</li>
+</ul>
+</li>
+<li>初始化<ul>
+<li>六种时机，进行类的初始化。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>字节码文件加密与解密</li>
+</ul>
+<h1 id="Java执行引擎"><a href="#Java执行引擎" class="headerlink" title="Java执行引擎"></a>Java执行引擎</h1><ul>
+<li>Java栈帧<ul>
+<li>存储局部变量表，操作数栈，动态链接和方法返回值</li>
+</ul>
+</li>
+<li>局部变量表<ul>
+<li>存储方法参数，对象引用，以及returnAddress类型</li>
+<li>所需容量在编译期就能完全确定</li>
+<li>方法外的变量存在对象实例空间中</li>
+</ul>
+</li>
+<li>操作数栈<ul>
+<li>通过入栈出栈来完成操作</li>
+</ul>
+</li>
+<li>动态链接<ul>
+<li>常量池表，描述一个方法调用了另外的方法时，就是通过常量池中指向方法的符号引用来表示的。动态链接将这些符号引用转换为直接引用。</li>
+</ul>
+</li>
+<li>方法返回值<ul>
+<li>包括正常返回和异常返回</li>
+</ul>
+</li>
+</ul>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><p><a href="http://blog.csdn.net/xiaoxik/article/details/76317202" target="_blank" rel="external">java面试</a></p>
+<p>RunTime类为JVM创建，可以获取JVM的相关信息，并能执行本机可执行程序。</p>
 
       
     </div>
@@ -467,7 +518,9 @@ volatile关键字
       
         <div class="post-tags">
           
-            <a href="/tags/并发/" rel="tag">#并发</a>
+            <a href="/tags/Java/" rel="tag">#Java</a>
+          
+            <a href="/tags/JVM/" rel="tag">#JVM</a>
           
         </div>
       
@@ -476,13 +529,17 @@ volatile关键字
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/11/Python模块总结/" rel="next" title="Python模块总结">
-                <i class="fa fa-chevron-left"></i> Python模块总结
+              <a href="/2017/02/28/深度学习的应用/" rel="next" title="深度学习的应用">
+                <i class="fa fa-chevron-left"></i> 深度学习的应用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/17/智能算法/" rel="prev" title="智能算法">
+                智能算法 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -508,8 +565,8 @@ volatile关键字
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2018/03/23/并发/"
-           data-title="并发" data-url="http://yoursite.com/2018/03/23/并发/">
+      <div class="ds-thread" data-thread-key="2017/03/09/JVM/"
+           data-title="JVM" data-url="http://yoursite.com/2017/03/09/JVM/">
       </div>
     
   </div>
@@ -554,7 +611,7 @@ volatile关键字
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -568,7 +625,7 @@ volatile关键字
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">23</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -625,7 +682,7 @@ volatile关键字
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内存模型"><span class="nav-number">1.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存间交互操作"><span class="nav-number">2.</span> <span class="nav-text">内存间交互操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#volatile关键字"><span class="nav-number">3.</span> <span class="nav-text">volatile关键字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#内存模型特性"><span class="nav-number">4.</span> <span class="nav-text">内存模型特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#happen-before原则"><span class="nav-number">5.</span> <span class="nav-text">happen-before原则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java线程实现"><span class="nav-number">6.</span> <span class="nav-text">Java线程实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程安全"><span class="nav-number">7.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Semphore"><span class="nav-number">8.</span> <span class="nav-text">Semphore</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Exchanger"><span class="nav-number">9.</span> <span class="nav-text">Exchanger</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Javac的编译过程"><span class="nav-number">1.</span> <span class="nav-text">Javac的编译过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字节码文件"><span class="nav-number">2.</span> <span class="nav-text">字节码文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HotSpot启动"><span class="nav-number">3.</span> <span class="nav-text">HotSpot启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程共享内存区"><span class="nav-number">4.</span> <span class="nav-text">线程共享内存区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程私有内存区"><span class="nav-number">5.</span> <span class="nav-text">线程私有内存区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能监控区"><span class="nav-number">6.</span> <span class="nav-text">性能监控区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动内存管理"><span class="nav-number">7.</span> <span class="nav-text">自动内存管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何定位堆溢出的代码段"><span class="nav-number">8.</span> <span class="nav-text">如何定位堆溢出的代码段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM监控工具"><span class="nav-number">9.</span> <span class="nav-text">JVM监控工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的加载机制"><span class="nav-number">10.</span> <span class="nav-text">类的加载机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java执行引擎"><span class="nav-number">11.</span> <span class="nav-text">Java执行引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java"><span class="nav-number">12.</span> <span class="nav-text">Java</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
