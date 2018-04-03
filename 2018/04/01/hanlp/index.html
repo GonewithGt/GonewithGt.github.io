@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python," />
+  <meta name="keywords" content="NLP," />
 
 
 
@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="Counter类Counter类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。Counter类可以很方便的对文本进行单词计数并得出最大的n个词。
-123456789sum(c.values())  # 所有计数">
+<meta name="description" content="阅读hanlp源码，记录hanlp实现方案
+分词">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python模块总结">
-<meta property="og:url" content="http://yoursite.com/2018/03/11/Python模块总结/index.html">
+<meta property="og:title" content="hanlp">
+<meta property="og:url" content="http://yoursite.com/2018/04/01/hanlp/index.html">
 <meta property="og:site_name" content="飘">
-<meta property="og:description" content="Counter类Counter类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。Counter类可以很方便的对文本进行单词计数并得出最大的n个词。
-123456789sum(c.values())  # 所有计数">
-<meta property="og:updated_time" content="2018-03-13T13:50:08.816Z">
+<meta property="og:description" content="阅读hanlp源码，记录hanlp实现方案
+分词">
+<meta property="og:updated_time" content="2018-04-01T16:46:09.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python模块总结">
-<meta name="twitter:description" content="Counter类Counter类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。Counter类可以很方便的对文本进行单词计数并得出最大的n个词。
-123456789sum(c.values())  # 所有计数">
+<meta name="twitter:title" content="hanlp">
+<meta name="twitter:description" content="阅读hanlp源码，记录hanlp实现方案
+分词">
 
 
 
@@ -119,12 +119,12 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/11/Python模块总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/01/hanlp/"/>
 
 
 <!-- 网页加载条 -->
 <script src="/js/src/pace.min.js"></script>
-  <title> Python模块总结 | 飘 </title>
+  <title> hanlp | 飘 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -495,7 +495,7 @@
             
             
               
-                Python模块总结
+                hanlp
               
             
           </h1>
@@ -507,8 +507,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-03-11T10:16:48+08:00" content="2018-03-11">
-              2018-03-11
+            <time itemprop="dateCreated" datetime="2018-04-01T23:36:05+08:00" content="2018-04-01">
+              2018-04-01
             </time>
           </span>
 
@@ -535,10 +535,8 @@
       
 
       
-        <h1 id="Counter类"><a href="#Counter类" class="headerlink" title="Counter类"></a>Counter类</h1><p><a href="http://www.pythoner.com/205.html" target="_blank" rel="external">Counter</a>类的目的是用来跟踪值出现的次数。它是一个无序的容器类型，以字典的键值对形式存储，其中元素作为key，其计数作为value。计数值可以是任意的Interger（包括0和负数）。Counter类和其他语言的bags或multisets很相似。Counter类可以很方便的对文本进行单词计数并得出最大的n个词。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sum(c.values())  <span class="comment"># 所有计数的总数</span></div><div class="line">c.clear()  <span class="comment"># 重置Counter对象，注意不是删除</span></div><div class="line">list(c)  <span class="comment"># 将c中的键转为列表</span></div><div class="line">set(c)  <span class="comment"># 将c中的键转为set</span></div><div class="line">dict(c)  <span class="comment"># 将c中的键值对转为字典</span></div><div class="line">c.items()  <span class="comment"># 转为(elem, cnt)格式的列表</span></div><div class="line">Counter(dict(list_of_pairs))  <span class="comment"># 从(elem, cnt)格式的列表转换为Counter类对象</span></div><div class="line">c.most_common()[:-n:<span class="number">-1</span>]  <span class="comment"># 取出计数最少的n-1个元素</span></div><div class="line">c += Counter()  <span class="comment"># 移除0和负值</span></div></pre></td></tr></table></figure>
-<h1 id="enumerate-说明"><a href="#enumerate-说明" class="headerlink" title="enumerate()说明"></a>enumerate()说明</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">list1 = [<span class="string">"这"</span>, <span class="string">"是"</span>, <span class="string">"一个"</span>, <span class="string">"测试"</span>]</div><div class="line"><span class="keyword">for</span> index, item <span class="keyword">in</span> enumerate(list1):</div><div class="line">    <span class="keyword">print</span> index, item</div><div class="line">&gt;&gt;&gt;</div><div class="line"><span class="number">0</span> 这</div><div class="line"><span class="number">1</span> 是</div><div class="line"><span class="number">2</span> 一个</div><div class="line"><span class="number">3</span> 测试</div><div class="line"><span class="comment"># 遍历大文件</span></div><div class="line">count = <span class="number">0</span></div><div class="line"><span class="keyword">for</span> index, line <span class="keyword">in</span> enumerate(open(filepath,<span class="string">'r'</span>))： </div><div class="line">    count += <span class="number">1</span></div></pre></td></tr></table></figure>
-
+        <p>阅读hanlp源码，记录hanlp实现方案</p>
+<h1 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h1>
       
     </div>
 
@@ -583,7 +581,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+            <a href="/tags/NLP/" rel="tag"><i class="fa fa-tag"></i> NLP</a>
           
         </div>
       
@@ -592,17 +590,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/23/GPU编程/" rel="next" title="GPU编程">
-                <i class="fa fa-chevron-left"></i> GPU编程
+              <a href="/2018/03/11/Python模块总结/" rel="next" title="Python模块总结">
+                <i class="fa fa-chevron-left"></i> Python模块总结
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/04/01/hanlp/" rel="prev" title="hanlp">
-                hanlp <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -780,7 +774,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Counter类"><span class="nav-number">1.</span> <span class="nav-text">Counter类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#enumerate-说明"><span class="nav-number">2.</span> <span class="nav-text">enumerate()说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分词"><span class="nav-number">1.</span> <span class="nav-text">分词</span></a></li></ol></div>
             
           </div>
         </section>
