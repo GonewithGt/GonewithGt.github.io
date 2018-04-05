@@ -471,6 +471,124 @@
             
               
                 
+                <a class="post-title-link" href="/2017/04/08/C++预处理指令--#pragma/" itemprop="url">
+                  C++知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-08T10:30:43+08:00" content="2017-04-08">
+              2017-04-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+<!-- 自定义，用于添加摘要图片，文章中不显示 -->
+        
+<!-- 自定义结束 -->
+        
+          <h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p>设定编译器的状态或者是指示编译器完成一些特定的动作。#pragma指令对每个编译器给出了一个方法，在保持与C和C++语言完全兼容的情况下，给出主机或操作系统专有的特征。依据定义，编译指示是机器或操作系统专有的，且对于每个编译器都是不同的。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/04/08/C++预处理指令--#pragma/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/03/23/并发/" itemprop="url">
                   并发
                 </a>
@@ -685,7 +803,9 @@
 </ul>
 </li>
 </ul>
-<h1 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h1><h1 id="Semphore"><a href="#Semphore" class="headerlink" title="Semphore"></a>Semphore</h1><p>限制线程并发的数量</p>
+<h1 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h1><p>锁是计算机协调多个进程或线程并发访问某一资源的机制。锁保证数据并发访问的一致性、有效性；锁冲突也是影响数据库并发访问性能的一个重要因素。锁是Mysql在服务器层和存储引擎层的的并发控制。 </p>
+<p>加锁是消耗资源的，锁的各种操作，包括获得锁、检测锁是否是否已解除、释放锁等。 </p>
+<h1 id="Semphore"><a href="#Semphore" class="headerlink" title="Semphore"></a>Semphore</h1><p>限制线程并发的数量</p>
 <h1 id="Exchanger"><a href="#Exchanger" class="headerlink" title="Exchanger"></a>Exchanger</h1><p>在两个线程之间传输数据</p>
 
           
@@ -920,9 +1040,14 @@
 <!-- 自定义结束 -->
         
           
-            <h1 id="PSO"><a href="#PSO" class="headerlink" title="PSO"></a>PSO</h1><ul>
-<li>粒子群优化算法 </li>
-</ul>
+            <h1 id="PSO"><a href="#PSO" class="headerlink" title="PSO"></a>PSO</h1><p>​    粒子群算法（Particle Swarm Optimization）是在仿真生物群体社会活动的基础上，通过模拟群体生物相互协同寻优能力，从而构造出的一种新的智能优化算法。它具有易理解、易实现、全局搜索能力强、收敛速度快、设置参数少等优点，在科学研究和工程领域都受到了广泛的应用。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>​    在粒子群优化算法中，每个优化问题的潜在解都是搜索空间中的一只鸟，称之为“粒子”。所有的粒子都有一个由被优化的函数决定的适应值，每个粒子还有一个速度决定他们飞翔的方向和距离。然后粒子们就追随当前的最优粒子在解空间中搜索。优化开始时先初始化为一群随机粒子（随机解）。然后通过迭代找到最优解。在每一次迭代中，粒子通过跟踪两个极值来更新自己。第一个极值就是整个种群目前找到的最优解。这个极值是全局最优解。另外也可以不用整个种群而只是用其中一部分作为粒子的邻居，那么在所有邻居中的极值就是全局最优解。第二个极值是粒子本身所找到的最优解，称为个体极值。这是因为粒子仅仅通过跟踪全局极值或者局部极值来更新位置，不可能总是获得较好的解。这样在优化过程中，粒子在追随全局极值或局部极值的同时追随个体极值则圆满的解决了这个问题。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>粒子群优化算法具有编程简单，易实现的特点。下面给出其实现的具体步骤：</p>
+<p>步骤1：初始化。初始搜索点的位置X0i及其速度V0i通常是在允许的范围内随机产生的，每个粒子的Pbest坐标设置为其当前位置，且计算出其相应的个体极值（即个体极值点的适应度值），而整个邻域的最优粒子就是该粒子邻域中个体极值中最好的，记录该最好值的粒子序号，并将Nbesti设置为该最好粒子的当前位置。</p>
+<p>步骤2：评价每一个粒子。计算粒子的适应度值,如果好于该粒子当前的个体极值，则将Pbest设置为该粒子的位置，且更新个体极值。如果在该粒子的邻域内所有粒子的个体极值中最好的好于当前的Nbesti，则将Nbesti设置为该粒子的位置，记录该粒子的序号，且更新Nbesti的函数值。</p>
+<p>步骤3：粒子的更新。用式(2.1)和式(2.2)对每一个粒子的速度和位置进行更新。</p>
+<p>步骤4：检验是否符合结束条件。如果当前的迭代次数达到了预先设定的最大次数（或达到最小错误要求)，则停止迭代，输出最优解，否则转到步骤2。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* </span></div><div class="line"> * File:   GA_Minimal.cpp</div><div class="line"> * Author: GonewithGt</div><div class="line"> *</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdint&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> POP_SIZE        (100)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> Genius          (20)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_GENR        (100000)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MUT_CHANCE      (10)</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> GENE_TYPE       double</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> GENE_SIZE	(sizeof(GENE_TYPE))</span></div><div class="line"><span class="comment">//#define GENE_MASK       (GENE_SIZE/2)</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    GENE_TYPE gene;</div><div class="line">	GENE_TYPE gene2;</div><div class="line">    <span class="keyword">double</span> fitness;</div><div class="line">&#125; individual; </div><div class="line"></div><div class="line">individual population[POP_SIZE];</div><div class="line"><span class="comment">//GENE_TYPE mutRate = MUT_CHANCE;</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">function2</span><span class="params">(<span class="keyword">double</span> x)</span></span>&#123;</div><div class="line">	<span class="keyword">double</span> tmp=<span class="number">0.</span>;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">5</span>;j++)</div><div class="line">	&#123;</div><div class="line">		tmp=j*<span class="number">1.0</span>*<span class="built_in">cos</span>((j+<span class="number">1</span>)*x*<span class="number">1.0</span>+j)+tmp;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> tmp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">double</span> <span class="title">fitnessFunction2</span><span class="params">(GENE_TYPE x)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (x &gt; <span class="number">1e-8</span>)</div><div class="line">		<span class="keyword">return</span> function2(x);</div><div class="line">	<span class="comment">//return x * x * log(x);</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0.</span>; <span class="comment">// limit of above function around 0</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">recombine2</span><span class="params">(GENE_TYPE p1, GENE_TYPE p2, GENE_TYPE *c1, GENE_TYPE *c2)</span> </span>&#123;</div><div class="line">    assert(<span class="keyword">sizeof</span>(<span class="keyword">uint64_t</span>) == <span class="keyword">sizeof</span>(GENE_TYPE));</div><div class="line">    <span class="keyword">int</span> cpoint = rand() % (GENE_SIZE * <span class="number">8</span>) + <span class="number">1</span>;</div><div class="line">    <span class="keyword">uint64_t</span> mask = (<span class="number">1U</span>L &lt;&lt; cpoint) - <span class="number">1</span>;</div><div class="line">    </div><div class="line">    *(<span class="keyword">uint64_t</span> *)(c1) = *(<span class="keyword">uint64_t</span> *)(&amp;p1) &amp; (mask);</div><div class="line">    *(<span class="keyword">uint64_t</span> *)(c1) |= *(<span class="keyword">uint64_t</span> *)(&amp;p2) &amp; (mask);</div><div class="line">    *(<span class="keyword">uint64_t</span> *)(c2) = *(<span class="keyword">uint64_t</span> *)(&amp;p2) &amp; (mask);</div><div class="line">    *(<span class="keyword">uint64_t</span> *)(c2) |= *(<span class="keyword">uint64_t</span> *)(&amp;p1) &amp; (mask);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">mutate2</span><span class="params">(GENE_TYPE * c1, GENE_TYPE * c2)</span> </span>&#123;</div><div class="line">    *c1 = rand()*<span class="number">20.</span>/RAND_MAX<span class="number">-10.</span>;</div><div class="line">    *c2 = rand()*<span class="number">20.</span>/RAND_MAX<span class="number">-10.</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ValueCmp2</span><span class="params">(individual <span class="keyword">const</span> &amp; a, individual <span class="keyword">const</span> &amp; b)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> a.fitness &lt; b.fitness;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * MinimalGA uygulamasi ana fonksiyonu</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv)</span> </span>&#123;</div><div class="line">	<span class="comment">//freopen("Uva673.in","r",stdin);</span></div><div class="line">	freopen(<span class="string">"test26.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"Generic 2"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">int</span> i, j;</div><div class="line">    GENE_TYPE parent1, parent2, parent21, parent22;</div><div class="line">    GENE_TYPE child1, child2, child21, child22;</div><div class="line"></div><div class="line">    srand(time(<span class="number">0</span>));</div><div class="line">    </div><div class="line">    <span class="comment">//cout &lt;&lt; "Basit Genetik Algoritma Uygulamasi" &lt;&lt; endl;</span></div><div class="line">    <span class="comment">//cout &lt;&lt; "Uyumluluk fonksiyonu : Some exponential stuff" &lt;&lt;GENE_SIZE&lt;&lt; endl;</span></div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Population Size : "</span> &lt;&lt; POP_SIZE &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Max Generation: "</span> &lt;&lt; MAX_GENR &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"Genius: "</span> &lt;&lt; Genius &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="comment">//cout &lt;&lt; "Mutasyon olasiligi : " &lt;&lt; MUT_CHANCE &lt;&lt; endl;</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; POP_SIZE; i++) &#123;</div><div class="line">        <span class="comment">//population[i].gene = (rand() % 100 - 50) / 50.;</span></div><div class="line">		population[i].gene = rand()*<span class="number">20.</span>/RAND_MAX<span class="number">-10.</span>;</div><div class="line">		population[i].gene2 = rand()*<span class="number">20.</span>/RAND_MAX<span class="number">-10.</span>;</div><div class="line">        population[i].fitness = fitnessFunction2(population[i].gene)*fitnessFunction2(population[i].gene2);</div><div class="line">    &#125;</div><div class="line">    sort(population, population + POP_SIZE, ValueCmp2);</div><div class="line">    </div><div class="line">    i = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>( i &lt; MAX_GENR) &#123;         </div><div class="line">        <span class="keyword">for</span> (j = Genius; j &lt; POP_SIZE-Genius; j += <span class="number">2</span>) &#123;</div><div class="line">            parent1 = population[j].gene;</div><div class="line">            parent2 = population[j + <span class="number">1</span>].gene;</div><div class="line">            <span class="keyword">if</span> (j &lt; rand()%POP_SIZE) </div><div class="line">				mutate2(&amp;child1, &amp;child2);</div><div class="line">			<span class="keyword">else</span></div><div class="line">				recombine2(parent1, parent2, &amp;child1, &amp;child2);</div><div class="line">            population[j].gene = child1;</div><div class="line">            population[j + <span class="number">1</span>].gene = child2;</div><div class="line"></div><div class="line">			parent21 = population[j].gene2;</div><div class="line">            parent22 = population[j + <span class="number">1</span>].gene2;</div><div class="line">            <span class="keyword">if</span> (j &lt; rand()%POP_SIZE) </div><div class="line">				mutate2(&amp;child21, &amp;child22);</div><div class="line">			<span class="keyword">else</span></div><div class="line">				recombine2(parent21, parent22, &amp;child21, &amp;child22);</div><div class="line">            population[j].gene2 = child21;</div><div class="line">            population[j + <span class="number">1</span>].gene2 = child22;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (j = POP_SIZE-Genius; j &lt; POP_SIZE<span class="number">-10</span>; j += <span class="number">2</span>) &#123;</div><div class="line">            parent1 = population[j-(POP_SIZE-Genius)].gene;</div><div class="line">            parent2 = population[j + <span class="number">1</span>-(POP_SIZE-Genius)].gene;</div><div class="line">            <span class="keyword">if</span> (j &lt; rand()%POP_SIZE) </div><div class="line">				mutate2(&amp;child1, &amp;child2);</div><div class="line">			<span class="keyword">else</span></div><div class="line">				recombine2(parent1, parent2, &amp;child1, &amp;child2);</div><div class="line">            population[j].gene = child1;</div><div class="line">            population[j + <span class="number">1</span>].gene = child2;</div><div class="line"></div><div class="line">			parent21 = population[j].gene2;</div><div class="line">            parent22 = population[j + <span class="number">1</span>].gene2;</div><div class="line">            <span class="keyword">if</span> (rand()%POP_SIZE&lt;<span class="number">0.3</span>*POP_SIZE) </div><div class="line">				mutate2(&amp;child21, &amp;child22);</div><div class="line">			<span class="keyword">else</span></div><div class="line">				recombine2(parent21, parent22, &amp;child21, &amp;child22);</div><div class="line">            population[j].gene2 = child21;</div><div class="line">            population[j + <span class="number">1</span>].gene2 = child22;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">for</span> (j = POP_SIZE<span class="number">-10</span>; j &lt; POP_SIZE; j += <span class="number">2</span>) &#123;</div><div class="line">            parent1 = population[j-(POP_SIZE<span class="number">-10</span>)].gene;</div><div class="line">            parent2 = population[j + <span class="number">1</span>-(POP_SIZE<span class="number">-10</span>)].gene;</div><div class="line">            <span class="keyword">if</span> (j &lt; rand()%POP_SIZE) </div><div class="line">				mutate2(&amp;child1, &amp;child2);</div><div class="line">			<span class="keyword">else</span></div><div class="line">				recombine2(parent1, parent2, &amp;child1, &amp;child2);</div><div class="line">            population[j].gene = child1;</div><div class="line">            population[j + <span class="number">1</span>].gene = child2;</div><div class="line"></div><div class="line">			<span class="comment">//parent21 = population[j].gene2;</span></div><div class="line">            <span class="comment">//parent22 = population[j + 1].gene2;</span></div><div class="line">            <span class="comment">//if (rand()%POP_SIZE&lt;0.3*POP_SIZE) </span></div><div class="line">			<span class="comment">//	mutate2(&amp;child21, &amp;child22);</span></div><div class="line">			<span class="comment">//else</span></div><div class="line">			<span class="comment">//	recombine2(parent21, parent22, &amp;child21, &amp;child22);</span></div><div class="line">            <span class="comment">//population[j].gene2 = child21;</span></div><div class="line">           <span class="comment">// population[j + 1].gene2 = child22;</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(j = <span class="number">0</span>; j &lt; POP_SIZE; j++)</div><div class="line">            population[j].fitness = fitnessFunction2(population[j].gene)*fitnessFunction2(population[j].gene2);</div><div class="line">        </div><div class="line">        sort(population, population + POP_SIZE, ValueCmp2);</div><div class="line">        </div><div class="line"></div><div class="line">	<span class="comment">//mutRate *= 0.9999;</span></div><div class="line"></div><div class="line">        <span class="comment">//if(abs(population[0].fitness) &lt; 1e-8 || abs(population[1].fitness) &lt; 1e-8)</span></div><div class="line">        <span class="comment">//    break;</span></div><div class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"The "</span>&lt;&lt;i&lt;&lt;<span class="string">"th generation:"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;<span class="number">20</span>;k++)&#123;</div><div class="line">		</div><div class="line">		<span class="built_in">cout</span>&lt;&lt;setprecision(<span class="number">9</span>)&lt;&lt;<span class="string">"  x"</span>&lt;&lt;k&lt;&lt;<span class="number">1</span>&lt;&lt;<span class="string">"="</span>&lt;&lt;population[k].gene&lt;&lt;<span class="string">"  x"</span>&lt;&lt;k&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="string">"="</span>&lt;&lt;population[k].gene2&lt;&lt;<span class="string">"  y="</span>&lt;&lt;population[k].fitness&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">		i++;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line"></div><div class="line">    <span class="comment">//int minIndex = (population[0].fitness &gt; population[1].fitness) ? 1 : 0;</span></div><div class="line">    <span class="comment">//cout &lt;&lt; "An effective gen : " &lt;&lt; population[minIndex].gene &lt;&lt; endl;</span></div><div class="line">    <span class="comment">//cout &lt;&lt; "Minimal fitness : " &lt;&lt; population[minIndex].fitness &lt;&lt; endl;</span></div><div class="line">    </div><div class="line">   <span class="comment">// cin.get();</span></div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
           
         
@@ -1154,6 +1279,49 @@
 </li>
 </ul>
 <h1 id="PaddlePaddle提供的模型"><a href="#PaddlePaddle提供的模型" class="headerlink" title="PaddlePaddle提供的模型"></a>PaddlePaddle提供的模型</h1><p><a href="http://www.paddlepaddle.org/docs/develop/models/README.cn.html" target="_blank" rel="external">models 简介</a></p>
+<h3 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h3><ul>
+<li>CBOW </li>
+<li>Skip-gram</li>
+<li>Huffuman </li>
+<li>Negative Sampling</li>
+</ul>
+<h3 id="文本分类"><a href="#文本分类" class="headerlink" title="文本分类"></a>文本分类</h3><ul>
+<li>CNN</li>
+<li>RNN</li>
+<li>LSTM</li>
+<li>栈式双向LSTM</li>
+<li>双层序列的文本分类：对于长文本，可以将文本分为多个序列，对每个序列用卷积、池化提取特征，再进行分类。</li>
+</ul>
+<h3 id="点击率预估"><a href="#点击率预估" class="headerlink" title="点击率预估"></a>点击率预估</h3><h4 id="广告展示步骤"><a href="#广告展示步骤" class="headerlink" title="广告展示步骤"></a>广告展示步骤</h4><ul>
+<li>获取与用户搜索词相关的广告集合</li>
+</ul>
+<ul>
+<li>业务规则和相关性过滤</li>
+<li>根据拍卖机制和 CTR 排序</li>
+<li>展出广告</li>
+</ul>
+<h4 id="发展阶段"><a href="#发展阶段" class="headerlink" title="发展阶段"></a>发展阶段</h4><ul>
+<li>Logistic Regression(LR) / GBDT + 特征工程</li>
+<li>LR + DNN 特征</li>
+<li>DNN + 特征工程</li>
+</ul>
+<h4 id="Wide-amp-Deep-Learning"><a href="#Wide-amp-Deep-Learning" class="headerlink" title="Wide &amp; Deep Learning"></a>Wide &amp; Deep Learning</h4><p>谷歌在 16 年提出，将稀疏特征和Dense Embedding分别用LR和DNN结合在一起。</p>
+<h3 id="排序学习（Learning-to-Rank）"><a href="#排序学习（Learning-to-Rank）" class="headerlink" title="排序学习（Learning to Rank）"></a>排序学习（Learning to Rank）</h3><ul>
+<li>Pointwise 方法</li>
+</ul>
+<p>Pointwise方法是通过近似为回归问题解决排序问题，输入的单条样本为<strong>得分-文档</strong>，将每个查询-文档对的相关性得分作为实数分数或者序数分数，使得单个查询-文档对作为样本点(Pointwise的由来)，训练排序模型。预测时候对于指定输入，给出查询-文档对的相关性得分。</p>
+<ul>
+<li>Pairwise方法(RankNet)</li>
+</ul>
+<p>Pairwise方法是通过近似为分类问题解决排序问题，输入的单条样本为<strong>标签-文档对</strong>。对于一次查询的多个结果文档，组合任意两个文档形成文档对作为输入样本。即学习一个二分类器，对输入的一对文档对AB（Pairwise的由来），根据A相关性是否比B好，二分类器给出分类标签1或0。对所有文档对进行分类，就可以得到一组偏序关系，从而构造文档全集的排序关系。该类方法的原理是对给定的文档全集SS，降低排序中的逆序文档对的个数来降低排序错误，从而达到优化排序结果的目的。</p>
+<ul>
+<li>Listwise方法(LambdaRank)</li>
+</ul>
+<p>Listwise方法是直接优化排序列表，输入为单条样本为一个<strong>文档排列</strong>。通过构造合适的度量函数衡量当前文档排序和最优排序差值，优化度量函数得到排序模型。由于度量函数很多具有非连续性的性质，优化困难。</p>
+<h3 id="深度结构化语义模型-Deep-Structured-Semantic-Models-DSSM"><a href="#深度结构化语义模型-Deep-Structured-Semantic-Models-DSSM" class="headerlink" title="深度结构化语义模型 (Deep Structured Semantic Models, DSSM)"></a>深度结构化语义模型 (Deep Structured Semantic Models, DSSM)</h3><p>​    DSSM使用DNN模型在一个连续的语义空间中学习文本低纬的表示向量，并且建模两个句子间的语义相似度。本例演示如何使用PaddlePaddle实现一个通用的DSSM 模型，用于建模两个字符串间的语义相似度，模型实现支持通用的数据格式，用户替换数据便可以在真实场景中使用该模型。</p>
+<h3 id="命名实体识别"><a href="#命名实体识别" class="headerlink" title="命名实体识别"></a>命名实体识别</h3><ul>
+<li>序列标注可以分为Sequence Classification、Segment Classification和Temporal Classification三类</li>
+</ul>
 
           
         
@@ -1648,136 +1816,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/02/27/WOJ-Problem-1201-Circle/" itemprop="url">
-                  WOJ Problem 1201 - Circle
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-27T17:15:25+08:00" content="2016-02-27">
-              2016-02-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/WOJ/" itemprop="url" rel="index">
-                    <span itemprop="name">WOJ</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-<!-- 自定义，用于添加摘要图片，文章中不显示 -->
-        
-<!-- 自定义结束 -->
-        
-          <p><a href="https://github.com/GonewithGt/woj">woj部分题解</a>：<a href="https://github.com/GonewithGt/woj">https://github.com/GonewithGt/woj</a></p>
-<h1 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h1><ul>
-<li>平面上有n个点。给你一个半径为r的圆，问最多能覆盖多少个点（圆周上的点能够被覆盖） </li>
-</ul>
-<h1 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h1><ul>
-<li>本题有多组测试数据，请处理到EOF </li>
-<li>每组数据第一行有两个整数n，r，表示平面上点的个数和圆的半径。 </li>
-<li>0&lt;=n&lt;=200,1&lt;=r&lt;=1000 </li>
-<li>接下去n行每行有两个整数xi,yi，分别为n个点的坐标，-10000&lt;=xi,yi&lt;=10000 </li>
-</ul>
-<h1 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h1><ul>
-<li>对每组输入，输出这个圆最多能覆盖多少个点 </li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/02/27/WOJ-Problem-1201-Circle/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1822,7 +1860,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

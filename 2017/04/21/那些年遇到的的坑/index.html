@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/21/那些年遇到的的坑/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="记录实践中遇到的各种各样的问题">
-<meta property="og:updated_time" content="2018-03-30T14:11:11.346Z">
+<meta property="og:updated_time" content="2018-04-04T12:57:51.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些年遇到的的坑">
 <meta name="twitter:description" content="记录实践中遇到的各种各样的问题">
@@ -544,18 +544,11 @@
 <li>tf.expand_dims(b,0)<br>b :  tensor [7,8]–&gt; tensor [[7,8]]<br>tf.expand_dims(b,1)<br>tensor[[7],[8]]# 系数不能超过b的维数</li>
 <li><p>tmp = tf.constant([1,11,21,31,41,51,61,71,81])<br>tf.gather(1,5,7) # [11,51,91]</p>
 </li>
-<li><p>前端与后台交互的URL中含有特殊字符：+，&amp; %<br>前端：<br>$(“#submit”).click(function(event) {</p>
-<pre><code>var inputText =$(&quot;#query&quot;).val().replace(/\%/g,&quot;%25&quot;);
-var inputText = inputText.replace(/\&amp;/g, &quot;%26&quot;);
-var inputText = inputText.replace(/\+/g,&quot;%2B&quot;);
-
-$.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
-    $(&quot;#result&quot;).text(JSON.stringify(msg));
-});
-</code></pre><p>});</p>
+<li><p>前端与后台交互的URL中含有特殊字符：+，&amp; %<br>前端：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#submit"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line"><span class="keyword">var</span> inputText =$(<span class="string">"#query"</span>).val().replace(<span class="regexp">/\%/g</span>,<span class="string">"%25"</span>);</div><div class="line"><span class="keyword">var</span> inputText = inputText.replace(<span class="regexp">/\&amp;/g</span>, <span class="string">"%26"</span>);</div><div class="line"><span class="keyword">var</span> inputText = inputText.replace(<span class="regexp">/\+/g</span>,<span class="string">"%2B"</span>);</div><div class="line"></div><div class="line">$.get(<span class="built_in">encodeURI</span>(<span class="string">"Query?expr="</span>+inputText), <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</div><div class="line">	$(<span class="string">"#result"</span>).text(<span class="built_in">JSON</span>.stringify(msg));</div><div class="line">&#125;);</div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
 <p>后台：</p>
-<pre><code>expr = URLDecoder.decode(expr, &quot;utf-8&quot;);
-</code></pre></li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">expr = URLDecoder.decode(expr, <span class="string">"utf-8"</span>);</div></pre></td></tr></table></figure>
+</li>
 <li><p>git “Permission denied(publickey)”<br>可能是ssh key过期了<br>ssh-keygen<br>cd ~/.ssh/id_rsa<br>拷贝 id_rsa.pub</p>
 </li>
 <li><p>在jupyter中修改代码重新运行时，<a href="http://blog.csdn.net/Jerr__y/article/details/70809528" target="_blank" rel="external">tf.get_variable()</a>可能会报错，需要重启kernel</p>
@@ -731,7 +724,7 @@ $.get(encodeURI(&quot;Query?expr=&quot;+inputText), function(msg){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

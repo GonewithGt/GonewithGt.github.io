@@ -1,0 +1,993 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="DL,C++," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="飘" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="记录神经网络开发历程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="轻量级神经网络框架">
+<meta property="og:url" content="http://yoursite.com/2017/11/04/轻量级神经网络框架/index.html">
+<meta property="og:site_name" content="飘">
+<meta property="og:description" content="记录神经网络开发历程">
+<meta property="og:updated_time" content="2018-04-05T06:58:26.556Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="轻量级神经网络框架">
+<meta name="twitter:description" content="记录神经网络开发历程">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/04/轻量级神经网络框架/"/>
+
+
+<!-- 网页加载条 -->
+<script src="/js/src/pace.min.js"></script>
+  <title> 轻量级神经网络框架 | 飘 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">飘</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">海の上で最も自由なのは海賊王だぁ～</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+
+      <!-- 自定义High一下的功能 -->
+      <li class="menu-item"> <a title="把这个链接拖到你的工具栏中,任何网页都可以High" href='javascript:(
+    /*
+     * Copyright (C) 2016 Never_yu (Neveryu.github.io) <React.dong.yu@gmail.com>
+     * Sina Weibo (http://weibo.com/1134446353)
+     *
+     * Licensed under the Apache License, Version 2.0 (the "License");
+     * you may not use this file except in compliance with the License.
+     * You may obtain a copy of the License at
+     *
+     *      http://www.apache.org/licenses/LICENSE-2.0
+     *
+     * Unless required by applicable law or agreed to in writing, software
+     * distributed under the License is distributed on an "AS IS" BASIS,
+     * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     * See the License for the specific language governing permissions and
+     * limitations under the License.
+     */
+    function go() {
+
+
+    var songs = [
+                "http://bdyun.65dj.com:8090/2015/06/28/84791C997D8C55023DAD0D5690E48C28/%D1%A6%D6%AE%C7%AB%20-%20%D1%DD%D4%B1.mp3",
+                "http://7xoiki.com1.z0.glb.clouddn.com/Music-sunburst.mp3",
+                ""
+    ];
+
+    
+    function c() {
+        var e = document.createElement("link");
+        e.setAttribute("type", "text/css");
+        e.setAttribute("rel", "stylesheet");
+        e.setAttribute("href", f);
+        e.setAttribute("class", l);
+        document.body.appendChild(e)
+    }
+ 
+    function h() {
+        var e = document.getElementsByClassName(l);
+        for (var t = 0; t < e.length; t++) {
+            document.body.removeChild(e[t])
+        }
+    }
+ 
+    function p() {
+        var e = document.createElement("div");
+        e.setAttribute("class", a);
+        document.body.appendChild(e);
+        setTimeout(function() {
+            document.body.removeChild(e)
+        }, 100)
+    }
+ 
+    function d(e) {
+        return {
+            height : e.offsetHeight,
+            width : e.offsetWidth
+        }
+    }
+ 
+    function v(i) {
+        var s = d(i);
+        return s.height > e && s.height < n && s.width > t && s.width < r
+    }
+ 
+    function m(e) {
+        var t = e;
+        var n = 0;
+        while (!!t) {
+            n += t.offsetTop;
+            t = t.offsetParent
+        }
+        return n
+    }
+ 
+    function g() {
+        var e = document.documentElement;
+        if (!!window.innerWidth) {
+            return window.innerHeight
+        } else if (e && !isNaN(e.clientHeight)) {
+            return e.clientHeight
+        }
+        return 0
+    }
+ 
+    function y() {
+        if (window.pageYOffset) {
+            return window.pageYOffset
+        }
+        return Math.max(document.documentElement.scrollTop, document.body.scrollTop)
+    }
+ 
+    function E(e) {
+        var t = m(e);
+        return t >= w && t <= b + w
+    }
+
+    function S() {
+        var e = document.getElementById("audio_element_id");
+        if(e != null){
+            var index = parseInt(e.getAttribute("curSongIndex"));
+            if(index > songs.length - 2) {
+                index = 0;
+            } else {
+                index++;
+            }
+            e.setAttribute("curSongIndex", index);
+            N();
+        }
+
+        e.src = i;
+        e.play()
+    }
+ 
+    function x(e) {
+        e.className += " " + s + " " + o
+    }
+ 
+    function T(e) {
+        e.className += " " + s + " " + u[Math.floor(Math.random() * u.length)]
+    }
+ 
+    function N() {
+        var e = document.getElementsByClassName(s);
+        var t = new RegExp("\\b" + s + "\\b");
+        for (var n = 0; n < e.length; ) {
+            e[n].className = e[n].className.replace(t, "")
+        }
+    }
+
+    function initAudioEle() {
+        var e = document.getElementById("audio_element_id");
+        if(e === null){
+            e = document.createElement("audio");
+            e.setAttribute("class", l);
+            e.setAttribute("curSongIndex", 0);
+            e.id = "audio_element_id";
+            e.loop = false;
+            e.bgcolor = 0;
+            e.addEventListener("canplay", function() {
+            setTimeout(function() {
+                x(k)
+            }, 500);
+            setTimeout(function() {
+                N();
+                p();
+                for (var e = 0; e < O.length; e++) {
+                    T(O[e])
+                }
+            }, 15500)
+        }, true);
+        e.addEventListener("ended", function() {
+            N();
+            h();
+            go();
+        }, true);
+        e.innerHTML = " <p>If you are reading this, it is because your browser does not support the audio element. We recommend that you get a new browser.</p> <p>";
+        document.body.appendChild(e);
+        }
+    }
+    
+    initAudioEle();
+    var e = 30;
+    var t = 30;
+    var n = 350;
+    var r = 350;
+
+    var curSongIndex = parseInt(document.getElementById("audio_element_id").getAttribute("curSongIndex"));
+    var i = songs[curSongIndex];
+    
+    var s = "mw-harlem_shake_me";
+    var o = "im_first";
+    var u = ["im_drunk", "im_baked", "im_trippin", "im_blown"];
+    var a = "mw-strobe_light";
+
+    /* harlem-shake-style.css，替换成你的位置，也可以直接使用：//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css */
+    var f = "//s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css";
+    
+    var l = "mw_added_css";
+    var b = g();
+    var w = y();
+    var C = document.getElementsByTagName("*");
+    var k = null;
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            if (E(A)) {
+                k = A;
+                break
+            }
+        }
+    }
+    if (A === null) {
+        console.warn("Could not find a node of the right size. Please try a different page.");
+        return
+    }
+    c();
+    S();
+    var O = [];
+    for (var L = 0; L < C.length; L++) {
+        var A = C[L];
+        if (v(A)) {
+            O.push(A)
+        }
+    }
+    })()'><i class="menu-item-icon fa fa-music fa-fw"></i>High一下</a> </li>
+      <!-- end High一下 -->
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                轻量级神经网络框架
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-04T10:35:16+08:00" content="2017-11-04">
+              2017-11-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>记录神经网络开发历程</p>
+<a id="more"></a>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>设计一个轻量级易用的C++深度学习框架，首先为了加深对深度学习算法的理解，其次是希望能完成一个深度学习框架，作为公司的技术储备，为后面自然语言处理引擎打下基础。</p>
+<h3 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h3><p>本框架的设计思想主要参考tensorflow框架，所有的操作都是Tensor，模型都是由许多Tensor通过图的方式连接起来，前向传播以及反向求导都是自动进行，使用的时候可以像普通计算表达式一样通过加减乘除符号来构建基本的模型，用户不需要关注内部实现细节。</p>
+<h3 id="依赖库"><a href="#依赖库" class="headerlink" title="依赖库"></a>依赖库</h3><p> 矩阵计算库 eigen 3.3.4 </p>
+<h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><ul>
+<li>操作系统 Ubuntu 14.4， </li>
+<li>编译器 G++ 5.4.0，</li>
+<li>调试器 gdb 7.11.1， </li>
+<li>构建工具 cmake 3.5.1</li>
+</ul>
+<h3 id="编译步骤"><a href="#编译步骤" class="headerlink" title="编译步骤"></a>编译步骤</h3><p>1、官网下载eigen的源码，在当前工程的同一级目录解压。比如：项目所在目录为：/home/redtea,那么eigen解压后的目录为：/home/eigen<br>2、进入CMakeList.txt文件所在目录，执行命令：cmake ./，这一步用于生成Makefile文件<br>3、执行命令：make，这一步直接生成可执行文件<br>4、运行测试程序：./test-lsl 1000，是一个基于最小平方差损失的线性回归模型，训练迭代1000次。</p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p>源码后期可能以<a href="http://www.hongchazn.com/" target="_blank" rel="external"><strong>红茶智能技术</strong>有限公司</a>公司的名义公开。</p>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><h4 id="test-lsl"><a href="#test-lsl" class="headerlink" title="test-lsl"></a>test-lsl</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* test case for LeastSquareLoss</div><div class="line">*/</div><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line">#include "stdafx.h"</div><div class="line">#include "Tensor.h"</div><div class="line">#include "TensorOps.h"</div><div class="line">#include "Loss.h"</div><div class="line">#include "Optimizer.h"</div><div class="line"></div><div class="line"></div><div class="line">using namespace std;</div><div class="line">using namespace Eigen;</div><div class="line">using namespace redtea::core;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line"></div><div class="line">    if(argc &lt; 2) return 1;</div><div class="line">    int epoch = atoi(argv[1]);</div><div class="line">    cout&lt;&lt;"epoch="&lt;&lt;epoch&lt;&lt;endl;</div><div class="line"></div><div class="line">    Matrix&lt;type, 5, 2&gt; sample;</div><div class="line">    sample &lt;&lt; 1, 1,</div><div class="line">              2, 1,</div><div class="line">              3, 2,</div><div class="line">              5, 3,</div><div class="line">              6, 0;</div><div class="line"></div><div class="line">    Matrix&lt;type, 5, 2&gt; target;</div><div class="line">    target &lt;&lt; 6, 7.95, </div><div class="line">              8, 9.4,</div><div class="line">              13, 15.95,</div><div class="line">              20, 23.95,</div><div class="line">              13, 10.1;</div><div class="line">/*</div><div class="line">    auto x = Constant::create(sample);</div><div class="line">    auto y = Constant::create(target);</div><div class="line"></div><div class="line">    auto w = Variable::create(MatrixX::Random(2, 2));</div><div class="line">    auto b = Variable::create(MatrixX::Random(1, 2));</div><div class="line">    </div><div class="line">    auto mul = Mul::create(x, w);</div><div class="line">    auto add = Add::create(mul, b);</div><div class="line"></div><div class="line">    LeastSquareLoss loss(add, y);</div><div class="line"></div><div class="line"></div><div class="line">    cout&lt;&lt;"w: "&lt;&lt;w-&gt;getOutput()&lt;&lt;endl;</div><div class="line">    cout&lt;&lt;"b: "&lt;&lt;b-&gt;getOutput()&lt;&lt;endl;</div><div class="line"></div><div class="line">    Optimizer opti(1e-2);</div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        loss.forward();</div><div class="line">        loss.backward(opti);</div><div class="line"></div><div class="line">        cout&lt;&lt;"o: "&lt;&lt;add-&gt;getOutput();</div><div class="line">        cout&lt;&lt;", w: "&lt;&lt;w-&gt;getOutput();</div><div class="line">        cout&lt;&lt;", b: "&lt;&lt;b-&gt;getOutput();</div><div class="line">        cout&lt;&lt;", l: "&lt;&lt;loss.getTotalLoss()&lt;&lt;endl;</div><div class="line">    &#125;</div><div class="line">*/</div><div class="line"></div><div class="line">    Constant x(sample);</div><div class="line">    Constant y(target);</div><div class="line">  </div><div class="line">    Variable w(MatrixX::Random(2, 2));</div><div class="line">    Variable b(MatrixX::Random(1, 2));</div><div class="line"></div><div class="line">//    Mul mul = x * w;</div><div class="line">    Add add = x * w + b;</div><div class="line"></div><div class="line">    LeastSquareLoss loss(add, y);</div><div class="line"></div><div class="line"></div><div class="line">    cout&lt;&lt;"w: "&lt;&lt;w.getOutput()&lt;&lt;endl;</div><div class="line">    cout&lt;&lt;"b: "&lt;&lt;b.getOutput()&lt;&lt;endl;</div><div class="line"></div><div class="line">    //AdamOptimizer opti;</div><div class="line">    //MomentumOptimizer opti(0.8, 1e-3);</div><div class="line">    //AdadeltaOptimizer opti;</div><div class="line">    SGDOptimizer opti(1e-3);</div><div class="line">    opti.minimize(loss);</div><div class="line"></div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        opti.run();</div><div class="line"> </div><div class="line">        cout&lt;&lt;"o: "&lt;&lt;add.getOutput();</div><div class="line">        cout&lt;&lt;", w: "&lt;&lt;w.getOutput();</div><div class="line">        cout&lt;&lt;", b: "&lt;&lt;b.getOutput();</div><div class="line">        cout&lt;&lt;", l: "&lt;&lt;loss.getOutput().sum()&lt;&lt;endl;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="test-tanh"><a href="#test-tanh" class="headerlink" title="test-tanh"></a>test-tanh</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* test case for LeastSquareLoss</div><div class="line">*/</div><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line"></div><div class="line">#include "Tensor.h"</div><div class="line">#include "TensorOps.h"</div><div class="line">#include "Loss.h"</div><div class="line">#include "Optimizer.h"</div><div class="line">#include "Activation.h"</div><div class="line"></div><div class="line">using namespace std;</div><div class="line">using namespace Eigen;</div><div class="line">using namespace redtea::core;</div><div class="line"></div><div class="line">int mainabc(int argc, char* argv[]) &#123;</div><div class="line"></div><div class="line">    if(argc &lt; 2) return 1;</div><div class="line">    int epoch = atoi(argv[1]);</div><div class="line">    cout&lt;&lt;"epoch="&lt;&lt;epoch&lt;&lt;endl;</div><div class="line"></div><div class="line">    //prepare test samples</div><div class="line">    Matrix&lt;type, 100, 2&gt; sample;</div><div class="line">    sample &lt;&lt; -0.017612,14.053064,-1.395634,4.662541,-0.752157,6.538620,-1.322371,7.152853,0.423363,11.054677,0.406704,7.067335,0.667394,12.741452,-2.460150,6.866805,0.569411,9.548755,-0.026632,10.427743,0.850433,6.920334,1.347183,13.175500,1.176813,3.167020,-1.781871,9.097953,-0.566606,5.749003,0.931635,1.589505,-0.024205,6.151823,-0.036453,2.690988,-0.196949,0.444165,1.014459,5.754399,1.985298,3.230619,-1.693453,-0.557540,-0.576525,11.778922,-0.346811,-1.678730,-2.124484,2.672471,1.217916,9.597015,-0.733928,9.098687,-3.642001,-1.618087,0.315985,3.523953,1.416614,9.619232,-0.386323,3.989286,0.556921,8.294984,1.224863,11.587360,-1.347803,-2.406051,1.196604,4.951851,0.275221,9.543647,0.470575,9.332488,-1.889567,9.542662,-1.527893,12.150579,-1.185247,11.309318,-0.445678,3.297303,1.042222,6.105155,-0.618787,10.320986,1.152083,0.548467,0.828534,2.676045,-1.237728,10.549033,-0.683565,-2.166125,0.229456,5.921938,-0.959885,11.555336,0.492911,10.993324,0.184992,8.721488,-0.355715,10.325976,-0.397822,8.058397,0.824839,13.730343,1.507278,5.027866,0.099671,6.835839,-0.344008,10.717485,1.785928,7.718645,-0.918801,11.560217,-0.364009,4.747300,-0.841722,4.119083,0.490426,1.960539,-0.007194,9.075792,0.356107,12.447863,0.342578,12.281162,-0.810823,-1.466018,2.530777,6.476801,1.296683,11.607559,0.475487,12.040035,-0.783277,11.009725,0.074798,11.023650,-1.337472,0.468339,-0.102781,13.763651,-0.147324,2.874846,0.518389,9.887035,1.015399,7.571882,-1.658086,-0.027255,1.319944,2.171228,2.056216,5.019981,-0.851633,4.375691,-1.510047,6.061992,-1.076637,-3.181888,1.821096,10.283990,3.010150,8.401766,-1.099458,1.688274,-0.834872,-1.733869,-0.846637,3.849075,1.400102,12.628781,1.752842,5.468166,0.078557,0.059736,0.089392,-0.715300,1.825662,12.693808,0.197445,9.744638,0.126117,0.922311,-0.679797,1.220530,0.677983,2.556666,0.761349,10.693862,-2.168791,0.143632,1.388610,9.341997,0.317029,14.739025;</div><div class="line"></div><div class="line">    Matrix&lt;type, 100, 1&gt; target;</div><div class="line">   	target &lt;&lt; -1,1,-1,-1,-1,1,-1,1,-1,-1,1,-1,1,-1,1,1,1,1,1,1,1,1,-1,1,1,-1,-1,1,1,-1,1,1,-1,1,1,-1,-1,-1,-1,-1,1,1,-1,1,1,-1,1,1,-1,-1,-1,-1,-1,-1,1,1,-1,1,-1,1,1,1,-1,-1,-1,1,1,-1,-1,-1,-1,1,-1,1,-1,-1,1,1,1,1,-1,1,-1,1,1,1,1,-1,1,1,1,-1,-1,1,1,1,-1,1,-1,-1;</div><div class="line"></div><div class="line"></div><div class="line">    cout&lt;&lt;"direct mode"&lt;&lt;endl;</div><div class="line">    Constant x(sample);</div><div class="line">    Constant y(target);</div><div class="line"></div><div class="line">    Variable w(MatrixX::Random(2, 1));</div><div class="line">    Variable b(MatrixX::Random(1, 1));</div><div class="line">    </div><div class="line">    Add add = x * w + b;</div><div class="line">    Tanh act(add);</div><div class="line">	</div><div class="line">    LeastSquareLoss loss(act, y);</div><div class="line"></div><div class="line">    SGDOptimizer opti(1e-3);</div><div class="line">   </div><div class="line">    opti.minimize(loss);</div><div class="line"></div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        opti.run();</div><div class="line"></div><div class="line">        cout&lt;&lt;"loss: "&lt;&lt;loss.getOutput().sum()&lt;&lt;endl;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    cout&lt;&lt;"o: "&lt;&lt;act.getOutput()&lt;&lt;endl;</div><div class="line">    </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="test-softmax"><a href="#test-softmax" class="headerlink" title="test-softmax"></a>test-softmax</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* test case for LeastSquareLoss</div><div class="line">*/</div><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line"></div><div class="line">#include "Tensor.h"</div><div class="line">#include "TensorOps.h"</div><div class="line">#include "Loss.h"</div><div class="line">#include "Optimizer.h"</div><div class="line">#include "Activation.h"</div><div class="line"></div><div class="line">using namespace std;</div><div class="line">using namespace Eigen;</div><div class="line">using namespace redtea::core;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line"></div><div class="line">    if(argc &lt; 2) return 1;</div><div class="line">    int epoch = atoi(argv[1]);</div><div class="line">    cout&lt;&lt;"epoch="&lt;&lt;epoch&lt;&lt;endl;</div><div class="line"></div><div class="line">    //prepare test samples</div><div class="line">    Matrix&lt;type, 100, 2&gt; sample;</div><div class="line">    sample &lt;&lt; -0.017612,14.053064,-1.395634,4.662541,-0.752157,6.538620,-1.322371,7.152853,0.423363,11.054677,0.406704,7.067335,0.667394,12.741452,-2.460150,6.866805,0.569411,9.548755,-0.026632,10.427743,0.850433,6.920334,1.347183,13.175500,1.176813,3.167020,-1.781871,9.097953,-0.566606,5.749003,0.931635,1.589505,-0.024205,6.151823,-0.036453,2.690988,-0.196949,0.444165,1.014459,5.754399,1.985298,3.230619,-1.693453,-0.557540,-0.576525,11.778922,-0.346811,-1.678730,-2.124484,2.672471,1.217916,9.597015,-0.733928,9.098687,-3.642001,-1.618087,0.315985,3.523953,1.416614,9.619232,-0.386323,3.989286,0.556921,8.294984,1.224863,11.587360,-1.347803,-2.406051,1.196604,4.951851,0.275221,9.543647,0.470575,9.332488,-1.889567,9.542662,-1.527893,12.150579,-1.185247,11.309318,-0.445678,3.297303,1.042222,6.105155,-0.618787,10.320986,1.152083,0.548467,0.828534,2.676045,-1.237728,10.549033,-0.683565,-2.166125,0.229456,5.921938,-0.959885,11.555336,0.492911,10.993324,0.184992,8.721488,-0.355715,10.325976,-0.397822,8.058397,0.824839,13.730343,1.507278,5.027866,0.099671,6.835839,-0.344008,10.717485,1.785928,7.718645,-0.918801,11.560217,-0.364009,4.747300,-0.841722,4.119083,0.490426,1.960539,-0.007194,9.075792,0.356107,12.447863,0.342578,12.281162,-0.810823,-1.466018,2.530777,6.476801,1.296683,11.607559,0.475487,12.040035,-0.783277,11.009725,0.074798,11.023650,-1.337472,0.468339,-0.102781,13.763651,-0.147324,2.874846,0.518389,9.887035,1.015399,7.571882,-1.658086,-0.027255,1.319944,2.171228,2.056216,5.019981,-0.851633,4.375691,-1.510047,6.061992,-1.076637,-3.181888,1.821096,10.283990,3.010150,8.401766,-1.099458,1.688274,-0.834872,-1.733869,-0.846637,3.849075,1.400102,12.628781,1.752842,5.468166,0.078557,0.059736,0.089392,-0.715300,1.825662,12.693808,0.197445,9.744638,0.126117,0.922311,-0.679797,1.220530,0.677983,2.556666,0.761349,10.693862,-2.168791,0.143632,1.388610,9.341997,0.317029,14.739025;</div><div class="line"></div><div class="line">    Matrix&lt;type, 100, 1&gt; target;</div><div class="line">    target &lt;&lt; 0,1,0,0,0,1,0,1,0,0,1,0,1,0,1,1,1,1,1,1,1,1,0,1,1,0,0,1,1,0,1,1,0,1,1,0,0,0,0,0,1,1,0,1,1,0,1,1,0,0,0,0,0,0,1,1,0,1,0,1,1,1,0,0,0,1,1,0,0,0,0,1,0,1,0,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0,0,1,1,1,0,1,0,0;</div><div class="line"></div><div class="line">    MatrixX targetSoftmax = Matrix&lt;type, 100, 2&gt;::Zero(100, 2);</div><div class="line">    for(int i=0;i&lt;100;i++) &#123;</div><div class="line">        if(target(i, 0) &gt; 0.5) targetSoftmax(i, 1) = 1;</div><div class="line">        else targetSoftmax(i, 0) = 1;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /*</div><div class="line">    auto x = Constant::create(sample);</div><div class="line">    auto y = Constant::create(targetSoftmax);</div><div class="line"></div><div class="line">    //create the network</div><div class="line">    auto w = Variable::create(MatrixX::Random(2, 2));</div><div class="line">    auto b = Variable::create(MatrixX::Random(1, 2));</div><div class="line">   </div><div class="line">    auto mul = Mul::create(x, w);</div><div class="line">    auto add = Add::create(mul, b);</div><div class="line">    auto act = Softmax::create(add);</div><div class="line"></div><div class="line">    //train</div><div class="line">    LogisticLoss loss(act, y);</div><div class="line">    Optimizer opti(1e-2);</div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        loss.reset();</div><div class="line">        loss.forward();</div><div class="line">        loss.backward(opti);</div><div class="line">        </div><div class="line">        cout&lt;&lt;", l: "&lt;&lt;loss.getTotalLoss()&lt;&lt;endl;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    cout&lt;&lt;"o: "&lt;&lt;act-&gt;getOutput()&lt;&lt;endl;</div><div class="line">    */</div><div class="line"></div><div class="line">    cout&lt;&lt;"direct mode."&lt;&lt;endl;</div><div class="line">    Constant x(sample);</div><div class="line">    Constant y(targetSoftmax);</div><div class="line"></div><div class="line">    //create the network</div><div class="line">    Variable w(MatrixX::Random(2, 2));</div><div class="line">    Variable b(MatrixX::Random(1, 2));</div><div class="line"></div><div class="line">    Mul mul(x, w);</div><div class="line">    Add add(mul, b);</div><div class="line">    Softmax act(add);</div><div class="line"></div><div class="line">    //train</div><div class="line">    LogisticLoss loss(act, y);</div><div class="line"></div><div class="line">    //AdamOptimizer opti;</div><div class="line">    //AdadeltaOptimizer opti;</div><div class="line">    //MomentumOptimizer opti;</div><div class="line">    SGDOptimizer opti(1e-3);</div><div class="line"></div><div class="line">    opti.minimize(loss);</div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        opti.run();</div><div class="line"></div><div class="line">        cout&lt;&lt;"loss: "&lt;&lt;loss.getOutput().sum()&lt;&lt;endl;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    cout&lt;&lt;"o: "&lt;&lt;act.getOutput()&lt;&lt;endl;</div><div class="line"></div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="test-logistic"><a href="#test-logistic" class="headerlink" title="test-logistic"></a>test-logistic</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* test case for LeastSquareLoss</div><div class="line">*/</div><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line"></div><div class="line">#include "Tensor.h"</div><div class="line">#include "TensorOps.h"</div><div class="line">#include "Loss.h"</div><div class="line">#include "Optimizer.h"</div><div class="line">#include "Activation.h"</div><div class="line"></div><div class="line">#include "data.h"</div><div class="line"></div><div class="line">using namespace std;</div><div class="line">using namespace Eigen;</div><div class="line">using namespace redtea::core;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line"></div><div class="line">    if(argc &lt; 2) return 1;</div><div class="line">    int epoch = atoi(argv[1]);</div><div class="line">    cout&lt;&lt;"epoch="&lt;&lt;epoch&lt;&lt;endl;</div><div class="line"></div><div class="line">    //prepare test samples</div><div class="line">    //Matrix&lt;type, 100, 2&gt; sample;</div><div class="line">    //sample &lt;&lt; -0.017612,14.053064,-1.395634,4.662541,-0.752157,6.538620,-1.322371,7.152853,0.423363,11.054677,0.406704,7.067335,0.667394,12.741452,-2.460150,6.866805,0.569411,9.548755,-0.026632,10.427743,0.850433,6.920334,1.347183,13.175500,1.176813,3.167020,-1.781871,9.097953,-0.566606,5.749003,0.931635,1.589505,-0.024205,6.151823,-0.036453,2.690988,-0.196949,0.444165,1.014459,5.754399,1.985298,3.230619,-1.693453,-0.557540,-0.576525,11.778922,-0.346811,-1.678730,-2.124484,2.672471,1.217916,9.597015,-0.733928,9.098687,-3.642001,-1.618087,0.315985,3.523953,1.416614,9.619232,-0.386323,3.989286,0.556921,8.294984,1.224863,11.587360,-1.347803,-2.406051,1.196604,4.951851,0.275221,9.543647,0.470575,9.332488,-1.889567,9.542662,-1.527893,12.150579,-1.185247,11.309318,-0.445678,3.297303,1.042222,6.105155,-0.618787,10.320986,1.152083,0.548467,0.828534,2.676045,-1.237728,10.549033,-0.683565,-2.166125,0.229456,5.921938,-0.959885,11.555336,0.492911,10.993324,0.184992,8.721488,-0.355715,10.325976,-0.397822,8.058397,0.824839,13.730343,1.507278,5.027866,0.099671,6.835839,-0.344008,10.717485,1.785928,7.718645,-0.918801,11.560217,-0.364009,4.747300,-0.841722,4.119083,0.490426,1.960539,-0.007194,9.075792,0.356107,12.447863,0.342578,12.281162,-0.810823,-1.466018,2.530777,6.476801,1.296683,11.607559,0.475487,12.040035,-0.783277,11.009725,0.074798,11.023650,-1.337472,0.468339,-0.102781,13.763651,-0.147324,2.874846,0.518389,9.887035,1.015399,7.571882,-1.658086,-0.027255,1.319944,2.171228,2.056216,5.019981,-0.851633,4.375691,-1.510047,6.061992,-1.076637,-3.181888,1.821096,10.283990,3.010150,8.401766,-1.099458,1.688274,-0.834872,-1.733869,-0.846637,3.849075,1.400102,12.628781,1.752842,5.468166,0.078557,0.059736,0.089392,-0.715300,1.825662,12.693808,0.197445,9.744638,0.126117,0.922311,-0.679797,1.220530,0.677983,2.556666,0.761349,10.693862,-2.168791,0.143632,1.388610,9.341997,0.317029,14.739025;</div><div class="line"></div><div class="line">    //Matrix&lt;type, 100, 1&gt; target;</div><div class="line">    //target &lt;&lt; 0,1,0,0,0,1,0,1,0,0,1,0,1,0,1,1,1,1,1,1,1,1,0,1,1,0,0,1,1,0,1,1,0,1,1,0,0,0,0,0,1,1,0,1,1,0,1,1,0,0,0,0,0,0,1,1,0,1,0,1,1,1,0,0,0,1,1,0,0,0,0,1,0,1,0,0,1,1,1,1,0,1,0,1,1,1,1,0,1,1,1,0,0,1,1,1,0,1,0,0;</div><div class="line"></div><div class="line">/*</div><div class="line">    cout&lt;&lt;"factory mode."&lt;&lt;endl;</div><div class="line">    auto x = Constant::create(sample);</div><div class="line">    auto y = Constant::create(target);</div><div class="line"></div><div class="line">    //create the network</div><div class="line">    auto w = Variable::create(MatrixX::Random(2, 1));</div><div class="line">    auto b = Variable::create(MatrixX::Random(1, 1));</div><div class="line">   </div><div class="line">    auto mul = Mul::create(x, w);</div><div class="line">    auto add = Add::create(mul, b);</div><div class="line">    auto act = Sigmoid::create(add);</div><div class="line"></div><div class="line">    //train</div><div class="line">    LogisticLoss loss(act, y);</div><div class="line">    Optimizer opti(1e-2);</div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        loss.reset();</div><div class="line">        loss.forward();</div><div class="line">        loss.backward(opti);</div><div class="line">        </div><div class="line">        cout&lt;&lt;", l: "&lt;&lt;loss.getTotalLoss()&lt;&lt;endl;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    cout&lt;&lt;"o: "&lt;&lt;act-&gt;getOutput()&lt;&lt;endl;</div><div class="line">*/</div><div class="line">    MatrixX sample;</div><div class="line">    MatrixX target;</div><div class="line">    loadCsv("./test/logistic.txt", sample, target);</div><div class="line"></div><div class="line">    sample /= 200;</div><div class="line"></div><div class="line">    cout&lt;&lt;"direct mode"&lt;&lt;endl;</div><div class="line">    Constant x(sample);</div><div class="line">    Constant y(target);</div><div class="line"></div><div class="line">    Variable w(MatrixX::Random(sample.cols(), 1));</div><div class="line">    Variable b(MatrixX::Random(1, 1));</div><div class="line"></div><div class="line">    Mul mul(x, w);</div><div class="line">    Add add(mul, b);</div><div class="line">    Sigmoid act(add);</div><div class="line">   </div><div class="line">    LogisticLoss loss(act, y);</div><div class="line"></div><div class="line">    //AdamOptimizer opti;</div><div class="line">    SGDOptimizer opti(1e-3);</div><div class="line">    //AdadeltaOptimizer opti;</div><div class="line">    //MomentumOptimizer opti(0.8, 1e-3);</div><div class="line"></div><div class="line">    opti.minimize(loss);</div><div class="line"></div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        opti.run();</div><div class="line">        if(i % 100 == 0) &#123;</div><div class="line">            cout&lt;&lt;"loss: "&lt;&lt;loss.getOutput().mean()&lt;&lt;endl;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    cout&lt;&lt;"o: "&lt;&lt;act.getOutput()&lt;&lt;endl; </div><div class="line">    cout&lt;&lt;"w: "&lt;&lt;w.getOutput()&lt;&lt;endl;</div><div class="line">    cout&lt;&lt;"b: "&lt;&lt;b.getOutput()&lt;&lt;endl;</div><div class="line">    </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="Data-h"><a href="#Data-h" class="headerlink" title="Data.h"></a>Data.h</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __DATA_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __DATA_H</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;fstream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"def.h"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">loadCsv</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* csvFile, MatrixX&amp; data, MatrixX&amp; label)</span> </span>&#123;</div><div class="line">    <span class="function">ifstream <span class="title">in</span><span class="params">(csvFile)</span></span>;</div><div class="line">    <span class="keyword">if</span>(!in) &#123;</div><div class="line">        <span class="built_in">cerr</span>&lt;&lt;<span class="string">"Error: file '"</span>&lt;&lt;csvFile&lt;&lt;<span class="string">"' not Found!"</span>&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125; </div><div class="line"></div><div class="line">    <span class="built_in">string</span> line;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt;&gt; strArray;  </div><div class="line">    <span class="keyword">while</span> (getline(in, line)) &#123;</div><div class="line">        <span class="function"><span class="built_in">stringstream</span> <span class="title">ss</span><span class="params">(line)</span></span>;</div><div class="line"></div><div class="line">        <span class="built_in">string</span> field;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; lineArray;  </div><div class="line">        <span class="keyword">while</span> (getline(ss, field, <span class="string">','</span>)) &#123;</div><div class="line">            lineArray.push_back(field);  </div><div class="line">        &#125;  </div><div class="line">        strArray.push_back(lineArray); </div><div class="line">    &#125;     </div><div class="line"></div><div class="line">    <span class="keyword">if</span>(strArray.size() == <span class="number">0</span> || strArray[<span class="number">0</span>].size() == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line"></div><div class="line">    data.resize(strArray.size(), strArray[<span class="number">0</span>].size()<span class="number">-1</span>);</div><div class="line">    label.resize(strArray.size(), <span class="number">1</span>);</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;strArray.size();i++) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;data.cols();j++) &#123;</div><div class="line">            data(i, j) = atof(strArray[i][j].c_str()); </div><div class="line">        &#125;</div><div class="line">        label(i, <span class="number">0</span>) = atof(strArray[i][data.cols()].c_str());</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"><span class="comment">/*0.99,0.99,1.00,1.00,1.00,1.00,1.00,1.00,1.00,0.99,0.99*/</span></div></pre></td></tr></table></figure>
+<h4 id="test-layer"><a href="#test-layer" class="headerlink" title="test-layer"></a>test-layer</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">* test case for LeastSquareLoss</div><div class="line">*/</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Tensor.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Loss.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Optimizer.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Layer.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"Activation.h"</span></span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Eigen;</div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> redtea::core;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(argc &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">int</span> epoch = atoi(argv[<span class="number">1</span>]);</div><div class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"epoch="</span>&lt;&lt;epoch&lt;&lt;<span class="built_in">endl</span>;</div><div class="line"></div><div class="line">    Matrix&lt;type, <span class="number">5</span>, <span class="number">2</span>&gt; sample;</div><div class="line">    sample &lt;&lt; <span class="number">1</span>, <span class="number">1</span>,</div><div class="line">              <span class="number">2</span>, <span class="number">1</span>,</div><div class="line">              <span class="number">3</span>, <span class="number">2</span>,</div><div class="line">              <span class="number">5</span>, <span class="number">3</span>,</div><div class="line">              <span class="number">6</span>, <span class="number">0</span>;</div><div class="line"></div><div class="line">    Matrix&lt;type, <span class="number">5</span>, <span class="number">2</span>&gt; target;</div><div class="line">    target &lt;&lt; <span class="number">6</span>, <span class="number">7.95</span>, </div><div class="line">              <span class="number">8</span>, <span class="number">9.4</span>,</div><div class="line">              <span class="number">13</span>, <span class="number">15.95</span>,</div><div class="line">              <span class="number">20</span>, <span class="number">23.95</span>,</div><div class="line">              <span class="number">13</span>, <span class="number">10.1</span>;</div><div class="line"><span class="comment">/*</span></div><div class="line">    auto x = Constant::create(sample);</div><div class="line">    auto y = Constant::create(target);</div><div class="line"></div><div class="line">    auto w = Variable::create(MatrixX::Random(2, 2));</div><div class="line">    auto b = Variable::create(MatrixX::Random(1, 2));</div><div class="line">    </div><div class="line">    auto mul = Mul::create(x, w);</div><div class="line">    auto add = Add::create(mul, b);</div><div class="line"></div><div class="line">    LeastSquareLoss loss(add, y);</div><div class="line"></div><div class="line"></div><div class="line">    cout&lt;&lt;"w: "&lt;&lt;w-&gt;getOutput()&lt;&lt;endl;</div><div class="line">    cout&lt;&lt;"b: "&lt;&lt;b-&gt;getOutput()&lt;&lt;endl;</div><div class="line"></div><div class="line">    Optimizer opti(1e-2);</div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        loss.forward();</div><div class="line">        loss.backward(opti);</div><div class="line"></div><div class="line">        cout&lt;&lt;"o: "&lt;&lt;add-&gt;getOutput();</div><div class="line">        cout&lt;&lt;", w: "&lt;&lt;w-&gt;getOutput();</div><div class="line">        cout&lt;&lt;", b: "&lt;&lt;b-&gt;getOutput();</div><div class="line">        cout&lt;&lt;", l: "&lt;&lt;loss.getTotalLoss()&lt;&lt;endl;</div><div class="line">    &#125;</div><div class="line">*/</div><div class="line"></div><div class="line">    <span class="function">Constant <span class="title">x</span><span class="params">(sample)</span></span>;</div><div class="line">    <span class="function">Constant <span class="title">y</span><span class="params">(target)</span></span>;</div><div class="line"></div><div class="line">    <span class="function">DenseLayer <span class="title">dense</span><span class="params">(x, <span class="number">2</span>)</span></span>;  </div><div class="line"></div><div class="line">    <span class="function">LeastSquareLoss <span class="title">loss</span><span class="params">(dense, y)</span></span>;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">//AdamOptimizer opti;</span></div><div class="line">    <span class="comment">//MomentumOptimizer opti(0.8, 1e-3);</span></div><div class="line">    <span class="comment">//AdadeltaOptimizer opti;</span></div><div class="line">    <span class="function">SGDOptimizer <span class="title">opti</span><span class="params">(<span class="number">1e-3</span>)</span></span>;</div><div class="line">    opti.minimize(loss);</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;epoch;i++) &#123;</div><div class="line">        opti.run();</div><div class="line"> </div><div class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"output: "</span>&lt;&lt;dense.getOutput();</div><div class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">", l: "</span>&lt;&lt;loss.getOutput().sum()&lt;&lt;<span class="built_in">endl</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="test-lstm"><a href="#test-lstm" class="headerlink" title="test-lstm"></a>test-lstm</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">* test case for LeastSquareLoss</div><div class="line">*/</div><div class="line"></div><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &lt;stdlib.h&gt;</div><div class="line"></div><div class="line">#include "Tensor.h"</div><div class="line">#include "TensorOps.h"</div><div class="line">#include "Loss.h"</div><div class="line">#include "Optimizer.h"</div><div class="line">#include "Activation.h"</div><div class="line">#include "Layer.h"</div><div class="line">#include "ShapeOps.h"</div><div class="line">#include "data.h"</div><div class="line"></div><div class="line">using namespace std;</div><div class="line">using namespace Eigen;</div><div class="line">using namespace redtea::core;</div><div class="line"></div><div class="line">int main(int argc, char* argv[]) &#123;</div><div class="line"></div><div class="line">    if(argc &lt; 2) return 1;</div><div class="line">    int epoch = atoi(argv[1]);</div><div class="line">    cout&lt;&lt;"epoch="&lt;&lt;epoch&lt;&lt;endl;</div><div class="line"></div><div class="line">    MatrixX sample;</div><div class="line">    MatrixX target;</div><div class="line">    loadCsv("./test/lstm.csv", sample, target);</div><div class="line"></div><div class="line">    Constant x(sample);</div><div class="line">    Constant y(target);</div><div class="line"></div><div class="line">    RefVector&lt;Tensor&gt; lstm_in = SubTensor::split(x);</div><div class="line">	</div><div class="line">    LstmLayer lstmLayer(lstm_in, 10);</div><div class="line">	</div><div class="line">	ConcatTensor concat(lstmLayer.getOutputTensor());</div><div class="line">	</div><div class="line">    DenseLayer dense(concat, 1);  </div><div class="line">   </div><div class="line">    LeastSquareLoss loss(dense, y);</div><div class="line"></div><div class="line">    AdamOptimizer opti;</div><div class="line">    //SGDOptimizer opti(1e-3);</div><div class="line">    //AdadeltaOptimizer opti;</div><div class="line">    //MomentumOptimizer opti(0.8, 1e-3);</div><div class="line"></div><div class="line">    opti.minimize(loss);</div><div class="line"></div><div class="line">    for(int i=0;i&lt;epoch;i++) &#123;</div><div class="line">        opti.run();</div><div class="line">        if(i % 10 == 0) &#123;</div><div class="line">            cout&lt;&lt;"epoch: "&lt;&lt;i&lt;&lt;", loss: "&lt;&lt;loss.getOutput().mean()&lt;&lt;endl;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    cout&lt;&lt;"output: "&lt;&lt;dense.getOutput()&lt;&lt;endl; </div><div class="line">    </div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+<blockquote class="blockquote-center" style="color: #ccc;">
+    -------------本文结束 <i class="fa fa-apple"></i> 感谢您的阅读-------------
+</blockquote>
+
+  <span id="inline-green" style="border-radius:3px;">作者</span>：<a class="link-blue" href="https://github.com/GonewithGt" target="_blank">GonewithGt</a><br/>有问题请 <a class="link-blue" href="https://GonewithGt.github.io/guestbook" target="_blank">留言</a> 或者私信我的 <a class="link-blue" href="http://weibo.com/1134446353" target="_blank">微博</a>。
+
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>满分是10分的话，这篇文章你给几分</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/reward/reward_wechat.png" alt="GonewithGt WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DL/" rel="tag"><i class="fa fa-tag"></i> DL</a>
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/03/优秀博客汇总/" rel="next" title="优秀博客汇总">
+                <i class="fa fa-chevron-left"></i> 优秀博客汇总
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/23/GPU编程/" rel="prev" title="GPU编程">
+                GPU编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    <div id="gitmentContainer" style="margin-bottom: -19px;"></div>
+    <link rel="stylesheet" href="/css/gitment.css">
+    <script src="/js/src/gitment.browser.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: 'blog-guestbook',
+        owner: 'GonewithGt',
+        repo: 'GonewithGt.github.io',
+        oauth: {
+          client_id: '',
+          client_secret: '',
+        },
+      })
+      gitment.render('gitmentContainer')
+    </script>
+
+    
+  </div>
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="GonewithGt" />
+          <p class="site-author-name" itemprop="name">GonewithGt</p>
+          <p class="site-description motion-element" itemprop="description">Everything is good now~</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/GonewithGt" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:1724532024@qq.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#目标"><span class="nav-number">1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计"><span class="nav-number">2.</span> <span class="nav-text">设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖库"><span class="nav-number">3.</span> <span class="nav-text">依赖库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开发环境"><span class="nav-number">4.</span> <span class="nav-text">开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译步骤"><span class="nav-number">5.</span> <span class="nav-text">编译步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码"><span class="nav-number">6.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">7.</span> <span class="nav-text">Example</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#test-lsl"><span class="nav-number">7.1.</span> <span class="nav-text">test-lsl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-tanh"><span class="nav-number">7.2.</span> <span class="nav-text">test-tanh</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-softmax"><span class="nav-number">7.3.</span> <span class="nav-text">test-softmax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-logistic"><span class="nav-number">7.4.</span> <span class="nav-text">test-logistic</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Data-h"><span class="nav-number">7.4.1.</span> <span class="nav-text">Data.h</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-layer"><span class="nav-number">7.5.</span> <span class="nav-text">test-layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test-lstm"><span class="nav-number">7.6.</span> <span class="nav-text">test-lstm</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+      <!-- hack一个虚线出来 -->
+      <section style="border-top:1px dotted #ccc;height:10px;"></section>
+      <!-- weibo show -->
+      <iframe width="100%" height="120" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=120&fansRow=2&ptype=1&speed=0&skin=5&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1134446353&verifier=d529ff3a&dpc=1"></iframe>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GonewithGt</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Pisces
+  </a>
+</div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count" style="color: #e90f92;">全站共  字</span>
+</div>
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+  <!-- 按需加载背景 -->
+  <!-- 按需加载背景 -->
+<!-- 识别手机或电脑的js开始 -->  
+<script type="text/javascript">   
+(function(){  
+var res = GetRequest();  
+var par = res['index'];  
+if(par!='gfan'){  
+  var ua=navigator.userAgent.toLowerCase();  
+  var contains=function (a, b){  
+      if(a.indexOf(b)!=-1){return true;}  
+  };   
+  if((contains(ua,"android") && contains(ua,"mobile"))||(contains(ua,"android") && contains(ua,"mozilla"))||(contains(ua,"android") && contains(ua,"opera"))||contains(ua,"ucweb7")||contains(ua,"iphone")){
+    return false;
+  } else {
+    $.getScript("/js/src/particle.js?v=5.0.1");
+  }
+}  
+})();  
+function GetRequest() {  
+var url = location.search;
+var theRequest = new Object();  
+if (url.indexOf("?") != -1) {  
+  var str = url.substr(1);  
+  strs = str.split("&");  
+  for(var i = 0; i < strs.length; i ++) {  
+    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+  }  
+}  
+return theRequest;  
+}  
+</script>  
+<!-- 识别手机或电脑的js结束 -->  
+  <!-- 页面点击小红心 -->
+  <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js?v=5.0.1"></script>
+  <!-- 页面移动stars -->
+  <!-- 鼠标移动特效 -->
+<script type="text/javascript" src="/js/src/jquery-stars.js?v=5.0.1"></script>
+<script type="text/javascript">
+jQuery('body').jstars({
+	image_path: '/images',
+	image: 'candy-cane-stars.png',
+	style: 'white',
+	width: 34,
+	height: 34,
+	delay: 700,
+	frequency: 5
+});
+</script>
+  <!-- 页面 title 进入/离开 效果 -->
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="≡[。。]≡ 回不去了吗？!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Thank Vue~ "+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},4e3))})</script>
+</body>
+</html>

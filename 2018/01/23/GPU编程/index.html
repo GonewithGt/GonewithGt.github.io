@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="学习GPU编程，希望能够用到开发的深度学习框架中
 官方教程">
-<meta property="og:updated_time" content="2018-03-27T07:24:32.349Z">
+<meta property="og:updated_time" content="2018-04-05T06:57:45.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GPU编程">
 <meta name="twitter:description" content="学习GPU编程，希望能够用到开发的深度学习框架中
@@ -521,117 +521,130 @@
 <li>驱动API：直接调用底层驱动</li>
 <li>运行API：调用封装好的API</li>
 </ul>
-<h1 id="通讯模式"><a href="#通讯模式" class="headerlink" title="通讯模式"></a>通讯模式</h1><pre><code>映射(MAP):输入输出一对一，例如求数组元素平方。
-聚合(GATHER) ：多对一，每相邻三个元素平方。
-分散(scatter) ：一对多
-模板(stencil) ：以固定的模式读取相邻的内存数值，serveral-to-one
-转置(transpose) ：一对一，位置模式的转换
-压缩(reduce) ：多对一(all-to-one)
-重排(scan/sort) ：多对多
-</code></pre><h1 id="CUDA线程通信"><a href="#CUDA线程通信" class="headerlink" title="CUDA线程通信"></a>CUDA线程通信</h1><p>线程通信在CUDA中有三种实现方式：</p>
+<h1 id="通讯模式"><a href="#通讯模式" class="headerlink" title="通讯模式"></a>通讯模式</h1><ul>
+<li>映射(MAP):输入输出一对一，例如求数组元素平方。</li>
+<li>聚合(GATHER) ：多对一，每相邻三个元素平方。</li>
+<li>分散(scatter) ：一对多</li>
+<li>模板(stencil) ：以固定的模式读取相邻的内存数值，serveral-to-one</li>
+<li>转置(transpose) ：一对一，位置模式的转换</li>
+<li>压缩(reduce) ：多对一(all-to-one)</li>
+<li>重排(scan/sort) ：多对多</li>
+</ul>
+<h1 id="CUDA线程通信"><a href="#CUDA线程通信" class="headerlink" title="CUDA线程通信"></a>CUDA线程通信</h1><p>线程通信在CUDA中有三种实现方式：</p>
 <ol>
 <li>共享存储器；</li>
 <li>线程 同步；</li>
 <li>原子操作；</li>
 </ol>
-<h1 id="硬件模式"><a href="#硬件模式" class="headerlink" title="硬件模式"></a>硬件模式</h1><pre><code>SM(流处理器)：包含很多简单处理器和memory，每个simple process就是来处理线程的。每个GPU至少一个SM，每个SM并行而独立运行。
-Kernel(核)：可以理解为C/C++的一个function。function由内存块来运行
-thread blocks(线程块)：一些线程block组成线程块，一个线程块包含多个线程。
-线程    
-</code></pre><h1 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h1><pre><code>最大特点：对线程块将在何处，合适运行不作保证。
-优点：充分利用硬件，灵活；不需要线程互相等待；可扩展性强
-缺点：对于线程块在哪个流处理器运行无法进行任何假设；无法获取块之间的明确通信（并行死锁，线程退出）。
-</code></pre><h2 id="CUDA编程模型的原则"><a href="#CUDA编程模型的原则" class="headerlink" title="CUDA编程模型的原则"></a>CUDA编程模型的原则</h2><pre><code>1. 所有在同一个线程块上的线程必然会在同一时间运行在同一个SM上
-2. 同一个内核的所有线程块必然会全部完成了后，才会运行下一个内核
-</code></pre><h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><pre><code>每个线程有自己的local memory,局部变量
-每个线程块有shared memory，线程块之间共享变量
-thread blocks有global memory 同步主机内存 host memory
-速度local &gt; shared &gt;&gt; global &gt; host
-将数据切割的越小越好
-</code></pre><h1 id="线程束"><a href="#线程束" class="headerlink" title="线程束"></a>线程束</h1><p>GPU采用单指令多线程(SIMT)架构来管理和执行线程，每32个线程为一组，称为线程束。</p>
+<h1 id="硬件模式"><a href="#硬件模式" class="headerlink" title="硬件模式"></a>硬件模式</h1><ul>
+<li>SM(流处理器)：包含很多简单处理器和memory，每个simple process就是来处理线程的。每个GPU至少一个SM，每个SM并行而独立运行。</li>
+<li>Kernel(核)：可以理解为C/C++的一个function。function由内存块来运行</li>
+<li>thread blocks(线程块)：一些线程block组成线程块，一个线程块包含多个线程。</li>
+</ul>
+<h1 id="编程模型"><a href="#编程模型" class="headerlink" title="编程模型"></a>编程模型</h1><ul>
+<li>最大特点：对线程块将在何处，合适运行不作保证。<ul>
+<li>优点：充分利用硬件，灵活；不需要线程互相等待；可扩展性强</li>
+<li>缺点：对于线程块在哪个流处理器运行无法进行任何假设；无法获取块之间的明确通信（并行死锁，线程退出）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="CUDA编程模型的原则"><a href="#CUDA编程模型的原则" class="headerlink" title="CUDA编程模型的原则"></a>CUDA编程模型的原则</h2><ol>
+<li>所有在同一个线程块上的线程必然会在同一时间运行在同一个SM上</li>
+<li>同一个内核的所有线程块必然会全部完成了后，才会运行下一个内核</li>
+</ol>
+<h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><ul>
+<li>每个线程有自己的local memory,局部变量</li>
+<li>每个线程块有shared memory，线程块之间共享变量</li>
+<li>thread blocks有global memory 同步主机内存 host memory</li>
+<li>速度local &gt; shared &gt;&gt; global &gt; host</li>
+<li>将数据切割的越小越好</li>
+</ul>
+<h1 id="线程束"><a href="#线程束" class="headerlink" title="线程束"></a>线程束</h1><p>GPU采用单指令多线程(SIMT)架构来管理和执行线程，每32个线程为一组，称为线程束。</p>
 <h1 id="线程束分化"><a href="#线程束分化" class="headerlink" title="线程束分化"></a>线程束分化</h1><p>同一个线程块必须按照相同的指令执行，当一个线程束中出现分支时，会执行符合条件的线程，禁用不符合条件的线程，相当于分支两侧顺序执行了。</p>
 <p>对于短指令，cuda会将断定变量设为1或者0，用断定指令替代分支指令。</p>
-<h2 id="同步性synchronisation和屏障barrier"><a href="#同步性synchronisation和屏障barrier" class="headerlink" title="同步性synchronisation和屏障barrier"></a>同步性synchronisation和屏障barrier</h2><pre><code>不同的线程在共享和全局内存中读写数据需要有先后的控制，所以引入了同步性的概念。
-屏障的作用：用来控制多个线程的停止与等待，当所有线程都到达了屏障点，程序才继续进行。
-</code></pre><h2 id="CUDA编程模CUDA"><a href="#CUDA编程模CUDA" class="headerlink" title="CUDA编程模CUDA"></a>CUDA编程模CUDA</h2><p>程序中CPU是主导地位，负责完成以下的事情：</p>
-<pre><code>1. 从CPU同步数据到GPU
-2. 从GPU同步数据到CPU
-（1、2使用cudaMemcpy）
-3. 给GPU分配内存（cudaMalloc）
-4. 加载Kernel到GPU上，launch kernel on GPU
-型    
-</code></pre><h1 id="CUDA代码"><a href="#CUDA代码" class="headerlink" title="CUDA代码"></a>CUDA代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="comment">//kernel 表示要在GPU上运行</span></div><div class="line"><span class="number">__</span><span class="function">global__ <span class="keyword">void</span> <span class="title">square</span><span class="params">(<span class="keyword">float</span>* d_out,<span class="keyword">float</span>* d_in)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> idx = threadIdx.x;</div><div class="line">  <span class="keyword">float</span> f = d_in[idx];</div><div class="line">  d_out[idx] = f * f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>** argv)</span></span>&#123;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> ARRAY_SIZE = <span class="number">8</span>;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> ARRAY_BYTES = ARRAY_SIZE * <span class="keyword">sizeof</span>(<span class="keyword">float</span>);</div><div class="line"></div><div class="line">  <span class="comment">// generate the input array on the host</span></div><div class="line">  <span class="comment">// h_* represents variable in CPU</span></div><div class="line">  <span class="keyword">float</span> h_in[ARRAY_SIZE];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ARRAY_SIZE;i++)&#123;</div><div class="line">	h_in[i] = <span class="keyword">float</span>(i);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">float</span> h_out[ARRAY_SIZE];</div><div class="line"></div><div class="line">  <span class="comment">// declare GPU memory pointers</span></div><div class="line">  <span class="keyword">float</span>* d_in;</div><div class="line">  <span class="keyword">float</span>* d_out;</div><div class="line"></div><div class="line">  <span class="comment">// allocate GPU memory</span></div><div class="line">  cudaMalloc((<span class="keyword">void</span>**) &amp;d_in,ARRAY_BYTES);</div><div class="line">  cudaMalloc((<span class="keyword">void</span>**) &amp;d_out,ARRAY_BYTES);</div><div class="line"></div><div class="line">  <span class="comment">// transfer the array to GPU</span></div><div class="line">  cudaMemcpy(d_in,h_in,ARRAY_BYTES,cudaMemcpyHostToDevice);</div><div class="line"></div><div class="line">  <span class="comment">// launch the kernel</span></div><div class="line">  <span class="comment">//1 表示加载个1 个线程块上面</span></div><div class="line">  <span class="comment">//第二个参数表示每个线程块里面有多少个线程</span></div><div class="line">  square&lt;&lt;&lt;<span class="number">1</span>,ARRAY_SIZE&gt;&gt;&gt;(d_out,d_in);</div><div class="line"></div><div class="line">  <span class="comment">// copy back the result array to the GPU</span></div><div class="line">  cudaMemcpy(h_out,d_out,ARRAY_BYTES,cudaMemcpyDeviceToHost);</div><div class="line"></div><div class="line">  <span class="comment">// print out the resulting array</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ARRAY_SIZE;i++)&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%f"</span>,h_out[i]);</div><div class="line">	<span class="built_in">printf</span>(((i%<span class="number">4</span>) != <span class="number">3</span>) ? <span class="string">"\t"</span> : <span class="string">"\n"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// free GPU memory allocation</span></div><div class="line">  cudaFree(d_in);</div><div class="line">  cudaFree(d_out);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="同步性synchronisation和屏障barrier"><a href="#同步性synchronisation和屏障barrier" class="headerlink" title="同步性synchronisation和屏障barrier"></a>同步性synchronisation和屏障barrier</h2><ul>
+<li>不同的线程在共享和全局内存中读写数据需要有先后的控制，所以引入了同步性的概念。</li>
+<li>屏障的作用：用来控制多个线程的停止与等待，当所有线程都到达了屏障点，程序才继续进行。</li>
+</ul>
+<h2 id="CUDA编程模CUDA"><a href="#CUDA编程模CUDA" class="headerlink" title="CUDA编程模CUDA"></a>CUDA编程模CUDA</h2><p>程序中CPU是主导地位，负责完成以下的事情：</p>
+<ol>
+<li>从CPU同步数据到GPU</li>
+<li>从GPU同步数据到CPU<br>（1、2使用cudaMemcpy）</li>
+<li>给GPU分配内存（cudaMalloc）</li>
+<li>加载Kernel到GPU上，launch kernel on GPU<br> ​    </li>
+</ol>
+<h1 id="CUDA代码"><a href="#CUDA代码" class="headerlink" title="CUDA代码"></a>CUDA代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="comment">//kernel 表示要在GPU上运行</span></div><div class="line"><span class="number">__</span><span class="function">global__ <span class="keyword">void</span> <span class="title">square</span><span class="params">(<span class="keyword">float</span>* d_out,<span class="keyword">float</span>* d_in)</span></span>&#123;</div><div class="line">  <span class="keyword">int</span> idx = threadIdx.x;</div><div class="line">  <span class="keyword">float</span> f = d_in[idx];</div><div class="line">  d_out[idx] = f * f;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>** argv)</span></span>&#123;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> ARRAY_SIZE = <span class="number">8</span>;</div><div class="line">  <span class="keyword">const</span> <span class="keyword">int</span> ARRAY_BYTES = ARRAY_SIZE * <span class="keyword">sizeof</span>(<span class="keyword">float</span>);</div><div class="line"></div><div class="line">  <span class="comment">// generate the input array on the host</span></div><div class="line">  <span class="comment">// h_* represents variable in CPU</span></div><div class="line">  <span class="keyword">float</span> h_in[ARRAY_SIZE];</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ARRAY_SIZE;i++)&#123;</div><div class="line">	h_in[i] = <span class="keyword">float</span>(i);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">float</span> h_out[ARRAY_SIZE];</div><div class="line"></div><div class="line">  <span class="comment">// declare GPU memory pointers</span></div><div class="line">  <span class="keyword">float</span>* d_in;</div><div class="line">  <span class="keyword">float</span>* d_out;</div><div class="line"></div><div class="line">  <span class="comment">// allocate GPU memory</span></div><div class="line">  cudaMalloc((<span class="keyword">void</span>**) &amp;d_in,ARRAY_BYTES);</div><div class="line">  cudaMalloc((<span class="keyword">void</span>**) &amp;d_out,ARRAY_BYTES);</div><div class="line"></div><div class="line">  <span class="comment">// transfer the array to GPU</span></div><div class="line">  cudaMemcpy(d_in,h_in,ARRAY_BYTES,cudaMemcpyHostToDevice);</div><div class="line"></div><div class="line">  <span class="comment">// launch the kernel</span></div><div class="line">  <span class="comment">//1 表示加载个1 个线程块上面</span></div><div class="line">  <span class="comment">//第二个参数表示每个线程块里面有多少个线程</span></div><div class="line">  square&lt;&lt;&lt;<span class="number">1</span>,ARRAY_SIZE&gt;&gt;&gt;(d_out,d_in);</div><div class="line"></div><div class="line">  <span class="comment">// copy back the result array to the GPU</span></div><div class="line">  cudaMemcpy(h_out,d_out,ARRAY_BYTES,cudaMemcpyDeviceToHost);</div><div class="line"></div><div class="line">  <span class="comment">// print out the resulting array</span></div><div class="line">  <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;ARRAY_SIZE;i++)&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%f"</span>,h_out[i]);</div><div class="line">	<span class="built_in">printf</span>(((i%<span class="number">4</span>) != <span class="number">3</span>) ? <span class="string">"\t"</span> : <span class="string">"\n"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// free GPU memory allocation</span></div><div class="line">  cudaFree(d_in);</div><div class="line">  cudaFree(d_out);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <pre><code>编译命令： nvcc -o square square.cu
-</code></pre><h1 id="CUDA代码的高效策略"><a href="#CUDA代码的高效策略" class="headerlink" title="CUDA代码的高效策略"></a>CUDA代码的高效策略</h1><pre><code>高效公式
-最大化计算强度 = Math（数学计算量）/Memory(每个线程的内存)
-
-1. 最大化每个线程的计算量
-2. 最小化每个线程的内存读取速度
-    - 每个线程读取的数据量少
-    - 每个线程读取的速度快（尽量存在本地内存  &gt; 共享内存 or 合并全局内存）
-3. 避免线程发散
-    线程发散：同一个线程块中的线程执行不同内容的代码
-    例子： kernel中if语句 或者 长度不一致的循环语句
-</code></pre><h1 id="Kernel加载方式"><a href="#Kernel加载方式" class="headerlink" title="Kernel加载方式"></a>Kernel加载方式</h1><pre><code>注意：Kernel的加载中，自定义的线程数，线程块的数量等都不要超过系统本身的设定，否则，会影响机器的效率。
-</code></pre><h1 id="CUDA中的各种内存的代码使用"><a href="#CUDA中的各种内存的代码使用" class="headerlink" title="CUDA中的各种内存的代码使用"></a>CUDA中的各种内存的代码使用</h1><pre><code>局部变量：kernel里面定义的变量
-全局变量：与GPU进行交互时需要拷入，拷出
-共享变量：需要进行barrier的操作。加载kernel时第三个参数可以表述共享变量大小。
-</code></pre><h1 id="CUDA同步操作"><a href="#CUDA同步操作" class="headerlink" title="CUDA同步操作"></a>CUDA同步操作</h1><h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><pre><code>原子操作：对于有很多线程需要同时读取或写入相同的内存时，保证同一时间只有一个线程能进行操作。
-1. 只支持某些运算(加、减、最小值、异或运算等，不支持求余和求幂等)和数据类型（整型）
-2. 运行顺序不定
-3. 安排不当，会使速度很慢（因为内部是个串行的运行）
-</code></pre><h2 id="同步函数"><a href="#同步函数" class="headerlink" title="同步函数"></a>同步函数</h2><pre><code>_syncthreads（）
-    线程块内线程同步
-    保证线程块内所有线程都执行到统一位置
-
-_threadfence()
-    一个线程调用__threadfence后，该线程在该语句前对全局存储器或共享存储器的访问已经全部完成，执行结果对grid中的所有线程可见。
-
-_threadfence_block()
-    一个线程调用__threadfence_block后，该线程在该语句前对全局存储器或者共享存储器的访问已经全部完成，执行结果对block中的所有线程可见。
-
-以上两个函数的重要作用是，及时通知其他线程，全局内存或者共享内存内的结果已经读入或写入完成了。
-</code></pre><h2 id="CPU-GPU同步"><a href="#CPU-GPU同步" class="headerlink" title="CPU/GPU同步"></a>CPU/GPU同步</h2><pre><code>cudaStreamSynchronize()/cudaEventSynchronize()
-主机端代码中使用cudaThreadSynchronize():实现CPU和GPU线程同步
-kernel启动后控制权将异步返回，利用该函数可以确定所有设备端线程均已运行结束；
-</code></pre><h1 id="并行化高效策略"><a href="#并行化高效策略" class="headerlink" title="并行化高效策略"></a>并行化高效策略</h1><pre><code>规约(Reduce)
-扫描(Scan)
-压缩（Compact）和 分配（Allocate）
-分段扫描：例子，稀疏矩阵与向量相乘的并行化方式
-排序：奇偶排序，归并排序，排序网
-</code></pre><h1 id="图像处理的例子"><a href="#图像处理的例子" class="headerlink" title="图像处理的例子"></a>图像处理的例子</h1><pre><code>RGB转灰度图
-图像模糊
-</code></pre><h1 id="CUDA流Streams"><a href="#CUDA流Streams" class="headerlink" title="CUDA流Streams"></a>CUDA流Streams</h1><pre><code>流：一系列将在GPU上按顺序执行的操作
-    定义流：cudaStream_t s1;
-    创建流：cudaStreamCreate(&amp;s1);
-    销毁流：cudaStreamDestory(s1);
-
-多GPU编程
-    两个问题：确定此时使用的是哪一个GPU，多个device如何与host同行
-</code></pre><h1 id="多GPU编程"><a href="#多GPU编程" class="headerlink" title="多GPU编程"></a>多GPU编程</h1><pre><code>两个方面
-    Peer-to-peer(P2P) memcopies
-使用另一个GPU的地址
-    cudaDeviceEnablePeerAccess( peer_device, 0 )
-        允许current GPU访问peer_device GPU
-    cudaDeviceCanAccessPeer( &amp;accessible, dev_X, dev_Y)
-        检查是否dev_X可以访问dev_Y的内存返回0/1(第一个参数)
-
-Peer-to-peer memcopy
-    cudaMemcpyPeerAsync(void* dst_addr, intdst_dev, void* src_addr, intsrc_dev, size_tnum_bytes, cudaStream_tstream)
-    两个设备之间拷贝字节
-    1）如果peer-access允许字节在最短的PCIe路径上传输
-    2）如果peer-access不允许CUDA驱动通过CPU memory传输
-</code></pre><h1 id="纹理内存"><a href="#纹理内存" class="headerlink" title="纹理内存"></a>纹理内存</h1><pre><code>纹理内存的优势：
-    1.它们是被缓存的,如果它们在texture fetch 中将提供更高的带宽
-    2.它们不会像全局或常驻内存读取时受内存访问模式的约束
-    3.寻址计算时的延迟更低,从而提高随机访问数据时的性能 
-    4. 在一个操作中,包装的数据可以通过广播到不同的变量中
-    5.8-bit和16-bit的整型输入数据可以被转换成在范围[0.0,1.0]或[-1.0,1.0]的浮点数
-</code></pre><h1 id="CPU与GPU协同"><a href="#CPU与GPU协同" class="headerlink" title="CPU与GPU协同"></a>CPU与GPU协同</h1><pre><code>CPU先将数据复制到CPU内的一个区域（staging）,然后再复制到GPU（通过PCLe）
-用于优化
-    cudaHostMalloc()
-    cudaHostRegister()
-</code></pre><h1 id="MPI"><a href="#MPI" class="headerlink" title="MPI"></a>MPI</h1><p><a href="https://zhuanlan.zhihu.com/p/21478495" target="_blank" rel="external">MPI安装</a><br><a href="https://www.cnblogs.com/hantan2008/p/5390375.html" target="_blank" rel="external">MPI教程</a></p>
+</code></pre><h1 id="CUDA代码的高效策略"><a href="#CUDA代码的高效策略" class="headerlink" title="CUDA代码的高效策略"></a>CUDA代码的高效策略</h1><p>高效公式<br>最大化计算强度 = Math（数学计算量）/Memory(每个线程的内存)</p>
+<ol>
+<li>最大化每个线程的计算量</li>
+<li>最小化每个线程的内存读取速度<ul>
+<li>每个线程读取的数据量少</li>
+<li>每个线程读取的速度快（尽量存在本地内存  &gt; 共享内存 or 合并全局内存）</li>
+</ul>
+</li>
+<li>避免线程发散<br> 线程发散：同一个线程块中的线程执行不同内容的代码<br> 例子： kernel中if语句 或者 长度不一致的循环语句</li>
+</ol>
+<h1 id="Kernel加载方式"><a href="#Kernel加载方式" class="headerlink" title="Kernel加载方式"></a>Kernel加载方式</h1><p>注意：Kernel的加载中，自定义的线程数，线程块的数量等都不要超过系统本身的设定，否则，会影响机器的效率。</p>
+<h1 id="CUDA中的各种内存的代码使用"><a href="#CUDA中的各种内存的代码使用" class="headerlink" title="CUDA中的各种内存的代码使用"></a>CUDA中的各种内存的代码使用</h1><ul>
+<li>局部变量：kernel里面定义的变量</li>
+<li>全局变量：与GPU进行交互时需要拷入，拷出</li>
+<li>共享变量：需要进行barrier的操作。加载kernel时第三个参数可以表述共享变量大小。</li>
+</ul>
+<h1 id="CUDA同步操作"><a href="#CUDA同步操作" class="headerlink" title="CUDA同步操作"></a>CUDA同步操作</h1><h2 id="原子操作"><a href="#原子操作" class="headerlink" title="原子操作"></a>原子操作</h2><p>原子操作：对于有很多线程需要同时读取或写入相同的内存时，保证同一时间只有一个线程能进行操作。</p>
+<ol>
+<li>只支持某些运算(加、减、最小值、异或运算等，不支持求余和求幂等)和数据类型（整型）</li>
+<li>运行顺序不定</li>
+<li>安排不当，会使速度很慢（因为内部是个串行的运行）</li>
+</ol>
+<h2 id="同步函数"><a href="#同步函数" class="headerlink" title="同步函数"></a>同步函数</h2><p>_syncthreads（）<br>​    线程块内线程同步<br>​    保证线程块内所有线程都执行到统一位置</p>
+<p>_threadfence()<br>​    一个线程调用__threadfence后，该线程在该语句前对全局存储器或共享存储器的访问已经全部完成，执行结果对grid中的所有线程可见。</p>
+<p>_threadfence_block()<br>​    一个线程调用__threadfence_block后，该线程在该语句前对全局存储器或者共享存储器的访问已经全部完成，执行结果对block中的所有线程可见。</p>
+<p>以上两个函数的重要作用是，及时通知其他线程，全局内存或者共享内存内的结果已经读入或写入完成了。</p>
+<h2 id="CPU-GPU同步"><a href="#CPU-GPU同步" class="headerlink" title="CPU/GPU同步"></a>CPU/GPU同步</h2><ul>
+<li>cudaStreamSynchronize()/cudaEventSynchronize()</li>
+<li>主机端代码中使用cudaThreadSynchronize():实现CPU和GPU线程同步</li>
+<li>kernel启动后控制权将异步返回，利用该函数可以确定所有设备端线程均已运行结束；</li>
+</ul>
+<h1 id="并行化高效策略"><a href="#并行化高效策略" class="headerlink" title="并行化高效策略"></a>并行化高效策略</h1><ul>
+<li>规约(Reduce)</li>
+<li>扫描(Scan)</li>
+<li>压缩（Compact）和 分配（Allocate）</li>
+<li>分段扫描：例子，稀疏矩阵与向量相乘的并行化方式</li>
+<li>排序：奇偶排序，归并排序，排序网</li>
+</ul>
+<h1 id="图像处理的例子"><a href="#图像处理的例子" class="headerlink" title="图像处理的例子"></a>图像处理的例子</h1><ul>
+<li>RGB转灰度图</li>
+<li>图像模糊</li>
+</ul>
+<h1 id="CUDA流Streams"><a href="#CUDA流Streams" class="headerlink" title="CUDA流Streams"></a>CUDA流Streams</h1><ul>
+<li>流：一系列将在GPU上按顺序执行的操作<ul>
+<li>​    定义流：cudaStream_t s1;</li>
+<li>​    创建流：cudaStreamCreate(&amp;s1);</li>
+<li>​    销毁流：cudaStreamDestory(s1);    </li>
+</ul>
+</li>
+<li>多GPU编程<ul>
+<li>​    两个问题：确定此时使用的是哪一个GPU，多个device如何与host同行</li>
+</ul>
+</li>
+</ul>
+<h1 id="多GPU编程"><a href="#多GPU编程" class="headerlink" title="多GPU编程"></a>多GPU编程</h1><ul>
+<li>两个方面</li>
+</ul>
+<p>​    Peer-to-peer(P2P) memcopies</p>
+<ul>
+<li>使用另一个GPU的地址</li>
+</ul>
+<p>​    cudaDeviceEnablePeerAccess( peer_device, 0 )<br>​        允许current GPU访问peer_device GPU<br>​    cudaDeviceCanAccessPeer( &amp;accessible, dev_X, dev_Y)<br>​        检查是否dev_X可以访问dev_Y的内存返回0/1(第一个参数)</p>
+<ul>
+<li>Peer-to-peer memcopy</li>
+</ul>
+<p>​    cudaMemcpyPeerAsync(void<em> dst_addr, intdst_dev, void</em> src_addr, intsrc_dev, size_tnum_bytes, cudaStream_tstream)<br>​    两个设备之间拷贝字节<br>​    1）如果peer-access允许字节在最短的PCIe路径上传输<br>​    2）如果peer-access不允许CUDA驱动通过CPU memory传输</p>
+<h1 id="纹理内存"><a href="#纹理内存" class="headerlink" title="纹理内存"></a>纹理内存</h1><p>纹理内存的优势：<br>​    1.它们是被缓存的,如果它们在texture fetch 中将提供更高的带宽<br>​    2.它们不会像全局或常驻内存读取时受内存访问模式的约束<br>​    3.寻址计算时的延迟更低,从而提高随机访问数据时的性能 </p>
+<p>​    在一个操作中,包装的数据可以通过广播到不同的变量中5.8-bit和16-bit的整型输入数据可以被转换成在范围[0.0,1.0]或[-1.0,1.0]的浮点数</p>
+<h1 id="CPU与GPU协同"><a href="#CPU与GPU协同" class="headerlink" title="CPU与GPU协同"></a>CPU与GPU协同</h1><p>CPU先将数据复制到CPU内的一个区域（staging）,然后再复制到GPU（通过PCLe）<br>用于优化<br>​    cudaHostMalloc()<br>​    cudaHostRegister()</p>
+<h1 id="MPI"><a href="#MPI" class="headerlink" title="MPI"></a>MPI</h1><p><a href="https://zhuanlan.zhihu.com/p/21478495" target="_blank" rel="external">MPI安装</a><br><a href="https://www.cnblogs.com/hantan2008/p/5390375.html" target="_blank" rel="external">MPI教程</a></p>
 <p>​<br>​    </p>
 
       
@@ -689,8 +702,8 @@ Peer-to-peer memcopy
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/03/优秀博客汇总/" rel="next" title="优秀博客汇总">
-                <i class="fa fa-chevron-left"></i> 优秀博客汇总
+              <a href="/2017/11/04/轻量级神经网络框架/" rel="next" title="轻量级神经网络框架">
+                <i class="fa fa-chevron-left"></i> 轻量级神经网络框架
               </a>
             
           </div>
@@ -805,7 +818,7 @@ Peer-to-peer memcopy
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
