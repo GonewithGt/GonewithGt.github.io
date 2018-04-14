@@ -87,18 +87,21 @@
 
 
 <meta name="description" content="学习GPU编程，希望能够用到开发的深度学习框架中
-官方教程">
+官方教程
+CUDA示例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GPU编程">
 <meta property="og:url" content="http://yoursite.com/2018/01/23/GPU编程/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="学习GPU编程，希望能够用到开发的深度学习框架中
-官方教程">
-<meta property="og:updated_time" content="2018-04-05T06:57:45.537Z">
+官方教程
+CUDA示例">
+<meta property="og:updated_time" content="2018-04-14T09:05:06.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GPU编程">
 <meta name="twitter:description" content="学习GPU编程，希望能够用到开发的深度学习框架中
-官方教程">
+官方教程
+CUDA示例">
 
 
 
@@ -514,6 +517,7 @@
       
         <p>学习GPU编程，希望能够用到开发的深度学习框架中</p>
 <p><a href="http://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html" target="_blank" rel="external">官方教程</a></p>
+<p><a href="https://blog.csdn.net/gone_huilin/article/category/6527270" target="_blank" rel="external">CUDA示例</a></p>
 <a id="more"></a>
 <h1 id="GPU和CPU的区别"><a href="#GPU和CPU的区别" class="headerlink" title="GPU和CPU的区别"></a>GPU和CPU的区别</h1><p>GPU基于高吞吐设计的：多ALU，小cashe，多Thread并行，控制单元能够将多个访问和并未较少的访问。</p>
 <p>CPU基于低延时设计的：强大ALU，复杂逻辑控制单元，大cache，少register</p>
@@ -619,9 +623,7 @@
 </ul>
 <h1 id="CUDA流Streams"><a href="#CUDA流Streams" class="headerlink" title="CUDA流Streams"></a>CUDA流Streams</h1><ul>
 <li>流：一系列将在GPU上按顺序执行的操作<ul>
-<li>​    定义流：cudaStream_t s1;</li>
-<li>​    创建流：cudaStreamCreate(&amp;s1);</li>
-<li>​    销毁流：cudaStreamDestory(s1);    </li>
+<li>​    定义流：cudaStream_t s1;<br>   ​    创建流：cudaStreamCreate(&amp;s1);<br>   ​    销毁流：cudaStreamDestory(s1);    </li>
 </ul>
 </li>
 <li>多GPU编程<ul>
@@ -630,17 +632,22 @@
 </li>
 </ul>
 <h1 id="多GPU编程"><a href="#多GPU编程" class="headerlink" title="多GPU编程"></a>多GPU编程</h1><ul>
-<li>两个方面</li>
+<li><p>两个方面</p>
+<pre><code>Peer-to-peer(P2P) memcopies
+</code></pre></li>
+<li><p>使用另一个GPU的地址</p>
+<pre><code>cudaDeviceEnablePeerAccess( peer_device, 0 )
+    允许current GPU访问peer_device GPU
+cudaDeviceCanAccessPeer( &amp;accessible, dev_X, dev_Y)
+    检查是否dev_X可以访问dev_Y的内存返回0/1(第一个参数)
+</code></pre></li>
+<li><p>Peer-to-peer memcopy</p>
+<pre><code>cudaMemcpyPeerAsync(void* dst_addr, intdst_dev, void* src_addr, intsrc_dev, size_tnum_bytes, cudaStream_tstream)
+两个设备之间拷贝字节
+1）如果peer-access允许字节在最短的PCIe路径上传输
+2）如果peer-access不允许CUDA驱动通过CPU memory传输
+</code></pre></li>
 </ul>
-<p>​    Peer-to-peer(P2P) memcopies</p>
-<ul>
-<li>使用另一个GPU的地址</li>
-</ul>
-<p>​    cudaDeviceEnablePeerAccess( peer_device, 0 )<br>​        允许current GPU访问peer_device GPU<br>​    cudaDeviceCanAccessPeer( &amp;accessible, dev_X, dev_Y)<br>​        检查是否dev_X可以访问dev_Y的内存返回0/1(第一个参数)</p>
-<ul>
-<li>Peer-to-peer memcopy</li>
-</ul>
-<p>​    cudaMemcpyPeerAsync(void<em> dst_addr, intdst_dev, void</em> src_addr, intsrc_dev, size_tnum_bytes, cudaStream_tstream)<br>​    两个设备之间拷贝字节<br>​    1）如果peer-access允许字节在最短的PCIe路径上传输<br>​    2）如果peer-access不允许CUDA驱动通过CPU memory传输</p>
 <h1 id="纹理内存"><a href="#纹理内存" class="headerlink" title="纹理内存"></a>纹理内存</h1><p>纹理内存的优势：<br>​    1.它们是被缓存的,如果它们在texture fetch 中将提供更高的带宽<br>​    2.它们不会像全局或常驻内存读取时受内存访问模式的约束<br>​    3.寻址计算时的延迟更低,从而提高随机访问数据时的性能 </p>
 <p>​    在一个操作中,包装的数据可以通过广播到不同的变量中5.8-bit和16-bit的整型输入数据可以被转换成在范围[0.0,1.0]或[-1.0,1.0]的浮点数</p>
 <h1 id="CPU与GPU协同"><a href="#CPU与GPU协同" class="headerlink" title="CPU与GPU协同"></a>CPU与GPU协同</h1><p>CPU先将数据复制到CPU内的一个区域（staging）,然后再复制到GPU（通过PCLe）<br>用于优化<br>​    cudaHostMalloc()<br>​    cudaHostRegister()</p>
