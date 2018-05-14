@@ -471,6 +471,205 @@
             
               
                 
+                <a class="post-title-link" href="/2018/05/14/Docker使用/" itemprop="url">
+                  Docker使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-14T23:04:00+08:00" content="2018-05-14">
+              2018-05-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+<!-- 自定义，用于添加摘要图片，文章中不显示 -->
+        
+<!-- 自定义结束 -->
+        
+          
+            <a id="more"></a>
+<h1 id="Deep-Learning-环境"><a href="#Deep-Learning-环境" class="headerlink" title="Deep Learning 环境"></a>Deep Learning 环境</h1><p><a href="https://blog.csdn.net/lijingpengchina/article/details/53039065" target="_blank" rel="external">包含深度学习常用框架的Docker环境</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">docker pull floydhub/dl-docker:cpu</div><div class="line"></div><div class="line">docker run -it -p 8888:8888 -p 6006:6006 -v /c/CodePython:/root/sharedfolder floydhub/dl-docker:cpu bash</div><div class="line"></div><div class="line">nvidia-docker run -it -p 8888:8888 -p 6006:6006 -v /c/CodePython:/root/sharedfolder floydhub/dl-docker:gpu bash</div></pre></td></tr></table></figure>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">docker-machine ssh default</div><div class="line">sudo mkdir /mnt/CodePython</div><div class="line">mount -t vboxsf CodePython /mnt/CodePython //在虚拟机和主机之间共享目录</div><div class="line"></div><div class="line">//加速</div><div class="line">docker-machine ssh default</div><div class="line">sudo sed -i &quot;s|EXTRA_ARGS=&apos;|EXTRA_ARGS=&apos;--registry-mirror=加速地址 |g&quot; /var/lib/boot2docker/profile</div><div class="line">exit</div><div class="line">docker-machine restart default</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/04/15/知识点/" itemprop="url">
+                  知识点
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-15T21:55:30+08:00" content="2018-04-15">
+              2018-04-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+<!-- 自定义，用于添加摘要图片，文章中不显示 -->
+        
+<!-- 自定义结束 -->
+        
+          <p>需要掌握的知识点汇总</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/04/15/知识点/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/04/01/hanlp/" itemprop="url">
                   hanlp
                 </a>
@@ -1242,274 +1441,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/04/Shape-of-My-Heart/" itemprop="url">
-                  Shape of My Heart
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-04T08:09:57+08:00" content="2017-05-04">
-              2017-05-04
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-<!-- 自定义，用于添加摘要图片，文章中不显示 -->
-        
-<!-- 自定义结束 -->
-        
-          
-            <pre><code> Shape of My Heart吾心之状 
-         Sting 
-
-He deals the cards as a meditation 
-他玩纸牌 如深深冥想 
-And those he plays never suspect 
-并不在游戏间徘徊流连 
-He doesn&apos;t play for the money he wins 
-他总是赢家 却漠视金钱 
-He doesn&apos;t play for respect 
-亦无视他人的尊谗 
-He deals the crads to find the answer 
-他玩纸牌 为寻觅答案 
-The sacred geometry of chance 
-那神秘几何中的偶然 
-The hidden law of a probable outcome 
-还有那飘忽结局的背后的隐匿之弦 
-The numbers lead a dance 
-数字昂首领舞 翩然 
-
-I know that the spades are swords of a soldier 
-黑桃如士兵手握的利剑 
-I know that the clubs are weapons of war 
-梅花似战场轰鸣的炮枪 
-I know that diamonds mean money for this art 
-这艺术般游戏里 方块便若到手的银钱 
-But that&apos;s not the shape of my heart 
-皆非吾心之状 
-
-He may play the jack of diamonds 
-或许 他会出牌方块J 
-He may lay the queen of spades 
-或许 他会下注黑桃Q 
-He may conceal a king in his hand 
-亦或匿藏手中的王 
-While the memory of it fades 
-但这些记忆呵 终将褪色 
-
-I know that the spades are swords of a soldier 
-黑桃如士兵手握的利剑 
-I know that the clubs are weapons of war 
-梅花似战场轰鸣的炮枪 
-I know that diamonds mean money for this art 
-这艺术般游戏里 方块便若到手的银钱 
-But that&apos;s not the shape of my heart 
-皆非吾心之状 
-
-
-And if I told you that I loved you 
-若是我说 爱你 
-You&apos;d maybe think there&apos;s something wrong 
-你会些许困惑 
-I&apos;m not a man of too many faces 
-我非善变多面的男人 
-The mask I wear is one 
-我的面具 始终如一 
-Those who speak know nothing 
-那些多言而无知的人们啊 
-And find out to their cost 
-终将背负代价 
-Like those who curse their luck in too many places 
-如同 四处充斥的诅咒自己命运者 
-And those who fear are lost 
-还有那些 深深恐惧 却难逃失落的人 
-
-I know that the spades are swords of a soldier 
-黑桃如士兵手握的利剑 
-I know that the clubs are weapons of war 
-梅花似战场轰鸣的炮枪 
-I know that diamonds mean money for this art 
-这艺术般游戏里 方块便若到手的银钱 
-But that&apos;s not the shape of my heart 
-皆非吾心之状 
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/01/项目中可重用模块/" itemprop="url">
-                  项目中可重用模块
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-01T12:11:30+08:00" content="2017-05-01">
-              2017-05-01
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-<!-- 自定义，用于添加摘要图片，文章中不显示 -->
-        
-<!-- 自定义结束 -->
-        
-          <p>记录在项目中可能会经常用到的模块。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/05/01/项目中可重用模块/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1554,7 +1485,7 @@ But that&apos;s not the shape of my heart
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1571,7 +1502,7 @@ But that&apos;s not the shape of my heart
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
