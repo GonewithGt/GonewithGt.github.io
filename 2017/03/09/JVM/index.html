@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/09/JVM/index.html">
 <meta property="og:site_name" content="飘">
 <meta property="og:description" content="​    记录JVM相关知识点">
-<meta property="og:updated_time" content="2018-03-30T14:07:25.016Z">
+<meta property="og:updated_time" content="2018-06-28T02:58:53.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM">
 <meta name="twitter:description" content="​    记录JVM相关知识点">
@@ -744,6 +744,250 @@
 </ul>
 <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><p><a href="http://blog.csdn.net/xiaoxik/article/details/76317202" target="_blank" rel="external">java面试</a></p>
 <p>RunTime类为JVM创建，可以获取JVM的相关信息，并能执行本机可执行程序。</p>
+<h1 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h1><p>maven相关知识点</p>
+<h2 id="POM配置信息"><a href="#POM配置信息" class="headerlink" title="POM配置信息"></a>POM配置信息</h2><ul>
+<li>project dependencies</li>
+<li>plugins</li>
+<li>goals</li>
+<li>build profiles</li>
+<li>project version</li>
+<li>developers</li>
+<li>mailing list</li>
+</ul>
+<h2 id="构建周期"><a href="#构建周期" class="headerlink" title="构建周期"></a>构建周期</h2><table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>处理</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prepare-resources</td>
+<td>资源拷贝</td>
+<td>本阶段可以自定义需要拷贝的资源</td>
+</tr>
+<tr>
+<td>compile</td>
+<td>编译</td>
+<td>本阶段完成源代码编译</td>
+</tr>
+<tr>
+<td>package</td>
+<td>打包</td>
+<td>本阶段根据 pom.xml 中描述的打包配置创建 JAR / WAR 包</td>
+</tr>
+<tr>
+<td>install</td>
+<td>安装</td>
+<td>本阶段在本地 / 远程仓库中安装工程包</td>
+</tr>
+</tbody>
+</table>
+<p>当需要在某个特定阶段之前或之后执行目标时，可以使用 <strong>pre</strong> 和 <strong>post</strong> 来定义这个<strong>目标</strong>。</p>
+<p>Maven 有以下三个标准的生命周期：</p>
+<ul>
+<li>clean</li>
+<li>default(or build)</li>
+<li>site</li>
+</ul>
+<h3 id="clean"><a href="#clean" class="headerlink" title="clean"></a>clean</h3><ul>
+<li>pre-clean</li>
+<li>clean</li>
+<li>post-clean</li>
+</ul>
+<h3 id="build"><a href="#build" class="headerlink" title="build"></a>build</h3><table>
+<thead>
+<tr>
+<th>生命周期阶段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>validate</td>
+<td>检查工程配置是否正确，完成构建过程的所有必要信息是否能够获取到。</td>
+</tr>
+<tr>
+<td>initialize</td>
+<td>初始化构建状态，例如设置属性。</td>
+</tr>
+<tr>
+<td>generate-sources</td>
+<td>生成编译阶段需要包含的任何源码文件。</td>
+</tr>
+<tr>
+<td>process-sources</td>
+<td>处理源代码，例如，过滤任何值（filter any value）。</td>
+</tr>
+<tr>
+<td>generate-resources</td>
+<td>生成工程包中需要包含的资源文件。</td>
+</tr>
+<tr>
+<td>process-resources</td>
+<td>拷贝和处理资源文件到目的目录中，为打包阶段做准备。</td>
+</tr>
+<tr>
+<td>compile</td>
+<td>编译工程源码。</td>
+</tr>
+<tr>
+<td>process-classes</td>
+<td>处理编译生成的文件，例如 Java Class 字节码的加强和优化。</td>
+</tr>
+<tr>
+<td>generate-test-sources</td>
+<td>生成编译阶段需要包含的任何测试源代码。</td>
+</tr>
+<tr>
+<td>process-test-sources</td>
+<td>处理测试源代码，例如，过滤任何值（filter any values)。</td>
+</tr>
+<tr>
+<td>test-compile</td>
+<td>编译测试源代码到测试目的目录。</td>
+</tr>
+<tr>
+<td>process-test-classes</td>
+<td>处理测试代码文件编译后生成的文件。</td>
+</tr>
+<tr>
+<td>test</td>
+<td>使用适当的单元测试框架（例如JUnit）运行测试。</td>
+</tr>
+<tr>
+<td>prepare-package</td>
+<td>在真正打包之前，为准备打包执行任何必要的操作。</td>
+</tr>
+<tr>
+<td>package</td>
+<td>获取编译后的代码，并按照可发布的格式进行打包，例如 JAR、WAR 或者 EAR 文件。</td>
+</tr>
+<tr>
+<td>pre-integration-test</td>
+<td>在集成测试执行之前，执行所需的操作。例如，设置所需的环境变量。</td>
+</tr>
+<tr>
+<td>integration-test</td>
+<td>处理和部署必须的工程包到集成测试能够运行的环境中。</td>
+</tr>
+<tr>
+<td>post-integration-test</td>
+<td>在集成测试被执行后执行必要的操作。例如，清理环境。</td>
+</tr>
+<tr>
+<td>verify</td>
+<td>运行检查操作来验证工程包是有效的，并满足质量要求。</td>
+</tr>
+<tr>
+<td>install</td>
+<td>安装工程包到本地仓库中，该仓库可以作为本地其他工程的依赖。</td>
+</tr>
+<tr>
+<td>deploy</td>
+<td>拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Site-生命周期"><a href="#Site-生命周期" class="headerlink" title="Site 生命周期"></a>Site 生命周期</h3><p>Maven Site 插件一般用来创建新的报告文档、部署站点等。</p>
+<p>阶段：</p>
+<ul>
+<li>pre-site</li>
+<li>site</li>
+<li>post-site</li>
+<li>site-deploy</li>
+</ul>
+<h2 id="构建配置文件"><a href="#构建配置文件" class="headerlink" title="构建配置文件"></a>构建配置文件</h2><p>构建配置文件是一组配置的集合，用来设置或者覆盖 Maven 构建的默认配置。使用构建配置文件，可以为不同的环境定制构建过程，例如 Producation 和 Development 环境。</p>
+<h3 id="profile类型"><a href="#profile类型" class="headerlink" title="profile类型"></a>profile类型</h3><p>Profile 主要有三种类型。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>在哪里定义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Per Project</td>
+<td>定义在工程 POM 文件 pom.xml 中</td>
+</tr>
+<tr>
+<td>Per User</td>
+<td>定义在 Maven 设置 xml 文件中 （%USER_HOME%/.m2/settings.xml）</td>
+</tr>
+<tr>
+<td>Global</td>
+<td>定义在 Maven 全局配置 xml 文件中 （%M2_HOME%/conf/settings.xml）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="maven插件"><a href="#maven插件" class="headerlink" title="maven插件"></a>maven插件</h3><p>Maven 实际上是一个依赖插件执行的框架，每个任务实际上是由插件完成。Maven 插件通常被用来：</p>
+<ul>
+<li>创建 jar 文件</li>
+<li>创建 war 文件</li>
+<li>编译代码文件</li>
+<li>代码单元测试</li>
+<li>创建工程文档</li>
+<li>创建工程报告</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Build plugins</td>
+<td>在构建时执行，并在 pom.xml 的 元素中配置。</td>
+</tr>
+<tr>
+<td>Reporting plugins</td>
+<td>在网站生成过程中执行，并在 pom.xml 的 元素中配置。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>插件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clean</td>
+<td>构建之后清理目标文件。删除目标目录。</td>
+</tr>
+<tr>
+<td>compiler</td>
+<td>编译 Java 源文件。</td>
+</tr>
+<tr>
+<td>surefile</td>
+<td>运行 JUnit 单元测试。创建测试报告。</td>
+</tr>
+<tr>
+<td>jar</td>
+<td>从当前工程中构建 JAR 文件。</td>
+</tr>
+<tr>
+<td>war</td>
+<td>从当前工程中构建 WAR 文件。</td>
+</tr>
+<tr>
+<td>javadoc</td>
+<td>为工程生成 Javadoc。</td>
+</tr>
+<tr>
+<td>antrun</td>
+<td>从构建过程的任意一个阶段中运行一个 ant 任务的集合。</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -916,7 +1160,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -933,7 +1177,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -988,7 +1232,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Javac的编译过程"><span class="nav-number">1.</span> <span class="nav-text">Javac的编译过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字节码文件"><span class="nav-number">2.</span> <span class="nav-text">字节码文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HotSpot启动"><span class="nav-number">3.</span> <span class="nav-text">HotSpot启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程共享内存区"><span class="nav-number">4.</span> <span class="nav-text">线程共享内存区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程私有内存区"><span class="nav-number">5.</span> <span class="nav-text">线程私有内存区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能监控区"><span class="nav-number">6.</span> <span class="nav-text">性能监控区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动内存管理"><span class="nav-number">7.</span> <span class="nav-text">自动内存管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何定位堆溢出的代码段"><span class="nav-number">8.</span> <span class="nav-text">如何定位堆溢出的代码段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM监控工具"><span class="nav-number">9.</span> <span class="nav-text">JVM监控工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的加载机制"><span class="nav-number">10.</span> <span class="nav-text">类的加载机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java执行引擎"><span class="nav-number">11.</span> <span class="nav-text">Java执行引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java"><span class="nav-number">12.</span> <span class="nav-text">Java</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Javac的编译过程"><span class="nav-number">1.</span> <span class="nav-text">Javac的编译过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字节码文件"><span class="nav-number">2.</span> <span class="nav-text">字节码文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HotSpot启动"><span class="nav-number">3.</span> <span class="nav-text">HotSpot启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程共享内存区"><span class="nav-number">4.</span> <span class="nav-text">线程共享内存区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程私有内存区"><span class="nav-number">5.</span> <span class="nav-text">线程私有内存区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能监控区"><span class="nav-number">6.</span> <span class="nav-text">性能监控区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动内存管理"><span class="nav-number">7.</span> <span class="nav-text">自动内存管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何定位堆溢出的代码段"><span class="nav-number">8.</span> <span class="nav-text">如何定位堆溢出的代码段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM监控工具"><span class="nav-number">9.</span> <span class="nav-text">JVM监控工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类的加载机制"><span class="nav-number">10.</span> <span class="nav-text">类的加载机制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java执行引擎"><span class="nav-number">11.</span> <span class="nav-text">Java执行引擎</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java"><span class="nav-number">12.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven"><span class="nav-number">13.</span> <span class="nav-text">Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#POM配置信息"><span class="nav-number">13.1.</span> <span class="nav-text">POM配置信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建周期"><span class="nav-number">13.2.</span> <span class="nav-text">构建周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#clean"><span class="nav-number">13.2.1.</span> <span class="nav-text">clean</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build"><span class="nav-number">13.2.2.</span> <span class="nav-text">build</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Site-生命周期"><span class="nav-number">13.2.3.</span> <span class="nav-text">Site 生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建配置文件"><span class="nav-number">13.3.</span> <span class="nav-text">构建配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#profile类型"><span class="nav-number">13.3.1.</span> <span class="nav-text">profile类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maven插件"><span class="nav-number">13.3.2.</span> <span class="nav-text">maven插件</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
